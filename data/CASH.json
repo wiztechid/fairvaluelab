@@ -1,7 +1,7 @@
 {
   "ticker": "CASH.JK",
   "name": "PT Cashlez Worldwide Indonesia Tbk",
-  "asOf": "2026-09-16T13:22:51.682270+00:00",
+  "asOf": "2026-09-16T22:08:48.204974+00:00",
   "price": 248.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -31,17 +31,17 @@
   },
   "quality": {
     "cashConversion": null,
-    "roe": null,
-    "dataScore": 43,
-    "dataLabel": "TERBATAS",
-    "availableInputs": 3,
+    "roe": -2.85934,
+    "dataScore": 71,
+    "dataLabel": "CUKUP",
+    "availableInputs": 5,
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
-      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
@@ -54,10 +54,10 @@
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
-    "roe": null,
-    "fcf": null,
-    "growthNormalized": 0.08,
-    "costOfEquity": 0.1388,
+    "roe": -2.85934,
+    "fcf": -31167068160.0,
+    "growthNormalized": -0.03,
+    "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 602094895104.0,
     "shares": 2427802216.0,
@@ -70,7 +70,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.8-all-tickers-fx-qc",
+  "engineVersion": "3.11-sector-aware-qc",
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -91,9 +91,11 @@
     {
       "name": "DCF & FCF Yield",
       "family": "cashflow",
-      "status": "NOT_APPLICABLE",
-      "reason": "FCF tidak tersedia/tervalidasi.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "FCF negatif; metode cashflow dilewati.",
+      "inputs": {
+        "fcf": -31167068160.0
+      }
     },
     {
       "name": "Historical EV/EBITDA",
