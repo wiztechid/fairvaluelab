@@ -1,27 +1,28 @@
 {
   "ticker": "VICI.JK",
   "name": "PT Victoria Care Indonesia Tbk",
-  "asOf": "2026-09-16T08:32:53.489105+00:00",
+  "asOf": "2026-09-16T08:47:10.826563+00:00",
   "price": 1230.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
     "sourceSector": "Consumer Defensive",
     "industry": "Household & Personal Products",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 315.51716064101834,
-    "base": 381.2940231873399,
-    "bull": 447.4432423505828,
-    "dispersion": 0.4358339730153523,
+    "bear": 277.43840310668327,
+    "base": 338.20916987967826,
+    "bull": 400.3184077351202,
+    "dispersion": 0.596244763952799,
     "agreement": "LOW",
     "available": true
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 107.03137945267656,
       "base": 169.66719555840248,
       "bull": 234.31980293315482,
@@ -32,90 +33,31 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.1846282372598162
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 59.052761836613,
-      "base": 104.98268770953422,
-      "bull": 118.105523673226,
-      "confidence": 0.75,
-      "relevance": 0.9,
-      "rawWeight": 0.675,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "bear": 322.9657295813354,
-      "base": 374.6146974206135,
-      "bull": 426.2636652598916,
-      "confidence": 0.9,
-      "relevance": 1.2,
-      "rawWeight": 1.08,
-      "bands": {
-        "mean": 24.808920358981027,
-        "sd": 3.4204614463098064,
-        "current": 81.45695364238411,
-        "z": 16.561517845645735,
-        "minus1": 322.9657295813354,
-        "base": 374.6146974206135,
-        "plus1": 426.2636652598916,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.3609022556390977
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 337.3212180529641,
-      "base": 421.1845900453889,
-      "bull": 505.0479620378137,
-      "confidence": 0.9,
-      "relevance": 1.2,
-      "rawWeight": 1.08,
-      "bands": {
-        "mean": 27.8930192083039,
-        "sd": 5.553865694862569,
-        "current": 81.45695364238411,
-        "z": 9.644441795491717,
-        "minus1": 337.3212180529641,
-        "base": 421.1845900453889,
-        "plus1": 505.0479620378137,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.3609022556390977
+      "normalizedWeight": 0.6636636636636637
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 614.0727236628577,
+      "family": "book",
+      "bear": 613.6879765668216,
       "base": 670.77860135291,
-      "bull": 727.4844790429624,
+      "bull": 727.8692261389984,
       "confidence": 0.8,
       "relevance": 0.35,
       "rawWeight": 0.27999999999999997,
       "bands": {
         "mean": 4.1202004830577765,
-        "sd": 0.34831102867553515,
+        "sd": 0.35067430497526436,
         "current": 7.555170340764597,
-        "z": 9.861788961344157,
-        "minus1": 614.0727236628577,
+        "z": 9.79532805504274,
+        "minus1": 613.6879765668216,
         "base": 670.77860135291,
-        "plus1": 727.4844790429624,
+        "plus1": 727.8692261389984,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.09356725146198829
+      "normalizedWeight": 0.3363363363363363
     }
   ],
   "dcfDiagnostics": {
@@ -140,11 +82,15 @@
     "roe": 0.09359,
     "dataScore": 100,
     "dataLabel": "BAIK",
-    "availableInputs": 10,
-    "totalInputs": 10,
-    "guards": [],
+    "availableInputs": 7,
+    "totalInputs": 7,
+    "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
+    ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4
+    "validMethodCount": 2,
+    "independentFamilies": 2
   },
   "raw": {
     "epsTTM": 15.1,

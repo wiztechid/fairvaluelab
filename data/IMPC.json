@@ -1,27 +1,28 @@
 {
   "ticker": "IMPC.JK",
   "name": "PT Impack Pratama Industri Tbk",
-  "asOf": "2026-09-16T08:30:50.933356+00:00",
+  "asOf": "2026-09-16T08:45:45.699454+00:00",
   "price": 1700.0,
   "companyProfile": {
     "sector": "Perindustrian",
     "valuationProfile": "Perindustrian",
     "sourceSector": "Industrials",
     "industry": "Building Products & Equipment",
-    "sectorNote": "DCF, FCF dan P/E digunakan seimbang.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 59.77116119481579,
-    "base": 98.28546314549442,
-    "bull": 126.77994598962573,
-    "dispersion": 0.411466311186678,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 91.34093914067014,
       "base": 144.66705887123007,
       "bull": 198.76184745598795,
@@ -31,22 +32,8 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.45010183299389
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 33.930713320616476,
-      "base": 60.321268125540406,
-      "bull": 67.86142664123295,
-      "confidence": 0.75,
-      "relevance": 0.9,
-      "rawWeight": 0.675,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.54989816700611
+      "included": false,
+      "normalizedWeight": 0
     }
   ],
   "dcfDiagnostics": {
@@ -69,16 +56,19 @@
   "quality": {
     "cashConversion": 0.4788067182206674,
     "roe": 0.26489002,
-    "dataScore": 80,
-    "dataLabel": "BAIK",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "dataScore": 100,
+    "dataLabel": "CUKUP",
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
-      "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2
+    "validMethodCount": 0,
+    "independentFamilies": 0
   },
   "raw": {
     "epsTTM": 14.14,

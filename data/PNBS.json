@@ -1,7 +1,7 @@
 {
   "ticker": "PNBS.JK",
   "name": "PT Bank Panin Dubai Syariah Tbk",
-  "asOf": "2026-09-16T08:28:04.504533+00:00",
+  "asOf": "2026-09-16T08:43:45.099043+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Emiten Syariah / Perusahaan Publik Syariah",
@@ -12,16 +12,17 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 17.137426460809106,
-    "base": 37.51025829237137,
-    "bull": 83.48893156439638,
-    "dispersion": 0.34793250247517377,
-    "agreement": "LOW",
+    "bear": 44.501948347823536,
+    "base": 53.054665434439336,
+    "bull": 62.1955113997748,
+    "dispersion": 0.3140689091371551,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 28.380666758324768,
       "base": 34.62407130481043,
       "bull": 48.03945450800638,
@@ -32,10 +33,11 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.04210577436744208
+      "normalizedWeight": 0.10381990180816669
     },
     {
       "name": "FCF Yield",
+      "family": "cashflow",
       "bear": 19.41338372009806,
       "base": 27.98325581275396,
       "bull": 34.13342192544714,
@@ -44,78 +46,33 @@
       "rawWeight": 0.0675,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.026225049779029674
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "bear": 0.965,
-      "base": 29.20757660981201,
-      "bull": 105.09465197345934,
-      "confidence": 0.9,
-      "relevance": 0.85,
-      "rawWeight": 0.765,
-      "bands": {
-        "mean": 15.133459383322284,
-        "sd": 39.31972816769292,
-        "current": 25.906735751295336,
-        "z": 0.2739916288847826,
-        "minus1": 0.965,
-        "base": 29.20757660981201,
-        "plus1": 105.09465197345934,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.297217230829003
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 0.965,
-      "base": 23.920441217862855,
-      "bull": 84.58079819731203,
-      "confidence": 0.9,
-      "relevance": 0.85,
-      "rawWeight": 0.765,
-      "bands": {
-        "mean": 12.394010993711325,
-        "sd": 31.430236776916672,
-        "current": 25.906735751295336,
-        "z": 0.42992755204148414,
-        "minus1": 0.965,
-        "base": 23.920441217862855,
-        "plus1": 84.58079819731203,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.297217230829003
+      "normalizedWeight": 0.06466291462100349
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 44.06334720135366,
-      "base": 57.90613931922391,
-      "bull": 71.74893143709417,
+      "family": "book",
+      "bear": 48.465798583576294,
+      "base": 57.30551311676916,
+      "bull": 66.14522764996202,
       "confidence": 0.8,
       "relevance": 1.085,
       "rawWeight": 0.868,
       "bands": {
-        "mean": 0.7562871128296723,
-        "sd": 0.18079473795708326,
+        "mean": 0.7484425930277184,
+        "sd": 0.11545169926960559,
         "current": 0.6530284368125688,
-        "z": -0.5711376181845229,
-        "minus1": 44.06334720135366,
-        "base": 57.90613931922391,
-        "plus1": 71.74893143709417,
+        "z": -0.8264421989349516,
+        "minus1": 48.465798583576294,
+        "base": 57.30551311676916,
+        "plus1": 66.14522764996202,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3372347141955223
+      "normalizedWeight": 0.8315171835708299
     }
   ],
   "dcfDiagnostics": {
@@ -140,16 +97,20 @@
     "roe": 0.02528,
     "dataScore": 100,
     "dataLabel": "BAIK",
-    "availableInputs": 10,
-    "totalInputs": 10,
-    "guards": [],
+    "availableInputs": 7,
+    "totalInputs": 7,
+    "guards": [
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+    ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5
+    "validMethodCount": 3,
+    "independentFamilies": 2
   },
   "raw": {
-    "epsTTM": 1.93,
+    "epsTTM": 0.5156940013819784,
     "bvps": 76.56634409988324,
-    "currentPE": 25.906735751295336,
+    "currentPE": 96.95672213756201,
     "currentPBV": 0.6530284368125688,
     "roe": 0.02528,
     "fcf": 120560658000.0,

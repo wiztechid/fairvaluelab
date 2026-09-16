@@ -1,27 +1,28 @@
 {
   "ticker": "FASW.JK",
   "name": "PT Fajar Surya Wisesa Tbk",
-  "asOf": "2026-09-16T08:29:35.662521+00:00",
+  "asOf": "2026-09-16T08:44:53.055845+00:00",
   "price": 5312.4970703125,
   "companyProfile": {
     "sector": "Barang Baku",
     "valuationProfile": "Barang Baku",
     "sourceSector": "Consumer Cyclical",
     "industry": "Packaging & Containers",
-    "sectorNote": "Arus kas dan laba ternormalisasi lebih penting pada bisnis bahan baku.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 613.1603142386231,
-    "base": 814.5062176155287,
-    "bull": 1057.5599791116606,
-    "dispersion": 0.10607089933078144,
-    "agreement": "HIGH",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 751.7798802593234,
       "base": 917.1623909077292,
       "bull": 1272.5245557227356,
@@ -31,11 +32,12 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.4164265129682997
+      "included": false,
+      "normalizedWeight": 0
     },
     {
       "name": "FCF Yield",
+      "family": "cashflow",
       "bear": 514.2441300905184,
       "base": 741.252800130477,
       "bull": 904.1655034558565,
@@ -44,30 +46,31 @@
       "rawWeight": 0.70875,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.5835734870317003
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 6129.671655492719,
+      "family": "book",
+      "bear": 6626.280490403276,
       "base": 7661.3957967878305,
-      "bull": 9193.11993808294,
+      "bull": 8696.511103172383,
       "confidence": 0.8,
       "relevance": 0.45499999999999996,
       "rawWeight": 0.364,
       "bands": {
         "mean": 4.300389669742867,
-        "sd": 0.8597663988176899,
+        "sd": 0.581016734892509,
         "current": 2.981938034227342,
-        "z": -1.5334998405713434,
-        "minus1": 6129.671655492719,
+        "z": -2.2692145618825346,
+        "minus1": 6626.280490403276,
         "base": 7661.3957967878305,
-        "plus1": 9193.11993808294,
+        "plus1": 8696.511103172383,
         "coverageYears": 4.996577686516085
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0
     }
@@ -92,16 +95,20 @@
   "quality": {
     "cashConversion": null,
     "roe": -0.09722,
-    "dataScore": 80,
-    "dataLabel": "BAIK",
-    "availableInputs": 8,
-    "totalInputs": 10,
-    "guards": [],
+    "dataScore": 86,
+    "dataLabel": "CUKUP",
+    "availableInputs": 6,
+    "totalInputs": 7,
+    "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+    ],
     "historyYears": 4.996577686516085,
-    "validMethodCount": 2
+    "validMethodCount": 0,
+    "independentFamilies": 0
   },
   "raw": {
-    "epsTTM": -352.6432557596039,
+    "epsTTM": null,
     "bvps": 1781.55850635878,
     "currentPE": null,
     "currentPBV": 2.981938034227342,

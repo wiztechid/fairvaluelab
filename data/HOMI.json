@@ -1,27 +1,28 @@
 {
   "ticker": "HOMI.JK",
   "name": "PT Grand House Mulia Tbk",
-  "asOf": "2026-09-16T08:35:50.652961+00:00",
+  "asOf": "2026-09-16T08:49:16.838884+00:00",
   "price": 250.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
     "sourceSector": "Real Estate",
     "industry": "Real Estate - Development",
-    "sectorNote": "Nilai aset dan ekuitas lebih penting pada developer properti.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 24.3021741522433,
-    "base": 31.447361679971586,
-    "bull": 41.66844087958604,
-    "dispersion": 0.10607089933078136,
-    "agreement": "HIGH",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 28.054571219722234,
       "base": 34.226238678928134,
       "bull": 47.48747833615111,
@@ -31,11 +32,12 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.5766818700114024
+      "included": false,
+      "normalizedWeight": 0
     },
     {
       "name": "FCF Yield",
+      "family": "cashflow",
       "bear": 19.190322793650793,
       "base": 27.66172654940655,
       "bull": 33.74122688993546,
@@ -44,30 +46,31 @@
       "rawWeight": 0.37125,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.4233181299885975
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 163.4364630358554,
+      "family": "book",
+      "bear": 143.93178131024243,
       "base": 365.4443748583749,
-      "bull": 567.4522866808943,
+      "bull": 586.9569684065074,
       "confidence": 0.8,
       "relevance": 0.945,
       "rawWeight": 0.756,
       "bands": {
         "mean": 4.348741254332625,
-        "sd": 2.4038682773120414,
+        "sd": 2.6359714916676396,
         "current": 2.9749679797492745,
-        "z": -0.5714844226487636,
-        "minus1": 163.4364630358554,
+        "z": -0.5211639347868048,
+        "minus1": 143.93178131024243,
         "base": 365.4443748583749,
-        "plus1": 567.4522866808943,
+        "plus1": 586.9569684065074,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0
     }
@@ -92,15 +95,17 @@
   "quality": {
     "cashConversion": 6.804031428725218,
     "roe": -8.9999994e-05,
-    "dataScore": 80,
-    "dataLabel": "BAIK",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "dataScore": 100,
+    "dataLabel": "CUKUP",
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2
+    "validMethodCount": 0,
+    "independentFamilies": 0
   },
   "raw": {
     "epsTTM": 0.4512694685714286,

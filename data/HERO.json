@@ -1,41 +1,28 @@
 {
   "ticker": "HERO.JK",
   "name": "PT DFI Retail Nusantara Tbk",
-  "asOf": "2026-09-16T08:31:58.801976+00:00",
+  "asOf": "2026-09-16T08:46:33.141852+00:00",
   "price": 340.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
     "sourceSector": "Consumer Cyclical",
     "industry": "Department Stores",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 548.867908931484,
-    "base": 1069.4955352800025,
-    "bull": 1485.158922384057,
-    "dispersion": 0.24166949665927828,
+    "bear": 391.8224829837501,
+    "base": 530.3155253044446,
+    "bull": 610.2278231103573,
+    "dispersion": 0.2827255112852303,
     "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
     {
-      "name": "DCF",
-      "bear": 899.8611835564473,
-      "base": 1426.4800605840105,
-      "bull": 1967.2940870023006,
-      "confidence": 0.85,
-      "relevance": 0.65,
-      "rawWeight": 0.5525,
-      "bands": null,
-      "warning": "Porsi nilai jangka panjang tinggi",
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.36650082918739635
-    },
-    {
       "name": "FCF Yield",
+      "family": "cashflow",
       "bear": 442.8704285317502,
       "base": 787.325206278667,
       "bull": 885.7408570635004,
@@ -44,32 +31,57 @@
       "rawWeight": 0.675,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.44776119402985076
+      "normalizedWeight": 0.2380952380952381
     },
     {
-      "name": "Historical PBV 5Y",
-      "bear": 111.81260550122703,
-      "base": 1045.320613299421,
-      "bull": 1978.8286210976148,
-      "confidence": 0.8,
-      "relevance": 0.35,
-      "rawWeight": 0.27999999999999997,
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 375.87000000000006,
+      "base": 450.0,
+      "bull": 524.13,
+      "confidence": 0.9,
+      "relevance": 1.2,
+      "rawWeight": 1.08,
       "bands": {
-        "mean": 2.63664138010678,
-        "sd": 2.354613322177681,
-        "current": 0.857591496647856,
-        "z": -0.755559253276269,
-        "minus1": 111.81260550122703,
-        "base": 1045.320613299421,
-        "plus1": 1978.8286210976148,
+        "mean": 11.741812818082028,
+        "sd": 1.9342679648987127,
+        "current": 8.87159190699531,
+        "z": -1.4838796708485098,
+        "minus1": 375.87000000000006,
+        "base": 450.0,
+        "plus1": 524.13,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.18573797678275286
+      "normalizedWeight": 0.380952380952381
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 375.87000000000006,
+      "base": 450.0,
+      "bull": 524.13,
+      "confidence": 0.9,
+      "relevance": 1.2,
+      "rawWeight": 1.08,
+      "bands": {
+        "mean": 11.741812818082028,
+        "sd": 1.9342679648987127,
+        "current": 8.87159190699531,
+        "z": -1.4838796708485098,
+        "minus1": 375.87000000000006,
+        "base": 450.0,
+        "plus1": 524.13,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.380952380952381
     }
   ],
   "dcfDiagnostics": {
@@ -92,20 +104,22 @@
   "quality": {
     "cashConversion": 1.8489250398163857,
     "roe": 0.0062300004,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "BAIK",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3
+    "validMethodCount": 3,
+    "independentFamilies": 2
   },
   "raw": {
-    "epsTTM": 2.99,
+    "epsTTM": 38.32457619380663,
     "bvps": 396.45915488783197,
-    "currentPE": 113.7123745819398,
+    "currentPE": 8.87159190699531,
     "currentPBV": 0.857591496647856,
     "roe": 0.0062300004,
     "fcf": 296449245184.0,

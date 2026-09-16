@@ -1,27 +1,28 @@
 {
   "ticker": "TCID.JK",
   "name": "PT. Mandom Indonesia Tbk",
-  "asOf": "2026-09-16T08:32:45.089688+00:00",
+  "asOf": "2026-09-16T08:47:04.698523+00:00",
   "price": 2580.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
     "sourceSector": "Consumer Defensive",
     "industry": "Household & Personal Products",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1296.099642858071,
-    "base": 1781.567118609426,
-    "bull": 2284.0900486308683,
-    "dispersion": 0.3836483085370728,
+    "bear": 983.6754835190135,
+    "base": 1262.1039322308698,
+    "bull": 1579.548956657456,
+    "dispersion": 0.5103253463996242,
     "agreement": "LOW",
     "available": true
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 848.5840856247564,
       "base": 1107.6268248174147,
       "bull": 1535.996450326151,
@@ -32,10 +33,11 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.18827361563517914
+      "normalizedWeight": 0.43070044709388966
     },
     {
       "name": "FCF Yield",
+      "family": "cashflow",
       "bear": 580.4616436000305,
       "base": 860.4276987455614,
       "bull": 1056.1146878141933,
@@ -44,78 +46,33 @@
       "rawWeight": 0.675,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.17589576547231273
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "bear": 1606.308762816413,
-      "base": 2300.0,
-      "bull": 2993.6912371835874,
-      "confidence": 0.9,
-      "relevance": 1.2,
-      "rawWeight": 1.08,
-      "bands": {
-        "mean": 60.45187317121465,
-        "sd": 18.23258030008921,
-        "current": 67.81123164423208,
-        "z": 0.4036377929996788,
-        "minus1": 1606.308762816413,
-        "base": 2300.0,
-        "plus1": 2993.6912371835874,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.2814332247557004
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 1468.5924808161872,
-      "base": 2071.1653950736522,
-      "bull": 2673.738309331117,
-      "confidence": 0.9,
-      "relevance": 1.2,
-      "rawWeight": 1.08,
-      "bands": {
-        "mean": 54.43731642591352,
-        "sd": 15.837678864826724,
-        "current": 67.81123164423208,
-        "z": 0.844436570059528,
-        "minus1": 1468.5924808161872,
-        "base": 2071.1653950736522,
-        "plus1": 2673.738309331117,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.2814332247557004
+      "normalizedWeight": 0.4023845007451565
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 2314.1979466097573,
-      "base": 2624.486119286755,
-      "bull": 2934.7742919637526,
+      "family": "book",
+      "bear": 2304.2929011044216,
+      "base": 2629.0366740480285,
+      "bull": 2953.7804469916355,
       "confidence": 0.8,
       "relevance": 0.35,
       "rawWeight": 0.27999999999999997,
       "bands": {
-        "mean": 0.5895762338892818,
-        "sd": 0.06970451507551043,
+        "mean": 0.590598490748841,
+        "sd": 0.07295188540875973,
         "current": 0.5795826742066106,
-        "z": -0.1433703350757879,
-        "minus1": 2314.1979466097573,
-        "base": 2624.486119286755,
-        "plus1": 2934.7742919637526,
+        "z": -0.15100112191079373,
+        "minus1": 2304.2929011044216,
+        "base": 2629.0366740480285,
+        "plus1": 2953.7804469916355,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.07296416938110749
+      "normalizedWeight": 0.1669150521609538
     }
   ],
   "dcfDiagnostics": {
@@ -140,11 +97,14 @@
     "roe": -0.00715,
     "dataScore": 100,
     "dataLabel": "BAIK",
-    "availableInputs": 10,
-    "totalInputs": 10,
-    "guards": [],
+    "availableInputs": 7,
+    "totalInputs": 7,
+    "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+    ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5
+    "validMethodCount": 3,
+    "independentFamilies": 2
   },
   "raw": {
     "epsTTM": 38.046794571374676,

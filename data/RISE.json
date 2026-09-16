@@ -1,27 +1,28 @@
 {
   "ticker": "RISE.JK",
   "name": "PT Jaya Sukses Makmur Sentosa Tbk",
-  "asOf": "2026-09-16T08:36:11.894120+00:00",
-  "price": 790.0,
+  "asOf": "2026-09-16T08:49:33.132614+00:00",
+  "price": 795.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
     "sourceSector": "Real Estate",
     "industry": "Real Estate - Development",
-    "sectorNote": "Nilai aset dan ekuitas lebih penting pada developer properti.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 618.2900746711316,
-    "base": 696.2903964305193,
-    "bull": 776.9973174872366,
-    "dispersion": 0.5991129965050316,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
       "name": "DCF",
+      "family": "cashflow",
       "bear": 85.75395272590154,
       "base": 130.43840996267124,
       "bull": 187.8440588548284,
@@ -31,11 +32,12 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.21276303121991472
+      "included": false,
+      "normalizedWeight": 0
     },
     {
       "name": "FCF Yield",
+      "family": "cashflow",
       "bear": 44.6265497787627,
       "base": 77.29997755104826,
       "bull": 89.2530995575254,
@@ -44,55 +46,33 @@
       "rawWeight": 0.37125,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0
     },
     {
-      "name": "Historical P/E 5Y",
-      "bear": 982.0113556005637,
-      "base": 1024.3779366853155,
-      "bull": 1066.7445177700672,
-      "confidence": 0.9,
-      "relevance": 0.75,
-      "rawWeight": 0.675,
-      "bands": {
-        "mean": 93.3799395337571,
-        "sd": 3.862040208272714,
-        "current": 72.01458523245213,
-        "z": -5.532141860030129,
-        "minus1": 982.0113556005637,
-        "base": 1024.3779366853155,
-        "plus1": 1066.7445177700672,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.37133819282079494
-    },
-    {
       "name": "Historical PBV 5Y",
-      "bear": 565.9706044792682,
+      "family": "book",
+      "bear": 668.1758853226014,
       "base": 692.8302986718592,
-      "bull": 819.6899928644501,
+      "bull": 717.4847120211169,
       "confidence": 0.8,
       "relevance": 0.945,
       "rawWeight": 0.756,
       "bands": {
         "mean": 5.132291924169364,
-        "sd": 0.9397409224962274,
-        "current": 5.852097732830401,
-        "z": 0.7659619704003338,
-        "minus1": 565.9706044792682,
+        "sd": 0.18263295755120876,
+        "current": 5.889136326076164,
+        "z": 4.144073512550918,
+        "minus1": 668.1758853226014,
         "base": 692.8302986718592,
-        "plus1": 819.6899928644501,
+        "plus1": 717.4847120211169,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.4158987759592903
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0
     }
   ],
   "dcfDiagnostics": {
@@ -105,35 +85,40 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 864.75,
-    "ma50": 924.6,
-    "ma200": 2897.443918457031,
-    "rsi14": 25.0,
-    "return1m": -0.13186813186813184,
-    "return3m": -0.33613445378151263
+    "ma20": 865.0,
+    "ma50": 924.7,
+    "ma200": 2897.468918457031,
+    "rsi14": 25.531914893617028,
+    "return1m": -0.12637362637362637,
+    "return3m": -0.33193277310924374
   },
   "quality": {
     "cashConversion": 1.326481790987732,
     "roe": 0.05347,
-    "dataScore": 90,
-    "dataLabel": "BAIK",
-    "availableInputs": 9,
-    "totalInputs": 10,
-    "guards": [],
+    "dataScore": 100,
+    "dataLabel": "CUKUP",
+    "availableInputs": 7,
+    "totalInputs": 7,
+    "guards": [
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+    ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3
+    "validMethodCount": 0,
+    "independentFamilies": 0
   },
   "raw": {
-    "epsTTM": 10.97,
+    "epsTTM": 5.382846574384729,
     "bvps": 134.9943278575274,
-    "currentPE": 72.01458523245213,
-    "currentPBV": 5.852097732830401,
+    "currentPE": 147.69137277349768,
+    "currentPBV": 5.889136326076164,
     "roe": 0.05347,
     "fcf": 115662020608.0,
     "growthNormalized": 0.13140982805783014,
     "costOfEquity": 0.1186526,
     "terminalGrowth": 0.035,
-    "marketCap": 12796893855744.0,
+    "marketCap": 12877886914560.0,
     "shares": 16198599990.0
   },
   "source": "Yahoo Finance via yfinance",
