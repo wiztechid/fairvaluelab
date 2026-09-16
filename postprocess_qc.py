@@ -1,3 +1,4 @@
+# Pipeline v3.8: this file change intentionally triggers a clean run after the race-safe workflow update.
 import json, glob, math, os
 import numpy as np
 from des_universe import TICKERS, SECTOR_BY_TICKER, DES_SOURCE
