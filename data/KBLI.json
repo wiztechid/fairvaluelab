@@ -1,7 +1,7 @@
 {
   "ticker": "KBLI.JK",
   "name": "PT KMI Wire and Cable Tbk",
-  "asOf": "2026-09-16T09:38:12.650697+00:00",
+  "asOf": "2026-09-16T11:01:57.809427+00:00",
   "price": 382.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 340.30815264388525,
-    "base": 432.72211537720034,
-    "bull": 525.1360781105155,
-    "dispersion": 0.14314433063483809,
-    "agreement": "HIGH",
+    "bear": 393.0669333910546,
+    "base": 497.6997873380772,
+    "bull": 602.3326412851,
+    "dispersion": 0.41073532633578663,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.41589648798521256
+      "normalizedWeight": 0.36086607858861264,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +67,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.41589648798521256
+      "normalizedWeight": 0.36086607858861264,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +92,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.16820702402957485
+      "normalizedWeight": 0.14595028067361665,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 739.0366350179471,
+      "base": 923.7957937724339,
+      "bull": 1108.5549525269205,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.13231756214915796,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -113,8 +132,10 @@
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 54.02,
@@ -130,5 +151,32 @@
     "shares": 4007235090.764398
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -276292042752.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

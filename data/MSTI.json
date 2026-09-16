@@ -1,7 +1,7 @@
 {
   "ticker": "MSTI.JK",
   "name": "PT Mastersystem Infotama Tbk",
-  "asOf": "2026-09-16T09:42:29.019849+00:00",
+  "asOf": "2026-09-16T11:05:23.408742+00:00",
   "price": 1355.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1617.1218977026847,
-    "base": 2328.7991553887996,
-    "bull": 2882.5536307019393,
-    "dispersion": 0.39614705182899634,
-    "agreement": "LOW",
+    "bear": 1304.6866913748138,
+    "base": 1710.064532727142,
+    "bull": 1918.6598878624377,
+    "dispersion": 0.10420126837895426,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.30125051857997986
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.05x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2720322408581758
+      "normalizedWeight": 0.3180873180873181,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +75,24 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.42671724056184446
+      "normalizedWeight": 0.498960498960499,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 1366.4898540955999,
+      "base": 1708.1123176194997,
+      "bull": 2049.7347811433997,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.18295218295218296,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -102,7 +122,9 @@
     "guards": [],
     "historyYears": 2.855578370978782,
     "validMethodCount": 3,
-    "independentFamilies": 2
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 177.66,
@@ -118,5 +140,33 @@
     "shares": 3139416200.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 3762.9379225138755,
+        "price": 1355.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

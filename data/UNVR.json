@@ -1,7 +1,7 @@
 {
   "ticker": "UNVR.JK",
   "name": "PT Unilever Indonesia Tbk",
-  "asOf": "2026-09-16T09:39:38.705396+00:00",
+  "asOf": "2026-09-16T11:03:05.522246+00:00",
   "price": 1620.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 362.83126032373633,
+    "base": 531.9253255452151,
+    "bull": 684.035659149515,
+    "dispersion": 0.23557788007925295,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,9 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.35473515248796145,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -47,8 +48,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.4333868378812199,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +74,9 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 6.06x dari median metode."
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +100,25 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 7.96x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 584.2437889778644,
+      "base": 730.3047362223305,
+      "bull": 876.3656834667966,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.21187800963081863,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -129,8 +151,10 @@
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 201.18254032577715,
@@ -146,5 +170,23 @@
     "shares": 37981233300.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

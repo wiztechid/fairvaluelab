@@ -12,11 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 168.3300940418058,
-    "base": 6298.822830914418,
-    "bull": 12429.31556778703,
-    "dispersion": 0.0,
-    "agreement": "HIGH"
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -38,8 +39,10 @@
       },
       "warning": null,
       "explanation": "EPS sekarang dikalikan rata-rata P/E historis 3 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": true,
-      "normalizedWeight": 0.5
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "Historical P/E 5Y",
@@ -60,8 +63,10 @@
       },
       "warning": null,
       "explanation": "EPS sekarang dikalikan rata-rata P/E historis 5 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": true,
-      "normalizedWeight": 0.5
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "Historical PBV 5Y",
@@ -83,7 +88,26 @@
       "warning": null,
       "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.06x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 35.07933913555328,
+      "base": 43.849173919441604,
+      "bull": 52.619008703329925,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.06x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -99,9 +123,17 @@
     "cashConversion": -1.3865517235994542,
     "roe": 0.24112,
     "dataScore": 90,
-    "dataLabel": "BAIK",
+    "dataLabel": "CUKUP",
     "availableInputs": 9,
-    "totalInputs": 10
+    "totalInputs": 10,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 6,
+    "guards": [
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "outlierMethodCount": 4
   },
   "raw": {
     "epsTTM": 4.52,
@@ -117,5 +149,66 @@
     "shares": 13485057905.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -89058689024.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 168.3300940418058,
+        "base": 6298.822830914418,
+        "bull": 12429.31556778703,
+        "price": 520.0
+      }
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 168.3300940418058,
+        "base": 6298.822830914418,
+        "bull": 12429.31556778703,
+        "price": 520.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 43.849173919441604,
+        "price": 520.0
+      }
+    }
+  ],
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

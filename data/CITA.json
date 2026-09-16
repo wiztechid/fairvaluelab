@@ -1,7 +1,7 @@
 {
   "ticker": "CITA.JK",
   "name": "PT Cita Mineral Investindo Tbk",
-  "asOf": "2026-09-16T09:37:09.503073+00:00",
+  "asOf": "2026-09-16T11:01:06.430534+00:00",
   "price": 3490.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1677.7249136281955,
-    "base": 3084.523551142862,
-    "bull": 4491.322188657528,
-    "dispersion": 0.29814921927115706,
-    "agreement": "MEDIUM",
+    "bear": 2318.952868607485,
+    "base": 3950.1964517061647,
+    "bull": 5581.440034804845,
+    "dispersion": 0.03966415020187468,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -41,8 +41,10 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": true,
-      "normalizedWeight": 0.40390707497360084
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.08x dari median metode."
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +68,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.40390707497360084
+      "normalizedWeight": 0.5243317340644277,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +93,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.19218585005279828
+      "normalizedWeight": 0.24948594928032897,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 3326.746934149893,
+      "base": 4158.433667687366,
+      "bull": 4990.120401224839,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.22618231665524333,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -112,7 +132,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
-    "independentFamilies": 2
+    "independentFamilies": 3,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 347.14,
@@ -128,5 +150,40 @@
     "shares": 3960361250.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NOT_APPLICABLE",
+      "reason": "FCF tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 1896.7765923687807,
+        "price": 3490.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

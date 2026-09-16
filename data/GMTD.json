@@ -1,7 +1,7 @@
 {
   "ticker": "GMTD.JK",
   "name": "PT Gowa Makassar Tourism Development Tbk",
-  "asOf": "2026-09-16T09:41:45.489646+00:00",
+  "asOf": "2026-09-16T11:04:48.415018+00:00",
   "price": 1235.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 476.71204709791954,
-    "base": 737.9196940864948,
-    "bull": 972.3863801287252,
-    "dispersion": 0.3167853721043878,
+    "bear": 493.0102370257899,
+    "base": 739.0677474845808,
+    "bull": 962.0038692334065,
+    "dispersion": 0.2833275138373714,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -33,7 +33,8 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.18346774193548385
+      "normalizedWeight": 0.15863412633305987,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -48,7 +49,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.17611480075901328
+      "normalizedWeight": 0.15227645611156687,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +74,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.3202087286527514
+      "normalizedWeight": 0.27686628383921247,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +99,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3202087286527514
+      "normalizedWeight": 0.27686628383921247,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +124,25 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.89x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 597.1210987468525,
+      "base": 746.4013734335656,
+      "bull": 895.6816481202787,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.13535684987694832,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -149,8 +171,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 2
+    "validMethodCount": 5,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 29.26,
@@ -166,5 +190,23 @@
     "shares": 1015380000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

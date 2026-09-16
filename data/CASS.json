@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1489.417878490913,
-    "base": 2240.832404081059,
-    "bull": 2878.5941674277215,
-    "dispersion": 0.4876032063925542,
-    "agreement": "LOW",
+    "bear": 1213.1726407763326,
+    "base": 1729.5733918722456,
+    "bull": 2113.8470792873854,
+    "dispersion": 0.11546714893398595,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.20692883895131087
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.34x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2106741573033708
+      "normalizedWeight": 0.23510971786833856,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +75,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.23876404494382023
+      "normalizedWeight": 0.2664576802507837,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +100,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.23876404494382023
+      "normalizedWeight": 0.2664576802507837,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +125,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.10486891385767791
+      "normalizedWeight": 0.11703239289446186,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 1564.6966100266466,
+      "base": 1955.8707625333082,
+      "bull": 2347.0449150399695,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.1149425287356322,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -150,7 +172,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 5,
-    "independentFamilies": 3
+    "independentFamilies": 4,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 230.48,
@@ -166,5 +190,33 @@
     "shares": 2086950000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 4312.909753011294,
+        "price": 1865.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

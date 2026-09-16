@@ -1,7 +1,7 @@
 {
   "ticker": "HOMI.JK",
   "name": "PT Grand House Mulia Tbk",
-  "asOf": "2026-09-16T09:41:48.460051+00:00",
+  "asOf": "2026-09-16T11:04:50.694102+00:00",
   "price": 252.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 24.04686226847199,
+    "base": 30.835775664039335,
+    "bull": 39.85961614845852,
+    "dispersion": 0.09226648968784404,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.41901408450704225,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -47,8 +48,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.3075807787903895,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -72,7 +74,25 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 11.56x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 23.368351595540336,
+      "base": 29.21043949442542,
+      "bull": 35.0525273933105,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.2734051367025684,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -101,11 +121,14 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 6,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 0.4512694685714286,
@@ -121,5 +144,63 @@
     "shares": 1575000000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 34.226238678928134,
+        "price": 252.0
+      }
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 27.66172654940655,
+        "price": 252.0
+      }
+    },
+    {
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 365.4443748583749,
+        "price": 252.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 29.21043949442542,
+        "price": 252.0
+      }
+    }
+  ],
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

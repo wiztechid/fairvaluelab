@@ -1,7 +1,7 @@
 {
   "ticker": "SMIL.JK",
   "name": "PT Sarana Mitra Luas Tbk",
-  "asOf": "2026-09-16T09:38:26.666234+00:00",
+  "asOf": "2026-09-16T11:02:09.163781+00:00",
   "price": 426.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 102.26216460312418,
+    "base": 171.8954655133366,
+    "bull": 241.52876642354906,
+    "dispersion": 0.18714172216507832,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -41,8 +41,25 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.7317073170731707,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 102.86079977276218,
+      "base": 128.57599971595272,
+      "bull": 154.29119965914325,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.2682926829268293,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -65,8 +82,10 @@
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 3.34839151266256,
-    "validMethodCount": 0,
-    "independentFamilies": 0
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 8.69,
@@ -82,5 +101,32 @@
     "shares": 8709668469.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -157452206080.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

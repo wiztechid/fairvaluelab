@@ -1,7 +1,7 @@
 {
   "ticker": "MIKA.JK",
   "name": "PT Mitra Keluarga Karyasehat Tbk",
-  "asOf": "2026-09-16T09:41:10.029184+00:00",
+  "asOf": "2026-09-16T11:04:19.784640+00:00",
   "price": 1790.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 2666.0192659781037,
-    "base": 3411.028993151045,
-    "bull": 4156.038720323986,
-    "dispersion": 0.05350102874487349,
-    "agreement": "HIGH",
+    "bear": 2442.8551109299888,
+    "base": 3122.3050887361214,
+    "bull": 3801.7550665422536,
+    "dispersion": 0.3578599906898671,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,9 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.17x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.70x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +76,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.4457364341085271
+      "normalizedWeight": 0.3902714932126697,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +101,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4457364341085271
+      "normalizedWeight": 0.3902714932126697,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +126,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.10852713178294573
+      "normalizedWeight": 0.09502262443438915,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 872.590965409616,
+      "base": 1090.73870676202,
+      "bull": 1308.886448114424,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.12443438914027151,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -149,8 +172,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 101.36,
@@ -166,5 +191,33 @@
     "shares": 13906650800.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 328.0514883808928,
+        "price": 1790.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

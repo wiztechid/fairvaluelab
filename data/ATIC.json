@@ -1,7 +1,7 @@
 {
   "ticker": "ATIC.JK",
   "name": "PT Anabatic Technologies Tbk",
-  "asOf": "2026-09-16T09:42:13.191847+00:00",
+  "asOf": "2026-09-16T11:05:10.947497+00:00",
   "price": 462.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 299.36282430377645,
-    "base": 384.2052575503799,
-    "bull": 469.0476907969833,
-    "dispersion": 0.21517313404460744,
+    "bear": 317.33902415029047,
+    "base": 405.2215117786468,
+    "bull": 493.1039994070032,
+    "dispersion": 0.19731522505664814,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.4639175257731959
+      "normalizedWeight": 0.39647577092511016,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +67,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4639175257731959
+      "normalizedWeight": 0.39647577092511016,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +92,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.07216494845360824
+      "normalizedWeight": 0.06167400881057268,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 423.01728991464546,
+      "base": 528.7716123933068,
+      "bull": 634.5259348719682,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.14537444933920707,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -111,8 +130,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 62.65,
@@ -128,5 +149,32 @@
     "shares": 2894201693.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -319544229888.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

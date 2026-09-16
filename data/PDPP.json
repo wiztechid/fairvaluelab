@@ -1,7 +1,7 @@
 {
   "ticker": "PDPP.JK",
   "name": "PT Primadaya Plastisindo Tbk",
-  "asOf": "2026-09-16T09:37:37.286555+00:00",
+  "asOf": "2026-09-16T11:01:29.481936+00:00",
   "price": 338.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 254.92189765893346,
-    "base": 343.1473500403049,
-    "bull": 412.43120524015814,
-    "dispersion": 0.4020195163381926,
+    "bear": 239.34850606815587,
+    "base": 319.99042898187605,
+    "bull": 384.54431648988304,
+    "dispersion": 0.4484887144125105,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,8 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.20787422735823702
+      "normalizedWeight": 0.17655786350148367,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -48,7 +49,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.38094598226283255
+      "normalizedWeight": 0.3235562656927642,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +74,24 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.4111797903789304
+      "normalizedWeight": 0.34923533439853915,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 151.54761196318097,
+      "base": 189.4345149539762,
+      "bull": 227.3214179447714,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.15065053640721296,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -103,8 +122,10 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan."
     ],
     "historyYears": 3.8521560574948666,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 11.289915036585997,
@@ -120,5 +141,23 @@
     "shares": 3061341438.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

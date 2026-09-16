@@ -1,7 +1,7 @@
 {
   "ticker": "GRIA.JK",
   "name": "PT Ingria Pratama Capitalindo Tbk",
-  "asOf": "2026-09-16T09:41:46.978566+00:00",
+  "asOf": "2026-09-16T11:04:49.598248+00:00",
   "price": 167.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 26.416353639271023,
+    "base": 32.65099159785035,
+    "bull": 40.175838309639815,
+    "dispersion": 0.21623458970082352,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.41901408450704225,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -47,8 +48,25 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.3075807787903895,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 26.739867362836804,
+      "base": 33.424834203546006,
+      "bull": 40.10980104425521,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.2734051367025684,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -80,8 +98,10 @@
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 3.1074606433949348,
-    "validMethodCount": 0,
-    "independentFamilies": 0
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 0.92,
@@ -97,5 +117,33 @@
     "shares": 7375720674.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 22.753067969193932,
+        "price": 167.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

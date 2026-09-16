@@ -1,7 +1,7 @@
 {
   "ticker": "CPRO.JK",
   "name": "PT Central Proteina Prima Tbk",
-  "asOf": "2026-09-16T09:38:46.814975+00:00",
+  "asOf": "2026-09-16T11:02:24.539886+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 37.70957142570785,
-    "base": 44.42775904559353,
-    "bull": 51.20562778432391,
-    "dispersion": 0.2564873882938082,
-    "agreement": "MEDIUM",
+    "bear": 40.94839307557583,
+    "base": 48.745371955350215,
+    "bull": 56.5961042581924,
+    "dispersion": 0.3798280529915949,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,8 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.1846282372598162
+      "normalizedWeight": 0.16629044394281414,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -48,7 +49,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.90x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +75,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.3609022556390977
+      "normalizedWeight": 0.32505643340857787,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +100,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3609022556390977
+      "normalizedWeight": 0.32505643340857787,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +125,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.09356725146198829
+      "normalizedWeight": 0.08427389014296462,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 70.3186166732423,
+      "base": 87.89827084155287,
+      "bull": 105.47792500986344,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.09932279909706546,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -151,8 +173,10 @@
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 5.4,
@@ -168,5 +192,23 @@
     "shares": 59572381286.4
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

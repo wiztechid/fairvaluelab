@@ -1,7 +1,7 @@
 {
   "ticker": "BUDI.JK",
   "name": "PT Budi Starch & Sweetener Tbk",
-  "asOf": "2026-09-16T09:38:41.587447+00:00",
+  "asOf": "2026-09-16T11:02:19.983663+00:00",
   "price": 226.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 252.1630745187309,
-    "base": 333.7265947442356,
-    "bull": 415.59917957647457,
-    "dispersion": 0.4076503151479582,
-    "agreement": "LOW",
+    "bear": 308.2286344142441,
+    "base": 400.2820146334754,
+    "bull": 492.33539485270666,
+    "dispersion": 0.2618799054409423,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.1846282372598162
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.59x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.88x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +76,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.3609022556390977
+      "normalizedWeight": 0.38989169675090257,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +101,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3609022556390977
+      "normalizedWeight": 0.38989169675090257,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +126,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.09356725146198829
+      "normalizedWeight": 0.10108303249097472,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 426.3325688390129,
+      "base": 532.9157110487661,
+      "bull": 639.4988532585193,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.11913357400722022,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -150,7 +173,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
-    "independentFamilies": 3
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 36.54,
@@ -166,5 +191,23 @@
     "shares": 4491276962.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 0.005712659913519799,
-    "base": 0.008052824710117494,
-    "bull": 0.010419606179120858,
-    "dispersion": 0.19292355384437782,
-    "agreement": "MEDIUM",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -31,8 +31,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.3874394142518305
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "FCF Yield",
@@ -45,8 +47,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.6125605857481696
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     }
   ],
   "dcfDiagnostics": {
@@ -73,9 +77,15 @@
     "dataLabel": "CUKUP",
     "availableInputs": 6,
     "totalInputs": 10,
-    "guards": [],
+    "guards": [
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
     "historyYears": 4.996577686516085,
-    "validMethodCount": 2
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 6,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": null,
@@ -91,5 +101,63 @@
     "shares": 833440000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
+      "name": "PBV & Graham",
+      "family": "book",
+      "status": "NEGATIVE",
+      "reason": "Ekuitas/BVPS negatif; metode berbasis book value tidak digunakan.",
+      "inputs": {
+        "bvps": -0.041
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 0.006836967542173421,
+        "base": 0.010042564669873872,
+        "bull": 0.01395416714713361,
+        "price": 135.0
+      }
+    },
+    {
+      "name": "FCF Yield",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 0.00500154480226531,
+        "base": 0.006794330934224443,
+        "bull": 0.008184026119049491,
+        "price": 135.0
+      }
+    }
+  ],
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

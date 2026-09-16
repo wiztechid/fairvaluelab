@@ -1,7 +1,7 @@
 {
   "ticker": "KOTA.JK",
   "name": "PT DMS Propertindo Tbk",
-  "asOf": "2026-09-16T09:40:17.961077+00:00",
+  "asOf": "2026-09-16T11:03:38.328742+00:00",
   "price": 193.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,37 +12,54 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 80.36439835172125,
+    "base": 95.25598312224,
+    "bull": 110.14756789275877,
+    "dispersion": 0.44523647920636783,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
       "name": "Historical PBV 5Y",
       "family": "book",
-      "bear": 49.8491297463139,
+      "bear": 49.849129746313906,
       "base": 50.98389775924578,
-      "bull": 52.118665772177664,
+      "bull": 52.11866577217766,
       "confidence": 0.8,
       "relevance": 0.35,
       "rawWeight": 0.27999999999999997,
       "bands": {
-        "mean": 0.43503019649417524,
-        "sd": 0.009682632622013241,
-        "current": 1.6468106914824843,
-        "z": 125.14989902987274,
-        "minus1": 49.8491297463139,
+        "mean": 0.43502434588243666,
+        "sd": 0.009682502402721452,
+        "current": 1.6467885439395311,
+        "z": 125.1498990298732,
+        "minus1": 49.849129746313906,
         "base": 50.98389775924578,
-        "plus1": 52.118665772177664,
+        "plus1": 52.11866577217766,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.4590163934426229,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 106.25614141085475,
+      "base": 132.82017676356844,
+      "bull": 159.38421211628213,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.5409836065573771,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -65,22 +82,51 @@
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 6.69,
-    "bvps": 117.19622722770791,
+    "bvps": 117.19780339150017,
     "currentPE": 28.849028400597906,
-    "currentPBV": 1.6468106914824843,
+    "currentPBV": 1.6467885439395311,
     "roe": 0.05898,
     "fcf": -272756948992.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.20891,
     "terminalGrowth": 0.035,
-    "marketCap": 2035413811200.0,
-    "shares": 10546185701.0
+    "marketCap": 2035386417152.0,
+    "shares": 10546043868.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -272756948992.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

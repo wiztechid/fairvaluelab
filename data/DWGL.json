@@ -1,7 +1,7 @@
 {
   "ticker": "DWGL.JK",
   "name": "PT Dwi Guna Laksana Tbk",
-  "asOf": "2026-09-16T09:36:23.915110+00:00",
+  "asOf": "2026-09-16T11:00:28.448791+00:00",
   "price": 232.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 225.91768507625983,
-    "base": 336.6456394237547,
-    "bull": 421.25901576420586,
-    "dispersion": 0.5407587769011314,
-    "agreement": "LOW",
+    "bear": 181.55195875396686,
+    "base": 260.6917619227622,
+    "bull": 312.9164831077804,
+    "dispersion": 0.2476162091341473,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.12602535421327365
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.87x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2605606000789577
+      "normalizedWeight": 0.26325119659634816,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +75,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.25266482431898935
+      "normalizedWeight": 0.25527388760858005,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +100,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.25266482431898935
+      "normalizedWeight": 0.25527388760858005,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +125,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.10808439706978988
+      "normalizedWeight": 0.10920049636589257,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 140.00913734866003,
+      "base": 175.01142168582504,
+      "bull": 210.01370602299005,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.11700053182059918,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -150,7 +172,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 5,
-    "independentFamilies": 3
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 25.19,
@@ -166,5 +190,23 @@
     "shares": 9252820991.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

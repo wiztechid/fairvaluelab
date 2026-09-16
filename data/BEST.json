@@ -1,7 +1,7 @@
 {
   "ticker": "BEST.JK",
   "name": "PT Bekasi Fajar Industrial Estate Tbk",
-  "asOf": "2026-09-16T09:41:33.333921+00:00",
+  "asOf": "2026-09-16T11:04:38.349038+00:00",
   "price": 121.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 82.71225465347791,
-    "base": 106.49089936997039,
-    "bull": 130.26954408646287,
-    "dispersion": 0.13860713040094447,
-    "agreement": "HIGH",
+    "bear": 91.01490593036495,
+    "base": 116.44918401306992,
+    "bull": 141.8834620957749,
+    "dispersion": 0.2781914825819527,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -33,7 +33,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.68x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -57,7 +59,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054
+      "normalizedWeight": 0.2770935960591133,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -81,7 +84,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054
+      "normalizedWeight": 0.2770935960591133,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -105,7 +109,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.358974358974359
+      "normalizedWeight": 0.3103448275862069,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 144.0009168064986,
+      "base": 180.00114600812324,
+      "bull": 216.0013752097479,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.1354679802955665,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -137,8 +158,10 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 3.118034893173317,
@@ -154,5 +177,23 @@
     "shares": 9647311150.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

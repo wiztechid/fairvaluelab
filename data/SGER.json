@@ -1,7 +1,7 @@
 {
   "ticker": "SGER.JK",
   "name": "PT Sumber Global Energy Tbk",
-  "asOf": "2026-09-16T09:36:48.179741+00:00",
+  "asOf": "2026-09-16T11:00:49.168811+00:00",
   "price": 685.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 122.01511178367187,
-    "base": 227.056554889166,
-    "bull": 332.0979979946602,
-    "dispersion": 0.4731835989348085,
+    "bear": 130.00569383900546,
+    "base": 225.2077134002675,
+    "bull": 320.4097329615295,
+    "dispersion": 0.44054698721229546,
     "agreement": "LOW",
     "available": true
   },
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.41189931350114417
+      "normalizedWeight": 0.34648700673724736,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +67,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.41189931350114417
+      "normalizedWeight": 0.34648700673724736,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +92,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.17620137299771169
+      "normalizedWeight": 0.1482194417709336,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 172.3315648472574,
+      "base": 215.41445605907174,
+      "bull": 258.49734727088605,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.15880654475457168,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -111,8 +130,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 14.39,
@@ -128,5 +149,32 @@
     "shares": 15586909438.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -967651688448.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

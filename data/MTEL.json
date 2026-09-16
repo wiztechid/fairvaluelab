@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.409967845659164
+      "normalizedWeight": 0.409967845659164,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +67,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.409967845659164
+      "normalizedWeight": 0.409967845659164,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +92,25 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.18006430868167203
+      "normalizedWeight": 0.18006430868167203,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 400.67914359856815,
+      "base": 500.84892949821017,
+      "bull": 601.0187153978521,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.31x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -112,7 +132,9 @@
     "guards": [],
     "historyYears": 4.815879534565366,
     "validMethodCount": 3,
-    "independentFamilies": 2
+    "independentFamilies": 2,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 27.01,
@@ -128,5 +150,40 @@
     "shares": 80798831544.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NOT_APPLICABLE",
+      "reason": "FCF tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 500.84892949821017,
+        "price": 484.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

@@ -41,7 +41,25 @@
       "warning": null,
       "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 46.809643715638714,
+      "base": 58.51205464454839,
+      "bull": 70.21446557345807,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE"
     }
   ],
   "dcfDiagnostics": null,
@@ -57,15 +75,20 @@
     "cashConversion": -1.0114951643224546,
     "roe": 0.15492,
     "dataScore": 80,
-    "dataLabel": "BAIK",
+    "dataLabel": "CUKUP",
     "availableInputs": 8,
     "totalInputs": 10,
     "guards": [
       "Riwayat harga 3.6 tahun; Historical 5Y dinonaktifkan.",
-      "Harga wajar gabungan tidak diterbitkan karena kurang dari 2 metode independen lolos validasi."
+      "Harga wajar gabungan tidak diterbitkan karena kurang dari 2 metode independen lolos validasi.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 3.6057494866529773,
-    "validMethodCount": 0
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 4.32,
@@ -81,5 +104,54 @@
     "shares": 8539117013.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -25546868736.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 2.16,
+        "base": 49.65943373641634,
+        "bull": 171.80012911612846,
+        "price": 396.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 58.51205464454839,
+        "price": 396.0
+      }
+    }
+  ],
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

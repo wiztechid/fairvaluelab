@@ -1,7 +1,7 @@
 {
   "ticker": "DEWA.JK",
   "name": "PT Darma Henwa Tbk",
-  "asOf": "2026-09-16T09:36:22.387131+00:00",
+  "asOf": "2026-09-16T11:00:27.104827+00:00",
   "price": 370.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 121.4966276254149,
-    "base": 445.46384430964014,
-    "bull": 907.5294057957739,
-    "dispersion": 0.5375356412166604,
-    "agreement": "LOW",
+    "bear": 269.34321343151396,
+    "base": 623.9790313886873,
+    "bull": 1113.8197050185863,
+    "dispersion": 0.14580734164159628,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.7003891050583658
+      "normalizedWeight": 0.6857142857142857,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -65,8 +66,26 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.32x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 604.71749728209,
+      "base": 755.8968716026125,
+      "bull": 907.0762459231349,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.2996108949416343
+      "normalizedWeight": 0.3142857142857143,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -88,7 +107,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
-    "independentFamilies": 2
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 115.63,
@@ -104,5 +125,32 @@
     "shares": 39048640370.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -49132089344.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

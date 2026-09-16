@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 10.40480096668809,
-    "base": 17.10926576471338,
-    "bull": 22.06950773952731,
-    "dispersion": 0.41146631118667787,
+    "bear": 306.0266047932408,
+    "base": 411.0218462102666,
+    "bull": 516.0170876272923,
+    "dispersion": 0.7129336073016537,
     "agreement": "LOW",
     "available": true
   },
@@ -31,8 +31,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.45010183299389
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "FCF Yield",
@@ -45,8 +47,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.54989816700611
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "Historical P/E 3Y",
@@ -68,8 +72,25 @@
       },
       "warning": null,
       "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.7659574468085106,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 68.43900661506443,
+      "base": 85.54875826883053,
+      "bull": 102.65850992259662,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.23404255319148934,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -97,10 +118,14 @@
     "availableInputs": 9,
     "totalInputs": 10,
     "guards": [
-      "Riwayat harga 3.4 tahun; Historical 5Y dinonaktifkan."
+      "Riwayat harga 3.4 tahun; Historical 5Y dinonaktifkan.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 3.359342915811088,
-    "validMethodCount": 2
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 5,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 10.44,
@@ -116,5 +141,57 @@
     "shares": 7738891036.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 15.900381937894718,
+        "base": 25.183247638191315,
+        "bull": 34.59992111931978,
+        "price": 440.0
+      }
+    },
+    {
+      "name": "FCF Yield",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 5.906566171737477,
+        "base": 10.50056208308885,
+        "bull": 11.813132343474955,
+        "price": 440.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 85.54875826883053,
+        "price": 440.0
+      }
+    }
+  ],
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

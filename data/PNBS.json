@@ -1,7 +1,7 @@
 {
   "ticker": "PNBS.JK",
   "name": "PT Bank Panin Dubai Syariah Tbk",
-  "asOf": "2026-09-16T09:36:07.944211+00:00",
+  "asOf": "2026-09-16T11:00:14.984799+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Emiten Syariah / Perusahaan Publik Syariah",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 44.501948347823536,
-    "base": 53.054665434439336,
-    "bull": 62.1955113997748,
-    "dispersion": 0.3140689091371551,
-    "agreement": "MEDIUM",
+    "bear": 24.225329367469463,
+    "base": 30.595090508387266,
+    "bull": 38.17845784307526,
+    "dispersion": 0.09094448059130705,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -33,7 +33,8 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.10381990180816669
+      "normalizedWeight": 0.21423276501111932,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -48,7 +49,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.06466291462100349
+      "normalizedWeight": 0.13343217197924387,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -71,8 +73,26 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.78x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 23.844940402207726,
+      "base": 29.806175502759658,
+      "bull": 35.76741060331159,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.8315171835708299
+      "normalizedWeight": 0.6523350630096367,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -105,7 +125,9 @@
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
-    "independentFamilies": 2
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 0.5156940013819784,
@@ -121,5 +143,33 @@
     "shares": 38813641319.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 57.30551311676916,
+        "price": 50.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

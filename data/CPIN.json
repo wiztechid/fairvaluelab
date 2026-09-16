@@ -1,7 +1,7 @@
 {
   "ticker": "CPIN.JK",
   "name": "PT Charoen Pokphand Indonesia Tbk",
-  "asOf": "2026-09-16T09:38:46.116126+00:00",
+  "asOf": "2026-09-16T11:02:23.875670+00:00",
   "price": 3120.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 2286.265853069398,
-    "base": 3068.2256319394664,
-    "bull": 3857.720054669162,
-    "dispersion": 0.5923362123839613,
-    "agreement": "LOW",
+    "bear": 4868.628725456575,
+    "base": 7989.855253682173,
+    "bull": 11111.08178190777,
+    "dispersion": 0.3060881286684061,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.6636636636636637
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.97x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 6.31x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -71,8 +75,9 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": false,
-      "normalizedWeight": 0
+      "included": true,
+      "normalizedWeight": 0.6390532544378699,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -96,7 +101,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3363363363363363
+      "normalizedWeight": 0.16568047337278105,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 3688.7917066454793,
+      "base": 4610.989633306849,
+      "bull": 5533.187559968219,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.19526627218934914,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -125,8 +147,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2
+    "validMethodCount": 3,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 453.92,
@@ -142,5 +166,23 @@
     "shares": 16398000000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

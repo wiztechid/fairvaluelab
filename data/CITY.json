@@ -1,7 +1,7 @@
 {
   "ticker": "CITY.JK",
   "name": "PT Natura City Developments Tbk",
-  "asOf": "2026-09-16T09:41:38.152003+00:00",
+  "asOf": "2026-09-16T11:04:42.373980+00:00",
   "price": 179.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 90.72712102645154,
-    "base": 124.79996811939495,
-    "bull": 158.8728152123384,
-    "dispersion": 0.16236620176265826,
+    "bear": 117.15535656699564,
+    "base": 137.57603435578844,
+    "bull": 157.9967121445813,
+    "dispersion": 0.049400934583368306,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054
+      "normalizedWeight": 0.4017857142857143,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +67,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054
+      "normalizedWeight": 0.4017857142857143,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -89,8 +91,26 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.37x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 100.92364814128196,
+      "base": 126.15456017660244,
+      "bull": 151.38547221192292,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.358974358974359
+      "normalizedWeight": 0.19642857142857142,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -112,7 +132,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
-    "independentFamilies": 2
+    "independentFamilies": 2,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 4.32,
@@ -128,5 +150,42 @@
     "shares": 5405188966.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -21535131648.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 96.99999999999999,
+        "price": 179.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

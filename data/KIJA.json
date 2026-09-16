@@ -1,7 +1,7 @@
 {
   "ticker": "KIJA.JK",
   "name": "PT Kawasan Industri Jababeka Tbk",
-  "asOf": "2026-09-16T09:41:52.435640+00:00",
+  "asOf": "2026-09-16T11:04:53.808537+00:00",
   "price": 176.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 163.09879867867357,
-    "base": 199.55042966334392,
-    "bull": 221.72152502009982,
-    "dispersion": 0.2531730976300973,
-    "agreement": "MEDIUM",
+    "bear": 161.61390153613112,
+    "base": 180.97418796482205,
+    "bull": 200.33447439351298,
+    "dispersion": 0.00776188677707352,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.14986376021798364
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.67x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -57,7 +59,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.2724795640326975
+      "normalizedWeight": 0.32051282051282054,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -81,7 +84,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2724795640326975
+      "normalizedWeight": 0.32051282051282054,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -105,7 +109,25 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3051771117166212
+      "normalizedWeight": 0.358974358974359,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 297.0750191537813,
+      "base": 371.34377394222656,
+      "bull": 445.61252873067184,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.03x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -137,8 +159,10 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 20.34915672942182,
@@ -154,5 +178,43 @@
     "shares": 20796832302.545456
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 304.9283825713227,
+        "price": 176.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 371.34377394222656,
+        "price": 176.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

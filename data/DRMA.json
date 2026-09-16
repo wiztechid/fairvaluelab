@@ -1,7 +1,7 @@
 {
   "ticker": "DRMA.JK",
   "name": "PT Dharma Polimetal Tbk",
-  "asOf": "2026-09-16T09:39:57.412363+00:00",
+  "asOf": "2026-09-16T11:03:21.233652+00:00",
   "price": 985.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 945.4751843436773,
-    "base": 1249.9609698875515,
-    "bull": 1501.4174313338233,
-    "dispersion": 0.3005392187190366,
-    "agreement": "MEDIUM",
+    "bear": 904.5594079441518,
+    "base": 1133.1617425208356,
+    "bull": 1302.9649781951007,
+    "dispersion": 0.12225717067694984,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.15064758009543286
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.76x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -48,7 +50,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.18404907975460125
+      "normalizedWeight": 0.19593613933236576,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +75,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.294478527607362
+      "normalizedWeight": 0.3134978229317852,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -96,7 +100,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.294478527607362
+      "normalizedWeight": 0.3134978229317852,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -120,7 +125,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.07634628493524198
+      "normalizedWeight": 0.08127721335268503,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 1121.19872191081,
+      "base": 1401.4984023885124,
+      "bull": 1681.7980828662148,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.09579100145137881,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -150,7 +172,9 @@
     "guards": [],
     "historyYears": 4.739219712525667,
     "validMethodCount": 5,
-    "independentFamilies": 3
+    "independentFamilies": 4,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 148.0,
@@ -166,5 +190,33 @@
     "shares": 4705882300.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 2068.749550889639,
+        "price": 985.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

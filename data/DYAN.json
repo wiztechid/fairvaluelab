@@ -1,7 +1,7 @@
 {
   "ticker": "DYAN.JK",
   "name": "PT Dyandra Media International Tbk",
-  "asOf": "2026-09-16T09:38:04.167601+00:00",
+  "asOf": "2026-09-16T11:01:51.187446+00:00",
   "price": 86.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 44.54302380805203,
-    "base": 70.49655363847515,
-    "bull": 96.45008346889828,
-    "dispersion": 0.25491565215672174,
-    "agreement": "MEDIUM",
+    "bear": 59.67660870820697,
+    "base": 87.45288304760014,
+    "bull": 115.22915738699328,
+    "dispersion": 0.5146025047262892,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.28x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -57,7 +59,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.41589648798521256
+      "normalizedWeight": 0.36086607858861264,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -81,7 +84,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.41589648798521256
+      "normalizedWeight": 0.36086607858861264,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -105,7 +109,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.16820702402957485
+      "normalizedWeight": 0.14595028067361665,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 158.91623817467763,
+      "base": 198.64529771834702,
+      "bull": 238.37435726201642,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.13231756214915796,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -136,8 +157,10 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 10.75,
@@ -153,5 +176,23 @@
     "shares": 4272964279.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

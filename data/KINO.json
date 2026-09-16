@@ -1,7 +1,7 @@
 {
   "ticker": "KINO.JK",
   "name": "PT Kino Indonesia Tbk",
-  "asOf": "2026-09-16T09:39:06.872171+00:00",
+  "asOf": "2026-09-16T11:02:40.619970+00:00",
   "price": 1405.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1826.176829350242,
-    "base": 3091.166612911414,
-    "bull": 4140.403660992894,
-    "dispersion": 0.2670655352387597,
-    "agreement": "MEDIUM",
+    "bear": 1872.8719140426447,
+    "base": 3130.5683681963537,
+    "bull": 4175.920502912704,
+    "dispersion": 0.16469029309112224,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -33,7 +33,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.21669341894060995
+      "normalizedWeight": 0.2132701421800948,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -57,7 +58,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.3467094703049759
+      "normalizedWeight": 0.3412322274881517,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -81,7 +83,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3467094703049759
+      "normalizedWeight": 0.3412322274881517,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -104,8 +107,26 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.05x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 1710.98641218668,
+      "base": 2138.7330152333498,
+      "bull": 2566.4796182800196,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.08988764044943819
+      "normalizedWeight": 0.1042654028436019,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -137,7 +158,9 @@
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
-    "independentFamilies": 3
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 160.98,
@@ -153,5 +176,33 @@
     "shares": 1378818900.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 1523.27503180215,
+        "price": 1405.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "GEMA.JK",
   "name": "PT Gema Grahasarana Tbk",
-  "asOf": "2026-09-16T09:40:05.456153+00:00",
+  "asOf": "2026-09-16T11:03:28.025684+00:00",
   "price": 91.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 119.31993084412306,
-    "base": 234.08140527379058,
-    "bull": 333.4715321368443,
-    "dispersion": 0.26059573465273256,
-    "agreement": "MEDIUM",
+    "bear": 155.57255453925077,
+    "base": 279.1514493659391,
+    "bull": 402.7303441926274,
+    "dispersion": 0.02021094680709075,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,8 +32,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.3316953316953317
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.87x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -57,7 +59,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.5307125307125307
+      "normalizedWeight": 0.6390532544378699,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -81,7 +84,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.13759213759213756
+      "normalizedWeight": 0.16568047337278105,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 231.53576981833112,
+      "base": 289.4197122729139,
+      "bull": 347.3036547274967,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.19526627218934914,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -113,7 +133,9 @@
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
-    "independentFamilies": 3
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 13.297017013149656,
@@ -129,5 +151,33 @@
     "shares": 1597000000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 148.29365237598276,
+        "price": 91.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

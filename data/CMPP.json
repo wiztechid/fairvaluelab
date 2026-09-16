@@ -32,7 +32,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     }
   ],
   "dcfDiagnostics": {
@@ -60,10 +62,15 @@
     "availableInputs": 7,
     "totalInputs": 10,
     "guards": [
-      "Harga wajar gabungan tidak diterbitkan karena kurang dari 2 metode independen lolos validasi."
+      "Harga wajar gabungan tidak diterbitkan karena kurang dari 2 metode independen lolos validasi.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.996577686516085,
-    "validMethodCount": 0
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": -121.3280450367569,
@@ -79,5 +86,53 @@
     "shares": 10685124441.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NEGATIVE",
+      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
+      "inputs": {
+        "eps": -121.3280450367569
+      }
+    },
+    {
+      "name": "PBV & Graham",
+      "family": "book",
+      "status": "NEGATIVE",
+      "reason": "Ekuitas/BVPS negatif; metode berbasis book value tidak digunakan.",
+      "inputs": {
+        "bvps": -1467.092
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "FCF Yield",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 1809.9815782950318,
+        "base": 3217.7450280800567,
+        "bull": 3619.9631565900636,
+        "price": 69.0
+      }
+    }
+  ],
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

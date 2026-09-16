@@ -4,13 +4,12 @@
   "asOf": "2026-09-16T05:56:21.315943+00:00",
   "price": 185.0,
   "fairValue": {
-    "bear": 919.751736817576,
-    "base": 1082.060866844207,
-    "bull": 1244.3699968708381,
-    "upside": 4.848977658617335,
-    "label": "DEEP UNDERVALUED",
-    "confidence": 34,
-    "dispersion": 0.5
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -20,7 +19,10 @@
       "bull": 1244.3699968708381,
       "confidence": 0.7,
       "upside": 4.848977658617335,
-      "included": true
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     }
   ],
   "technical": {
@@ -47,5 +49,63 @@
     "marketCap": 185000001536.0,
     "shares": 1000000000.0
   },
-  "source": "Yahoo Finance via yfinance"
+  "source": "Yahoo Finance via yfinance",
+  "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NEGATIVE",
+      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
+      "inputs": {
+        "eps": -98.865
+      }
+    },
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -1731122176.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Justified PBV",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 919.751736817576,
+        "base": 1082.060866844207,
+        "bull": 1244.3699968708381,
+        "price": 185.0
+      }
+    }
+  ],
+  "quality": {
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
+    "guards": [
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "outlierMethodCount": 1
+  },
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

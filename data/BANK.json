@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 517.808434351808,
-    "base": 677.7776989369569,
-    "bull": 837.7469635221057,
-    "dispersion": 0.4916962957120396,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -32,7 +32,9 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "FCF Yield",
@@ -46,7 +48,9 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
       "included": false,
-      "normalizedWeight": 0
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
     },
     {
       "name": "Historical P/E 3Y",
@@ -68,8 +72,9 @@
       },
       "warning": null,
       "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.3190158465387823
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -91,8 +96,9 @@
       },
       "warning": null,
       "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.3190158465387823
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -114,8 +120,27 @@
       },
       "warning": null,
       "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.36196830692243537
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 137.18321374361642,
+      "base": 171.47901717952053,
+      "bull": 205.77482061542463,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.50x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -139,12 +164,17 @@
     "cashConversion": 31.376619843539537,
     "roe": 0.03334,
     "dataScore": 100,
-    "dataLabel": "BAIK",
+    "dataLabel": "CUKUP",
     "availableInputs": 10,
     "totalInputs": 10,
-    "guards": [],
+    "guards": [
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
+    "outlierMethodCount": 4
   },
   "raw": {
     "epsTTM": 5.6,
@@ -160,5 +190,59 @@
     "shares": 14089731085.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 5646.705523721454,
+        "base": 8943.33130482326,
+        "bull": 12287.47626741966,
+        "price": 258.0
+      }
+    },
+    {
+      "name": "FCF Yield",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 2097.599916684286,
+        "base": 3729.066518549843,
+        "bull": 4195.199833368572,
+        "price": 258.0
+      }
+    },
+    {
+      "name": "Historical PBV 5Y",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
+      "inputs": {
+        "bear": 710.5007407364627,
+        "base": 1115.7547299060438,
+        "bull": 1521.0087190756249,
+        "price": 258.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

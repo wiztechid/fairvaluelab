@@ -1,7 +1,7 @@
 {
   "ticker": "POLI.JK",
   "name": "PT Pollux Hotels Group Tbk",
-  "asOf": "2026-09-16T09:42:01.516279+00:00",
+  "asOf": "2026-09-16T11:05:01.133495+00:00",
   "price": 900.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 577.5854050604785,
-    "base": 730.0103562448219,
-    "bull": 882.4353074291655,
-    "dispersion": 0.11573188518059978,
+    "bear": 594.6990703297432,
+    "base": 750.3148196157445,
+    "bull": 905.9305689017457,
+    "dispersion": 0.12894374802728154,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054
+      "normalizedWeight": 0.2770935960591133,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,7 +67,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054
+      "normalizedWeight": 0.2770935960591133,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +92,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.358974358974359
+      "normalizedWeight": 0.3103448275862069,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 703.9153705026874,
+      "base": 879.8942131283592,
+      "bull": 1055.873055754031,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.1354679802955665,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -103,7 +122,7 @@
     "return3m": 0.10429447852760743
   },
   "quality": {
-    "cashConversion": -1.9208753127498874,
+    "cashConversion": -0.5066140185683962,
     "roe": 0.03135,
     "dataScore": 100,
     "dataLabel": "BAIK",
@@ -111,8 +130,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 33.21,
@@ -120,13 +141,40 @@
     "currentPE": 27.100271002710027,
     "currentPBV": 0.8686263111790695,
     "roe": 0.03135,
-    "fcf": -133798584320.0,
+    "fcf": -35288203264.0,
     "growthNormalized": 0.014739649729195815,
-    "costOfEquity": 0.1388,
+    "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1809473863680.0,
     "shares": 2010526400.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -35288203264.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

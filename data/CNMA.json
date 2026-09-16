@@ -1,7 +1,7 @@
 {
   "ticker": "CNMA.JK",
   "name": "PT Nusantara Sejahtera Raya Tbk",
-  "asOf": "2026-09-16T09:39:53.191791+00:00",
+  "asOf": "2026-09-16T11:03:17.470321+00:00",
   "price": 91.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 77.79205622602352,
-    "base": 117.11982839637872,
-    "bull": 151.69025805141584,
-    "dispersion": 0.30344735343604884,
+    "bear": 76.94359163889973,
+    "base": 113.57192247666534,
+    "bull": 146.03814227970244,
+    "dispersion": 0.28913486142489325,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -33,7 +33,8 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.23943661971830985
+      "normalizedWeight": 0.20947867298578196,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -48,7 +49,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2925243770314193
+      "normalizedWeight": 0.2559241706161137,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -72,7 +74,24 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.46803900325027087
+      "normalizedWeight": 0.409478672985782,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 71.01076729105687,
+      "base": 88.76345911382109,
+      "bull": 106.5161509365853,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.12511848341232226,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -101,8 +120,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 3.1238877481177276,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 7.05,
@@ -118,5 +139,23 @@
     "shares": 83279924289.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

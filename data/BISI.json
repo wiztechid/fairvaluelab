@@ -1,7 +1,7 @@
 {
   "ticker": "BISI.JK",
   "name": "PT BISI International Tbk",
-  "asOf": "2026-09-16T09:38:38.756376+00:00",
+  "asOf": "2026-09-16T11:02:17.852747+00:00",
   "price": 720.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 766.377705502678,
-    "base": 1144.1700835192664,
-    "bull": 1521.9624615358543,
-    "dispersion": 0.2512562591943639,
-    "agreement": "MEDIUM",
+    "bear": 1089.4736251514614,
+    "base": 1413.4055844205586,
+    "bull": 1737.3375436896558,
+    "dispersion": 0.056162855889950944,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -42,7 +42,8 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.4426229508196722
+      "normalizedWeight": 0.6390532544378699,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -65,8 +66,10 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4426229508196722
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.72x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -90,7 +93,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.11475409836065573
+      "normalizedWeight": 0.16568047337278105,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 1168.3770993031317,
+      "base": 1460.4713741289145,
+      "bull": 1752.5656489546973,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.19526627218934914,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -112,7 +132,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
-    "independentFamilies": 2
+    "independentFamilies": 3,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 81.42,
@@ -128,5 +150,42 @@
     "shares": 3000000000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -425721987072.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 819.5139996100069,
+        "price": 720.0
+      }
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

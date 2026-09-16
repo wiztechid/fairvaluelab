@@ -1,7 +1,7 @@
 {
   "ticker": "MRAT.JK",
   "name": "PT Mustika Ratu Tbk",
-  "asOf": "2026-09-16T09:39:13.649327+00:00",
+  "asOf": "2026-09-16T11:02:46.036792+00:00",
   "price": 390.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 263.28182739258307,
-    "base": 357.0295784741549,
-    "bull": 474.0788762994256,
-    "dispersion": 0.16604695175483125,
-    "agreement": "HIGH",
+    "bear": 242.52599537033902,
+    "base": 326.49400035318394,
+    "bull": 429.9331608341881,
+    "dispersion": 0.31936414394641127,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -33,7 +33,8 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.43070044709388966
+      "normalizedWeight": 0.35990037359900373,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -48,7 +49,8 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.4023845007451565
+      "normalizedWeight": 0.3362391033623911,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -72,7 +74,24 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.1669150521609538
+      "normalizedWeight": 0.13947696139476962,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 137.01718259059822,
+      "base": 171.27147823824777,
+      "bull": 205.5257738858973,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.16438356164383564,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -104,8 +123,10 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 0.9717026869158879,
@@ -121,5 +142,23 @@
     "shares": 428000000.0
   },
   "source": "Yahoo Finance via yfinance",
-  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)"
+  "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "methodDiagnostics": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "analysisStatus": "SIAP",
+  "engineVersion": "3.6-transparent-negative-qc"
 }

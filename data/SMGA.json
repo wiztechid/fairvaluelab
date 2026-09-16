@@ -4,13 +4,12 @@
   "asOf": "2026-09-16T05:56:17.023051+00:00",
   "price": 86.0,
   "fairValue": {
-    "bear": 47.17912004496237,
-    "base": 55.50484711172044,
-    "bull": 63.8305741784785,
-    "upside": -0.35459480102650653,
-    "label": "VERY EXPENSIVE",
-    "confidence": 34,
-    "dispersion": 0.5
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -20,7 +19,9 @@
       "bull": 63.8305741784785,
       "confidence": 0.7,
       "upside": -0.35459480102650653,
-      "included": true
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE"
     }
   ],
   "technical": {
@@ -47,5 +48,49 @@
     "marketCap": 752500015104.0,
     "shares": 8750000000.0
   },
-  "source": "Yahoo Finance via yfinance"
+  "source": "Yahoo Finance via yfinance",
+  "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
+      "name": "DCF & FCF Yield",
+      "family": "cashflow",
+      "status": "NEGATIVE",
+      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "inputs": {
+        "fcf": -9029677056.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    }
+  ],
+  "quality": {
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 4,
+    "guards": [
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "outlierMethodCount": 0
+  },
+  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.6-transparent-negative-qc"
 }
