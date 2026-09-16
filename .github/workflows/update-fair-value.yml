@@ -10,6 +10,7 @@ on:
       - 'generate_data.py'
       - 'adaptive_pe.py'
       - 'augment_models.py'
+      - 'sector_models.py'
       - 'postprocess_qc.py'
       - 'des_universe.py'
       - 'requirements.txt'
@@ -40,7 +41,9 @@ jobs:
         run: python adaptive_pe.py
       - name: Add EV EBITDA, Graham and dividend models
         run: python augment_models.py
-      - name: Reject extreme outliers and rebuild composites
+      - name: Add sector-aware forward earnings and justified PBV models
+        run: python sector_models.py
+      - name: Reject extreme outliers, cap family dominance and rebuild composites
         run: python postprocess_qc.py
       - name: Commit refreshed valuation data
         run: |
@@ -55,21 +58,15 @@ jobs:
           mkdir -p data
           cp -a /tmp/fv-data/. data/
           git add data/
-          if git diff --cached --quiet; then
-            echo "No valuation data changes to commit."
-            exit 0
-          fi
-          git commit -m "data: refresh adaptive PE multimodel fair values"
-          if git push origin HEAD:main; then
-            exit 0
-          fi
+          if git diff --cached --quiet; then echo "No valuation data changes to commit."; exit 0; fi
+          git commit -m "data: refresh sector-aware multimodel fair values"
+          if git push origin HEAD:main; then exit 0; fi
           echo "Main moved during final push; retrying safely..."
           cp -a data/. /tmp/fv-data/
           git fetch origin main
           git reset --hard origin/main
-          rm -rf data
-          mkdir -p data
+          rm -rf data && mkdir -p data
           cp -a /tmp/fv-data/. data/
           git add data/
-          git commit -m "data: refresh adaptive PE multimodel fair values"
+          git commit -m "data: refresh sector-aware multimodel fair values"
           git push origin HEAD:main
