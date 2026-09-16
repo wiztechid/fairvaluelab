@@ -6,16 +6,11 @@ import yfinance as yf
 
 TICKERS=[x.strip().upper() for x in os.getenv('TICKERS','TOTL,STAA,CMRY,PDPP,SMGA,PKPK,PORT,SMAR,GTRA,CINT,AMIN,CLPI,PSGO,UNIC,BULL,CASS,FORE,JTPE,DWGL').split(',') if x.strip()]
 OUT='data';os.makedirs(OUT,exist_ok=True)
-
 def n(x):
- try:
-  v=float(x);return v if math.isfinite(v) else None
+ try:v=float(x);return v if math.isfinite(v) else None
  except:return None
-
 def safe_div(a,b):
- a=n(a);b=n(b)
- return a/b if a is not None and b is not None and abs(b)>1e-12 else None
-
+ a=n(a);b=n(b);return a/b if a is not None and b is not None and abs(b)>1e-12 else None
 def stmt(df,names):
  if df is None or df.empty:return None
  for k in names:
@@ -23,21 +18,17 @@ def stmt(df,names):
    try:return n(df.loc[k].iloc[0])
    except:pass
  return None
-
 def series(df,names):
  if df is None or df.empty:return []
  for k in names:
   if k in df.index:return sorted([(pd.Timestamp(d),float(v)) for d,v in df.loc[k].items() if pd.notna(v) and n(v) is not None])
  return []
-
 def cagr(a):
  if len(a)<3 or a[0][1]<=0 or a[-1][1]<=0:return None
  y=max(1,a[-1][0].year-a[0][0].year);return (a[-1][1]/a[0][1])**(1/y)-1
-
 def tech(h):
  c=h.Close.dropna();last=float(c.iloc[-1]);ma=lambda p:n(c.rolling(p).mean().iloc[-1]) if len(c)>=p else None;d=c.diff();u=d.clip(lower=0).rolling(14).mean();dn=(-d.clip(upper=0)).rolling(14).mean();rs=u/dn.replace(0,np.nan);e12=c.ewm(span=12,adjust=False).mean();e26=c.ewm(span=26,adjust=False).mean();m=e12-e26;s=m.ewm(span=9,adjust=False).mean()
  return {'ma20':ma(20),'ma50':ma(50),'ma200':ma(200),'rsi14':n((100-100/(1+rs)).iloc[-1]),'macd':n(m.iloc[-1]),'macdSignal':n(s.iloc[-1]),'return1m':safe_div(last,c.iloc[-22])-1 if len(c)>=22 and safe_div(last,c.iloc[-22]) is not None else None,'return3m':safe_div(last,c.iloc[-66])-1 if len(c)>=66 and safe_div(last,c.iloc[-66]) is not None else None,'low52':n(c.tail(252).min()),'high52':n(c.tail(252).max())}
-
 def hist_mult(h,annual,shares,current_ps,years):
  shares=n(shares);current_ps=n(current_ps)
  if not shares or not current_ps or current_ps<=0:return None
@@ -55,7 +46,6 @@ def hist_mult(h,annual,shares,current_ps,years):
  mean=float(np.mean(a));sd=float(np.std(a));current=safe_div(float(h.Close.iloc[-1]),current_ps)
  if current is None:return None
  return {'mean':mean,'sd':sd,'current':current,'z':safe_div(current-mean,sd) if sd>1e-12 else 0,'minus2':max(0,mean-2*sd)*current_ps,'minus1':max(0,mean-sd)*current_ps,'base':mean*current_ps,'plus1':(mean+sd)*current_ps,'plus2':(mean+2*sd)*current_ps}
-
 def analyze(sym):
  tk=sym if '.' in sym else sym+'.JK';t=yf.Ticker(tk);info=t.info or {};h=t.history(period='5y',auto_adjust=False)
  if h.empty:raise ValueError('price unavailable')
@@ -89,13 +79,14 @@ def analyze(sym):
  if not use or totalw<=0:raise ValueError('no usable valuation models after validation')
  for m in methods:m['included']=m in use;m['upside']=safe_div(m['base'],price)-1 if safe_div(m['base'],price) is not None else None;m['normalizedWeight']=safe_div(m['rawWeight'],totalw) if m in use else 0
  def comp(k):return sum(m[k]*m['normalizedWeight'] for m in use)
- bear,base,bull=comp('bear'),comp('base'),comp('bull');avg=float(np.mean([m['base'] for m in use]));disp=safe_div(float(np.std([m['base'] for m in use])),avg) if len(use)>1 else .5;disp=disp if disp is not None else 1.;agreement='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW';conf=round(100*max(0,min(1,.55*min(1,len(use)/5)+.45*(1-min(disp,1)))));potential=safe_div(base,price);potential=potential-1 if potential is not None else None;premium=safe_div(price,base);premium=premium-1 if premium is not None else None;label=(f"Below Fair Value {abs(premium)*100:.1f}%" if premium<0 else f"Above Fair Value {premium*100:.1f}%") if premium is not None else 'Fair value unavailable';currentPE=safe_div(price,eps) if eps and eps>0 else None;currentPBV=safe_div(price,bvps) if bvps and bvps>0 else None
- return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'fairValue':{'bear':bear,'base':base,'bull':bull,'potential':potential,'upside':potential,'pricePremium':premium,'label':label,'confidence':conf,'dispersion':disp,'agreement':agreement},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':currentPE,'currentPBV':currentPBV,'roe':roe,'fcf':fcf,'fcfPerShare':fcfps,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares},'source':'Yahoo Finance via yfinance'}
-
+ bear,base,bull=comp('bear'),comp('base'),comp('bull');avg=float(np.mean([m['base'] for m in use]));disp=safe_div(float(np.std([m['base'] for m in use])),avg) if len(use)>1 else .5;disp=disp if disp is not None else 1.;agreement='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW';potential=safe_div(base,price);potential=potential-1 if potential is not None else None;premium=safe_div(price,base);premium=premium-1 if premium is not None else None;label=(f"Below Fair Value {abs(premium)*100:.1f}%" if premium<0 else f"Above Fair Value {premium*100:.1f}%") if premium is not None else 'Fair value unavailable';currentPE=safe_div(price,eps) if eps and eps>0 else None;currentPBV=safe_div(price,bvps) if bvps and bvps>0 else None
+ # Data quality measures input availability only; it is deliberately separate from model agreement.
+ quality_checks=[price,eps,bvps,roe,fcf,shares,mcap]
+ available=sum(v is not None for v in quality_checks)+int(any(m['name']=='Historical P/E 3Y' for m in methods))+int(any(m['name']=='Historical P/E 5Y' for m in methods))+int(dcfdiag is not None)
+ quality_total=10;quality_score=round(100*available/quality_total);quality_label='BAIK' if quality_score>=80 else 'CUKUP' if quality_score>=60 else 'TERBATAS'
+ return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'fairValue':{'bear':bear,'base':base,'bull':bull,'potential':potential,'upside':potential,'pricePremium':premium,'label':label,'dispersion':disp,'agreement':agreement},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe,'dataScore':quality_score,'dataLabel':quality_label,'availableInputs':available,'totalInputs':quality_total},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':currentPE,'currentPBV':currentPBV,'roe':roe,'fcf':fcf,'fcfPerShare':fcfps,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares},'source':'Yahoo Finance via yfinance'}
 summary=[];errors=[]
 for s in TICKERS:
- try:
-  d=analyze(s);json.dump(d,open(f'{OUT}/{s}.json','w'),ensure_ascii=False,indent=2,allow_nan=False);summary.append({'ticker':s,'price':d['price'],**d['fairValue']});print('OK',s)
- except Exception as e:
-  errors.append({'ticker':s,'error':str(e)});print('ERR',s,e)
+ try:d=analyze(s);json.dump(d,open(f'{OUT}/{s}.json','w'),ensure_ascii=False,indent=2,allow_nan=False);summary.append({'ticker':s,'price':d['price'],**d['fairValue']});print('OK',s)
+ except Exception as e:errors.append({'ticker':s,'error':str(e)});print('ERR',s,e)
 json.dump({'updatedAt':datetime.now(timezone.utc).isoformat(),'count':len(summary),'requested':len(TICKERS),'stocks':summary,'errors':errors},open(f'{OUT}/summary.json','w'),ensure_ascii=False,indent=2,allow_nan=False)
