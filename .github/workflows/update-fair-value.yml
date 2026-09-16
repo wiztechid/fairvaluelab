@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'generate_data.py'
+      - 'adaptive_pe.py'
       - 'augment_models.py'
       - 'postprocess_qc.py'
       - 'des_universe.py'
@@ -35,6 +36,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Generate core valuation data
         run: python generate_data.py
+      - name: Add adaptive historical PE valuation
+        run: python adaptive_pe.py
       - name: Add EV EBITDA, Graham and dividend models
         run: python augment_models.py
       - name: Reject extreme outliers and rebuild composites
@@ -44,9 +47,6 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Generated data belongs to this run. If main moved while calculation was
-          # running, update the code/base first and then restore this run's data.
           mkdir -p /tmp/fv-data
           cp -a data/. /tmp/fv-data/
           git fetch origin main
@@ -54,16 +54,12 @@ jobs:
           rm -rf data
           mkdir -p data
           cp -a /tmp/fv-data/. data/
-
           git add data/
           if git diff --cached --quiet; then
             echo "No valuation data changes to commit."
             exit 0
           fi
-          git commit -m "data: refresh multimodel fair values with robust QC"
-
-          # One retry is enough for a rare external main update. Generated data
-          # is intentionally kept as the authoritative output of this run.
+          git commit -m "data: refresh adaptive PE multimodel fair values"
           if git push origin HEAD:main; then
             exit 0
           fi
@@ -75,5 +71,5 @@ jobs:
           mkdir -p data
           cp -a /tmp/fv-data/. data/
           git add data/
-          git commit -m "data: refresh multimodel fair values with robust QC"
+          git commit -m "data: refresh adaptive PE multimodel fair values"
           git push origin HEAD:main
