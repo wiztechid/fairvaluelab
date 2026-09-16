@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'generate_data.py'
+      - 'augment_models.py'
       - 'postprocess_qc.py'
       - 'des_universe.py'
       - 'requirements.txt'
@@ -32,8 +33,10 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Generate valuation data
+      - name: Generate core valuation data
         run: python generate_data.py
+      - name: Add EV EBITDA, Graham and dividend models
+        run: python augment_models.py
       - name: Reject extreme outliers and rebuild composites
         run: python postprocess_qc.py
       - name: Commit refreshed valuation data
@@ -45,7 +48,7 @@ jobs:
             echo "No valuation data changes to commit."
             exit 0
           fi
-          git commit -m "data: refresh fair values with robust QC"
+          git commit -m "data: refresh multimodel fair values with robust QC"
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               exit 0
