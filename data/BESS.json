@@ -1,7 +1,7 @@
 {
   "ticker": "BESS.JK",
   "name": "PT Batulicin Nusantara Maritim Tbk",
-  "asOf": "2026-09-16T12:58:28.405822+00:00",
+  "asOf": "2026-09-16T13:14:58.985010+00:00",
   "price": 920.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 180.70150319654863,
-    "base": 293.9111754349068,
-    "bull": 408.8022321951283,
-    "dispersion": 0.5015643283529158,
+    "bear": 75.22826031351937,
+    "base": 139.53937027002831,
+    "bull": 203.4347499293436,
+    "dispersion": 0.43993556926850175,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.141548012021481,
+      "normalizedWeight": 0.10950184853451234,
       "qcStatus": "VALID"
     },
     {
@@ -48,34 +48,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.06x dari median metode."
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "family": "earnings",
-      "bear": 338.56271746788997,
-      "base": 501.2548186362609,
-      "bull": 663.9469198046319,
-      "confidence": 0.9,
-      "relevance": 0.8,
-      "rawWeight": 0.7200000000000001,
-      "bands": {
-        "mean": 27.114499980337165,
-        "sd": 8.80054377518495,
-        "current": 49.765785892647855,
-        "z": 2.5738507177455245,
-        "minus1": 338.56271746788997,
-        "base": 501.2548186362609,
-        "plus1": 663.9469198046319,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.28378578114992364,
+      "normalizedWeight": 0.22639783511834433,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +74,31 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.12139725082524512,
+      "normalizedWeight": 0.09391317604909098,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 54.55703317415164,
+      "base": 101.00920034506045,
+      "bull": 147.46136751596927,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 30.701884144502145,
+        "sd": 14.11919953697595,
+        "current": 279.63525417933124,
+        "sampleCount": 489,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.21953729466021266,
       "qcStatus": "VALID"
     },
     {
@@ -119,15 +117,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.3232004729763019,
+      "normalizedWeight": 0.25002858558524216,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 226.0733378914593,
-      "base": 282.5916723643241,
-      "bull": 339.1100068371889,
+      "bear": 95.37154506854459,
+      "base": 119.21443133568073,
+      "bull": 143.05731760281688,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -135,7 +133,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.13006848302704835,
+      "normalizedWeight": 0.10062126005259747,
       "qcStatus": "VALID"
     }
   ],
@@ -164,16 +162,18 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.2900 per saham.",
+      "Historical P/E 3Y adaptive: median 30.7x, current 279.6x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
+    "validMethodCount": 6,
     "independentFamilies": 5,
     "diagnosticCount": 1,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 18.486596433633657,
+    "epsTTM": 3.290000049171197,
     "bvps": 191.99027931483846,
     "currentPE": 49.765785892647855,
     "currentPBV": 4.791909274173838,
@@ -188,7 +188,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 3.29
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 3.2900000983423943
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 18.486596433633657
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 18.486596433633657
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

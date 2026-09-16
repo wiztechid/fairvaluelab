@@ -1,7 +1,7 @@
 {
   "ticker": "ALDO.JK",
   "name": "PT Alkindo Naratama Tbk",
-  "asOf": "2026-09-16T12:59:07.534844+00:00",
+  "asOf": "2026-09-16T13:15:57.190896+00:00",
   "price": 960.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 359.4807466952674,
-    "base": 496.77027027027026,
-    "bull": 634.0597938452731,
-    "dispersion": 0.004032258064516186,
+    "bear": 375.3797573910328,
+    "base": 506.30824686494964,
+    "bull": 637.2367363388665,
+    "dispersion": 0.04121570599063027,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,8 +42,58 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.30743243243243246,
+      "normalizedWeight": 0.2404227212681638,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1163.6075210411127,
+      "base": 1264.79078374034,
+      "bull": 1365.974046439567,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 37.913392523099716,
+        "sd": 3.033071401847977,
+        "current": 28.77697820863309,
+        "sampleCount": 191,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.34x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 305.7254589762131,
+      "base": 1269.911394200827,
+      "bull": 2234.0973294254413,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 38.06688803938757,
+        "sd": 28.90245588232212,
+        "current": 28.77697820863309,
+        "sampleCount": 663,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.35x dari median metode."
     },
     {
       "name": "Historical EV/EBITDA",
@@ -61,25 +111,24 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.6925675675675675,
+      "normalizedWeight": 0.5416116248348745,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 270.2485649199475,
-      "base": 337.8107061499344,
-      "bull": 405.37284737992127,
+      "bear": 432.4234806146276,
+      "base": 540.5293507682844,
+      "bull": 648.6352209219413,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.46x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.2179656538969617,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -101,16 +150,17 @@
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 33.3600 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 13.0296965564086,
+    "epsTTM": 33.36000024186001,
     "bvps": 389.25123491038664,
     "currentPE": 73.6778478181695,
     "currentPBV": 2.466273485865783,
@@ -125,7 +175,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 33.36
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 33.36000048372001
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 13.0296965564086
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 13.0296965564086
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

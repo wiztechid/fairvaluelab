@@ -1,7 +1,7 @@
 {
   "ticker": "HOMI.JK",
   "name": "PT Grand House Mulia Tbk",
-  "asOf": "2026-09-16T13:03:27.528760+00:00",
+  "asOf": "2026-09-16T13:22:14.949398+00:00",
   "price": 252.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 24.04686226847199,
-    "base": 30.835775664039335,
-    "bull": 39.85961614845852,
-    "dispersion": 0.09226648968784404,
-    "agreement": "HIGH",
+    "bear": 30.373570632088153,
+    "base": 46.78201145827941,
+    "bull": 64.59032617977122,
+    "dispersion": 0.45781494691200386,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.41901408450704225,
+      "normalizedWeight": 0.26245459263103266,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.3075807787903895,
+      "normalizedWeight": 0.19265697976128698,
       "qcStatus": "VALID"
     },
     {
@@ -76,7 +76,56 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 11.56x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 7.29x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 189.52,
+      "base": 206.0,
+      "bull": 222.48,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 456.4900006466836,
+        "sd": 36.519200051734686,
+        "current": 558.4246609852635,
+        "sampleCount": 177,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.11x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 40.979594236094705,
+      "base": 73.51410396334578,
+      "bull": 106.04861369059685,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 162.90511342605865,
+        "sd": 72.0955260506426,
+        "current": 558.4246609852635,
+        "sampleCount": 604,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.37363777893098077,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -91,7 +140,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.2734051367025684,
+      "normalizedWeight": 0.17125064867669954,
       "qcStatus": "VALID"
     }
   ],
@@ -121,13 +170,15 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 456.5x, current 558.4x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 162.9x, current 558.4x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 0.4512694685714286,
@@ -145,7 +196,18 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "WISS reconciled EPS",
+        "value": 0.4512694685714286
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 0.4512694685714286
+      }
+    ],
+    "epsSource": "Multi-source EPS median"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

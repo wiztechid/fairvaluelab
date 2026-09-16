@@ -1,7 +1,7 @@
 {
   "ticker": "BRAM.JK",
   "name": "PT Indo Kordsa Tbk",
-  "asOf": "2026-09-16T13:01:40.544291+00:00",
+  "asOf": "2026-09-16T13:19:43.316311+00:00",
   "price": 4590.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 3730.3040083498754,
-    "base": 4798.196722971872,
-    "bull": 6348.08354074977,
-    "dispersion": 0.3090126651515798,
-    "agreement": "MEDIUM",
+    "bear": 3184.8741562994915,
+    "base": 3773.799556027269,
+    "bull": 4484.74450080363,
+    "dispersion": 0.39449055914414827,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -42,7 +42,55 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.38781163434903043,
+      "normalizedWeight": 0.0981767180925666,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 2660.046636023581,
+      "base": 2891.355039156066,
+      "bull": 3122.663442288552,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 12.424713283466005,
+        "sd": 0.9939770626772805,
+        "current": 19.724120074771175,
+        "sampleCount": 240,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.31556802244039267,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 2499.396030565925,
+      "base": 2792.505294227654,
+      "bull": 3085.6145578893825,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 11.999936760954347,
+        "sd": 1.2595473445515695,
+        "current": 19.724120074771175,
+        "sampleCount": 599,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.31556802244039267,
       "qcStatus": "VALID"
     },
     {
@@ -63,7 +111,23 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.19x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.88x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 5292.373332748442,
+      "base": 6615.466665935553,
+      "bull": 7938.559999122663,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.11570827489481066,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical Dividend Yield",
@@ -81,7 +145,7 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.6121883656509697,
+      "normalizedWeight": 0.15497896213183732,
       "qcStatus": "VALID"
     }
   ],
@@ -104,16 +168,17 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 232.7100 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
     "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 232.71000088216863,
     "bvps": 8358.40488967197,
     "currentPE": null,
     "currentPBV": 0.5491478410757076,
@@ -128,7 +193,18 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0
+    "fxFactor": 17707.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 232.71
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 232.71000176433728
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -136,13 +212,6 @@
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "DCF & FCF Yield",
       "family": "cashflow",

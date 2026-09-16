@@ -1,7 +1,7 @@
 {
   "ticker": "TCID.JK",
   "name": "PT. Mandom Indonesia Tbk",
-  "asOf": "2026-09-16T13:01:23.496425+00:00",
+  "asOf": "2026-09-16T13:19:18.024540+00:00",
   "price": 2580.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1747.8794131321313,
-    "base": 2029.3886594798105,
-    "bull": 2371.7955414676153,
-    "dispersion": 0.26410319226959833,
+    "bear": 1667.5544274064482,
+    "base": 2086.7143083456112,
+    "bull": 2545.0361463224017,
+    "dispersion": 0.22341352499030992,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.27847369435343994,
+      "normalizedWeight": 0.1790804312802082,
       "qcStatus": "VALID"
     },
     {
@@ -51,7 +51,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.50x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.54x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -75,7 +75,55 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.10792060127192137,
+      "normalizedWeight": 0.06940141281447515,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1573.5259999999998,
+      "base": 2300.0,
+      "bull": 3026.474,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 60.45187317121465,
+        "sd": 19.09422352616739,
+        "current": 67.81123164423208,
+        "sampleCount": 277,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.1784607758086504,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 1472.1340000000002,
+      "base": 2080.0,
+      "bull": 2687.866,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 54.66952008527238,
+        "sd": 15.976799276997198,
+        "current": 67.81123164423208,
+        "sampleCount": 653,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.1784607758086504,
       "qcStatus": "VALID"
     },
     {
@@ -94,7 +142,7 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.3160531894391983,
+      "normalizedWeight": 0.20324699467096297,
       "qcStatus": "VALID"
     },
     {
@@ -110,7 +158,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.12719213721333592,
+      "normalizedWeight": 0.08179452224563144,
       "qcStatus": "VALID"
     },
     {
@@ -129,7 +177,7 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.17036037772210447,
+      "normalizedWeight": 0.10955508737142151,
       "qcStatus": "VALID"
     }
   ],
@@ -158,11 +206,13 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Historical P/E 3Y adaptive: median 60.5x, current 67.8x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 54.7x, current 67.8x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 5,
+    "validMethodCount": 7,
+    "independentFamilies": 6,
     "diagnosticCount": 0,
     "outlierMethodCount": 1
   },
@@ -182,7 +232,18 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "WISS reconciled EPS",
+        "value": 38.046794571374676
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 38.046794571374676
+      }
+    ],
+    "epsSource": "Multi-source EPS median"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

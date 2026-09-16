@@ -1,7 +1,7 @@
 {
   "ticker": "BRMS.JK",
   "name": "PT Bumi Resources Minerals Tbk",
-  "asOf": "2026-09-16T12:59:14.519874+00:00",
+  "asOf": "2026-09-16T13:16:07.951001+00:00",
   "price": 730.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 215.54020484836593,
-    "base": 240.56143398951158,
-    "bull": 265.58266313065724,
-    "dispersion": 0.29731636267837297,
-    "agreement": "MEDIUM",
+    "bear": 228.3534537264576,
+    "base": 315.22430074288127,
+    "bull": 402.0951477593049,
+    "dispersion": 0.37966878271645693,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -42,7 +42,55 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2404227212681638,
+      "normalizedWeight": 0.12322274881516589,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 210.26446367923967,
+      "base": 322.98056398905635,
+      "bull": 435.696664298873,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 65.64645526801144,
+        "sd": 22.90977619700914,
+        "current": 148.37398186991865,
+        "sampleCount": 491,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.24373730534867977,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 273.3858584718083,
+      "base": 464.46745415105727,
+      "bull": 655.5490498303061,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 94.40395290599486,
+        "sd": 38.83772220957261,
+        "current": 148.37398186991865,
+        "sampleCount": 867,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.24373730534867977,
       "qcStatus": "VALID"
     },
     {
@@ -61,15 +109,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.5416116248348745,
+      "normalizedWeight": 0.2775897088693297,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 105.20804621128173,
-      "base": 131.51005776410216,
-      "bull": 157.8120693169226,
+      "bear": 105.20804687423654,
+      "base": 131.51005859279567,
+      "bull": 157.8120703113548,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -77,7 +125,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.2179656538969617,
+      "normalizedWeight": 0.1117129316181449,
       "qcStatus": "VALID"
     }
   ],
@@ -101,16 +149,18 @@
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 65.6x, current 148.4x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 94.4x, current 148.4x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 3,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
     "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 4.92,
+    "epsTTM": 4.920000062005482,
     "bvps": 156.23211646899261,
     "currentPE": 148.3739837398374,
     "currentPBV": 4.672534793093474,
@@ -125,7 +175,26 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0
+    "fxFactor": 17707.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 4.92
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 4.920000124010962
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 4.92
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 6.245577134760954
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

@@ -1,7 +1,7 @@
 {
   "ticker": "INET.JK",
   "name": "PT Sinergi Inti Andalan Prima Tbk",
-  "asOf": "2026-09-16T13:04:19.140154+00:00",
+  "asOf": "2026-09-16T13:23:33.968546+00:00",
   "price": 316.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -21,11 +21,59 @@
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 176.10616405943665,
+      "base": 406.91998182283265,
+      "bull": 637.7337995862285,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 173.1574486629604,
+        "sd": 98.21865129608769,
+        "current": 134.46809255319107,
+        "sampleCount": 190,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 176.10616405943665,
+      "base": 406.91998182283265,
+      "bull": 637.7337995862285,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 173.1574486629604,
+        "sd": 98.21865129608769,
+        "current": 134.46809255319107,
+        "sampleCount": 190,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 17.385388254835064,
-      "base": 21.73173531854383,
-      "bull": 26.078082382252596,
+      "bear": 25.47617919413786,
+      "base": 31.845223992672324,
+      "bull": 38.214268791206784,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -34,7 +82,8 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 12.78x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -58,16 +107,19 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.3500 per saham.",
+      "Historical P/E 3Y adaptive: median 173.2x, current 134.5x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 173.2x, current 134.5x; confidence diturunkan.",
       "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 3.1485284052019167,
     "validMethodCount": 0,
     "independentFamilies": 0,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 1.0943797189392026,
+    "epsTTM": 2.3499998698576094,
     "bvps": 19.17954321144367,
     "currentPE": 288.74804104219254,
     "currentPBV": 16.475887695357386,
@@ -82,7 +134,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 2.35
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 2.349999739715219
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 1.0943797189392026
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 1.0943797189392026
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

@@ -1,7 +1,7 @@
 {
   "ticker": "YPAS.JK",
   "name": "PT Yanaprima Hastapersada Tbk",
-  "asOf": "2026-09-16T12:59:57.759986+00:00",
+  "asOf": "2026-09-16T13:17:10.236450+00:00",
   "price": 1310.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 180.98519184371443,
-    "base": 251.9974006323022,
-    "bull": 311.99897936520813,
-    "dispersion": 0.4833026776125266,
-    "agreement": "LOW",
+    "bear": 250.56113666894288,
+    "base": 334.24731069634475,
+    "bull": 417.89889559578694,
+    "dispersion": 0.3072287584700715,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.1482084690553746,
+      "normalizedWeight": 0.20347231356043666,
       "qcStatus": "VALID"
     },
     {
@@ -48,9 +48,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.2716037555087182,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.09x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -74,8 +75,58 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.13949032381682316,
+      "normalizedWeight": 0.1915033539392345,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1220.559443475272,
+      "base": 1405.1539894690388,
+      "bull": 1589.7485354628054,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 38.37121883409536,
+        "sd": 5.040812446886181,
+        "current": 35.772802873839396,
+        "sampleCount": 266,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.51x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 1310.4217091157211,
+      "base": 1574.1282033925308,
+      "bull": 1837.8346976693404,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 42.98547932680303,
+        "sd": 7.201160638408828,
+        "current": 35.772802873839396,
+        "sampleCount": 429,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.93x dari median metode."
     },
     {
       "name": "Historical EV/EBITDA",
@@ -93,15 +144,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.31423644376317306,
+      "normalizedWeight": 0.4314086544784953,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 151.88968259942075,
-      "base": 189.86210324927595,
-      "bull": 227.83452389913114,
+      "bear": 320.2924442022049,
+      "base": 400.36555525275605,
+      "bull": 480.43866630330723,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -109,7 +160,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.1264610078559111,
+      "normalizedWeight": 0.1736156780218335,
       "qcStatus": "VALID"
     }
   ],
@@ -139,16 +190,17 @@
     "totalInputs": 7,
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 36.6200 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
+    "validMethodCount": 4,
     "independentFamilies": 4,
     "diagnosticCount": 1,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 3
   },
   "raw": {
-    "epsTTM": 8.23533913181859,
+    "epsTTM": 36.61999884716893,
     "bvps": 194.5416383020871,
     "currentPE": 159.07055909071178,
     "currentPBV": 6.733776950956961,
@@ -163,7 +215,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 36.62
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 36.619997694337854
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 8.23533913181859
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 8.23533913181859
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

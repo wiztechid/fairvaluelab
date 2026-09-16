@@ -1,7 +1,7 @@
 {
   "ticker": "UANG.JK",
   "name": "PT Pakuan Tbk",
-  "asOf": "2026-09-16T13:03:46.303552+00:00",
+  "asOf": "2026-09-16T13:22:43.404797+00:00",
   "price": 4210.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,14 +12,62 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 396.07742502948713,
-    "base": 615.8801819879563,
-    "bull": 835.6829389464258,
-    "dispersion": 0.05406305825357745,
+    "bear": 367.42915715943764,
+    "base": 568.9045826516063,
+    "bull": 770.3800081437752,
+    "dispersion": 0.10224970974685982,
     "agreement": "HIGH",
     "available": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 325.50096965649783,
+      "base": 499.8840503866864,
+      "bull": 674.2671311168749,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 8.475484136794396,
+        "sd": 2.956647713226205,
+        "current": 71.38012942861987,
+        "sampleCount": 455,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.277992277992278,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 363.59969556731374,
+      "base": 562.8946449732434,
+      "bull": 762.1895943791732,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 9.543822473365118,
+        "sd": 3.3790259579728055,
+        "current": 71.38012942861987,
+        "sampleCount": 619,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.277992277992278,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -36,15 +84,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.7130434782608696,
+      "normalizedWeight": 0.3166023166023166,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 531.5866364755033,
-      "base": 664.4832955943791,
-      "bull": 797.379954713255,
+      "bear": 531.5866343478941,
+      "base": 664.4832929348676,
+      "bull": 797.379951521841,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -52,7 +100,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.28695652173913044,
+      "normalizedWeight": 0.12741312741312744,
       "qcStatus": "VALID"
     }
   ],
@@ -75,16 +123,18 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Historical P/E 3Y adaptive: median 8.5x, current 71.4x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 9.5x, current 71.4x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 58.98,
+    "epsTTM": 58.97999952787982,
     "bvps": 332.7214876033058,
     "currentPE": 71.38012885723974,
     "currentPBV": 12.653225465917192,
@@ -99,7 +149,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 58.98
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 58.97999905575964
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 58.98
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 68.67685950413224
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

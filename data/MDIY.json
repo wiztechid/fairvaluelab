@@ -1,7 +1,7 @@
 {
   "ticker": "MDIY.JK",
   "name": "PT Daya Intiguna Yasa Tbk",
-  "asOf": "2026-09-16T13:02:12.387130+00:00",
+  "asOf": "2026-09-16T13:20:29.978111+00:00",
   "price": 950.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 711.0831040048894,
-    "base": 1014.8767443340846,
-    "bull": 1318.9292583211636,
-    "dispersion": 0.4049043544534048,
-    "agreement": "LOW",
+    "bear": 977.9375195446274,
+    "base": 1335.3278624008065,
+    "bull": 1709.3493310314461,
+    "dispersion": 0.040631378651217194,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2836113837095191,
+      "normalizedWeight": 0.21615557217651457,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,57 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.82x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1040.3045538677666,
+      "base": 1383.4968208967327,
+      "bull": 1726.689087925699,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 29.18154116606611,
+        "sd": 7.238816249458415,
+        "current": 20.037967336848745,
+        "sampleCount": 217,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.26496565260058885,
+      "normalizedWeight": 0.2692595362752431,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 1040.3045538677666,
+      "base": 1383.4968208967327,
+      "bull": 1726.689087925699,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 29.18154116606611,
+        "sd": 7.238816249458415,
+        "current": 20.037967336848745,
+        "sampleCount": 217,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.2692595362752431,
       "qcStatus": "VALID"
     },
     {
@@ -68,24 +117,25 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.32188420019627084,
+      "normalizedWeight": 0.24532535527299926,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 336.08971143310976,
-      "base": 420.11213929138717,
-      "bull": 504.1345671496646,
+      "bear": 336.08970587170984,
+      "base": 420.11213233963724,
+      "bull": 504.13455880756464,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.1295387634936212,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.04x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -119,10 +169,10 @@
     "validMethodCount": 4,
     "independentFamilies": 3,
     "diagnosticCount": 1,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 47.41,
+    "epsTTM": 47.40999843097863,
     "bvps": 165.4542732006711,
     "currentPE": 20.037966673697532,
     "currentPBV": 5.7417676897821375,
@@ -137,7 +187,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 47.41
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 47.40999686195726
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 47.41
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 44.034685923109095
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

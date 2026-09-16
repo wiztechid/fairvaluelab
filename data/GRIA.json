@@ -1,7 +1,7 @@
 {
   "ticker": "GRIA.JK",
   "name": "PT Ingria Pratama Capitalindo Tbk",
-  "asOf": "2026-09-16T13:03:26.153845+00:00",
+  "asOf": "2026-09-16T13:22:13.144029+00:00",
   "price": 167.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 26.416353639271023,
-    "base": 32.65099159785035,
-    "bull": 40.175838309639815,
-    "dispersion": 0.21623458970082352,
+    "bear": 26.416353731203458,
+    "base": 32.650991712765894,
+    "bull": 40.17583844753847,
+    "dispersion": 0.2162345897466375,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -53,11 +53,61 @@
       "qcStatus": "VALID"
     },
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 60.0293668729867,
+      "base": 137.2055767284898,
+      "bull": 214.38178658399292,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 149.13649269327232,
+        "sd": 83.88718251580922,
+        "current": 181.52173456521726,
+        "sampleCount": 495,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.48x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 57.1782364375633,
+      "base": 138.96462258398324,
+      "bull": 220.7510087304032,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 151.04849900985272,
+        "sd": 88.89824357556171,
+        "current": 181.52173456521726,
+        "sampleCount": 522,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.53x dari median metode."
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 26.739867362836804,
-      "base": 33.424834203546006,
-      "bull": 40.10980104425521,
+      "bear": 26.73986769908665,
+      "base": 33.42483462385831,
+      "bull": 40.10980154862997,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -95,16 +145,18 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 149.1x, current 181.5x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 151.0x, current 181.5x; confidence diturunkan."
     ],
     "historyYears": 3.1074606433949348,
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 0.92,
+    "epsTTM": 0.9200000231377258,
     "bvps": 53.971958528238595,
     "currentPE": 181.52173913043478,
     "currentPBV": 3.094199368596642,
@@ -119,7 +171,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 0.92
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 0.9200000462754515
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 0.92
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 1.0372170410367685
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

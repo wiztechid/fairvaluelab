@@ -1,7 +1,7 @@
 {
   "ticker": "CHIP.JK",
   "name": "PT Pelita Teknologi Global Tbk",
-  "asOf": "2026-09-16T13:03:51.899291+00:00",
+  "asOf": "2026-09-16T13:22:52.536642+00:00",
   "price": 735.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,14 +12,64 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 72.2732512627021,
-    "base": 165.89394802087506,
-    "bull": 259.51464477904796,
-    "dispersion": 0.22013161250167848,
-    "agreement": "MEDIUM",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1317.794499501494,
+      "base": 1620.4477960581387,
+      "bull": 1923.101092614783,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 221.37264966243345,
+        "sd": 41.34607875106814,
+        "current": 100.40983603278688,
+        "sampleCount": 498,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.30x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 765.8418324462938,
+      "base": 1306.5865530744325,
+      "bull": 1847.331273702571,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 178.49543068958906,
+        "sd": 73.87222956988646,
+        "current": 100.40983603278688,
+        "sampleCount": 616,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.66x dari median metode."
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -35,25 +85,27 @@
       },
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.7130434782608696,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.66x dari median metode."
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 94.62498624773376,
-      "base": 118.28123280966719,
-      "bull": 141.93747937160063,
+      "bear": 94.62498626318273,
+      "base": 118.2812328289784,
+      "bull": 141.93747939477407,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.28695652173913044,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.16x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -74,16 +126,19 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Historical P/E 3Y adaptive: median 221.4x, current 100.4x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 178.5x, current 100.4x; confidence diturunkan.",
+      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 3.6030116358658453,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 4
   },
   "raw": {
-    "epsTTM": 7.32,
+    "epsTTM": 7.320000002390204,
     "bvps": 84.94505182133994,
     "currentPE": 100.40983606557377,
     "currentPBV": 8.652652323361734,
@@ -98,12 +153,31 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 7.32
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 7.320000004780408
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 7.32
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 5.736976914392059
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.8-all-tickers-fx-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {

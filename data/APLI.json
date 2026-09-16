@@ -1,7 +1,7 @@
 {
   "ticker": "APLI.JK",
   "name": "PT Asiaplast Industries Tbk",
-  "asOf": "2026-09-16T12:59:09.437973+00:00",
+  "asOf": "2026-09-16T13:16:00.053206+00:00",
   "price": 292.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 88.96236716023876,
-    "base": 145.76427597255028,
-    "bull": 204.1449713386228,
-    "dispersion": 0.04225288322351178,
-    "agreement": "HIGH",
+    "bear": 164.113267812873,
+    "base": 247.7152840584505,
+    "bull": 332.51651069823225,
+    "dispersion": 0.49003901918843296,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -41,10 +41,9 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.13x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.2404227212681638,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical EV/EBITDA",
@@ -62,15 +61,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.7130434782608696,
+      "normalizedWeight": 0.5416116248348745,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 123.76681326782985,
-      "base": 154.7085165847873,
-      "bull": 185.65021990174475,
+      "bear": 199.08490958121982,
+      "base": 248.85613697652477,
+      "bull": 298.6273643718297,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -78,7 +77,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.28695652173913044,
+      "normalizedWeight": 0.2179656538969617,
       "qcStatus": "VALID"
     }
   ],
@@ -101,16 +100,17 @@
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 10.7000 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 4.135380810076443,
+    "epsTTM": 10.69999992671233,
     "bvps": 257.2352121912884,
     "currentPE": 70.61018402186819,
     "currentPBV": 1.1351478575291605,
@@ -125,7 +125,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 10.7
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 10.69999985342466
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 4.135380810076443
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 4.135380810076443
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

@@ -1,7 +1,7 @@
 {
   "ticker": "CYBR.JK",
   "name": "PT ITSEC Asia Tbk",
-  "asOf": "2026-09-16T13:03:52.443998+00:00",
+  "asOf": "2026-09-16T13:22:53.533128+00:00",
   "price": 520.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -21,11 +21,59 @@
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 392.35697050921635,
+      "base": 469.7385711260472,
+      "bull": 547.120171742878,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 103.9244636377797,
+        "sd": 17.119823309930233,
+        "current": 115.0442488938053,
+        "sampleCount": 205,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 392.35697050921635,
+      "base": 469.7385711260472,
+      "bull": 547.120171742878,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 103.9244636377797,
+        "sd": 17.119823309930233,
+        "current": 115.0442488938053,
+        "sampleCount": 205,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 35.07933913555328,
-      "base": 43.849173919441604,
-      "bull": 52.619008703329925,
+      "bear": 35.07933896690262,
+      "base": 43.84917370862827,
+      "bull": 52.619008450353924,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -34,7 +82,8 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 10.71x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -57,16 +106,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Historical P/E 3Y adaptive: median 103.9x, current 115.0x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 103.9x, current 115.0x; confidence diturunkan.",
       "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 3.1074606433949348,
     "validMethodCount": 0,
     "independentFamilies": 0,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 4.52,
+    "epsTTM": 4.519999956538462,
     "bvps": 18.90609688709379,
     "currentPE": 115.04424778761063,
     "currentPBV": 27.504354976355643,
@@ -81,7 +132,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 4.52
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 4.519999913076925
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 4.52
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 4.763074859113851
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

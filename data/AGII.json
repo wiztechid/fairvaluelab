@@ -1,7 +1,7 @@
 {
   "ticker": "AGII.JK",
   "name": "PT Samator Indo Gas Tbk",
-  "asOf": "2026-09-16T12:59:06.199995+00:00",
+  "asOf": "2026-09-16T13:15:55.162293+00:00",
   "price": 3300.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 976.6565638065672,
-    "base": 1215.9871110462234,
-    "bull": 1478.4094127334135,
-    "dispersion": 0.43761084624845986,
-    "agreement": "LOW",
+    "bear": 1202.612294206208,
+    "base": 1575.091922236285,
+    "bull": 1947.571550266362,
+    "dispersion": 0.19171096981672558,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.25040227750959276,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.50x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -51,7 +52,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.65x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.33x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -75,7 +76,55 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.1802203242975616,
+      "normalizedWeight": 0.12322274881516589,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1366.6512170486849,
+      "base": 1681.9394704764027,
+      "bull": 1997.2277239041207,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 50.84460156078783,
+        "sd": 9.531083551888099,
+        "current": 99.75815901571937,
+        "sampleCount": 491,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.24373730534867977,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 1084.0083128338104,
+      "base": 1681.9394704764027,
+      "bull": 2279.8706281189952,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 50.84460156078783,
+        "sd": 18.075306516534212,
+        "current": 99.75815901571937,
+        "sampleCount": 865,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.24373730534867977,
       "qcStatus": "VALID"
     },
     {
@@ -94,15 +143,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.40599084045055084,
+      "normalizedWeight": 0.2775897088693297,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 763.8216263652206,
-      "base": 954.7770329565257,
-      "bull": 1145.7324395478308,
+      "bear": 763.8216379105008,
+      "base": 954.777047388126,
+      "bull": 1145.7324568657511,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -110,7 +159,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.16338655774229488,
+      "normalizedWeight": 0.1117129316181449,
       "qcStatus": "VALID"
     }
   ],
@@ -140,16 +189,18 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 50.8x, current 99.8x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 50.8x, current 99.8x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
+    "validMethodCount": 5,
     "independentFamilies": 4,
     "diagnosticCount": 1,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 33.08,
+    "epsTTM": 33.080001000018484,
     "bvps": 1224.7738582040395,
     "currentPE": 99.75816203143894,
     "currentPBV": 2.694374947583378,
@@ -164,7 +215,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 33.08
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 33.08000200003697
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 33.08
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 19.03667181885178
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

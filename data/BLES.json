@@ -1,7 +1,7 @@
 {
   "ticker": "BLES.JK",
   "name": "PT Superior Prima Sukses Tbk",
-  "asOf": "2026-09-16T12:59:12.959019+00:00",
+  "asOf": "2026-09-16T13:16:05.707238+00:00",
   "price": 197.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 121.89244296575262,
-    "base": 169.10839345700109,
-    "bull": 203.78584517051416,
-    "dispersion": 0.2843455390272934,
-    "agreement": "MEDIUM",
+    "bear": 228.9747919668312,
+    "base": 293.64321597671454,
+    "bull": 351.35200607103627,
+    "dispersion": 0.4179184662620778,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.17223335560008907,
+      "normalizedWeight": 0.09560004943764677,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,55 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.31563126252505014,
+      "normalizedWeight": 0.17519466073414908,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 347.45380999465334,
+      "base": 430.11764163127793,
+      "bull": 512.7814732679026,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 17.15666742700979,
+        "sd": 3.2973208498332043,
+        "current": 7.857997803350614,
+        "sampleCount": 324,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.2224694104560623,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 347.45380999465334,
+      "base": 430.11764163127793,
+      "bull": 512.7814732679026,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 17.15666742700979,
+        "sd": 3.2973208498332043,
+        "current": 7.857997803350614,
+        "sampleCount": 324,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.2224694104560623,
       "qcStatus": "VALID"
     },
     {
@@ -68,15 +116,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.36517479403250946,
+      "normalizedWeight": 0.20269435174885675,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 130.90783602839244,
-      "base": 163.63479503549055,
-      "bull": 196.36175404258867,
+      "bear": 213.305357943065,
+      "base": 266.6316974288312,
+      "bull": 319.95803691459747,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -84,7 +132,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.1469605878423514,
+      "normalizedWeight": 0.08157211716722285,
       "qcStatus": "VALID"
     }
   ],
@@ -114,16 +162,17 @@
     "totalInputs": 7,
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 25.0700 per saham."
     ],
     "historyYears": 2.190280629705681,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
+    "validMethodCount": 6,
+    "independentFamilies": 4,
     "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 9.442393208891078,
+    "epsTTM": 25.069999372613736,
     "bvps": 126.03370802268438,
     "currentPE": 20.863354834079807,
     "currentPBV": 1.563073903725364,
@@ -138,7 +187,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 25.07
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 25.069998745227473
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 9.442393208891078
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 9.442393208891078
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

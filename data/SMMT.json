@@ -1,7 +1,7 @@
 {
   "ticker": "SMMT.JK",
   "name": "PT Golden Eagle Energy Tbk",
-  "asOf": "2026-09-16T12:58:59.118533+00:00",
+  "asOf": "2026-09-16T13:15:44.321466+00:00",
   "price": 3100.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,29 +12,53 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 917.4556622856917,
+    "base": 1034.667198167665,
+    "bull": 1151.8787340496385,
+    "dispersion": 0.6602972946539742,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1234.462591261474,
+      "base": 1379.522685363062,
+      "bull": 1524.58277946465,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 65.16403971169778,
+        "sd": 6.852153888379691,
+        "current": 146.43363624940943,
+        "sampleCount": 424,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.6857142857142856,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 225.8041837757354,
-      "base": 282.2552297196692,
-      "bull": 338.70627566360304,
+      "bear": 225.80418088398517,
+      "base": 282.25522610498143,
+      "bull": 338.7062713259777,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.3142857142857143,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -58,16 +82,16 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
+      "Historical P/E 3Y adaptive: median 65.2x, current 146.4x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 21.17,
+    "epsTTM": 21.169999457774868,
     "bvps": 167.2555811769343,
     "currentPE": 146.43363249881907,
     "currentPBV": 18.534508553831813,
@@ -82,12 +106,31 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0
+    "fxFactor": 17707.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 21.17
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 21.169998915549733
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 21.17
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 21.010526488467153
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.8-all-tickers-fx-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {

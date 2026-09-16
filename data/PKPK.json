@@ -1,7 +1,7 @@
 {
   "ticker": "PKPK.JK",
   "name": "PT Paragon Karya Perkasa Tbk",
-  "asOf": "2026-09-16T12:58:50.176134+00:00",
+  "asOf": "2026-09-16T13:15:29.781764+00:00",
   "price": 4170.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,14 +12,62 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 523.741299914813,
-    "base": 696.2927915091755,
-    "bull": 868.8442831035379,
-    "dispersion": 0.34832990313440665,
+    "bear": 659.767619696888,
+    "base": 2022.7280591331519,
+    "bull": 3385.6884985694155,
+    "dispersion": 0.5954968493276422,
     "agreement": "LOW",
     "available": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 713.3426428829335,
+      "base": 2828.509462049509,
+      "bull": 4943.676281216084,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 35.44498103343729,
+        "sd": 26.50585009307028,
+        "current": 52.255639548872175,
+        "sampleCount": 433,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.30508474576271183,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 713.3426428829335,
+      "base": 2828.509462049509,
+      "bull": 4943.676281216084,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 35.44498103343729,
+        "sd": 26.50585009307028,
+        "current": 52.255639548872175,
+        "sampleCount": 433,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.30508474576271183,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -36,15 +84,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.7130434782608696,
+      "normalizedWeight": 0.2779661016949152,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 316.0889945104285,
-      "base": 395.1112431380356,
-      "bull": 474.1334917656427,
+      "bear": 497.8927097058972,
+      "base": 622.3658871323714,
+      "bull": 746.8390645588457,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -52,7 +100,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.28695652173913044,
+      "normalizedWeight": 0.11186440677966102,
       "qcStatus": "VALID"
     }
   ],
@@ -76,16 +124,17 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 79.8000 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 32.1625225,
+    "epsTTM": 79.79999931107915,
     "bvps": 215.72782,
     "currentPE": 129.6540095696785,
     "currentPBV": 19.32991303578741,
@@ -100,7 +149,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 79.8
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 79.7999986221583
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 32.1625225
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 32.1625225
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

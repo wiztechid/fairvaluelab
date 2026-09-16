@@ -1,7 +1,7 @@
 {
   "ticker": "AADI.JK",
   "name": "PT Adaro Andalan Indonesia Tbk",
-  "asOf": "2026-09-16T12:58:22.551308+00:00",
+  "asOf": "2026-09-16T13:14:51.174261+00:00",
   "price": 12400.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,14 +12,62 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 8458.379632736705,
-    "base": 9999.241932225232,
-    "bull": 11540.104231713754,
-    "dispersion": 0.4361499303601647,
-    "agreement": "LOW",
+    "bear": 6670.810170692132,
+    "base": 7314.598675412124,
+    "bull": 7958.3871801321175,
+    "dispersion": 0.036604580070552166,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 6892.715915118547,
+      "base": 7492.082516433204,
+      "bull": 8091.44911774786,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 4.1073438339351265,
+        "sd": 0.32858750671481013,
+        "current": 6.7979848632316715,
+        "sampleCount": 227,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3435114503816794,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 6892.715915118547,
+      "base": 7492.082516433204,
+      "bull": 8091.44911774786,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 4.1073438339351265,
+        "sd": 0.32858750671481013,
+        "current": 6.7979848632316715,
+        "sampleCount": 227,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3435114503816794,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -36,24 +84,25 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.7130434782608696,
+      "normalizedWeight": 0.3129770992366412,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 14110.613871658219,
-      "base": 17638.267339572772,
-      "bull": 21165.920807487328,
+      "bear": 14110.613729712844,
+      "base": 17638.267162141055,
+      "bull": 21165.920594569267,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.28695652173913044,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.35x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -77,13 +126,13 @@
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
     ],
     "historyYears": 1.7796030116358659,
-    "validMethodCount": 2,
+    "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 1824.07,
+    "epsTTM": 1824.0699633016254,
     "bvps": 7580.324944699116,
     "currentPE": 6.797984726463349,
     "currentPBV": 1.6358137798131278,
@@ -98,7 +147,26 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0
+    "fxFactor": 17707.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 1824.07
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 1824.069926603251
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 1824.07
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 1728.6110652191728
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

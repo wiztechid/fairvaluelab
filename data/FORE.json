@@ -1,7 +1,7 @@
 {
   "ticker": "FORE.JK",
   "name": "PT Fore Kopi Indonesia Tbk",
-  "asOf": "2026-09-16T13:00:51.097132+00:00",
+  "asOf": "2026-09-16T13:18:29.882415+00:00",
   "price": 780.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 85.51092897001254,
-    "base": 122.11358498793685,
-    "bull": 158.76150973346378,
-    "dispersion": 0.23697717619145026,
-    "agreement": "MEDIUM",
+    "bear": 394.42741933326954,
+    "base": 445.47181944759546,
+    "bull": 498.5062121904035,
+    "dispersion": 0.5335001934571018,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.4182344428364688,
+      "normalizedWeight": 0.21811320754716979,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,57 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.37x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 568.8337980021965,
+      "base": 618.2976065241268,
+      "bull": 667.7614150460569,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 52.9364381546239,
+        "sd": 4.234915052369912,
+        "current": 66.7808209589041,
+        "sampleCount": 135,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.39073806078147616,
+      "normalizedWeight": 0.21735849056603773,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 568.8337980021965,
+      "base": 618.2976065241268,
+      "bull": 667.7614150460569,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 52.9364381546239,
+        "sd": 4.234915052369912,
+        "current": 66.7808209589041,
+        "sampleCount": 135,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.21735849056603773,
       "qcStatus": "VALID"
     },
     {
@@ -67,17 +116,16 @@
       },
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.61x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.24754716981132074,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 113.29276538123534,
-      "base": 141.61595672654417,
-      "bull": 169.939148071853,
+      "bear": 113.2927661946193,
+      "base": 141.61595774327412,
+      "bull": 169.93914929192894,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -85,7 +133,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.191027496382055,
+      "normalizedWeight": 0.09962264150943397,
       "qcStatus": "VALID"
     }
   ],
@@ -115,16 +163,18 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 52.9x, current 66.8x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 52.9x, current 66.8x; confidence diturunkan."
     ],
     "historyYears": 1.4236824093086926,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
     "diagnosticCount": 1,
     "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 11.68,
+    "epsTTM": 11.680000167712825,
     "bvps": 76.3130867563715,
     "currentPE": 66.78082191780823,
     "currentPBV": 10.22105163286265,
@@ -139,7 +189,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 11.68
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 11.68000033542565
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 11.68
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 10.106460099134356
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

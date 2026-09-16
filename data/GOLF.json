@@ -1,7 +1,7 @@
 {
   "ticker": "GOLF.JK",
   "name": "PT Intra Golflink Resorts Tbk",
-  "asOf": "2026-09-16T13:01:55.160025+00:00",
+  "asOf": "2026-09-16T13:20:03.545709+00:00",
   "price": 173.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 64.38801612068215,
-    "base": 95.58045205772706,
-    "bull": 119.69610226515307,
-    "dispersion": 0.3985380169127673,
-    "agreement": "LOW",
+    "bear": 148.1587867474744,
+    "base": 177.28331002693824,
+    "bull": 206.62719331146062,
+    "dispersion": 0.24373375982066853,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.35473515248796145,
+      "normalizedWeight": 0.23789020452099033,
       "qcStatus": "VALID"
     },
     {
@@ -48,16 +48,65 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.91x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 183.73003510541366,
+      "base": 208.17702588363795,
+      "bull": 232.62401666186224,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 75.97701726846972,
+        "sd": 8.922259469483818,
+        "current": 63.13868656569342,
+        "sampleCount": 329,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.4333868378812199,
+      "normalizedWeight": 0.310010764262648,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 183.73003510541366,
+      "base": 208.17702588363795,
+      "bull": 232.62401666186224,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 75.97701726846972,
+        "sd": 8.922259469483818,
+        "current": 63.13868656569342,
+        "sampleCount": 329,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.310010764262648,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 127.41712370173758,
-      "base": 159.27140462717196,
-      "bull": 191.12568555260634,
+      "bear": 127.41712326351109,
+      "base": 159.27140407938884,
+      "bull": 191.1256848952666,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -65,7 +114,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.21187800963081863,
+      "normalizedWeight": 0.14208826695371368,
       "qcStatus": "VALID"
     }
   ],
@@ -95,16 +144,18 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 76.0x, current 63.1x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 76.0x, current 63.1x; confidence diturunkan."
     ],
     "historyYears": 2.190280629705681,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 2.74,
+    "epsTTM": 2.739999981152602,
     "bvps": 411.47413352655855,
     "currentPE": 63.138686131386855,
     "currentPBV": 0.42043955112632553,
@@ -119,7 +170,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 2.74
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 2.739999962305203
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 2.74
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 2.6586987389386434
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

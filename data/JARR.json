@@ -1,7 +1,7 @@
 {
   "ticker": "JARR.JK",
   "name": "PT Jhonlin Agro Raya Tbk",
-  "asOf": "2026-09-16T13:00:58.124623+00:00",
+  "asOf": "2026-09-16T13:18:39.981138+00:00",
   "price": 3890.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,14 +12,38 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 277.9600006250881,
-    "base": 431.2633791167051,
-    "bull": 584.5667576083222,
-    "dispersion": 0.10974885435401484,
+    "bear": 274.1034324639091,
+    "base": 395.92423721395585,
+    "bull": 517.7450419640026,
+    "dispersion": 0.12973711454248202,
     "agreement": "HIGH",
     "available": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 267.9436336450446,
+      "base": 339.47977138972675,
+      "bull": 411.0159091344089,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 11.79158593328319,
+        "sd": 2.484756343797659,
+        "current": 135.1163549235844,
+        "sampleCount": 428,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3850267379679144,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -36,15 +60,15 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.7130434782608696,
+      "normalizedWeight": 0.4385026737967914,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 293.4248768281571,
-      "base": 366.78109603519636,
-      "bull": 440.1373152422356,
+      "bear": 293.4248821742983,
+      "base": 366.7811027178729,
+      "bull": 440.1373232614475,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -52,7 +76,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.28695652173913044,
+      "normalizedWeight": 0.17647058823529413,
       "qcStatus": "VALID"
     }
   ],
@@ -75,16 +99,17 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Historical P/E 3Y adaptive: median 11.8x, current 135.1x; confidence diturunkan."
     ],
     "historyYears": 4.117727583846681,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 28.79,
+    "epsTTM": 28.790001049095835,
     "bvps": 207.6776232623672,
     "currentPE": 135.11635984716915,
     "currentPBV": 18.73095396072408,
@@ -99,7 +124,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 28.79
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 28.790002098191668
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 28.79
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 29.08580047306559
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

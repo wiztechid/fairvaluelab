@@ -1,7 +1,7 @@
 {
   "ticker": "RATU.JK",
   "name": "PT Raharja Energi Cepu Tbk",
-  "asOf": "2026-09-16T12:58:54.282144+00:00",
+  "asOf": "2026-09-16T13:15:36.136897+00:00",
   "price": 4320.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 787.9248966230424,
-    "base": 1138.7749800615682,
-    "bull": 1469.5461205365093,
-    "dispersion": 0.2645273137006681,
-    "agreement": "MEDIUM",
+    "bear": 3322.7988920219987,
+    "base": 3812.330275361661,
+    "bull": 4242.728973762432,
+    "dispersion": 0.5188663769392478,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.30453108535300316,
+      "normalizedWeight": 0.36415624697101867,
       "qcStatus": "VALID"
     },
     {
@@ -48,9 +48,60 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.48147847937099786,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.19x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 7991.842365818633,
+      "base": 10090.59090073958,
+      "bull": 12189.339435660528,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 69.81175583161044,
+        "sd": 14.52019229727294,
+        "current": 29.88792114943958,
+        "sampleCount": 209,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.53x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 7991.842365818633,
+      "base": 10090.59090073958,
+      "bull": 12189.339435660528,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 69.81175583161044,
+        "sd": 14.52019229727294,
+        "current": 29.88792114943958,
+        "sampleCount": 209,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.53x dari median metode."
     },
     {
       "name": "Historical EV/EBITDA",
@@ -67,26 +118,26 @@
       },
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.96x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.6358437530289812,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 816.6684674549425,
-      "base": 1020.8355843186781,
-      "bull": 1225.0027011824136,
+      "bear": 816.6684558344314,
+      "base": 1020.8355697930392,
+      "bull": 1225.002683751647,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.21399043527599904,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.80x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -116,16 +167,18 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Historical P/E 3Y adaptive: median 69.8x, current 29.9x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 69.8x, current 29.9x; confidence diturunkan."
     ],
     "historyYears": 1.6865160848733745,
-    "validMethodCount": 3,
+    "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 1,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 4
   },
   "raw": {
-    "epsTTM": 144.54,
+    "epsTTM": 144.5399958866327,
     "bvps": 320.4358009966506,
     "currentPE": 29.887920298879205,
     "currentPBV": 13.481639650012626,
@@ -140,7 +193,26 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0
+    "fxFactor": 17707.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 144.54
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 144.53999177326546
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 144.54
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 99.55343361888445
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

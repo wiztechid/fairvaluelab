@@ -1,7 +1,7 @@
 {
   "ticker": "SSIA.JK",
   "name": "PT Surya Semesta Internusa Tbk",
-  "asOf": "2026-09-16T13:04:33.160635+00:00",
+  "asOf": "2026-09-16T13:23:55.487550+00:00",
   "price": 1720.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 590.3581555165271,
+    "base": 732.003886094828,
+    "bull": 873.6496166731288,
+    "dispersion": 0.31745703179501045,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -41,9 +41,73 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.10579345088161209,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 742.5554401713568,
+      "base": 914.9683990927778,
+      "bull": 1087.3813580141987,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 20.942285187475104,
+        "sd": 3.946279848931371,
+        "current": 39.368278246738306,
+        "sampleCount": 266,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3778337531486146,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 392.39164080529684,
+      "base": 451.33183712239696,
+      "bull": 510.272033439497,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 10.330324038050057,
+        "sd": 1.3490546793773115,
+        "current": 39.368278246738306,
+        "sampleCount": 527,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3778337531486146,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 862.5379797272543,
+      "base": 1078.1724746590678,
+      "bull": 1293.8069695908814,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.1385390428211587,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -65,16 +129,16 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 43.6900 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 43.6899980542711,
     "bvps": 1182.5293729887783,
     "currentPE": null,
     "currentPBV": 1.4545093249166354,
@@ -89,21 +153,25 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 43.69
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 43.68999610854221
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.8-all-tickers-fx-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "DCF & FCF Yield",
       "family": "cashflow",

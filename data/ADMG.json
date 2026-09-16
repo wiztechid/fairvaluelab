@@ -1,7 +1,7 @@
 {
   "ticker": "ADMG.JK",
   "name": "PT. Polychem Indonesia Tbk",
-  "asOf": "2026-09-16T12:59:05.475301+00:00",
+  "asOf": "2026-09-16T13:15:54.107284+00:00",
   "price": 252.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 222.54667791215238,
-    "base": 336.9750958569396,
-    "bull": 432.66193501279946,
-    "dispersion": 0.4358735317193758,
-    "agreement": "LOW",
+    "bear": 269.64979926022744,
+    "base": 402.13647907490133,
+    "bull": 515.434569452578,
+    "dispersion": 0.14492786585470396,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2649880095923261,
+      "normalizedWeight": 0.27130831287267626,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.4856115107913669,
+      "normalizedWeight": 0.4971939670291126,
       "qcStatus": "VALID"
     },
     {
@@ -73,8 +73,25 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.60x dari median metode."
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 325.4549710922052,
+      "base": 406.8187138652565,
+      "bull": 488.18245663830777,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.24940047961630696,
+      "normalizedWeight": 0.23149772009821118,
       "qcStatus": "VALID"
     }
   ],
@@ -104,16 +121,17 @@
     "totalInputs": 7,
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 14.3400 per saham."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 14.34000030899287,
     "bvps": 512.9442503791067,
     "currentPE": null,
     "currentPBV": 0.4912814595616422,
@@ -128,7 +146,18 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0
+    "fxFactor": 17707.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 14.34
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 14.34000061798574
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -136,13 +165,6 @@
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",

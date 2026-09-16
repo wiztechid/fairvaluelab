@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-16T13:01:26.002629+00:00",
+  "asOf": "2026-09-16T13:19:21.699528+00:00",
   "price": 500.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -122,7 +122,8 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 326.9900 per saham."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
@@ -131,7 +132,7 @@
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 326.9900052602883,
     "bvps": 1112.2996705723126,
     "currentPE": null,
     "currentPBV": 0.44951914778751534,
@@ -146,7 +147,18 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 326.99
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 326.9900105205766
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -155,19 +167,24 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
-    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NEGATIVE",
       "reason": "EBITDA negatif/nol.",
       "inputs": {
         "ebitda": -736105000000.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 2288.5446471268565,
+        "base": 2860.6808089085703,
+        "bull": 3432.816970690284,
+        "price": 500.0
       }
     }
   ]

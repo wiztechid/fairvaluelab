@@ -1,7 +1,7 @@
 {
   "ticker": "PALM.JK",
   "name": "PT Provident Investasi Bersama Tbk",
-  "asOf": "2026-09-16T13:03:04.288583+00:00",
+  "asOf": "2026-09-16T13:21:45.873042+00:00",
   "price": 290.0,
   "companyProfile": {
     "sector": "Keuangan",
@@ -12,64 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 408.39296968101155,
-    "base": 568.5164071478152,
-    "bull": 728.6398446146188,
-    "dispersion": 0.39061702797548803,
-    "agreement": "LOW",
+    "bear": 400.6577821808146,
+    "base": 649.6119206200003,
+    "bull": 898.566059059186,
+    "dispersion": 0.11246334690434343,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
-    {
-      "name": "Historical P/E 3Y",
-      "family": "earnings",
-      "bear": 369.17400000000004,
-      "base": 384.0,
-      "bull": 398.82599999999996,
-      "confidence": 0.9,
-      "relevance": 0.85,
-      "rawWeight": 0.765,
-      "bands": {
-        "mean": 3.270793049595065,
-        "sd": 0.12628327539920933,
-        "current": 2.4701301676629397,
-        "z": -6.340213139079999,
-        "minus1": 369.17400000000004,
-        "base": 384.0,
-        "plus1": 398.82599999999996,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": true,
-      "normalizedWeight": 0.28042521994134895,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "family": "earnings",
-      "bear": 304.4964,
-      "base": 432.0,
-      "bull": 559.5036,
-      "confidence": 0.9,
-      "relevance": 0.85,
-      "rawWeight": 0.765,
-      "bands": {
-        "mean": 3.6796421807944477,
-        "sd": 1.086036168433201,
-        "current": 2.4701301676629397,
-        "z": -1.1136940447171688,
-        "minus1": 304.4964,
-        "base": 432.0,
-        "plus1": 559.5036,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.28042521994134895,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Historical PBV 5Y",
       "family": "book",
@@ -92,15 +42,40 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3181818181818182,
+      "normalizedWeight": 0.7245409015025042,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 106.70373575299926,
+      "base": 115.98232147065137,
+      "bull": 125.26090718830349,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 3.270793049595065,
+        "sd": 0.2616634439676052,
+        "current": 8.178228995205865,
+        "sampleCount": 209,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.73x dari median metode."
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 798.9171786130572,
-      "base": 998.6464732663214,
-      "bull": 1198.3757679195858,
+      "bear": 439.06826274280377,
+      "base": 548.8353284285047,
+      "bull": 658.6023941142056,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -108,7 +83,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.12096774193548387,
+      "normalizedWeight": 0.27545909849749584,
       "qcStatus": "VALID"
     }
   ],
@@ -129,16 +104,17 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 35.4600 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 117.40271982280888,
+    "epsTTM": 35.45999997921311,
     "bvps": 377.5399108952834,
     "currentPE": 2.4701301676629397,
     "currentPBV": 0.7681307105050307,
@@ -153,7 +129,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 35.46
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 35.45999995842621
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 117.40271982280888
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 117.40271982280888
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

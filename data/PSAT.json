@@ -1,7 +1,7 @@
 {
   "ticker": "PSAT.JK",
   "name": "PT Pancaran Samudera Transport Tbk",
-  "asOf": "2026-09-16T12:58:50.678122+00:00",
+  "asOf": "2026-09-16T13:15:30.973990+00:00",
   "price": 865.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,14 +12,62 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 1092.7614011130577,
+    "base": 1201.2059886794575,
+    "bull": 1309.6505762458576,
+    "dispersion": 0.34707195220955195,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 1242.0,
+      "base": 1350.0,
+      "bull": 1458.0,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 86.89478011425567,
+        "sd": 6.951582409140453,
+        "current": 55.67702577691196,
+        "sampleCount": 83,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.4067796610169491,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 1242.0,
+      "base": 1350.0,
+      "bull": 1458.0,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 86.89478011425567,
+        "sd": 6.951582409140453,
+        "current": 55.67702577691196,
+        "sampleCount": 83,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.4067796610169491,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -32,9 +80,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.1864406779661017,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -55,11 +103,12 @@
     "totalInputs": 7,
     "guards": [
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
+      "Historical P/E 3Y adaptive: median 86.9x, current 55.7x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 86.9x, current 55.7x; confidence diturunkan."
     ],
     "historyYears": 1.1909650924024642,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
@@ -79,12 +128,23 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "WISS reconciled EPS",
+        "value": 15.536031027697181
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 15.536031027697181
+      }
+    ],
+    "epsSource": "Multi-source EPS median"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.8-all-tickers-fx-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {

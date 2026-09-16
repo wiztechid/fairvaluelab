@@ -1,7 +1,7 @@
 {
   "ticker": "INPP.JK",
   "name": "PT Indonesian Paradise Property Tbk",
-  "asOf": "2026-09-16T13:03:28.190609+00:00",
+  "asOf": "2026-09-16T13:22:15.813303+00:00",
   "price": 740.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 378.1125153152845,
-    "base": 579.6917865497487,
-    "bull": 776.6033891401607,
-    "dispersion": 0.2184156047380119,
-    "agreement": "MEDIUM",
+    "bear": 348.68096741968685,
+    "base": 529.6415119678409,
+    "bull": 706.5125900688411,
+    "dispersion": 0.3866477894023889,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.1657026563838903,
+      "normalizedWeight": 0.14517642642642642,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.1590616966580977,
+      "normalizedWeight": 0.13935810810810811,
       "qcStatus": "VALID"
     },
     {
@@ -74,8 +74,58 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32390745501285345,
+      "normalizedWeight": 0.28378378378378377,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 85.42537123591633,
+      "base": 92.85366438686557,
+      "bull": 100.28195753781483,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 34.390245813606285,
+        "sd": 2.751219665088503,
+        "current": 274.074072037037,
+        "sampleCount": 218,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.97x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 68.43671336122526,
+      "base": 135.13981318405743,
+      "bull": 201.8429130068896,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 50.05178228875551,
+        "sd": 24.704851602616994,
+        "current": 274.074072037037,
+        "sampleCount": 651,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.73x dari median metode."
     },
     {
       "name": "Historical EV/EBITDA",
@@ -93,7 +143,23 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.3513281919451585,
+      "normalizedWeight": 0.30780780780780775,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 140.5196559399146,
+      "base": 175.64956992489323,
+      "bull": 210.77948390987186,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.12387387387387387,
       "qcStatus": "VALID"
     }
   ],
@@ -122,16 +188,19 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.7000 per saham.",
+      "Historical P/E 3Y adaptive: median 34.4x, current 274.1x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 50.1x, current 274.1x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 2.7000000200675682,
     "bvps": 507.8645462631903,
     "currentPE": null,
     "currentPBV": 1.4570814313478586,
@@ -146,7 +215,18 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 2.7
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 2.700000040135136
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -154,13 +234,6 @@
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",

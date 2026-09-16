@@ -1,7 +1,7 @@
 {
   "ticker": "BLUE.JK",
   "name": "PT Berkah Prima Perkasa Tbk",
-  "asOf": "2026-09-16T13:00:02.337842+00:00",
+  "asOf": "2026-09-16T13:17:17.338528+00:00",
   "price": 2990.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,14 +12,62 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 340.2425117289946,
-    "base": 401.3931177614958,
-    "bull": 484.6490003926845,
-    "dispersion": 0.2041032223472994,
-    "agreement": "MEDIUM",
+    "bear": 289.0809627153148,
+    "base": 313.62550923337875,
+    "bull": 338.1700557514427,
+    "dispersion": 0.01808731664143908,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 291.4880623909772,
+      "base": 316.83485042497523,
+      "bull": 342.1816384589732,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 9.17298351276607,
+        "sd": 0.7338386810212856,
+        "current": 86.56629997104807,
+        "sampleCount": 456,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3185840707964602,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 280.99938038407987,
+      "base": 305.4341091131303,
+      "bull": 329.86883784218077,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 8.842909936748182,
+        "sd": 0.7074327949398546,
+        "current": 86.56629997104807,
+        "sampleCount": 844,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3185840707964602,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -36,24 +84,25 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.5150753768844221,
+      "normalizedWeight": 0.36283185840707965,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 347.2914110211435,
-      "base": 434.11426377642937,
-      "bull": 520.9371165317152,
+      "bear": 347.2914109630681,
+      "base": 434.11426370383504,
+      "bull": 520.937116444602,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.20728643216080403,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.37x dari median metode."
     },
     {
       "name": "Historical Dividend Yield",
@@ -70,9 +119,10 @@
       },
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.2776381909547739,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.67x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -104,16 +154,18 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Historical P/E 3Y adaptive: median 9.2x, current 86.6x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 8.8x, current 86.6x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
-    "independentFamilies": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 0,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 34.54,
+    "epsTTM": 34.53999998844816,
     "bvps": 242.49526348086124,
     "currentPE": 86.56629994209612,
     "currentPBV": 12.3301377399315,
@@ -128,7 +180,26 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 34.54
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 34.53999997689632
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 34.54
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 34.66701968421053
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",

@@ -1,7 +1,7 @@
 {
   "ticker": "MMIX.JK",
   "name": "PT Multi Medika Internasional Tbk",
-  "asOf": "2026-09-16T13:02:51.961784+00:00",
+  "asOf": "2026-09-16T13:21:27.847539+00:00",
   "price": 860.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 123.74360049203163,
+    "base": 144.82674092912814,
+    "bull": 177.45594782992436,
+    "dispersion": 0.10432854421338196,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.43524096385542166,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,24 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3659638554216868,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 114.19759425983048,
+      "base": 142.7469928247881,
+      "bull": 171.2963913897457,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.1987951807228916,
       "qcStatus": "VALID"
     }
   ],
@@ -82,16 +98,16 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 164.6900 per saham."
     ],
     "historyYears": 3.7782340862423,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 5.217181850871724,
+    "epsTTM": 164.69000181159004,
     "bvps": 5.499005872683725,
     "currentPE": 164.83995087430296,
     "currentPBV": 156.39190426619552,
@@ -106,12 +122,31 @@
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
-    "fxFactor": 1.0
+    "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 164.69
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 164.69000362318008
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 5.217181850871724
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 5.217181850871724
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check"
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.8-all-tickers-fx-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -120,18 +155,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 20.325504086490866,
-        "base": 25.40688010811358,
-        "bull": 30.488256129736293,
-        "price": 860.0
-      }
     },
     {
       "name": "Historical Dividend Yield",
