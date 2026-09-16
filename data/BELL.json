@@ -1,7 +1,7 @@
 {
   "ticker": "BELL.JK",
   "name": "PT Trisula Textile Industries Tbk",
-  "asOf": "2026-09-16T22:05:24.333002+00:00",
+  "asOf": "2026-09-16T23:40:16.116848+00:00",
   "price": 107.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 87.31789141551647,
-    "base": 113.67635365258815,
-    "bull": 147.08383119957836,
-    "dispersion": 0.02787394653378533,
-    "agreement": "HIGH",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -27,13 +27,13 @@
       "base": 111.12725608764688,
       "bull": 159.3589957007034,
       "confidence": 0.85,
-      "relevance": 0.85,
-      "rawWeight": 0.7224999999999999,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.6,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID"
     },
     {
@@ -50,26 +50,6 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.46x dari median metode."
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 108.1136866083263,
-      "base": 117.5,
-      "bull": 128.6710844478908,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.01174468085106383,
-        "sd": 0.0010196604945370907
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.40000000000000013,
       "qcStatus": "VALID"
     }
   ],
@@ -101,13 +81,14 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": null,
@@ -131,12 +112,14 @@
         "source": "Yahoo trailingEps",
         "value": 0.065
       }
-    ]
+    ],
+    "growthNormalizedLegacy": 0.06067325,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -159,6 +142,73 @@
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
       "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.25,
+      "justified_pbv": 0.55,
+      "graham": 0.2,
+      "ev": 0.9,
+      "dividend": 0.85,
+      "dcf": 1.0
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "AKPI.JK",
   "name": "PT Argha Karya Prima Industry Tbk",
-  "asOf": "2026-09-16T22:01:32.647468+00:00",
+  "asOf": "2026-09-16T23:37:20.842117+00:00",
   "price": 550.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,51 +12,35 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 202.98289617929012,
-    "base": 429.2907999568031,
-    "bull": 681.2266135759508,
-    "dispersion": 0.12659470374983894,
-    "agreement": "HIGH",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 72.87115328793271,
-      "base": 384.68466659467185,
-      "bull": 696.4981799014114,
-      "confidence": 0.82,
-      "relevance": 1,
-      "rawWeight": 0.82,
-      "bands": {
-        "mean": 14.547295029453243,
-        "sd": 1.8541918330371145
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 398.1505105163262,
-      "base": 496.2,
-      "bull": 658.3192640877596,
-      "confidence": 0.68,
+      "name": "Justified PBV / ROE",
+      "family": "book_profitability",
+      "bear": 1245.2771850520182,
+      "base": 1556.5964813150226,
+      "bull": 1867.9157775780272,
+      "confidence": 0.78,
       "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.016666666666666666,
-        "sd": 0.004104372881355932
-      },
+      "rawWeight": 0.507,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4,
-      "qcStatus": "VALID"
+      "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity; cocok sebagai anchor untuk bisnis yang nilai bukunya bermakna.",
+      "bands": {
+        "justifiedPBV": 0.53632,
+        "roe": 0.04704,
+        "growth": -0.02,
+        "costOfEquity": 0.105
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -79,12 +63,13 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 142.0100 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 142.0100 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -122,12 +107,14 @@
         "value": 20.682644941265632
       }
     ],
-    "epsSource": "Yahoo TTM cross-check"
+    "epsSource": "Yahoo TTM cross-check",
+    "growthNormalizedLegacy": -0.03,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -140,6 +127,13 @@
       }
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
       "status": "OUTLIER",
@@ -150,6 +144,73 @@
         "bull": 3654.3319222484924,
         "price": 550.0
       }
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.05,
+      "justified_pbv": 0.65,
+      "graham": 0.15,
+      "ev": 1.25,
+      "dividend": 0.55,
+      "dcf": 0.85
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

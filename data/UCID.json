@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-16T22:05:09.774917+00:00",
+  "asOf": "2026-09-16T23:40:04.707369+00:00",
   "price": 500.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,9 +12,9 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 728.8604496549888,
-    "base": 1114.8866603317128,
-    "bull": 1445.2611982111061,
+    "bear": 750.4870753634568,
+    "base": 1146.6524843087504,
+    "bull": 1500.770566656878,
     "dispersion": 0.2598815193383768,
     "agreement": "MEDIUM",
     "available": true
@@ -27,13 +27,13 @@
       "base": 1567.130441524621,
       "bull": 2168.6289615542887,
       "confidence": 0.85,
-      "relevance": 0.65,
-      "rawWeight": 0.5525,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.270061099796334,
+      "normalizedWeight": 0.33442622950819667,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.329938900203666,
+      "normalizedWeight": 0.26557377049180325,
       "qcStatus": "VALID"
     },
     {
@@ -74,28 +74,8 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4,
+      "normalizedWeight": 0.4000000000000001,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 269.61845834676404,
-      "base": 379.6492188547949,
-      "bull": 641.4055624990621,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.017573706644584963,
-        "sd": 0.007171794983568214
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.51x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -123,17 +103,16 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 328.3000 per saham."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 328.2999955384031,
+    "epsTTM": null,
     "bvps": 1112.2996705723126,
     "currentPE": null,
     "currentPBV": 0.44951914778751534,
@@ -149,17 +128,8 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 328.3
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 328.29999107680624
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check"
+    "growthNormalizedLegacy": 0.03833491016482819,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -168,25 +138,85 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -736105000000.0
-      }
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 2293.12425898862,
-        "base": 2866.405323735775,
-        "bull": 3439.6863884829295,
-        "price": 500.0
-      }
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.25,
+      "justified_pbv": 0.55,
+      "graham": 0.2,
+      "ev": 0.9,
+      "dividend": 0.85,
+      "dcf": 1.0
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "BOAT.JK",
   "name": "PT Newport Marine Services TBK",
-  "asOf": "2026-09-16T22:00:32.425051+00:00",
+  "asOf": "2026-09-16T23:36:34.908624+00:00",
   "price": 138.0,
   "companyProfile": {
     "sector": "Energi",
@@ -23,12 +23,12 @@
     {
       "name": "DCF",
       "family": "cashflow",
-      "bear": 43.35144898417543,
-      "base": 63.04732185112171,
-      "bull": 86.75235931534874,
+      "bear": 43.24862180524419,
+      "base": 62.89777717852064,
+      "bull": 86.54658763797568,
       "confidence": 0.85,
-      "relevance": 0.5525,
-      "rawWeight": 0.46962499999999996,
+      "relevance": 0.85,
+      "rawWeight": 0.7224999999999999,
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
@@ -39,9 +39,9 @@
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 34.63546806104498,
-      "base": 44.265707859569716,
-      "bull": 52.681949662317,
+      "bear": 34.55331469466085,
+      "base": 44.1607121104252,
+      "bull": 52.55699106482351,
       "confidence": 0.75,
       "relevance": 0.9900000000000001,
       "rawWeight": 0.7425,
@@ -56,7 +56,7 @@
   "dcfDiagnostics": {
     "terminalValueShare": 0.6359549203351684,
     "bearTerminalValueShare": 0.5593040583675777,
-    "bullTerminalValueShare": 0.6937891637522123,
+    "bullTerminalValueShare": 0.6937891637522124,
     "warning": false,
     "growth": 0.06804424805,
     "costOfEquity": 0.1388,
@@ -82,7 +82,6 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 1.842573579739904,
@@ -97,7 +96,7 @@
     "currentPE": null,
     "currentPBV": null,
     "roe": 0.086289994,
-    "fcf": 19405172128.0,
+    "fcf": 19359144160.0,
     "growthNormalized": 0.06804424805,
     "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
@@ -107,8 +106,9 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0,
-    "epsCandidates": []
+    "fxFactor": 17665.0,
+    "growthNormalizedLegacy": 0.06804424805,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -140,9 +140,69 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.05,
+      "justified_pbv": 0.65,
+      "graham": 0.15,
+      "ev": 1.25,
+      "dividend": 0.55,
+      "dcf": 0.85
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

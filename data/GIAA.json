@@ -1,7 +1,7 @@
 {
   "ticker": "GIAA.JK",
   "name": "PT. Garuda Indonesia (Persero) Tbk",
-  "asOf": "2026-09-16T22:10:10.299924+00:00",
+  "asOf": "2026-09-16T23:43:52.743802+00:00",
   "price": 62.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -53,11 +53,11 @@
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 0.35686578114461387,
+    "bvps": 0.35601931574629264,
     "currentPE": null,
-    "currentPBV": 173.73478566967322,
+    "currentPBV": 174.14785450624987,
     "roe": null,
-    "fcf": -271187999393.0,
+    "fcf": -270544756835.0,
     "growthNormalized": 0.17890039979489458,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
@@ -67,8 +67,10 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0,
-    "epsCandidates": []
+    "fxFactor": 17665.0,
+    "epsCandidates": [],
+    "growthNormalizedLegacy": 0.17890039979489458,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -89,26 +91,82 @@
       "status": "NEGATIVE",
       "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
-        "fcf": -271187999393.0
+        "fcf": -270544756835.0
       }
     },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "Hasil nol/negatif/tidak lengkap; tidak masuk Composite FV.",
-      "inputs": {
-        "bear": -86.87038283305479,
-        "base": -42.14520697132159,
-        "bull": 2.579968890411602
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.05,
+      "justified_pbv": 0.7,
+      "graham": 0.2,
+      "ev": 1.0,
+      "dividend": 0.65,
+      "dcf": 1.0
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

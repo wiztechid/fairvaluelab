@@ -1,7 +1,7 @@
 {
   "ticker": "HAJJ.JK",
   "name": "PT Arsy Buana Travelindo Tbk",
-  "asOf": "2026-09-16T22:05:55.182521+00:00",
+  "asOf": "2026-09-16T23:40:39.306350+00:00",
   "price": 111.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -23,12 +23,12 @@
     {
       "name": "DCF",
       "family": "cashflow",
-      "bear": 114.6307481302734,
-      "base": 181.635520777583,
-      "bull": 251.30080573462627,
+      "bear": 114.62928485737129,
+      "base": 181.6332021820931,
+      "bull": 251.29759785484427,
       "confidence": 0.85,
-      "relevance": 0.65,
-      "rawWeight": 0.5525,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
@@ -39,9 +39,9 @@
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 74.25637970260468,
-      "base": 123.21297682505727,
-      "bull": 148.51275940520935,
+      "bear": 74.25543181253153,
+      "base": 123.21140399915215,
+      "bull": 148.51086362506305,
       "confidence": 0.75,
       "relevance": 0.9,
       "rawWeight": 0.675,
@@ -55,7 +55,7 @@
   ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.7241482323322467,
-    "bearTerminalValueShare": 0.6381784627037188,
+    "bearTerminalValueShare": 0.6381784627037189,
     "bullTerminalValueShare": 0.7713526377329039,
     "warning": true,
     "growth": 0.0428665,
@@ -100,14 +100,16 @@
     "growthNormalized": 0.0428665,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 274003066880.0,
-    "shares": 2468496061.0,
+    "marketCap": 274006573056.0,
+    "shares": 2468527572.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": []
+    "epsCandidates": [],
+    "growthNormalizedLegacy": 0.0428665,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -139,9 +141,69 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.25,
+      "justified_pbv": 0.55,
+      "graham": 0.2,
+      "ev": 0.9,
+      "dividend": 0.85,
+      "dcf": 1.0
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

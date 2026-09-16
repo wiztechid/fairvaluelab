@@ -1,7 +1,7 @@
 {
   "ticker": "ATIC.JK",
   "name": "PT Anabatic Technologies Tbk",
-  "asOf": "2026-09-16T22:08:44.052702+00:00",
+  "asOf": "2026-09-16T23:42:48.369863+00:00",
   "price": 462.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 294.01178525669394,
-    "base": 406.87200289581995,
-    "bull": 519.7322205349459,
-    "dispersion": 0.18581296853876828,
+    "bear": 336.37752492023924,
+    "base": 400.4526264923273,
+    "bull": 464.5277280644153,
+    "dispersion": 0.18152229788937063,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.04530744336569579,
+      "normalizedWeight": 0.045528455284552835,
       "qcStatus": "VALID"
     },
     {
@@ -66,7 +66,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.29126213592233013,
+      "normalizedWeight": 0.2926829268292683,
       "qcStatus": "VALID"
     },
     {
@@ -90,26 +90,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.29126213592233013,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 187.19099306222284,
-      "base": 402.72416187124276,
-      "bull": 618.2573306802626,
-      "confidence": 0.82,
-      "relevance": 1,
-      "rawWeight": 0.82,
-      "bands": {
-        "mean": 3.101855153119505,
-        "sd": 1.0389418724749124
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.26537216828478966,
+      "normalizedWeight": 0.2926829268292683,
       "qcStatus": "VALID"
     },
     {
@@ -119,14 +100,59 @@
       "base": 532.2627211741338,
       "bull": 638.7152654089606,
       "confidence": 0.6,
-      "relevance": 0.55,
-      "rawWeight": 0.33,
+      "relevance": 0.1,
+      "rawWeight": 0.06,
       "bands": null,
-      "warning": null,
+      "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.10679611650485438,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.019512195121951216,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 366.8184509499416,
+      "base": 416.8391488067518,
+      "bull": 466.859846663562,
+      "confidence": 0.86,
+      "relevance": 1.25,
+      "rawWeight": 1.075,
+      "warning": null,
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 70.90715901466676,
+        "growthUsed": 0.11699999999999999,
+        "historicalPE": 5.878660978654227
+      },
+      "included": true,
+      "normalizedWeight": 0.3495934959349593,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Justified PBV / ROE",
+      "family": "book_profitability",
+      "bear": 1363.8787286613647,
+      "base": 1704.848410826706,
+      "bull": 2045.818092992047,
+      "confidence": 0.78,
+      "relevance": 0.25,
+      "rawWeight": 0.195,
+      "warning": null,
+      "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity; cocok sebagai anchor untuk bisnis yang nilai bukunya bermakna.",
+      "bands": {
+        "justifiedPBV": 8.595142857142855,
+        "roe": 0.37083,
+        "growth": 0.06999999999999999,
+        "costOfEquity": 0.105
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.62x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -148,9 +174,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 63.47999911787535,
@@ -187,7 +213,9 @@
         "value": 71.94904802441494
       }
     ],
-    "epsSource": "Yahoo TTM cross-check"
+    "epsSource": "Yahoo TTM cross-check",
+    "growthNormalizedLegacy": 0.18,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -205,11 +233,78 @@
       }
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.25,
+      "justified_pbv": 0.25,
+      "graham": 0.1,
+      "ev": 0.85,
+      "dividend": 0.25,
+      "dcf": 1.15
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

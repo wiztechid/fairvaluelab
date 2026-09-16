@@ -1,7 +1,7 @@
 {
   "ticker": "CSRA.JK",
   "name": "PT Cisadane Sawit Raya Tbk",
-  "asOf": "2026-09-16T22:04:03.092022+00:00",
+  "asOf": "2026-09-16T23:39:16.294632+00:00",
   "price": 755.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 610.5528254244773,
-    "base": 767.4878378337621,
-    "bull": 924.422850243047,
-    "dispersion": 0.040928932205424304,
+    "bear": 637.3092432232397,
+    "base": 762.7940956026443,
+    "bull": 888.2789479820489,
+    "dispersion": 0.028809070517712237,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.10181818181818182,
+      "normalizedWeight": 0.08874801901743265,
       "qcStatus": "VALID"
     },
     {
@@ -66,7 +66,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.3,
+      "normalizedWeight": 0.2852614896988907,
       "qcStatus": "VALID"
     },
     {
@@ -90,26 +90,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.3,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 620.6830611766719,
-      "base": 814.7679825407522,
-      "bull": 1008.8529039048324,
-      "confidence": 0.82,
-      "relevance": 1,
-      "rawWeight": 0.82,
-      "bands": {
-        "mean": 5.390717597188291,
-        "sd": 0.9421118759743222
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.2981818181818182,
+      "normalizedWeight": 0.2852614896988907,
       "qcStatus": "VALID"
     },
     {
@@ -119,35 +100,60 @@
       "base": 1435.3434084600042,
       "bull": 1722.412090152005,
       "confidence": 0.6,
-      "relevance": 0.55,
-      "rawWeight": 0.33,
+      "relevance": 0.2,
+      "rawWeight": 0.12,
       "bands": null,
-      "warning": null,
+      "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.91x dari median metode."
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.86x dari median metode."
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 192.46478753544542,
-      "base": 314.36439389875363,
-      "bull": 857.4211144280716,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.03880846634281749,
-        "sd": 0.024579752126772315
-      },
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 697.196179911314,
+      "base": 792.2683862628568,
+      "bull": 887.3405926143995,
+      "confidence": 0.86,
+      "relevance": 1.25,
+      "rawWeight": 1.075,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 135.248177097873,
+        "growthUsed": 0.05687409109499522,
+        "historicalPE": 5.857885875160653
+      },
+      "included": true,
+      "normalizedWeight": 0.3407290015847861,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Justified PBV / ROE",
+      "family": "book_profitability",
+      "bear": 1635.9618163233622,
+      "base": 2044.9522704042026,
+      "bull": 2453.942724485043,
+      "confidence": 0.78,
+      "relevance": 0.55,
+      "rawWeight": 0.42900000000000005,
+      "warning": null,
+      "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity; cocok sebagai anchor untuk bisnis yang nilai bukunya bermakna.",
+      "bands": {
+        "justifiedPBV": 2.8579999999999997,
+        "roe": 0.17003,
+        "growth": 0.06999999999999999,
+        "costOfEquity": 0.105
+      },
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.38x dari median metode."
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.65x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -170,7 +176,7 @@
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
     "independentFamilies": 3,
-    "diagnosticCount": 1,
+    "diagnosticCount": 3,
     "outlierMethodCount": 2
   },
   "raw": {
@@ -208,7 +214,9 @@
         "value": 131.11200602731708
       }
     ],
-    "epsSource": "Yahoo TTM cross-check"
+    "epsSource": "Yahoo TTM cross-check",
+    "growthNormalizedLegacy": 0.08749860168460803,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -224,6 +232,80 @@
       "inputs": {
         "fcf": -125600653312.0
       }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.25,
+      "justified_pbv": 0.55,
+      "graham": 0.2,
+      "ev": 0.9,
+      "dividend": 0.85,
+      "dcf": 1.0
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }

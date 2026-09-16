@@ -1,7 +1,7 @@
 {
   "ticker": "GDYR.JK",
   "name": "PT Goodyear Indonesia Tbk",
-  "asOf": "2026-09-16T22:05:49.409776+00:00",
+  "asOf": "2026-09-16T23:40:34.630340+00:00",
   "price": 1125.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -23,12 +23,12 @@
     {
       "name": "DCF",
       "family": "cashflow",
-      "bear": 2374.295291700376,
-      "base": 3762.6122112375115,
-      "bull": 5203.97287175957,
+      "bear": 2368.6635978927625,
+      "base": 3753.6875084153526,
+      "bull": 5191.629343176868,
       "confidence": 0.85,
-      "relevance": 0.65,
-      "rawWeight": 0.5525,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
@@ -39,9 +39,9 @@
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 1489.9471473628048,
-      "base": 2511.5856113704776,
-      "bull": 2979.8942947256096,
+      "bear": 1486.4130772103658,
+      "base": 2505.6282727090693,
+      "bull": 2972.8261544207317,
       "confidence": 0.75,
       "relevance": 0.9,
       "rawWeight": 0.675,
@@ -55,7 +55,7 @@
   ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.7271758767296906,
-    "bearTerminalValueShare": 0.6420887043198795,
+    "bearTerminalValueShare": 0.6420887043198794,
     "bullTerminalValueShare": 0.7738127837229154,
     "warning": true,
     "growth": 0.05041625,
@@ -82,7 +82,6 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
@@ -97,7 +96,7 @@
     "currentPE": null,
     "currentPBV": null,
     "roe": 0.03205,
-    "fcf": 97740532867.0,
+    "fcf": 97508697865.0,
     "growthNormalized": 0.05041625,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
@@ -107,13 +106,9 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17707.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 0.006
-      }
-    ]
+    "fxFactor": 17665.0,
+    "growthNormalizedLegacy": 0.05041625,
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -145,9 +140,69 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
-  ]
+  ],
+  "quarterlyNormalization": {
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
+    "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
+    "metrics": {
+      "revenue": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebitda": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "ebit": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "netIncome": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "operatingCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      },
+      "freeCashFlow": {
+        "observations": [],
+        "normalGrowth": null,
+        "outliersRemoved": [],
+        "validGrowthCount": 0
+      }
+    },
+    "notes": [
+      "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
+      "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
+    ]
+  },
+  "valuationPolicy": {
+    "growthSource": "Robust quarterly sustainable growth when available; legacy normalized growth otherwise.",
+    "sectorWeights": {
+      "forward_pe": 1.25,
+      "justified_pbv": 0.55,
+      "graham": 0.2,
+      "ev": 0.9,
+      "dividend": 0.85,
+      "dcf": 1.0
+    },
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+  }
 }
