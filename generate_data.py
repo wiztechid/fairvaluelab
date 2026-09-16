@@ -33,7 +33,7 @@ def hist_mult(h,annual,shares,current_ps,years):
   px=hh[hh.index.year==d.year].Close
   if len(px):vals+=list((px/ps).replace([np.inf,-np.inf],np.nan).dropna())
  if len(vals)<30:return None
- a=np.array(vals,float);a=a[(a>0)&(a<np.nanpercentile(a,99))];mean=float(np.mean(a));sd=float(np.std(a));current=h.Close.iloc[-1]/current_ps
+ a=np.array(vals,float);a=a[(a>0)&(a<np.nanpercentile(a,99))];mean=float(np.mean(a));sd=float(np.std(a));current=float(h.Close.iloc[-1])/current_ps
  return {'mean':mean,'sd':sd,'current':current,'z':(current-mean)/sd if sd else 0,'minus2':max(0,mean-2*sd)*current_ps,'minus1':max(0,mean-sd)*current_ps,'base':mean*current_ps,'plus1':(mean+sd)*current_ps,'plus2':(mean+2*sd)*current_ps}
 def analyze(sym):
  tk=sym if '.' in sym else sym+'.JK';t=yf.Ticker(tk);info=t.info or {};h=t.history(period='5y',auto_adjust=False)
@@ -42,26 +42,25 @@ def analyze(sym):
  if not shares and mcap and price:shares=mcap/price
  ni=stmt(inc,['Net Income','Net Income Common Stockholders']);eq=stmt(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity']);eps=n(info.get('trailingEps')) or (ni/shares if ni and shares else None);bvps=eq/shares if eq and shares else n(info.get('bookValue'));roe=n(info.get('returnOnEquity'));beta=n(info.get('beta')) or 1.;ocf=stmt(cf,['Operating Cash Flow','Total Cash From Operating Activities']);capex=stmt(cf,['Capital Expenditure','Capital Expenditures']);fcf=n(info.get('freeCashflow'))
  if not fcf and ocf is not None and capex is not None:fcf=ocf+capex if capex<0 else ocf-capex
- fcfps=fcf/shares if fcf and shares else None;ni_s=series(inc,['Net Income','Net Income Common Stockholders']);rev_s=series(inc,['Total Revenue']);fcf_s=series(cf,['Free Cash Flow']);eq_s=series(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity']);gs=[g for g in [cagr(ni_s),cagr(rev_s),cagr(fcf_s)] if g is not None];hg=float(np.median(gs)) if gs else .08;payout=n(info.get('payoutRatio'));sust=roe*(1-min(max(payout if payout is not None else .35,0),.9)) if roe is not None else None;growth=min(.18,max(-.03,float(np.median([hg,sust])) if sust is not None else hg));rf=.065;erp=.0738;ke=min(.22,max(.105,rf+beta*erp));terminal=.035;methods=[]
- def add(name,bear,base,bull,conf,rel,bands=None,warning=None):methods.append({'name':name,'bear':bear,'base':base,'bull':bull,'confidence':conf,'relevance':rel,'weight':conf*rel,'bands':bands,'warning':warning})
+ fcfps=fcf/shares if fcf and shares else None;ni_s=series(inc,['Net Income','Net Income Common Stockholders']);rev_s=series(inc,['Total Revenue']);fcf_s=series(cf,['Free Cash Flow']);eq_s=series(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity']);gs=[g for g in [cagr(ni_s),cagr(rev_s),cagr(fcf_s)] if g is not None];hg=float(np.median(gs)) if gs else .08;payout=n(info.get('payoutRatio'));sust=roe*(1-min(max(payout if payout is not None else .35,0),.9)) if roe is not None else None;growth=min(.18,max(-.03,float(np.median([hg,sust])) if sust is not None else hg));rf=.065;erp=.0738;ke=min(.22,max(.105,rf+beta*erp));terminal=.035;methods=[];dcfdiag=None
+ def add(name,bear,base,bull,conf,rel,bands=None,warning=None):methods.append({'name':name,'bear':bear,'base':base,'bull':bull,'confidence':conf,'relevance':rel,'rawWeight':conf*rel,'bands':bands,'warning':warning})
  if fcfps and fcfps>0 and ke>terminal:
   def dcf(g,k):
    f=fcfps;s=0
    for yr in range(1,6):f*=1+g;s+=f/(1+k)**yr
    tv=f*(1+terminal)/(k-terminal)/(1+k)**5;return s+tv,tv/(s+tv)
-  b,tvb=dcf(max(-.02,growth-.05),min(.24,ke+.02));base,tv=dcf(growth,ke);bu,tvu=dcf(min(.22,growth+.04),max(.095,ke-.015));rel=.65 if tv>.70 else .85;add('DCF',b,base,bu,.85,rel,warning='Terminal value high' if tv>.70 else None)
+  b,tvb=dcf(max(-.02,growth-.05),min(.24,ke+.02));base,tv=dcf(growth,ke);bu,tvu=dcf(min(.22,growth+.04),max(.095,ke-.015));rel=.65 if tv>.70 else .85;dcfdiag={'terminalValueShare':tv,'bearTerminalValueShare':tvb,'bullTerminalValueShare':tvu,'warning':tv>.70};add('DCF',b,base,bu,.85,rel,warning='Terminal value high' if tv>.70 else None)
   req=min(.18,max(.09,ke-growth*.20));add('FCF Yield',fcfps/.16,fcfps/req,fcfps/max(.08,req-.02),.75,.90)
  for yrs in [3,5]:
   pe=hist_mult(h,ni_s,shares,eps,yrs)
   if pe:add(f'Historical P/E {yrs}Y',pe['minus1'],pe['base'],pe['plus1'],.9,1.,pe)
  pbv=hist_mult(h,eq_s,shares,bvps,5)
  if pbv:add('Historical PBV 5Y',pbv['minus1'],pbv['base'],pbv['plus1'],.8,.45 if roe and roe>.25 else .7,pbv,'Low relevance for high-ROE business' if roe and roe>.25 else None)
- cashconv=fcf/ni if fcf and ni and ni>0 else None
- bases=[m['base'] for m in methods if m.get('base') and m['base']>0];med=float(np.median(bases));use=[m for m in methods if .30*med<=m['base']<=3*med]
- for m in methods:m['included']=m in use;m['upside']=m['base']/price-1
- def comp(k):return sum(m[k]*m['weight'] for m in use)/sum(m['weight'] for m in use)
- bear,base,bull=comp('bear'),comp('base'),comp('bull');disp=float(np.std([m['base'] for m in use])/np.mean([m['base'] for m in use])) if len(use)>1 else .5;agreement='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW';conf=round(100*max(0,min(1,.55*min(1,len(use)/5)+.45*(1-min(disp,1)))));up=base/price-1;label=f"Below Fair Value {abs(up)*100:.1f}%" if up>=0 else f"Above Fair Value {abs(up)*100:.1f}%"
- return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'fairValue':{'bear':bear,'base':base,'bull':bull,'upside':up,'label':label,'confidence':conf,'dispersion':disp,'agreement':agreement},'methods':methods,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe},'raw':{'epsTTM':eps,'bvps':bvps,'roe':roe,'fcf':fcf,'fcfPerShare':fcfps,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares},'source':'Yahoo Finance via yfinance'}
+ cashconv=fcf/ni if fcf and ni and ni>0 else None;bases=[m['base'] for m in methods if m.get('base') and m['base']>0];med=float(np.median(bases));use=[m for m in methods if .30*med<=m['base']<=3*med];totalw=sum(m['rawWeight'] for m in use)
+ for m in methods:m['included']=m in use;m['upside']=m['base']/price-1;m['normalizedWeight']=m['rawWeight']/totalw if m in use and totalw else 0
+ def comp(k):return sum(m[k]*m['normalizedWeight'] for m in use)
+ bear,base,bull=comp('bear'),comp('base'),comp('bull');disp=float(np.std([m['base'] for m in use])/np.mean([m['base'] for m in use])) if len(use)>1 else .5;agreement='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW';conf=round(100*max(0,min(1,.55*min(1,len(use)/5)+.45*(1-min(disp,1)))));potential=base/price-1;premium=price/base-1;label=f"Below Fair Value {abs(premium)*100:.1f}%" if premium<0 else f"Above Fair Value {premium*100:.1f}%";currentPE=price/eps if eps and eps>0 else None;currentPBV=price/bvps if bvps and bvps>0 else None
+ return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'fairValue':{'bear':bear,'base':base,'bull':bull,'potential':potential,'upside':potential,'pricePremium':premium,'label':label,'confidence':conf,'dispersion':disp,'agreement':agreement},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':currentPE,'currentPBV':currentPBV,'roe':roe,'fcf':fcf,'fcfPerShare':fcfps,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares},'source':'Yahoo Finance via yfinance'}
 summary=[]
 for s in TICKERS:
  try:d=analyze(s);json.dump(d,open(f'{OUT}/{s}.json','w'),ensure_ascii=False,indent=2);summary.append({'ticker':s,'price':d['price'],**d['fairValue']});print('OK',s)
