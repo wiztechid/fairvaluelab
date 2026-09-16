@@ -1,14 +1,14 @@
 {
   "ticker": "PGUN.JK",
   "name": "PT Pradiksi Gunatama Tbk",
-  "asOf": "2026-09-16T08:32:27.017686+00:00",
+  "asOf": "2026-09-16T11:55:41.087408+00:00",
   "price": 9400.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
     "sourceSector": "Consumer Defensive",
     "industry": "Farm Products",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -20,38 +20,6 @@
     "available": false
   },
   "methods": [
-    {
-      "name": "DCF",
-      "bear": 117.8532955636167,
-      "base": 143.96450176424432,
-      "bull": 180.96375204129293,
-      "confidence": 0.85,
-      "relevance": 0.85,
-      "rawWeight": 0.7224999999999999,
-      "bands": null,
-      "warning": null,
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 176.90335372621269,
-      "base": 157.2474255344113,
-      "bull": 176.90335372621269,
-      "confidence": 0.75,
-      "relevance": 0.9,
-      "rawWeight": 0.675,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -95,22 +63,24 @@
   "quality": {
     "cashConversion": 1.019453260150713,
     "roe": 0.06353,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
-      "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 20.74,
@@ -123,10 +93,18 @@
     "costOfEquity": 0.22,
     "terminalGrowth": 0.035,
     "marketCap": 53935779872768.0,
-    "shares": 5737848882.0
+    "shares": 5737848882.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Graham Number",
@@ -148,30 +126,6 @@
       "inputs": {}
     },
     {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 117.8532955636167,
-        "base": 143.96450176424432,
-        "bull": 180.96375204129293,
-        "price": 9400.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 176.90335372621269,
-        "base": 157.2474255344113,
-        "bull": 176.90335372621269,
-        "price": 9400.0
-      }
-    },
-    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "OUTLIER",
@@ -181,7 +135,5 @@
         "price": 9400.0
       }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

@@ -1,14 +1,14 @@
 {
   "ticker": "VISI.JK",
   "name": "PT Satu Visi Putra Tbk",
-  "asOf": "2026-09-16T08:31:19.953940+00:00",
+  "asOf": "2026-09-16T11:54:40.536689+00:00",
   "price": 1280.0,
   "companyProfile": {
     "sector": "Perindustrian",
     "valuationProfile": "Perindustrian",
     "sourceSector": "Industrials",
     "industry": "Industrial Distribution",
-    "sectorNote": "DCF, FCF dan P/E digunakan seimbang.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -20,38 +20,6 @@
     "available": false
   },
   "methods": [
-    {
-      "name": "DCF",
-      "bear": 25.37178496470048,
-      "base": 33.593169601429295,
-      "bull": 42.29870452025479,
-      "confidence": 0.85,
-      "relevance": 0.85,
-      "rawWeight": 0.7224999999999999,
-      "bands": null,
-      "warning": null,
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 27.892188617886177,
-      "base": 24.79305654923216,
-      "bull": 27.892188617886177,
-      "confidence": 0.75,
-      "relevance": 0.9,
-      "rawWeight": 0.675,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -95,25 +63,27 @@
   "quality": {
     "cashConversion": null,
     "roe": -0.030550001,
-    "dataScore": 80,
+    "dataScore": 86,
     "dataLabel": "CUKUP",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "availableInputs": 6,
+    "totalInputs": 7,
     "guards": [
-      "Riwayat harga 2.6 tahun; Historical 5Y dinonaktifkan.",
-      "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 2.5516769336071183,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -0.34743906536585367,
+    "epsTTM": null,
     "bvps": 59.341577702113824,
     "currentPE": null,
     "currentPBV": 21.570036550518015,
@@ -123,19 +93,25 @@
     "costOfEquity": 0.22,
     "terminalGrowth": 0.035,
     "marketCap": 3936000147456.0,
-    "shares": 3075000000.0
+    "shares": 3075000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -0.34743906536585367
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
@@ -143,30 +119,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 25.37178496470048,
-        "base": 33.593169601429295,
-        "bull": 42.29870452025479,
-        "price": 1280.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 27.892188617886177,
-        "base": 24.79305654923216,
-        "bull": 27.892188617886177,
-        "price": 1280.0
-      }
     },
     {
       "name": "Historical EV/EBITDA",
@@ -178,7 +130,5 @@
         "price": 1280.0
       }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

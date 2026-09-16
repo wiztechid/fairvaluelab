@@ -1,14 +1,14 @@
 {
   "ticker": "MBMA.JK",
   "name": "PT Merdeka Battery Materials Tbk.",
-  "asOf": "2026-09-16T08:00:38.247223+00:00",
-  "price": 510.0,
+  "asOf": "2026-09-16T11:53:22.323979+00:00",
+  "price": 500.0,
   "companyProfile": {
     "sector": "Barang Baku",
     "valuationProfile": "Barang Baku",
     "sourceSector": "Basic Materials",
     "industry": "Other Industrial Metals & Mining",
-    "sectorNote": "Arus kas dan laba ternormalisasi lebih penting pada bisnis bahan baku yang sensitif terhadap siklus harga.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -21,72 +21,17 @@
   },
   "methods": [
     {
-      "name": "Historical P/E 3Y",
-      "bear": 4531361.6396044735,
-      "base": 32161114.145597335,
-      "bull": 59790866.6515902,
-      "confidence": 0.9,
-      "relevance": 0.85,
-      "rawWeight": 0.765,
-      "bands": {
-        "mean": 3146880.0533852577,
-        "sd": 2703498.2882576184,
-        "current": 49.902152641878665,
-        "z": -1.1639845177267418,
-        "minus1": 4531361.6396044735,
-        "base": 32161114.145597335,
-        "plus1": 59790866.6515902
-      },
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 134.49731994999897,
+      "base": 168.1216499374987,
+      "bull": 201.7459799249984,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
       "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 3 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 4254649.387659004,
-      "base": 45851048.88757371,
-      "bull": 87447448.38748842,
-      "confidence": 0.9,
-      "relevance": 0.85,
-      "rawWeight": 0.765,
-      "bands": {
-        "mean": 4486404.000741067,
-        "sd": 4070097.7984260963,
-        "current": 49.902152641878665,
-        "z": -1.1022718177246982,
-        "minus1": 4254649.387659004,
-        "base": 45851048.88757371,
-        "plus1": 87447448.38748842
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 5 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 430.23078189103296,
-      "base": 575.5270233125163,
-      "bull": 720.8232647339998,
-      "confidence": 0.8,
-      "relevance": 0.45499999999999996,
-      "rawWeight": 0.364,
-      "bands": {
-        "mean": 39248.06620684874,
-        "sd": 9908.47739884509,
-        "current": 34779.45075504076,
-        "z": -0.4509891148693378,
-        "minus1": 430.23078189103296,
-        "base": 575.5270233125163,
-        "plus1": 720.8232647339998
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "CANDIDATE"
@@ -94,45 +39,57 @@
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 535.8,
-    "ma50": 524.9,
-    "ma200": 604.025,
-    "rsi14": 34.848484848484844,
-    "return1m": -0.02857142857142858,
-    "return3m": 0.05809128630705396
+    "ma20": 535.3,
+    "ma50": 524.7,
+    "ma200": 603.975,
+    "rsi14": 31.38297872340425,
+    "return1m": -0.04761904761904767,
+    "return3m": 0.03734439834024905
   },
   "quality": {
     "cashConversion": -0.61136078571632,
     "roe": 0.07353,
-    "dataScore": 90,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
-    "availableInputs": 9,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
+    "guards": [
+      "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "historyYears": 3.4140999315537304,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 6,
-    "guards": [
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
-    ],
-    "outlierMethodCount": 2
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 10.22,
-    "bvps": 0.01466383134086967,
-    "currentPE": 49.902152641878665,
-    "currentPBV": 34779.45075504076,
+    "epsTTM": 4.8427213348887586,
+    "bvps": 259.40317641998445,
+    "currentPE": 103.24773312844057,
+    "currentPBV": 1.9275014550726988,
     "roe": 0.07353,
-    "fcf": -18074428.0,
+    "fcf": -319736631320.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.1064756,
     "terminalGrowth": 0.035,
-    "marketCap": 55077666553856.0,
-    "shares": 107995419900.0
+    "marketCap": 53997712965632.0,
+    "shares": 107995419900.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "USD",
+    "fxApplied": true,
+    "fxPair": "USDIDR=X",
+    "fxFactor": 17690.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -140,7 +97,7 @@
       "status": "NEGATIVE",
       "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
       "inputs": {
-        "fcf": -18074428.0
+        "fcf": -319736631320.0
       }
     },
     {
@@ -151,49 +108,11 @@
       "inputs": {}
     },
     {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
-      "inputs": {
-        "bear": 1.4690291796874249,
-        "base": 1.8362864746092808,
-        "bull": 2.203543769531137,
-        "price": 510.0
-      }
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 4531361.6396044735,
-        "base": 32161114.145597335,
-        "bull": 59790866.6515902,
-        "price": 510.0
-      }
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 4254649.387659004,
-        "base": 45851048.88757371,
-        "bull": 87447448.38748842,
-        "price": 510.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

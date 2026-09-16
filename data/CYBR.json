@@ -1,14 +1,14 @@
 {
   "ticker": "CYBR.JK",
   "name": "PT ITSEC Asia Tbk",
-  "asOf": "2026-09-16T08:05:25.037736+00:00",
+  "asOf": "2026-09-16T11:59:25.367070+00:00",
   "price": 520.0,
   "companyProfile": {
     "sector": "Teknologi",
     "valuationProfile": "Teknologi",
     "sourceSector": "Technology",
     "industry": "Software - Infrastructure",
-    "sectorNote": "Pertumbuhan dan arus kas lebih penting pada teknologi; PBV diberi bobot rendah.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -20,78 +20,6 @@
     "available": false
   },
   "methods": [
-    {
-      "name": "Historical P/E 3Y",
-      "bear": 168.3300940418058,
-      "base": 6298.822830914418,
-      "bull": 12429.31556778703,
-      "confidence": 0.9,
-      "relevance": 1.0,
-      "rawWeight": 0.9,
-      "bands": {
-        "mean": 1393.5448740961103,
-        "sd": 1356.3037028479232,
-        "current": 115.04424778761063,
-        "z": -0.9426359477040024,
-        "minus1": 168.3300940418058,
-        "base": 6298.822830914418,
-        "plus1": 12429.31556778703
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 3 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 168.3300940418058,
-      "base": 6298.822830914418,
-      "bull": 12429.31556778703,
-      "confidence": 0.9,
-      "relevance": 1.0,
-      "rawWeight": 0.9,
-      "bands": {
-        "mean": 1393.5448740961103,
-        "sd": 1356.3037028479232,
-        "current": 115.04424778761063,
-        "z": -0.9426359477040024,
-        "minus1": 168.3300940418058,
-        "base": 6298.822830914418,
-        "plus1": 12429.31556778703
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 5 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 280.49755591845644,
-      "base": 410.40834265721116,
-      "bull": 540.3191293959658,
-      "confidence": 0.8,
-      "relevance": 0.175,
-      "rawWeight": 0.13999999999999999,
-      "bands": {
-        "mean": 21.707724503272573,
-        "sd": 6.871369987923739,
-        "current": 27.504354976355643,
-        "z": 0.8435916685130481,
-        "minus1": 280.49755591845644,
-        "base": 410.40834265721116,
-        "plus1": 540.3191293959658
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.06x dari median metode."
-    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -106,8 +34,7 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.06x dari median metode."
+      "qcStatus": "CANDIDATE"
     }
   ],
   "dcfDiagnostics": null,
@@ -122,19 +49,22 @@
   "quality": {
     "cashConversion": -1.3865517235994542,
     "roe": 0.24112,
-    "dataScore": 90,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
-    "availableInputs": 9,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
+    "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "historyYears": 3.1074606433949348,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 6,
-    "guards": [
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
-    ],
-    "outlierMethodCount": 4
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 4.52,
@@ -147,10 +77,18 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 7012230365184.0,
-    "shares": 13485057905.0
+    "shares": 13485057905.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -176,30 +114,6 @@
       "inputs": {}
     },
     {
-      "name": "Historical P/E 3Y",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 168.3300940418058,
-        "base": 6298.822830914418,
-        "bull": 12429.31556778703,
-        "price": 520.0
-      }
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 168.3300940418058,
-        "base": 6298.822830914418,
-        "bull": 12429.31556778703,
-        "price": 520.0
-      }
-    },
-    {
       "name": "Graham Number",
       "family": "fundamental",
       "status": "OUTLIER",
@@ -209,7 +123,5 @@
         "price": 520.0
       }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

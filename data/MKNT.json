@@ -1,14 +1,14 @@
 {
   "ticker": "MKNT.JK",
   "name": "PT Mitra Komunikasi Nusantara Tbk",
-  "asOf": "2026-09-16T08:03:38.587359+00:00",
+  "asOf": "2026-09-16T11:57:10.944758+00:00",
   "price": 1.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
     "valuationProfile": "Barang Konsumen Non-Primer",
     "sourceSector": "Technology",
     "industry": "Communication Equipment",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi; PBV diberi bobot lebih kecil.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,40 +19,7 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "DCF",
-      "bear": 354.4009058350291,
-      "base": 432.3648326733592,
-      "bull": 599.8881681828072,
-      "confidence": 0.85,
-      "relevance": 0.85,
-      "rawWeight": 0.7224999999999999,
-      "bands": null,
-      "warning": null,
-      "explanation": "Mengestimasi nilai saham dari arus kas masa depan yang didiskontokan ke nilai hari ini. Cocok saat arus kas cukup dapat diproyeksikan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 242.42280261818183,
-      "base": 349.43827404422603,
-      "bull": 426.2378947132867,
-      "confidence": 0.75,
-      "relevance": 0.9,
-      "rawWeight": 0.675,
-      "bands": null,
-      "warning": null,
-      "explanation": "Membandingkan free cash flow per saham dengan tingkat imbal hasil kas yang dianggap wajar. Semakin kuat FCF, semakin tinggi nilai wajarnya.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": {
     "terminalValueShare": 0.6914052596292686,
     "bearTerminalValueShare": 0.631341348752999,
@@ -73,23 +40,28 @@
   "quality": {
     "cashConversion": null,
     "roe": null,
-    "dataScore": 70,
-    "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "dataScore": 57,
+    "dataLabel": "TERBATAS",
+    "availableInputs": 4,
+    "totalInputs": 7,
+    "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "historyYears": 4.996577686516085,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 6,
-    "guards": [
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
-    ],
-    "outlierMethodCount": 2
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -3.84,
-    "bvps": -1.331949768909091,
+    "epsTTM": null,
+    "bvps": null,
     "currentPE": null,
     "currentPBV": null,
     "roe": null,
@@ -98,28 +70,32 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 5500000256.0,
-    "shares": 5500000000.0
+    "shares": 5500000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -3.84
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "PBV & Graham",
       "family": "book",
-      "status": "NEGATIVE",
-      "reason": "Ekuitas/BVPS negatif; metode berbasis book value tidak digunakan.",
-      "inputs": {
-        "bvps": -1.331949768909091
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "BVPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "Historical EV/EBITDA",
@@ -136,32 +112,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 354.4009058350291,
-        "base": 432.3648326733592,
-        "bull": 599.8881681828072,
-        "price": 1.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 242.42280261818183,
-        "base": 349.43827404422603,
-        "bull": 426.2378947132867,
-        "price": 1.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

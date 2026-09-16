@@ -1,14 +1,14 @@
 {
   "ticker": "CMPP.JK",
   "name": "PT AirAsia Indonesia Tbk",
-  "asOf": "2026-09-16T08:37:46.186725+00:00",
+  "asOf": "2026-09-16T12:00:36.632290+00:00",
   "price": 69.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
     "valuationProfile": "Transportasi & Logistik",
     "sourceSector": "Industrials",
     "industry": "Airlines",
-    "sectorNote": "DCF dan FCF diperkuat karena kebutuhan aset dan arus kas operasional.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,24 +19,7 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "FCF Yield",
-      "bear": 1809.9815782950318,
-      "base": 3217.7450280800567,
-      "bull": 3619.9631565900636,
-      "confidence": 0.75,
-      "relevance": 0.9450000000000001,
-      "rawWeight": 0.70875,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": {
     "terminalValueShare": 0.7705206396749862,
     "bearTerminalValueShare": 0.6988354790069763,
@@ -57,25 +40,28 @@
   "quality": {
     "cashConversion": null,
     "roe": null,
-    "dataScore": 70,
-    "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "dataScore": 57,
+    "dataLabel": "TERBATAS",
+    "availableInputs": 4,
+    "totalInputs": 7,
     "guards": [
-      "Harga wajar gabungan tidak diterbitkan karena kurang dari 2 metode independen lolos validasi.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.996577686516085,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 1
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -121.3280450367569,
-    "bvps": -1467.092,
+    "epsTTM": null,
+    "bvps": null,
     "currentPE": null,
     "currentPBV": null,
     "roe": null,
@@ -84,28 +70,32 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 737273577472.0,
-    "shares": 10685124441.0
+    "shares": 10685124441.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -121.3280450367569
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "PBV & Graham",
       "family": "book",
-      "status": "NEGATIVE",
-      "reason": "Ekuitas/BVPS negatif; metode berbasis book value tidak digunakan.",
-      "inputs": {
-        "bvps": -1467.092
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "BVPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "Historical EV/EBITDA",
@@ -122,20 +112,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 1809.9815782950318,
-        "base": 3217.7450280800567,
-        "bull": 3619.9631565900636,
-        "price": 69.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

@@ -1,14 +1,14 @@
 {
   "ticker": "INET.JK",
   "name": "PT Sinergi Inti Andalan Prima Tbk",
-  "asOf": "2026-09-16T08:05:56.730120+00:00",
-  "price": 318.0,
+  "asOf": "2026-09-16T12:00:05.273668+00:00",
+  "price": 316.0,
   "companyProfile": {
     "sector": "Infrastruktur",
     "valuationProfile": "Infrastruktur",
     "sourceSector": "Communication Services",
     "industry": "Telecom Services",
-    "sectorNote": "DCF dan FCF mendapat bobot lebih besar untuk aset dan arus kas jangka panjang; P/E dan PBV menjadi pembanding.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -21,35 +21,11 @@
   },
   "methods": [
     {
-      "name": "Historical PBV 5Y",
-      "bear": 74.90173345742849,
-      "base": 221.90017409775976,
-      "bull": 368.89861473809106,
-      "confidence": 0.8,
-      "relevance": 0.42,
-      "rawWeight": 0.336,
-      "bands": {
-        "mean": 11.569627683591587,
-        "sd": 7.664334808173281,
-        "current": 16.580165465581167,
-        "z": 0.6537472471383061,
-        "minus1": 74.90173345742849,
-        "base": 221.90017409775976,
-        "plus1": 368.89861473809106
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.64x dari median metode."
-    },
-    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 25.476179899569985,
-      "base": 31.84522487446248,
-      "bull": 38.21426984935498,
+      "bear": 17.385388254835064,
+      "base": 21.73173531854383,
+      "bull": 26.078082382252596,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
@@ -58,51 +34,62 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.64x dari median metode."
+      "qcStatus": "CANDIDATE"
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 338.7,
-    "ma50": 269.76,
-    "ma200": 363.1450372314453,
-    "rsi14": 36.206896551724135,
-    "return1m": 0.35897435897435903,
-    "return3m": 0.5979899497487438
+    "ma20": 338.6,
+    "ma50": 269.72,
+    "ma200": 363.1350372314453,
+    "rsi14": 35.593220338983045,
+    "return1m": 0.3504273504273505,
+    "return3m": 0.5879396984924623
   },
   "quality": {
     "cashConversion": -8.55921831273357,
     "roe": 0.01903,
-    "dataScore": 70,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
     "availableInputs": 7,
-    "totalInputs": 10,
+    "totalInputs": 7,
+    "guards": [
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "historyYears": 3.1485284052019167,
     "validMethodCount": 0,
     "independentFamilies": 0,
     "diagnosticCount": 4,
-    "guards": [
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
-    ],
-    "outlierMethodCount": 2
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 2.35,
+    "epsTTM": 1.0943797189392026,
     "bvps": 19.17954321144367,
-    "currentPE": 135.3191489361702,
-    "currentPBV": 16.580165465581167,
+    "currentPE": 288.74804104219254,
+    "currentPBV": 16.475887695357386,
     "roe": 0.01903,
     "fcf": -209611702272.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 7116074516480.0,
-    "shares": 22377593743.0
+    "marketCap": 7071319195648.0,
+    "shares": 22377593743.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -133,11 +120,9 @@
       "status": "OUTLIER",
       "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
       "inputs": {
-        "base": 31.84522487446248,
-        "price": 318.0
+        "base": 21.73173531854383,
+        "price": 316.0
       }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

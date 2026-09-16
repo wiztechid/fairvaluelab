@@ -1,14 +1,14 @@
 {
   "ticker": "VKTR.JK",
   "name": "PT VKTR Teknologi Mobilitas Tbk",
-  "asOf": "2026-09-16T08:04:05.390648+00:00",
-  "price": 735.0,
+  "asOf": "2026-09-16T11:57:44.160927+00:00",
+  "price": 730.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
     "valuationProfile": "Barang Konsumen Non-Primer",
     "sourceSector": "Consumer Cyclical",
     "industry": "Recreational Vehicles",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi; PBV diberi bobot lebih kecil.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,81 +19,66 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 42.33171912861677,
-      "base": 148.51208465762295,
-      "bull": 254.69245018662915,
-      "confidence": 0.8,
-      "relevance": 0.35,
-      "rawWeight": 0.27999999999999997,
-      "bands": {
-        "mean": 6.271800758680508,
-        "sd": 4.484093658890085,
-        "current": 31.03972022382866,
-        "z": 5.5235062755756035,
-        "minus1": 42.33171912861677,
-        "base": 148.51208465762295,
-        "plus1": 254.69245018662915
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 869.25,
-    "ma50": 796.8,
-    "ma200": 795.755,
-    "rsi14": 24.24242424242425,
-    "return1m": -0.1694915254237288,
-    "return3m": 0.17599999999999993
+    "ma20": 869.0,
+    "ma50": 796.7,
+    "ma200": 795.73,
+    "rsi14": 23.88059701492537,
+    "return1m": -0.17514124293785316,
+    "return3m": 0.16799999999999993
   },
   "quality": {
     "cashConversion": null,
     "roe": 0.00202,
-    "dataScore": 70,
+    "dataScore": 86,
     "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "availableInputs": 6,
+    "totalInputs": 7,
+    "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+    ],
+    "historyYears": 3.24435318275154,
     "validMethodCount": 0,
     "independentFamilies": 0,
     "diagnosticCount": 4,
-    "guards": [
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
-    ],
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -0.3,
+    "epsTTM": null,
     "bvps": 23.679337142857143,
     "currentPE": null,
-    "currentPBV": 31.03972022382866,
+    "currentPBV": 30.828565664482884,
     "roe": 0.00202,
     "fcf": -54267248640.0,
     "growthNormalized": 0.0038117011863604724,
     "costOfEquity": 0.1711244,
     "terminalGrowth": 0.035,
-    "marketCap": 32156248178688.0,
-    "shares": 43750000000.0
+    "marketCap": 31937498447872.0,
+    "shares": 43750000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -0.3
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "DCF & FCF Yield",
@@ -118,7 +103,5 @@
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

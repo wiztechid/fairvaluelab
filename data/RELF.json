@@ -1,14 +1,14 @@
 {
   "ticker": "RELF.JK",
   "name": "PT Graha Mitra Asia Tbk",
-  "asOf": "2026-09-16T08:36:10.989076+00:00",
+  "asOf": "2026-09-16T11:59:08.005729+00:00",
   "price": 41.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
     "sourceSector": "Real Estate",
     "industry": "Real Estate - Development",
-    "sectorNote": "Nilai aset dan ekuitas lebih penting pada developer properti.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -20,38 +20,6 @@
     "available": false
   },
   "methods": [
-    {
-      "name": "DCF",
-      "bear": 1.1257129302790791,
-      "base": 1.7839098436243217,
-      "bull": 2.4674366478462133,
-      "confidence": 0.85,
-      "relevance": 0.45499999999999996,
-      "rawWeight": 0.38675,
-      "bands": null,
-      "warning": "Porsi nilai jangka panjang tinggi",
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 0.7105803838933867,
-      "base": 1.1942997904113017,
-      "bull": 1.4211607677867735,
-      "confidence": 0.75,
-      "relevance": 0.49500000000000005,
-      "rawWeight": 0.37125,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
@@ -92,37 +60,48 @@
   "quality": {
     "cashConversion": null,
     "roe": 0.02775,
-    "dataScore": 70,
+    "dataScore": 71,
     "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "availableInputs": 5,
+    "totalInputs": 7,
     "guards": [
-      "Riwayat harga 3.2 tahun; Historical 5Y dinonaktifkan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 3.2361396303901437,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 2
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 43.027,
+    "bvps": null,
     "currentPE": null,
-    "currentPBV": 0.9528900457852046,
+    "currentPBV": null,
     "roe": 0.02775,
     "fcf": 651213632.0,
     "growthNormalized": 0.04901875,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 234841112576.0,
-    "shares": 5727832195.0
+    "shares": 5727832195.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -132,37 +111,18 @@
       "inputs": {}
     },
     {
+      "name": "PBV & Graham",
+      "family": "book",
+      "status": "NOT_APPLICABLE",
+      "reason": "BVPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 1.1257129302790791,
-        "base": 1.7839098436243217,
-        "bull": 2.4674366478462133,
-        "price": 41.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.7105803838933867,
-        "base": 1.1942997904113017,
-        "bull": 1.4211607677867735,
-        "price": 41.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

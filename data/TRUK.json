@@ -1,14 +1,14 @@
 {
   "ticker": "TRUK.JK",
   "name": "PT Guna Timur Raya Tbk",
-  "asOf": "2026-09-16T08:38:12.024430+00:00",
+  "asOf": "2026-09-16T12:01:00.924660+00:00",
   "price": 1180.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
     "valuationProfile": "Transportasi & Logistik",
     "sourceSector": "Industrials",
     "industry": "Trucking",
-    "sectorNote": "DCF dan FCF diperkuat karena kebutuhan aset dan arus kas operasional.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,40 +19,7 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "DCF",
-      "bear": 22.307375573422224,
-      "base": 25.633530482712384,
-      "bull": 33.09148262000219,
-      "confidence": 0.85,
-      "relevance": 0.935,
-      "rawWeight": 0.7947500000000001,
-      "bands": null,
-      "warning": null,
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 28.214243678160923,
-      "base": 25.07932771392082,
-      "bull": 28.214243678160923,
-      "confidence": 0.75,
-      "relevance": 0.9450000000000001,
-      "rawWeight": 0.70875,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": {
     "terminalValueShare": 0.4775050064473639,
     "bearTerminalValueShare": 0.43352972849403376,
@@ -73,42 +40,61 @@
   "quality": {
     "cashConversion": null,
     "roe": -0.16787,
-    "dataScore": 70,
+    "dataScore": 71,
     "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "availableInputs": 5,
+    "totalInputs": 7,
     "guards": [
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 84.714,
+    "bvps": null,
     "currentPE": null,
-    "currentPBV": 13.929220671907832,
+    "currentPBV": null,
     "roe": -0.16787,
     "fcf": 1963711360.0,
     "growthNormalized": -0.014557750000000001,
     "costOfEquity": 0.18610580000000002,
     "terminalGrowth": 0.035,
     "marketCap": 513300004864.0,
-    "shares": 435000000.0
+    "shares": 435000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
       "status": "NOT_APPLICABLE",
       "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
+      "name": "PBV & Graham",
+      "family": "book",
+      "status": "NOT_APPLICABLE",
+      "reason": "BVPS tidak tersedia/tervalidasi.",
       "inputs": {}
     },
     {
@@ -124,32 +110,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 22.307375573422224,
-        "base": 25.633530482712384,
-        "bull": 33.09148262000219,
-        "price": 1180.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 28.214243678160923,
-        "base": 25.07932771392082,
-        "bull": 28.214243678160923,
-        "price": 1180.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

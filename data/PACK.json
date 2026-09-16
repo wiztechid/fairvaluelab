@@ -1,14 +1,14 @@
 {
   "ticker": "PACK.JK",
   "name": "PT Abadi Nusantara Hijau Investama Tbk",
-  "asOf": "2026-09-16T08:30:03.395577+00:00",
+  "asOf": "2026-09-16T11:53:30.395597+00:00",
   "price": 560.0,
   "companyProfile": {
     "sector": "Barang Baku",
     "valuationProfile": "Barang Baku",
     "sourceSector": "Consumer Cyclical",
     "industry": "Packaging & Containers",
-    "sectorNote": "Arus kas dan laba ternormalisasi lebih penting pada bisnis bahan baku.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,56 +19,7 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "DCF",
-      "bear": 26.027734685872918,
-      "base": 41.22309077955806,
-      "bull": 56.63748019156224,
-      "confidence": 0.85,
-      "relevance": 0.45499999999999996,
-      "rawWeight": 0.38675,
-      "bands": null,
-      "warning": "Porsi nilai jangka panjang tinggi",
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 9.668606566999879,
-      "base": 17.188633896888675,
-      "bull": 19.337213133999757,
-      "confidence": 0.75,
-      "relevance": 0.9450000000000001,
-      "rawWeight": 0.70875,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "bear": 28.451568503308142,
-      "base": 35.564460629135176,
-      "bull": 42.67735275496221,
-      "confidence": 0.6,
-      "relevance": 0.55,
-      "rawWeight": 0.33,
-      "bands": null,
-      "warning": null,
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": {
     "terminalValueShare": 0.7705206396749862,
     "bearTerminalValueShare": 0.6988354790069763,
@@ -89,27 +40,30 @@
   "quality": {
     "cashConversion": 1.846536153445563,
     "roe": 0.08349,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "Riwayat harga 3.6 tahun; Historical 5Y dinonaktifkan.",
-      "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 3.600273785078713,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 18.2,
+    "epsTTM": 0.8377724139510526,
     "bvps": 3.0887200484525184,
-    "currentPE": 30.76923076923077,
+    "currentPE": 668.4392929088715,
     "currentPBV": 181.3048742570781,
     "roe": 0.08349,
     "fcf": 52771725312.0,
@@ -117,10 +71,18 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 19103171477504.0,
-    "shares": 34112804251.0
+    "shares": 34112804251.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
@@ -130,47 +92,23 @@
       "inputs": {}
     },
     {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 6.104267367551944,
+        "base": 7.630334209439929,
+        "bull": 9.156401051327915,
+        "price": 560.0
+      }
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 26.027734685872918,
-        "base": 41.22309077955806,
-        "bull": 56.63748019156224,
-        "price": 560.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 9.668606566999879,
-        "base": 17.188633896888675,
-        "bull": 19.337213133999757,
-        "price": 560.0
-      }
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 35.564460629135176,
-        "price": 560.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

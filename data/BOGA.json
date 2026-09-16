@@ -1,14 +1,14 @@
 {
   "ticker": "BOGA.JK",
   "name": "PT Apollo Global Interactive Tbk",
-  "asOf": "2026-09-16T08:33:08.673037+00:00",
+  "asOf": "2026-09-16T11:56:19.839903+00:00",
   "price": 1560.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
     "valuationProfile": "Barang Konsumen Non-Primer",
     "sourceSector": "Consumer Cyclical",
     "industry": "Auto & Truck Dealerships",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,64 +19,7 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "DCF",
-      "bear": 68.99822262740913,
-      "base": 84.17699980413056,
-      "bull": 116.79207557977652,
-      "confidence": 0.85,
-      "relevance": 0.85,
-      "rawWeight": 0.7224999999999999,
-      "bands": null,
-      "warning": null,
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 47.197234063492886,
-      "base": 68.03204910053029,
-      "bull": 82.98414780394354,
-      "confidence": 0.75,
-      "relevance": 0.9,
-      "rawWeight": 0.675,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 835.8907203725125,
-      "base": 1120.9419956615845,
-      "bull": 1405.9932709506563,
-      "confidence": 0.8,
-      "relevance": 0.35,
-      "rawWeight": 0.27999999999999997,
-      "bands": {
-        "mean": 9.241439880775207,
-        "sd": 2.3500629236105093,
-        "current": 12.86118841992405,
-        "z": 1.540277284825913,
-        "minus1": 835.8907203725125,
-        "base": 1120.9419956615845,
-        "plus1": 1405.9932709506563,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": {
     "terminalValueShare": 0.6914052596292686,
     "bearTerminalValueShare": 0.6313413487529989,
@@ -97,21 +40,24 @@
   "quality": {
     "cashConversion": 11.92859976766751,
     "roe": 0.0091699995,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 1.11,
@@ -124,10 +70,18 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 5933500989440.0,
-    "shares": 3803526210.0
+    "shares": 3803526210.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
@@ -154,32 +108,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 68.99822262740913,
-        "base": 84.17699980413056,
-        "bull": 116.79207557977652,
-        "price": 1560.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 47.197234063492886,
-        "base": 68.03204910053029,
-        "bull": 82.98414780394354,
-        "price": 1560.0
-      }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

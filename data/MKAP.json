@@ -1,14 +1,14 @@
 {
   "ticker": "MKAP.JK",
   "name": "PT Multikarya Asia Pasifik Raya Tbk",
-  "asOf": "2026-09-16T08:28:43.565159+00:00",
-  "price": 1145.0,
+  "asOf": "2026-09-16T11:52:14.273518+00:00",
+  "price": 1140.0,
   "companyProfile": {
     "sector": "Energi",
     "valuationProfile": "Energi",
     "sourceSector": "Energy",
     "industry": "Oil & Gas Equipment & Services",
-    "sectorNote": "FCF dan laba historis lebih ditekankan karena laba sektor energi cenderung siklikal.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -20,54 +20,6 @@
     "available": true
   },
   "methods": [
-    {
-      "name": "DCF",
-      "bear": 38.48504729113892,
-      "base": 54.5705421484756,
-      "bull": 73.18080853491361,
-      "confidence": 0.85,
-      "relevance": 0.5525,
-      "rawWeight": 0.46962499999999996,
-      "bands": null,
-      "warning": null,
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "FCF Yield",
-      "bear": 30.190912984615387,
-      "base": 36.125834563802606,
-      "bull": 42.47961541695578,
-      "confidence": 0.75,
-      "relevance": 0.9900000000000001,
-      "rawWeight": 0.7425,
-      "bands": null,
-      "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "bear": 113.11433021615238,
-      "base": 141.39291277019046,
-      "bull": 169.67149532422854,
-      "confidence": 0.6,
-      "relevance": 0.55,
-      "rawWeight": 0.33,
-      "bands": null,
-      "warning": null,
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": true,
-      "normalizedWeight": 0.28695652173913044,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -89,6 +41,22 @@
       "included": true,
       "normalizedWeight": 0.7130434782608696,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 113.11433021615238,
+      "base": 141.39291277019046,
+      "bull": 169.67149532422854,
+      "confidence": 0.6,
+      "relevance": 0.55,
+      "rawWeight": 0.33,
+      "bands": null,
+      "warning": null,
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "included": true,
+      "normalizedWeight": 0.28695652173913044,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -101,48 +69,56 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 1132.75,
-    "ma50": 1153.5,
-    "ma200": 921.105,
-    "rsi14": 61.53846153846153,
-    "return1m": -0.01716738197424894,
-    "return3m": 0.09569377990430628
+    "ma20": 1132.5,
+    "ma50": 1153.4,
+    "ma200": 921.08,
+    "rsi14": 58.33333333333333,
+    "return1m": -0.02145922746781115,
+    "return3m": 0.09090909090909083
   },
   "quality": {
     "cashConversion": 0.28366624194132906,
     "roe": 0.13265,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "CUKUP",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "availableInputs": 7,
+    "totalInputs": 7,
     "guards": [
-      "Riwayat harga 2.6 tahun; Historical 5Y dinonaktifkan.",
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 2.5927446954141,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 2
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 8.93,
     "bvps": 99.49959328923077,
-    "currentPE": 128.2194848824188,
-    "currentPBV": 11.507584726217447,
+    "currentPE": 127.65957446808511,
+    "currentPBV": 11.457333264530908,
     "roe": 0.13265,
     "fcf": 15699274752.0,
     "growthNormalized": 0.10365575303818503,
     "costOfEquity": 0.15444560000000002,
     "terminalGrowth": 0.035,
-    "marketCap": 3721249947648.0,
-    "shares": 3250000000.0
+    "marketCap": 3704999903232.0,
+    "shares": 3250000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical Dividend Yield",
@@ -152,40 +128,14 @@
       "inputs": {}
     },
     {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 38.48504729113892,
-        "base": 54.5705421484756,
-        "bull": 73.18080853491361,
-        "price": 1145.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 30.190912984615387,
-        "base": 36.125834563802606,
-        "bull": 42.47961541695578,
-        "price": 1145.0
-      }
-    },
-    {
       "name": "Graham Number",
       "family": "fundamental",
       "status": "OUTLIER",
       "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
       "inputs": {
         "base": 141.39291277019046,
-        "price": 1145.0
+        "price": 1140.0
       }
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }

@@ -1,14 +1,14 @@
 {
   "ticker": "EMDE.JK",
   "name": "PT Megapolitan Developments Tbk",
-  "asOf": "2026-09-16T08:35:44.596494+00:00",
-  "price": 77.0,
+  "asOf": "2026-09-16T11:58:43.036596+00:00",
+  "price": 76.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
     "sourceSector": "Real Estate",
     "industry": "Real Estate Services",
-    "sectorNote": "Nilai aset dan ekuitas lebih penting pada developer properti.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -19,53 +19,29 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 119.05690231919307,
-      "base": 148.65324072096564,
-      "bull": 178.24957912273823,
-      "confidence": 0.8,
-      "relevance": 0.945,
-      "rawWeight": 0.756,
-      "bands": {
-        "mean": 0.27804933707006857,
-        "sd": 0.055358646958536484,
-        "current": 0.14402510736098403,
-        "z": -2.421017078135389,
-        "minus1": 119.05690231919307,
-        "base": 148.65324072096564,
-        "plus1": 178.24957912273823,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 77.55,
-    "ma50": 74.38,
-    "ma200": 80.81,
-    "rsi14": 54.54545454545455,
-    "return1m": 0.026666666666666616,
-    "return3m": 0.3999999999999999
+    "ma20": 77.5,
+    "ma50": 74.36,
+    "ma200": 80.805,
+    "rsi14": 52.17391304347826,
+    "return1m": 0.01333333333333342,
+    "return3m": 0.38181818181818183
   },
   "quality": {
     "cashConversion": null,
     "roe": -0.02814,
-    "dataScore": 70,
+    "dataScore": 86,
     "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "availableInputs": 6,
+    "totalInputs": 7,
     "guards": [
-      "Harga wajar gabungan tidak diterbitkan karena kurang dari 2 metode independen lolos validasi.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
@@ -74,29 +50,35 @@
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -23.288670508955224,
+    "epsTTM": null,
     "bvps": 534.6290060871642,
     "currentPE": null,
-    "currentPBV": 0.14402510736098403,
+    "currentPBV": 0.142154651421231,
     "roe": -0.02814,
     "fcf": -72666324992.0,
     "growthNormalized": 0.03834933976646274,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 257950007296.0,
-    "shares": 3350000000.0
+    "marketCap": 254600003584.0,
+    "shares": 3350000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
+  "analysisStatus": "TERBATAS",
+  "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -23.288670508955224
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "DCF & FCF Yield",
@@ -123,7 +105,5 @@
       "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
-  ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  ]
 }
