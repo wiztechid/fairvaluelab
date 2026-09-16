@@ -14,6 +14,7 @@ on:
       - 'sector_models.py'
       - 'postprocess_qc.py'
       - 'validate_engine.py'
+      - 'snapshot_backtest.py'
       - 'des_universe.py'
       - 'requirements.txt'
 
@@ -51,6 +52,8 @@ jobs:
         run: python postprocess_qc.py
       - name: Validate all DES valuations before publication
         run: python validate_engine.py
+      - name: Lock quarterly valuation snapshots and update target progress
+        run: python snapshot_backtest.py
       - name: Commit refreshed valuation data
         run: |
           set -e
@@ -64,7 +67,7 @@ jobs:
           cp -a /tmp/fv-data/. data/
           git add data/
           if git diff --cached --quiet; then echo "No valuation data changes to commit."; exit 0; fi
-          git commit -m "data: refresh validated quarterly-normalized fair values"
+          git commit -m "data: refresh valuations and quarterly backtest progress"
           if git push origin HEAD:main; then exit 0; fi
           echo "Main moved during final push; retrying safely..."
           cp -a data/. /tmp/fv-data/
@@ -73,5 +76,5 @@ jobs:
           rm -rf data && mkdir -p data
           cp -a /tmp/fv-data/. data/
           git add data/
-          git commit -m "data: refresh validated quarterly-normalized fair values"
+          git commit -m "data: refresh valuations and quarterly backtest progress"
           git push origin HEAD:main
