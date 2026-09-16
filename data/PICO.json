@@ -1,22 +1,23 @@
 {
   "ticker": "PICO.JK",
   "name": "PT Pelangi Indah Canindo Tbk",
-  "asOf": "2026-09-16T08:00:47.257722+00:00",
-  "price": 179.0,
+  "asOf": "2026-09-16T08:30:06.521189+00:00",
+  "price": 180.0,
   "companyProfile": {
     "sector": "Barang Baku",
     "valuationProfile": "Barang Baku",
     "sourceSector": "Consumer Cyclical",
     "industry": "Packaging & Containers",
-    "sectorNote": "Arus kas dan laba ternormalisasi lebih penting pada bisnis bahan baku yang sensitif terhadap siklus harga.",
+    "sectorNote": "Arus kas dan laba ternormalisasi lebih penting pada bisnis bahan baku.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 791.1556078062766,
-    "base": 1050.9505372339281,
-    "bull": 1364.5607659794882,
-    "dispersion": 0.1060708993307814,
-    "agreement": "HIGH"
+    "bear": 87.00695858765647,
+    "base": 146.28171616396708,
+    "bull": 205.55647374027768,
+    "dispersion": 0.0615866482298246,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -29,9 +30,9 @@
       "rawWeight": 0.5057499999999999,
       "bands": null,
       "warning": null,
-      "explanation": "Mengestimasi nilai saham dari arus kas masa depan yang didiskontokan ke nilai hari ini. Cocok saat arus kas cukup dapat diproyeksikan.",
-      "included": true,
-      "normalizedWeight": 0.4164265129682997
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": false,
+      "normalizedWeight": 0
     },
     {
       "name": "FCF Yield",
@@ -43,31 +44,78 @@
       "rawWeight": 0.70875,
       "bands": null,
       "warning": null,
-      "explanation": "Membandingkan free cash flow per saham dengan tingkat imbal hasil kas yang dianggap wajar. Semakin kuat FCF, semakin tinggi nilai wajarnya.",
+      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "bear": 100.40300410324397,
+      "base": 153.35601880089237,
+      "bull": 206.30903349854077,
+      "confidence": 0.9,
+      "relevance": 0.85,
+      "rawWeight": 0.765,
+      "bands": {
+        "mean": 17.458597339002434,
+        "sd": 6.028360469456459,
+        "current": 20.49184339546869,
+        "z": 0.503162687738171,
+        "minus1": 100.40300410324397,
+        "base": 153.35601880089237,
+        "plus1": 206.30903349854077,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
       "included": true,
-      "normalizedWeight": 0.5835734870317003
+      "normalizedWeight": 0.40390707497360084
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "bear": 87.33535540631533,
+      "base": 146.0,
+      "bull": 204.66464459368467,
+      "confidence": 0.9,
+      "relevance": 0.85,
+      "rawWeight": 0.765,
+      "bands": {
+        "mean": 16.62116186521349,
+        "sd": 6.678592832581194,
+        "current": 20.49184339546869,
+        "z": 0.579565430515881,
+        "minus1": 87.33535540631533,
+        "base": 146.0,
+        "plus1": 204.66464459368467,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
+      "included": true,
+      "normalizedWeight": 0.40390707497360084
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 79.76942649196495,
-      "base": 159.55606890250837,
-      "bull": 239.34271131305178,
+      "bear": 58.16300697859476,
+      "base": 132.0060879996456,
+      "bull": 205.84916902069642,
       "confidence": 0.8,
       "relevance": 0.45499999999999996,
       "rawWeight": 0.364,
       "bands": {
-        "mean": 0.4324071352474716,
-        "sd": 0.21622689574307458,
-        "current": 0.4851014301222898,
-        "z": 0.2436990768134168,
-        "minus1": 79.76942649196495,
-        "base": 159.55606890250837,
-        "plus1": 239.34271131305178
+        "mean": 0.3577449277847872,
+        "sd": 0.2001194648488708,
+        "current": 0.48781149397772156,
+        "z": 0.6499446032956361,
+        "minus1": 58.16300697859476,
+        "base": 132.0060879996456,
+        "plus1": 205.84916902069642,
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
-      "included": false,
-      "normalizedWeight": 0
+      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
+      "included": true,
+      "normalizedWeight": 0.19218585005279828
     }
   ],
   "dcfDiagnostics": {
@@ -80,32 +128,35 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 181.9,
-    "ma50": 150.72,
-    "ma200": 167.665,
-    "rsi14": 39.189189189189186,
-    "return1m": 0.33582089552238803,
-    "return3m": 0.3161764705882353
+    "ma20": 181.95,
+    "ma50": 150.74,
+    "ma200": 167.67,
+    "rsi14": 39.726027397260275,
+    "return1m": 0.34328358208955234,
+    "return3m": 0.32352941176470584
   },
   "quality": {
     "cashConversion": 12.086087149159336,
     "roe": 0.01354,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "BAIK",
-    "availableInputs": 8,
-    "totalInputs": 10
+    "availableInputs": 10,
+    "totalInputs": 10,
+    "guards": [],
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 3
   },
   "raw": {
-    "epsTTM": -1.51,
+    "epsTTM": 8.783982803606774,
     "bvps": 368.9949954484275,
-    "currentPE": null,
-    "currentPBV": 0.4851014301222898,
+    "currentPE": 20.49184339546869,
+    "currentPBV": 0.48781149397772156,
     "roe": 0.01354,
     "fcf": 60340953088.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 101739118592.0,
+    "marketCap": 102307495936.0,
     "shares": 568375000.0
   },
   "source": "Yahoo Finance via yfinance",

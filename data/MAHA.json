@@ -1,7 +1,7 @@
 {
   "ticker": "MAHA.JK",
   "name": "PT Mandiri Herindo Adiperkasa Tbk",
-  "asOf": "2026-09-16T07:59:41.756519+00:00",
+  "asOf": "2026-09-16T08:28:39.239878+00:00",
   "price": 144.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 165.13407208503295,
-    "base": 208.67699068866506,
-    "bull": 242.74188309813104,
-    "dispersion": 0.25088911604843056,
-    "agreement": "MEDIUM"
+    "bear": 144.93171806776013,
+    "base": 194.60886226168455,
+    "bull": 229.45923344055342,
+    "dispersion": 0.30060670520554794,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -29,9 +30,9 @@
       "rawWeight": 0.359125,
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
-      "explanation": "Mengestimasi nilai saham dari arus kas masa depan yang didiskontokan ke nilai hari ini. Cocok saat arus kas cukup dapat diproyeksikan.",
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.12602535421327365
+      "normalizedWeight": 0.19714540588760038
     },
     {
       "name": "FCF Yield",
@@ -43,75 +44,32 @@
       "rawWeight": 0.7425,
       "bands": null,
       "warning": null,
-      "explanation": "Membandingkan free cash flow per saham dengan tingkat imbal hasil kas yang dianggap wajar. Semakin kuat FCF, semakin tinggi nilai wajarnya.",
+      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2605606000789577
+      "normalizedWeight": 0.4076031016262952
     },
     {
       "name": "Historical P/E 3Y",
-      "bear": 219.73106012279533,
-      "base": 244.59717909346116,
-      "bull": 269.463298064127,
+      "bear": 216.02749148447782,
+      "base": 240.2910161416498,
+      "bull": 264.5545407988218,
       "confidence": 0.9,
       "relevance": 0.8,
       "rawWeight": 0.7200000000000001,
       "bands": {
-        "mean": 10.798992454457448,
-        "sd": 1.0978418971596395,
+        "mean": 10.608874884841052,
+        "sd": 1.0712372917073734,
         "current": 6.357615894039736,
-        "z": -4.045552070756762,
-        "minus1": 219.73106012279533,
-        "base": 244.59717909346116,
-        "plus1": 269.463298064127
+        "z": -3.968550221049082,
+        "minus1": 216.02749148447782,
+        "base": 240.2910161416498,
+        "plus1": 264.5545407988218,
+        "coverageYears": 3.1457905544147846
       },
       "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 3 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
+      "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
       "included": true,
-      "normalizedWeight": 0.25266482431898935
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 217.84959649148246,
-      "base": 250.18856617575665,
-      "bull": 282.5275358600308,
-      "confidence": 0.9,
-      "relevance": 0.8,
-      "rawWeight": 0.7200000000000001,
-      "bands": {
-        "mean": 11.045852811291685,
-        "sd": 1.4277690809834087,
-        "current": 6.357615894039736,
-        "z": -3.2836100597043454,
-        "minus1": 217.84959649148246,
-        "base": 250.18856617575665,
-        "plus1": 282.5275358600308
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 5 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": true,
-      "normalizedWeight": 0.25266482431898935
-    },
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 152.7294167099757,
-      "base": 184.77466201914646,
-      "bull": 216.8199073283172,
-      "confidence": 0.8,
-      "relevance": 0.385,
-      "rawWeight": 0.30800000000000005,
-      "bands": {
-        "mean": 1.6041742454060803,
-        "sd": 0.278209991840575,
-        "current": 1.2501773176808144,
-        "z": -1.2724091086136107,
-        "minus1": 152.7294167099757,
-        "base": 184.77466201914646,
-        "plus1": 216.8199073283172
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
-      "included": true,
-      "normalizedWeight": 0.10808439706978988
+      "normalizedWeight": 0.39525149248610447
     }
   ],
   "dcfDiagnostics": {
@@ -134,10 +92,15 @@
   "quality": {
     "cashConversion": 0.7250802543140263,
     "roe": 0.20763001,
-    "dataScore": 100,
+    "dataScore": 90,
     "dataLabel": "BAIK",
-    "availableInputs": 10,
-    "totalInputs": 10
+    "availableInputs": 9,
+    "totalInputs": 10,
+    "guards": [
+      "Riwayat harga 3.1 tahun; Historical 5Y dinonaktifkan."
+    ],
+    "historyYears": 3.1457905544147846,
+    "validMethodCount": 3
   },
   "raw": {
     "epsTTM": 22.65,

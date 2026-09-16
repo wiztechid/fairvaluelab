@@ -1,22 +1,23 @@
 {
   "ticker": "SKBM.JK",
   "name": "PT Sekar Bumi Tbk",
-  "asOf": "2026-09-16T08:02:37.185944+00:00",
+  "asOf": "2026-09-16T08:32:38.964061+00:00",
   "price": 535.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
     "sourceSector": "Consumer Defensive",
     "industry": "Packaged Foods",
-    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi; PBV diberi bobot lebih kecil.",
+    "sectorNote": "P/E, DCF dan FCF lebih relevan untuk bisnis konsumsi.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 282.16912245328587,
-    "base": 430.54909523045876,
-    "bull": 557.5870498286373,
-    "dispersion": 0.18945511864246495,
-    "agreement": "MEDIUM"
+    "bear": 436.02092925547447,
+    "base": 574.0018759509994,
+    "bull": 703.2103366465695,
+    "dispersion": 0.26806980644857453,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -29,9 +30,9 @@
       "rawWeight": 0.5525,
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
-      "explanation": "Mengestimasi nilai saham dari arus kas masa depan yang didiskontokan ke nilai hari ini. Cocok saat arus kas cukup dapat diproyeksikan.",
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.36650082918739635
+      "normalizedWeight": 0.15064758009543286
     },
     {
       "name": "FCF Yield",
@@ -43,31 +44,78 @@
       "rawWeight": 0.675,
       "bands": null,
       "warning": null,
-      "explanation": "Membandingkan free cash flow per saham dengan tingkat imbal hasil kas yang dianggap wajar. Semakin kuat FCF, semakin tinggi nilai wajarnya.",
+      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.44776119402985076
+      "normalizedWeight": 0.18404907975460125
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "bear": 569.150011902141,
+      "base": 706.8542611668753,
+      "bull": 844.5585104316095,
+      "confidence": 0.9,
+      "relevance": 1.2,
+      "rawWeight": 1.08,
+      "bands": {
+        "mean": 9.055268526349927,
+        "sd": 1.764082106901541,
+        "current": 6.853702280297207,
+        "z": -1.24799533844804,
+        "minus1": 569.150011902141,
+        "base": 706.8542611668753,
+        "plus1": 844.5585104316095,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
+      "included": true,
+      "normalizedWeight": 0.294478527607362
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "bear": 516.8885294264413,
+      "base": 642.1988995447524,
+      "bull": 767.5092696630634,
+      "confidence": 0.9,
+      "relevance": 1.2,
+      "rawWeight": 1.08,
+      "bands": {
+        "mean": 8.226990770493881,
+        "sd": 1.6053083540649633,
+        "current": 6.853702280297207,
+        "z": -0.8554671049454341,
+        "minus1": 516.8885294264413,
+        "base": 642.1988995447524,
+        "plus1": 767.5092696630634,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS sekarang dikalikan median P/E historis 5 tahun yang lolos sanity check.",
+      "included": true,
+      "normalizedWeight": 0.294478527607362
     },
     {
       "name": "Historical PBV 5Y",
-      "bear": 294.6429313434325,
-      "base": 359.3884943210469,
-      "bull": 424.13405729866133,
+      "bear": 297.5542931693431,
+      "base": 356.25172797038823,
+      "bull": 414.9491627714333,
       "confidence": 0.8,
       "relevance": 0.35,
       "rawWeight": 0.27999999999999997,
       "bands": {
-        "mean": 0.6234775604841976,
-        "sd": 0.11232247636007579,
+        "mean": 0.6180358074425141,
+        "sd": 0.10183000856934404,
         "current": 0.9281334826514266,
-        "z": 2.7123326696482697,
-        "minus1": 294.6429313434325,
-        "base": 359.3884943210469,
-        "plus1": 424.13405729866133
+        "z": 3.0452484445952166,
+        "minus1": 297.5542931693431,
+        "base": 356.25172797038823,
+        "plus1": 414.9491627714333,
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
+      "explanation": "BVPS sekarang dikalikan median P/BV historis 5 tahun yang lolos sanity check.",
       "included": true,
-      "normalizedWeight": 0.18573797678275286
+      "normalizedWeight": 0.07634628493524198
     }
   ],
   "dcfDiagnostics": {
@@ -90,10 +138,13 @@
   "quality": {
     "cashConversion": 0.9192620724948175,
     "roe": 0.13295001,
-    "dataScore": 80,
+    "dataScore": 100,
     "dataLabel": "BAIK",
-    "availableInputs": 8,
-    "totalInputs": 10
+    "availableInputs": 10,
+    "totalInputs": 10,
+    "guards": [],
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 5
   },
   "raw": {
     "epsTTM": 78.06,

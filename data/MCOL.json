@@ -1,7 +1,7 @@
 {
   "ticker": "MCOL.JK",
   "name": "PT Prima Andalan Mandiri Tbk",
-  "asOf": "2026-09-16T07:59:43.268867+00:00",
+  "asOf": "2026-09-16T08:28:41.516642+00:00",
   "price": 3650.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 4277.9560119521875,
-    "base": 5425.508178591145,
-    "bull": 6573.060345230103,
-    "dispersion": 0.5,
-    "agreement": "LOW"
+    "bear": 0.2972199155281652,
+    "base": 0.39680338995143105,
+    "bull": 0.5132231338598792,
+    "dispersion": 0.10607089933078137,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -29,9 +30,9 @@
       "rawWeight": 0.46962499999999996,
       "bands": null,
       "warning": null,
-      "explanation": "Mengestimasi nilai saham dari arus kas masa depan yang didiskontokan ke nilai hari ini. Cocok saat arus kas cukup dapat diproyeksikan.",
-      "included": false,
-      "normalizedWeight": 0
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": true,
+      "normalizedWeight": 0.3874394142518305
     },
     {
       "name": "FCF Yield",
@@ -43,75 +44,9 @@
       "rawWeight": 0.7425,
       "bands": null,
       "warning": null,
-      "explanation": "Membandingkan free cash flow per saham dengan tingkat imbal hasil kas yang dianggap wajar. Semakin kuat FCF, semakin tinggi nilai wajarnya.",
-      "included": false,
-      "normalizedWeight": 0
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "bear": 53365015.290845,
-      "base": 74495505.6194365,
-      "bull": 95625995.948028,
-      "confidence": 0.9,
-      "relevance": 0.8,
-      "rawWeight": 0.7200000000000001,
-      "bands": {
-        "mean": 186911.645974098,
-        "sd": 53017.087335887954,
-        "current": 9.157968687274186,
-        "z": -3.5253254638697213,
-        "minus1": 53365015.290845,
-        "base": 74495505.6194365,
-        "plus1": 95625995.948028
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 3 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": false,
-      "normalizedWeight": 0
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "bear": 26236164.720574494,
-      "base": 54242913.9187389,
-      "bull": 82249663.1169033,
-      "confidence": 0.9,
-      "relevance": 0.8,
-      "rawWeight": 0.7200000000000001,
-      "bands": {
-        "mean": 136097.23484227946,
-        "sd": 70269.84443537839,
-        "current": 9.157968687274186,
-        "z": -1.9366497530635864,
-        "minus1": 26236164.720574494,
-        "base": 54242913.9187389,
-        "plus1": 82249663.1169033
-      },
-      "warning": null,
-      "explanation": "EPS sekarang dikalikan rata-rata P/E historis 5 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
-      "included": false,
-      "normalizedWeight": 0
-    },
-    {
-      "name": "Historical PBV 5Y",
-      "bear": 4277.9560119521875,
-      "base": 5425.508178591145,
-      "bull": 6573.060345230103,
-      "confidence": 0.8,
-      "relevance": 0.385,
-      "rawWeight": 0.30800000000000005,
-      "bands": {
-        "mean": 34547.10482151692,
-        "sd": 7307.076809039026,
-        "current": 23241.49709996026,
-        "z": -1.5472134777030617,
-        "minus1": 4277.9560119521875,
-        "base": 5425.508178591145,
-        "plus1": 6573.060345230103
-      },
-      "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
+      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
       "included": true,
-      "normalizedWeight": 1.0
+      "normalizedWeight": 0.6125605857481696
     }
   ],
   "dcfDiagnostics": {
@@ -134,10 +69,15 @@
   "quality": {
     "cashConversion": 2.150643038025706,
     "roe": 0.14837,
-    "dataScore": 100,
+    "dataScore": 80,
     "dataLabel": "BAIK",
-    "availableInputs": 10,
-    "totalInputs": 10
+    "availableInputs": 8,
+    "totalInputs": 10,
+    "guards": [
+      "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan."
+    ],
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 2
   },
   "raw": {
     "epsTTM": 398.56,
