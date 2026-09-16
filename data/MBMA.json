@@ -1,7 +1,7 @@
 {
   "ticker": "MBMA.JK",
   "name": "PT Merdeka Battery Materials Tbk.",
-  "asOf": "2026-09-16T11:53:22.323979+00:00",
+  "asOf": "2026-09-16T12:59:33.861456+00:00",
   "price": 500.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,29 +12,48 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 282.1552873850138,
+    "base": 354.18561792691946,
+    "bull": 426.2159484688251,
+    "dispersion": 0.4365044586998854,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 341.5266,
+      "base": 429.0,
+      "bull": 516.4734000000001,
+      "confidence": 0.82,
+      "relevance": 1,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 25.15727858594196,
+        "sd": 3.984069702925259
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.7130434782608696,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 134.49731994999897,
-      "base": 168.1216499374987,
-      "bull": 201.7459799249984,
+      "bear": 134.62657119019966,
+      "base": 168.28321398774955,
+      "bull": 201.93985678529944,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.28695652173913044,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -57,23 +76,21 @@
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
     ],
     "historyYears": 3.4140999315537304,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 4.8427213348887586,
-    "bvps": 259.40317641998445,
-    "currentPE": 103.24773312844057,
-    "currentPBV": 1.9275014550726988,
+    "epsTTM": 4.84737516545366,
+    "bvps": 259.65246155277924,
+    "currentPE": 103.14860784108622,
+    "currentPBV": 1.9256509143409972,
     "roe": 0.07353,
-    "fcf": -319736631320.0,
+    "fcf": -320043896596.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.1064756,
     "terminalGrowth": 0.035,
@@ -83,29 +100,22 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17690.0
+    "fxFactor": 17707.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.6-transparent-negative-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.8-all-tickers-fx-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
       "family": "cashflow",
       "status": "NEGATIVE",
-      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
-        "fcf": -319736631320.0
+        "fcf": -320043896596.0
       }
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup untuk membentuk rentang valuasi.",
-      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",

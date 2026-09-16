@@ -1,7 +1,7 @@
 {
   "ticker": "PKPK.JK",
   "name": "PT Paragon Karya Perkasa Tbk",
-  "asOf": "2026-09-16T11:52:17.321972+00:00",
+  "asOf": "2026-09-16T12:58:50.176134+00:00",
   "price": 4170.0,
   "companyProfile": {
     "sector": "Energi",
@@ -27,17 +27,14 @@
       "base": 817.5,
       "bull": 1027.6913088858616,
       "confidence": 0.82,
-      "relevance": 1.0,
+      "relevance": 1,
       "rawWeight": 0.82,
       "bands": {
         "mean": 13.18623936073935,
-        "sd": 3.5024250014255056,
-        "minus1": 9.683814359313844,
-        "base": 13.18623936073935,
-        "plus1": 16.688664362164857
+        "sd": 3.5024250014255056
       },
       "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
       "normalizedWeight": 0.7130434782608696,
       "qcStatus": "VALID"
@@ -53,7 +50,7 @@
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
       "normalizedWeight": 0.28695652173913044,
       "qcStatus": "VALID"
@@ -79,13 +76,12 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 4,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -108,15 +104,15 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.6-transparent-negative-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.8-all-tickers-fx-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
       "family": "cashflow",
       "status": "NEGATIVE",
-      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
         "fcf": -156904095744.0
       }
@@ -127,26 +123,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 817.5,
-        "price": 4170.0
-      }
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 395.1112431380356,
-        "price": 4170.0
-      }
     }
   ]
 }

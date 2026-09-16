@@ -1,7 +1,7 @@
 {
   "ticker": "MDKA.JK",
   "name": "PT Merdeka Copper Gold Tbk",
-  "asOf": "2026-09-16T11:53:23.313396+00:00",
+  "asOf": "2026-09-16T12:59:34.511919+00:00",
   "price": 2850.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,38 +12,57 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 1808.9126926280205,
+    "base": 2275.0738403029186,
+    "bull": 2741.2349879778158,
+    "dispersion": 0.09309757340063729,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
       "name": "Historical PBV 5Y",
       "family": "book",
-      "bear": 1900.417625586244,
-      "base": 2576.884689886568,
-      "bull": 3253.351754186893,
+      "bear": 1902.2439172558295,
+      "base": 2579.361062963339,
+      "bull": 3256.4782086708483,
       "confidence": 0.8,
       "relevance": 0.45499999999999996,
       "rawWeight": 0.364,
       "bands": {
         "mean": 4.493891668486323,
         "sd": 1.1797073094483108,
-        "current": 4.9701840774838075,
-        "z": 0.4037377790091192,
-        "minus1": 1900.417625586244,
-        "base": 2576.884689886568,
-        "plus1": 3253.351754186893,
+        "current": 4.965412341485771,
+        "z": 0.39969293164755787,
+        "minus1": 1902.2439172558295,
+        "base": 2579.361062963339,
+        "plus1": 3256.4782086708483,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.30743243243243246,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 1767.482734378603,
+      "base": 2140.0,
+      "bull": 2512.5172656213967,
+      "confidence": 0.82,
+      "relevance": 1,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 26.896134712150825,
+        "sd": 2.9807616799274728
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.6925675675675675,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -65,23 +84,21 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 573.41940571401,
+    "bvps": 573.9704588455611,
     "currentPE": null,
-    "currentPBV": 4.9701840774838075,
+    "currentPBV": 4.965412341485771,
     "roe": 0.04484,
-    "fcf": -6173640742080.0,
+    "fcf": -6179573579424.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.1341506,
     "terminalGrowth": 0.035,
@@ -91,12 +108,12 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17690.0
+    "fxFactor": 17707.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.6-transparent-negative-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.8-all-tickers-fx-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -110,17 +127,10 @@
       "name": "DCF & FCF Yield",
       "family": "cashflow",
       "status": "NEGATIVE",
-      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
-        "fcf": -6173640742080.0
+        "fcf": -6179573579424.0
       }
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup untuk membentuk rentang valuasi.",
-      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",

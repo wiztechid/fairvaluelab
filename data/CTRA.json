@@ -1,7 +1,7 @@
 {
   "ticker": "CTRA.JK",
   "name": "PT Ciputra Development Tbk",
-  "asOf": "2026-09-16T11:58:37.542895+00:00",
+  "asOf": "2026-09-16T13:03:19.445996+00:00",
   "price": 600.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -102,17 +102,14 @@
       "base": 1109.7186934438357,
       "bull": 1315.9729282276173,
       "confidence": 0.82,
-      "relevance": 1.0,
+      "relevance": 1,
       "rawWeight": 0.82,
       "bands": {
         "mean": 5.038505838090223,
-        "sd": 0.9611130823283407,
-        "minus1": 4.077392755761882,
-        "base": 5.038505838090223,
-        "plus1": 5.9996189204185635
+        "sd": 0.9611130823283407
       },
       "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
       "normalizedWeight": 0.2802460697197539,
       "qcStatus": "VALID"
@@ -128,7 +125,7 @@
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
@@ -155,7 +152,7 @@
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
     "independentFamilies": 3,
-    "diagnosticCount": 3,
+    "diagnosticCount": 2,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -178,7 +175,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.6-transparent-negative-qc",
+  "engineVersion": "3.8-all-tickers-fx-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -186,7 +183,7 @@
       "name": "DCF & FCF Yield",
       "family": "cashflow",
       "status": "NEGATIVE",
-      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
         "fcf": -768170852352.0
       }
@@ -195,21 +192,11 @@
       "name": "Historical Dividend Yield",
       "family": "income",
       "status": "OUTLIER",
-      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
       "inputs": {
         "bear": 1568.7539204576929,
         "base": 2268.9416498993965,
         "bull": 4098.030921979438,
-        "price": 600.0
-      }
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 1993.3509694534714,
         "price": 600.0
       }
     }

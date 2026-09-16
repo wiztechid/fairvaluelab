@@ -1,7 +1,7 @@
 {
   "ticker": "SMMT.JK",
   "name": "PT Golden Eagle Energy Tbk",
-  "asOf": "2026-09-16T11:52:30.437820+00:00",
+  "asOf": "2026-09-16T12:58:59.118533+00:00",
   "price": 3100.0,
   "companyProfile": {
     "sector": "Energi",
@@ -23,15 +23,15 @@
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 225.69576357702368,
-      "base": 282.1197044712796,
-      "bull": 338.5436453655355,
+      "bear": 225.8041837757354,
+      "base": 282.2552297196692,
+      "bull": 338.70627566360304,
       "confidence": 0.6,
       "relevance": 0.55,
       "rawWeight": 0.33,
       "bands": null,
       "warning": null,
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "CANDIDATE"
@@ -58,22 +58,21 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan setelah QC: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 21.17,
-    "bvps": 167.09500372846716,
+    "bvps": 167.2555811769343,
     "currentPE": 146.43363249881907,
-    "currentPBV": 18.552320122255505,
+    "currentPBV": 18.534508553831813,
     "roe": 0.07222,
-    "fcf": -131999188930.0,
+    "fcf": -132126039479.0,
     "growthNormalized": -0.025984575247143316,
     "costOfEquity": 0.11245340000000001,
     "terminalGrowth": 0.035,
@@ -83,11 +82,11 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17690.0
+    "fxFactor": 17707.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.6-transparent-negative-qc",
+  "engineVersion": "3.8-all-tickers-fx-qc",
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -95,17 +94,22 @@
       "name": "DCF & FCF Yield",
       "family": "cashflow",
       "status": "NEGATIVE",
-      "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
+      "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
-        "fcf": -131999188930.0
+        "fcf": -132126039479.0
       }
     },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup untuk membentuk rentang valuasi.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 5.794655942533414,
+        "base": 189.67909113337709,
+        "bull": 373.56352632422085,
+        "price": 3100.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
@@ -113,16 +117,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 282.1197044712796,
-        "price": 3100.0
-      }
     }
   ]
 }
