@@ -7,6 +7,7 @@ from des_universe import TICKERS as DES_TICKERS, SECTOR_BY_TICKER, DES_SOURCE
 
 TICKERS=[x.strip().upper() for x in os.getenv('TICKERS','').split(',') if x.strip()] or DES_TICKERS
 OUT='data'; os.makedirs(OUT,exist_ok=True)
+FX_CACHE={}
 
 def n(x):
     try:
@@ -29,6 +30,36 @@ def ser(df,names):
     for k in names:
         if k in df.index:return sorted([(pd.Timestamp(d),float(v)) for d,v in df.loc[k].items() if pd.notna(v) and n(v) is not None])
     return []
+
+def fx_bundle(financial_currency,quote_currency):
+    fc=(financial_currency or '').upper(); qc=(quote_currency or '').upper()
+    if not fc or not qc or fc==qc:return {'factor':1.0,'history':None,'pair':None,'applied':False}
+    key=(fc,qc)
+    if key in FX_CACHE:return FX_CACHE[key]
+    def fetch(pair,invert=False):
+        try:
+            h=yf.Ticker(pair).history(period='5y',auto_adjust=False).Close.dropna()
+            if h.empty:return None
+            if invert:h=1/h
+            return {'factor':float(h.iloc[-1]),'history':h,'pair':pair,'applied':True}
+        except:return None
+    out=fetch(f'{fc}{qc}=X') or fetch(f'{qc}{fc}=X',True)
+    FX_CACHE[key]=out
+    return out
+
+def fx_for_date(bundle,date):
+    if not bundle or not bundle.get('applied'):return 1.0
+    h=bundle.get('history'); fallback=bundle.get('factor')
+    if h is None or h.empty:return fallback
+    try:
+        d=pd.Timestamp(date); idx=h.index
+        if getattr(idx,'tz',None) is not None and d.tzinfo is None:d=d.tz_localize(idx.tz)
+        elif getattr(idx,'tz',None) is None and d.tzinfo is not None:d=d.tz_localize(None)
+        pos=idx.get_indexer([d],method='nearest')[0]
+        return float(h.iloc[pos]) if pos>=0 else fallback
+    except:return fallback
+
+def convert_series(values,bundle):return [(d,v*fx_for_date(bundle,d)) for d,v in values]
 
 def cagr(a):
     if len(a)<3 or a[0][1]<=0 or a[-1][1]<=0:return None
@@ -62,11 +93,9 @@ def hist_multiple(h,annual,shares,current_ps,years,kind,price):
     if len(vals)<30:return None
     a=np.array(vals,float); lo,hi=np.nanpercentile(a,[5,95]); a=a[(a>=lo)&(a<=hi)]
     if len(a)<10:return None
-    med=float(np.median(a)); mad=float(np.median(np.abs(a-med))); sigma=1.4826*mad
-    cur=sd(price,current_ps)
+    med=float(np.median(a)); mad=float(np.median(np.abs(a-med))); sigma=1.4826*mad; cur=sd(price,current_ps)
     if cur is None or not floor<=cur<=cap:return None
     bear=max(floor,med-sigma)*current_ps; base=med*current_ps; bull=min(cap,med+sigma)*current_ps
-    # Economic sanity: historical multiple model cannot imply >5x current price without independent support.
     if not all(.05*price<=v<=5*price for v in [bear,base,bull]):return None
     return {'mean':med,'sd':sigma,'current':cur,'z':sd(cur-med,sigma) if sigma>1e-12 else 0,'minus1':bear,'base':base,'plus1':bull,'coverageYears':coverage}
 
@@ -75,30 +104,33 @@ def analyze(sym):
     if h.empty:raise ValueError('price unavailable')
     price=n(h.Close.dropna().iloc[-1]); ys=info.get('sector') or info.get('sectorDisp'); ind=info.get('industry') or info.get('industryDisp'); ds=SECTOR_BY_TICKER.get(sym.replace('.JK','')); sector,sw,note=profile(ds,ys,ind)
     inc=t.income_stmt; bs=t.balance_sheet; cf=t.cashflow; mcap=n(info.get('marketCap')); shares=n(info.get('sharesOutstanding') or info.get('impliedSharesOutstanding')); guards=[]
+    quote_currency=(info.get('currency') or 'IDR').upper(); financial_currency=(info.get('financialCurrency') or quote_currency).upper(); fx=fx_bundle(financial_currency,quote_currency)
+    if financial_currency!=quote_currency:
+        if not fx:raise ValueError(f'currency mismatch {financial_currency}->{quote_currency}; FX unavailable')
+        guards.append(f'Laporan keuangan dinormalisasi {financial_currency}→{quote_currency} dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.')
+    factor=fx.get('factor',1.0) if fx else 1.0
     sm=sd(mcap,price) if mcap and price else None
     if shares and sm and not .8<=shares/sm<=1.25:shares=sm; guards.append('Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.')
     elif not shares:shares=sm
-    ni=stmt(inc,['Net Income','Net Income Common Stockholders']); eq=stmt(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity'])
+    ni0=stmt(inc,['Net Income','Net Income Common Stockholders']); eq0=stmt(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity']); ni=ni0*factor if ni0 is not None else None; eq=eq0*factor if eq0 is not None else None
     eps_calc=sd(ni,shares); eps_info=n(info.get('trailingEps')); eps=None
     if eps_calc and eps_calc>0:
         eps=eps_calc
         if eps_info and eps_info>0 and .5<=eps_info/eps_calc<=2:eps=eps_info
-        elif eps_info and eps_info>0:guards.append('EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.')
+        elif eps_info and eps_info>0:guards.append('EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.')
     bvps=sd(eq,shares) if eq and eq>0 and shares else None
-    roe=n(info.get('returnOnEquity')); beta=n(info.get('beta')) or 1.; ocf=stmt(cf,['Operating Cash Flow','Total Cash From Operating Activities']); capex=stmt(cf,['Capital Expenditure','Capital Expenditures']); fcf=n(info.get('freeCashflow'))
+    roe=n(info.get('returnOnEquity')); beta=n(info.get('beta')) or 1.; ocf0=stmt(cf,['Operating Cash Flow','Total Cash From Operating Activities']); capex0=stmt(cf,['Capital Expenditure','Capital Expenditures']); ocf=ocf0*factor if ocf0 is not None else None; capex=capex0*factor if capex0 is not None else None; fcf0=n(info.get('freeCashflow')); fcf=fcf0*factor if fcf0 is not None else None
     if fcf is None and ocf is not None and capex is not None:fcf=ocf+capex if capex<0 else ocf-capex
-    fcfps=sd(fcf,shares); nis=ser(inc,['Net Income','Net Income Common Stockholders']); revs=ser(inc,['Total Revenue']); fcfs=ser(cf,['Free Cash Flow']); eqs=ser(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity'])
+    fcfps=sd(fcf,shares); nis=convert_series(ser(inc,['Net Income','Net Income Common Stockholders']),fx); revs=convert_series(ser(inc,['Total Revenue']),fx); fcfs=convert_series(ser(cf,['Free Cash Flow']),fx); eqs=convert_series(ser(bs,['Stockholders Equity','Total Stockholder Equity','Common Stock Equity']),fx)
     gs=[g for g in [cagr(nis),cagr(revs),cagr(fcfs)] if g is not None]; hg=float(np.median(gs)) if gs else .08; payout=n(info.get('payoutRatio')); sust=roe*(1-clamp(payout if payout is not None else .35,0,.9)) if roe is not None else None
     growth=clamp(float(np.median([hg,sust])) if sust is not None else hg,-.03,.18); ke=clamp(.065+beta*.0738,.105,.22); terminal=.035; methods=[]; dcfdiag=None; coverage=history_years(h)
-    currentPE=sd(price,eps) if eps and eps>0 else None; currentPBV=sd(price,bvps) if bvps and bvps>0 else None
-    pe_ok=currentPE is not None and 1<=currentPE<=60; pbv_ok=currentPBV is not None and .2<=currentPBV<=12
+    currentPE=sd(price,eps) if eps and eps>0 else None; currentPBV=sd(price,bvps) if bvps and bvps>0 else None; pe_ok=currentPE is not None and 1<=currentPE<=60; pbv_ok=currentPBV is not None and .2<=currentPBV<=12
     if not pe_ok:guards.append('P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.')
     if not pbv_ok:guards.append('P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.')
     def rel(name,b):
         key='Historical P/E' if name.startswith('Historical P/E') else 'Historical PBV' if name.startswith('Historical PBV') else name; return b*sw.get(key,1)
     def add(name,bear,base,bull,q,r,family,bands=None,warning=None,explain=''):
         vals=[n(bear),n(base),n(bull)]
-        # Hard guard only catches broken units/data. It is not a valuation target cap.
         if all(v is not None and .05*price<=v<=5*price for v in vals):methods.append({'name':name,'family':family,'bear':vals[0],'base':vals[1],'bull':vals[2],'confidence':q,'relevance':rel(name,r),'rawWeight':q*rel(name,r),'bands':bands,'warning':warning,'explanation':explain})
         else:guards.append(f'{name} ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.')
     if fcfps and fcfps>0 and ke>terminal:
@@ -119,8 +151,7 @@ def analyze(sym):
         pb=hist_multiple(h,eqs,shares,bvps,5,'pbv',price)
         if pb:add('Historical PBV 5Y',pb['minus1'],pb['base'],pb['plus1'],.8,.7,'book',pb,explain='BVPS tervalidasi dikalikan median P/BV historis 5 tahun.')
     if not methods:raise ValueError('no usable valuation models after QC')
-    med=float(np.median([m['base'] for m in methods])); use=[m for m in methods if .4*med<=m['base']<=2.5*med]
-    families=set(m['family'] for m in use); sufficient=len(use)>=2 and len(families)>=2
+    med=float(np.median([m['base'] for m in methods])); use=[m for m in methods if .4*med<=m['base']<=2.5*med]; families=set(m['family'] for m in use); sufficient=len(use)>=2 and len(families)>=2
     if not sufficient:guards.append('Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.')
     tw=sum(m['rawWeight'] for m in use) if sufficient else 0
     for m in methods:m['included']=bool(sufficient and m in use); m['normalizedWeight']=sd(m['rawWeight'],tw) if sufficient and m in use else 0
@@ -128,7 +159,7 @@ def analyze(sym):
         comp=lambda k:sum(m[k]*m['normalizedWeight'] for m in use); bear,base,bull=comp('bear'),comp('base'),comp('bull'); vals=[m['base'] for m in use]; disp=sd(float(np.std(vals)),float(np.mean(vals))); agreement='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW'
     else:bear=base=bull=disp=None; agreement='INSUFFICIENT'
     cashconv=sd(fcf,ni) if ni and ni>0 else None; checks=[price,eps,bvps,roe,fcf,shares,mcap]; available=sum(v is not None for v in checks); qs=round(available/7*100); ql='BAIK' if qs>=80 and sufficient else 'CUKUP' if qs>=60 else 'TERBATAS'
-    return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'companyProfile':{'sector':ds or sector,'valuationProfile':sector,'sourceSector':ys,'industry':ind,'sectorNote':note,'sectorSource':'OJK DES Periode I 2026' if ds else 'Yahoo Finance'},'fairValue':{'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agreement,'available':sufficient},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe,'dataScore':qs,'dataLabel':ql,'availableInputs':available,'totalInputs':7,'guards':guards,'historyYears':coverage,'validMethodCount':len(use) if sufficient else 0,'independentFamilies':len(families) if sufficient else 0},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':currentPE,'currentPBV':currentPBV,'roe':roe,'fcf':fcf,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares},'source':'Yahoo Finance via yfinance','universeSource':DES_SOURCE}
+    return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'companyProfile':{'sector':ds or sector,'valuationProfile':sector,'sourceSector':ys,'industry':ind,'sectorNote':note,'sectorSource':'OJK DES Periode I 2026' if ds else 'Yahoo Finance'},'fairValue':{'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agreement,'available':sufficient},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe,'dataScore':qs,'dataLabel':ql,'availableInputs':available,'totalInputs':7,'guards':guards,'historyYears':coverage,'validMethodCount':len(use) if sufficient else 0,'independentFamilies':len(families) if sufficient else 0},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':currentPE,'currentPBV':currentPBV,'roe':roe,'fcf':fcf,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares,'quoteCurrency':quote_currency,'financialCurrency':financial_currency,'fxApplied':bool(fx and fx.get('applied')),'fxPair':fx.get('pair') if fx else None,'fxFactor':factor},'source':'Yahoo Finance via yfinance','universeSource':DES_SOURCE,'engineVersion':'3.7-fx-normalized'}
 
 summary=[]; errors=[]
 for s in TICKERS:
