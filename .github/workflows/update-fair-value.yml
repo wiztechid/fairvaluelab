@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'generate_data.py'
+      - 'postprocess_qc.py'
       - 'des_universe.py'
       - 'requirements.txt'
 
@@ -31,7 +32,10 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python generate_data.py
+      - name: Generate valuation data
+        run: python generate_data.py
+      - name: Reject extreme outliers and rebuild composites
+        run: python postprocess_qc.py
       - name: Commit refreshed valuation data
         run: |
           git config user.name "github-actions[bot]"
@@ -41,7 +45,7 @@ jobs:
             echo "No valuation data changes to commit."
             exit 0
           fi
-          git commit -m "data: refresh fair values"
+          git commit -m "data: refresh fair values with robust QC"
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               exit 0
