@@ -1,7 +1,7 @@
 {
   "ticker": "SAPX.JK",
   "name": "PT Satria Antaran Prima Tbk",
-  "asOf": "2026-09-16T09:43:29.550385+00:00",
+  "asOf": "2026-09-16T11:35:00.760357+00:00",
   "price": 366.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -44,7 +44,29 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.61x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.98x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 289.2436,
+      "base": 310.0,
+      "bull": 330.7563999999999,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 21.859308094148563,
+        "sd": 0.9451419984034398,
+        "minus1": 20.914166095745124,
+        "base": 21.859308094148563,
+        "plus1": 22.804450092552003
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -61,7 +83,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.61x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.37x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -81,16 +103,15 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
       "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "diagnosticCount": 3,
     "outlierMethodCount": 2
   },
   "raw": {
@@ -104,10 +125,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 304999989248.0,
-    "shares": 833333300.0
+    "shares": 833333300.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -119,17 +146,10 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -143,6 +163,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

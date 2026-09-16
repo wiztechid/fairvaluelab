@@ -1,7 +1,7 @@
 {
   "ticker": "MLPT.JK",
   "name": "PT Multipolar Technology Tbk",
-  "asOf": "2026-09-16T11:05:22.242302+00:00",
+  "asOf": "2026-09-16T11:33:58.387699+00:00",
   "price": 1160.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 78.07502818764982,
+    "base": 114.11673875827445,
+    "bull": 152.01741810373153,
+    "dispersion": 0.2609461155481377,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3734899140304546,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,30 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.2579086362870147,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 60.221790960051976,
+      "base": 86.85186017773827,
+      "bull": 113.48192939542459,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.667264141076886,
+        "sd": 2.7093152606883852,
+        "minus1": 4.9579488803885,
+        "base": 7.667264141076886,
+        "plus1": 10.376579401765271
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.3686014496825308,
       "qcStatus": "VALID"
     }
   ],
@@ -81,12 +103,11 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 5,
     "outlierMethodCount": 0
   },
@@ -101,18 +122,17 @@
     "costOfEquity": 0.1320842,
     "terminalGrowth": 0.035,
     "marketCap": 54374998999040.0,
-    "shares": 46875000000.0
+    "shares": 46875000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -128,9 +148,14 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 24.551279003717603,
+        "base": 31.723374069333257,
+        "bull": 44.81507362425456,
+        "price": 1160.0
+      }
     },
     {
       "name": "DCF",
@@ -151,8 +176,17 @@
         "base": 96.4831713155855,
         "price": 1160.0
       }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 86.85186017773827,
+        "price": 1160.0
+      }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "TERBATAS"
 }

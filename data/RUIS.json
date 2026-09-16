@@ -1,7 +1,7 @@
 {
   "ticker": "RUIS.JK",
   "name": "PT Radiant Utama Interinsco Tbk",
-  "asOf": "2026-09-16T11:00:47.997990+00:00",
+  "asOf": "2026-09-16T11:28:16.905528+00:00",
   "price": 202.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 161.2703663983179,
-    "base": 181.95619415137247,
-    "bull": 202.64202190442708,
-    "dispersion": 0.04944880814902538,
-    "agreement": "HIGH",
+    "bear": 174.53144294347786,
+    "base": 200.47653414932532,
+    "bull": 231.31526820646116,
+    "dispersion": 0.18963056550721089,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.41189931350114417,
+      "normalizedWeight": 0.3287671232876712,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.41189931350114417,
+      "normalizedWeight": 0.3287671232876712,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.17620137299771169,
+      "normalizedWeight": 0.14063926940639268,
       "qcStatus": "VALID"
     },
     {
@@ -110,7 +110,26 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.82x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.70x dari median metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 226.97570041166713,
+      "base": 273.71986970684037,
+      "bull": 344.7108214552295,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.02192022086824067,
+        "sd": 0.004514326923076925
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.20182648401826483,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -131,9 +150,9 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -147,10 +166,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 155539996672.0,
-    "shares": 770000000.0
+    "shares": 770000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -164,16 +189,14 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 0.3652055920593262,
+        "base": 85.07218698335016,
+        "bull": 169.779168374641,
+        "price": 202.0
+      }
     },
     {
       "name": "Graham Number",
@@ -186,6 +209,5 @@
       }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

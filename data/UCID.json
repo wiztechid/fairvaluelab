@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-16T11:03:03.787987+00:00",
+  "asOf": "2026-09-16T11:31:08.032646+00:00",
   "price": 500.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 756.7137123994391,
-    "base": 1107.8054292821528,
-    "bull": 1450.7177097331257,
-    "dispersion": 0.20310489366611828,
-    "agreement": "MEDIUM",
+    "bear": 646.2771377437416,
+    "base": 942.7143572078301,
+    "bull": 1267.2265740175803,
+    "dispersion": 0.3939592077655878,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.36650082918739635,
+      "normalizedWeight": 0.2834060015388561,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.44776119402985076,
+      "normalizedWeight": 0.34624262631443964,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +74,26 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.18573797678275286,
+      "normalizedWeight": 0.14362657091561937,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 269.61845834676404,
+      "base": 379.6492188547949,
+      "bull": 641.4055624990621,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.017573706644584963,
+        "sd": 0.007171794983568214
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.22672480123108493,
       "qcStatus": "VALID"
     }
   ],
@@ -106,9 +125,9 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -122,10 +141,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2078286151680.0,
-    "shares": 4156572300.0
+    "shares": 4156572300.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -137,18 +162,12 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol; EV/EBITDA tidak digunakan.",
+      "inputs": {
+        "ebitda": -736105000000.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

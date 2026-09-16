@@ -1,7 +1,7 @@
 {
   "ticker": "PNGO.JK",
   "name": "PT AEP Pinago Plantations Tbk",
-  "asOf": "2026-09-16T11:02:51.863149+00:00",
+  "asOf": "2026-09-16T11:30:52.262919+00:00",
   "price": 3590.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 2100.702940841789,
-    "base": 2748.0631362811796,
-    "bull": 3293.9099260231337,
-    "dispersion": 0.3535992042236345,
-    "agreement": "LOW",
+    "bear": 1854.255071572398,
+    "base": 2283.354447208435,
+    "bull": 2694.5033948565074,
+    "dispersion": 0.2982352782499822,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.13821138211382114,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.08x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -49,7 +50,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.16885553470919326,
+      "normalizedWeight": 0.14340344168260039,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.2701688555347092,
+      "normalizedWeight": 0.22944550669216063,
       "qcStatus": "VALID"
     },
     {
@@ -99,7 +100,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2701688555347092,
+      "normalizedWeight": 0.22944550669216063,
       "qcStatus": "VALID"
     },
     {
@@ -124,7 +125,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.07004377736085052,
+      "normalizedWeight": 0.05948587210537497,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 1952.4687240214766,
+      "base": 2217.563858794971,
+      "bull": 2482.658993568465,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 4.336116471559894,
+        "sd": 0.44936228372192805,
+        "minus1": 3.886754187837966,
+        "base": 4.336116471559894,
+        "plus1": 4.785478755281822
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.17420862545145527,
       "qcStatus": "VALID"
     },
     {
@@ -140,7 +163,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.0825515947467167,
+      "normalizedWeight": 0.07010834926704908,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 892.4161970945439,
+      "base": 1314.705882352941,
+      "bull": 2495.636375078878,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.06845637583892618,
+        "sd": 0.03239342977084948
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.09390269810919909,
       "qcStatus": "VALID"
     }
   ],
@@ -170,10 +212,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 6,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "validMethodCount": 7,
+    "independentFamilies": 6,
+    "diagnosticCount": 1,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 423.07,
@@ -186,26 +228,27 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2804687568896.0,
-    "shares": 781250000.0
+    "shares": 781250000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 4773.095689567038,
+        "price": 3590.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "BMHS.JK",
   "name": "PT Bundamedik Tbk",
-  "asOf": "2026-09-16T11:04:11.447259+00:00",
+  "asOf": "2026-09-16T11:32:30.981553+00:00",
   "price": 199.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 160.19803844917482,
-    "base": 230.27156214843117,
-    "bull": 300.3450858476876,
-    "dispersion": 0.6603868631899033,
-    "agreement": "LOW",
+    "bear": 225.3523699348985,
+    "base": 363.594077807193,
+    "bull": 501.8357856794877,
+    "dispersion": 0.09536729653561071,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -42,7 +42,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.43298969072164945,
+      "normalizedWeight": 0.23507462686567163,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 208.52782661506816,
+      "base": 346.42405094924334,
+      "bull": 484.3202752834186,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 17.895989011720083,
+        "sd": 5.190900078922685,
+        "minus1": 12.705088932797398,
+        "base": 17.895989011720083,
+        "plus1": 23.086889090642767
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7649253731343283,
       "qcStatus": "VALID"
     },
     {
@@ -57,9 +79,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": true,
-      "normalizedWeight": 0.5670103092783505,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.04x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -86,7 +109,7 @@
     "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 1.4434918719431247,
@@ -99,10 +122,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1712079896576.0,
-    "shares": 8603416176.0
+    "shares": 8603416176.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -114,20 +143,22 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 85.79672587713802,
+        "price": 199.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "MRAT.JK",
   "name": "PT Mustika Ratu Tbk",
-  "asOf": "2026-09-16T11:02:46.036792+00:00",
+  "asOf": "2026-09-16T11:30:44.693280+00:00",
   "price": 390.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 242.52599537033902,
-    "base": 326.49400035318394,
-    "bull": 429.9331608341881,
-    "dispersion": 0.31936414394641127,
+    "bear": 228.64990978436546,
+    "base": 322.09873711663164,
+    "bull": 429.3719126938332,
+    "dispersion": 0.28843436928016675,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.35990037359900373,
+      "normalizedWeight": 0.25552608311229,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.3362391033623911,
+      "normalizedWeight": 0.23872679045092843,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +74,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.13947696139476962,
+      "normalizedWeight": 0.09902740937223696,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 194.67888318211916,
+      "base": 311.3383823027552,
+      "bull": 427.99788142339116,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 4.408991295037309,
+        "sd": 2.656916749094581,
+        "minus1": 1.7520745459427278,
+        "base": 4.408991295037309,
+        "plus1": 7.0659080441318896
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2900088417329797,
       "qcStatus": "VALID"
     },
     {
@@ -90,7 +112,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.16438356164383564,
+      "normalizedWeight": 0.116710875331565,
       "qcStatus": "VALID"
     }
   ],
@@ -119,13 +141,13 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -139,26 +161,24 @@
     "costOfEquity": 0.10514720000000001,
     "terminalGrowth": 0.035,
     "marketCap": 166919995392.0,
-    "shares": 428000000.0
+    "shares": 428000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

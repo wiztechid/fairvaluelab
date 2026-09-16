@@ -1,7 +1,7 @@
 {
   "ticker": "MAHA.JK",
   "name": "PT Mandiri Herindo Adiperkasa Tbk",
-  "asOf": "2026-09-16T11:00:36.959363+00:00",
+  "asOf": "2026-09-16T11:28:03.642074+00:00",
   "price": 143.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 197.4990276427667,
-    "base": 245.51994341841086,
-    "bull": 293.99789123517996,
-    "dispersion": 0.03390099793285513,
-    "agreement": "HIGH",
+    "bear": 149.3717966635935,
+    "base": 189.22117657599838,
+    "bull": 221.25884726309775,
+    "dispersion": 0.2629460579655831,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2548567373369999,
+      "normalizedWeight": 0.1052034127943169,
       "qcStatus": "VALID"
     },
     {
@@ -48,10 +48,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.02x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.21751071075469627,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -75,7 +74,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.5109553801117714,
+      "normalizedWeight": 0.21091947709546305,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 143.73746527389633,
+      "base": 175.96192009825825,
+      "bull": 208.1863749226201,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.542722538507277,
+        "sd": 1.3595460232284373,
+        "minus1": 6.18317651527884,
+        "base": 7.542722538507277,
+        "plus1": 8.902268561735715
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.24021384891427733,
       "qcStatus": "VALID"
     },
     {
@@ -91,7 +112,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.23418788255122858,
+      "normalizedWeight": 0.09667142700208722,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 144.702842377261,
+      "base": 152.0,
+      "bull": 160.07221302843388,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.07894736842105263,
+        "sd": 0.003981203007518794
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.12948112343915927,
       "qcStatus": "VALID"
     }
   ],
@@ -121,10 +161,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 3.1457905544147846,
-    "validMethodCount": 3,
-    "independentFamilies": 3,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1
+    "validMethodCount": 6,
+    "independentFamilies": 5,
+    "diagnosticCount": 0,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 22.65,
@@ -137,36 +177,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2344480669696.0,
-    "shares": 16394970000.0
+    "shares": 16394970000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
-    {
-      "name": "FCF Yield",
-      "family": "cashflow",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 119.1772042278821,
-        "price": 143.0
-      }
-    }
-  ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "engineVersion": "3.6-transparent-negative-qc",
+  "methodDiagnostics": [],
+  "analysisStatus": "SIAP"
 }

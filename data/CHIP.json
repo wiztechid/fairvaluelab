@@ -104,7 +104,30 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 11.66x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 10.95x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 63.27804084189668,
+      "base": 185.05516267904406,
+      "bull": 306.8322845161914,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 13.63437660392275,
+        "sd": 8.757403355595203,
+        "minus1": 4.8769732483275465,
+        "base": 13.63437660392275,
+        "plus1": 22.391779959517955
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 7.00x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -127,9 +150,10 @@
     "independentFamilies": 2,
     "diagnosticCount": 4,
     "guards": [
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
-    "outlierMethodCount": 1
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 7.32,
@@ -157,17 +181,10 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     },
     {
@@ -177,6 +194,16 @@
       "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
       "inputs": {
         "base": 118.28123280966719,
+        "price": 730.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 185.05516267904406,
         "price": 730.0
       }
     }

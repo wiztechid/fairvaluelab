@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 233.67307591891645,
+    "base": 286.3698232811899,
+    "bull": 339.06657064346325,
+    "dispersion": 0.41826436170199915,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
@@ -64,9 +64,31 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.28695652173913044,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 282.19061992124836,
+      "base": 344.7141897063482,
+      "bull": 407.237759491448,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 13.958465577773707,
+        "sd": 2.3031993440670027,
+        "minus1": 11.655266233706705,
+        "base": 13.958465577773707,
+        "plus1": 16.26166492184071
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7130434782608696,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -97,12 +119,13 @@
       "Riwayat harga 2.6 tahun; Historical 5Y dinonaktifkan.",
       "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 2.5927446954141,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 5,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 4,
     "outlierMethodCount": 2
   },
   "raw": {
@@ -122,17 +145,10 @@
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {

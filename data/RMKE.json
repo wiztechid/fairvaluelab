@@ -1,7 +1,7 @@
 {
   "ticker": "RMKE.JK",
   "name": "PT RMK Energy Tbk",
-  "asOf": "2026-09-16T11:00:46.584458+00:00",
+  "asOf": "2026-09-16T11:28:15.388070+00:00",
   "price": 400.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 116.44860796869244,
-    "base": 144.40033279717602,
-    "bull": 172.3520576256596,
-    "dispersion": 0.1003103037154085,
+    "bear": 107.89486420658218,
+    "base": 133.31852711132336,
+    "bull": 158.74219001606454,
+    "dispersion": 0.15844754280656484,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.34648700673724736,
+      "normalizedWeight": 0.24844720496894412,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.34648700673724736,
+      "normalizedWeight": 0.24844720496894412,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.1482194417709336,
+      "normalizedWeight": 0.10628019323671499,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 86.21842574601492,
+      "base": 105.23560977571134,
+      "bull": 124.25279380540776,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.023668595629767,
+        "sd": 1.1697312991152942,
+        "minus1": 5.853937296514473,
+        "base": 7.023668595629767,
+        "plus1": 8.193399894745061
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.28295376121463073,
       "qcStatus": "VALID"
     },
     {
@@ -108,8 +130,28 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.15880654475457168,
+      "normalizedWeight": 0.11387163561076605,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 488.31788161495496,
+      "base": 623.8193018480493,
+      "bull": 863.4010975447678,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.009618169848584594,
+        "sd": 0.002668908355795148
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.26x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -130,10 +172,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.774811772758385,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 14.61,
@@ -146,10 +188,16 @@
     "costOfEquity": 0.1072874,
     "terminalGrowth": 0.035,
     "marketCap": 8749999718400.0,
-    "shares": 21875000000.0
+    "shares": 21875000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -161,20 +209,15 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 623.8193018480493,
+        "price": 400.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

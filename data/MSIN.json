@@ -1,7 +1,7 @@
 {
   "ticker": "MSIN.JK",
   "name": "PT MNC Digital Entertainment Tbk",
-  "asOf": "2026-09-16T11:03:50.672938+00:00",
+  "asOf": "2026-09-16T11:32:05.203983+00:00",
   "price": 308.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 389.3151407908696,
-    "base": 449.5635094781701,
-    "bull": 509.9451069919967,
-    "dispersion": 0.49488454334258153,
-    "agreement": "LOW",
+    "bear": 480.9513880194572,
+    "base": 540.3920470864722,
+    "bull": 599.8327061534868,
+    "dispersion": 0.12686157670754158,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.16629044394281414,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.38x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -51,7 +52,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.23x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 8.11x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -75,7 +76,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.32505643340857787,
+      "normalizedWeight": 0.3312883435582822,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +101,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32505643340857787,
+      "normalizedWeight": 0.3312883435582822,
       "qcStatus": "VALID"
     },
     {
@@ -125,7 +126,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.08427389014296462,
+      "normalizedWeight": 0.08588957055214723,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 464.0394,
+      "base": 510.00000000000006,
+      "bull": 555.9606000000001,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 23.003982724986308,
+        "sd": 2.1011959406426333,
+        "minus1": 20.902786784343675,
+        "base": 23.003982724986308,
+        "plus1": 25.10517866562894
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.25153374233128833,
       "qcStatus": "VALID"
     },
     {
@@ -140,9 +163,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": true,
-      "normalizedWeight": 0.09932279909706546,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.52x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -171,10 +195,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 3
   },
   "raw": {
     "epsTTM": 16.78,
@@ -187,26 +211,34 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 18688262537216.0,
-    "shares": 60676178205.0
+    "shares": 60676178205.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 62.872696778407054,
+        "price": 308.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

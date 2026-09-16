@@ -1,7 +1,7 @@
 {
   "ticker": "JAWA.JK",
   "name": "PT Jaya Agra Wattie Tbk",
-  "asOf": "2026-09-16T11:02:38.846974+00:00",
+  "asOf": "2026-09-16T11:30:35.698654+00:00",
   "price": 154.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 100.89550586025834,
+    "base": 140.8188063777942,
+    "bull": 180.7421068953301,
+    "dispersion": 0.10535130176635583,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -41,9 +41,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.2545454545454546,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 106.4872,
+      "base": 148.0,
+      "bull": 189.5128,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 20.64136805986617,
+        "sd": 4.088966809980289,
+        "minus1": 16.552401249885882,
+        "base": 20.64136805986617,
+        "plus1": 24.73033486984646
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7454545454545455,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -64,14 +86,12 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -85,10 +105,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2499874652160.0,
-    "shares": 16232951842.0
+    "shares": 16232951842.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -107,20 +133,12 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

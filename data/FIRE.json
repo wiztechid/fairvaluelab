@@ -1,7 +1,7 @@
 {
   "ticker": "FIRE.JK",
   "name": "PT Alfa Energi Investama Tbk",
-  "asOf": "2026-09-16T11:00:30.420505+00:00",
+  "asOf": "2026-09-16T11:27:56.466365+00:00",
   "price": 122.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 47.663388898830846,
+    "base": 87.38145007464894,
+    "bull": 127.09951125046703,
+    "dispersion": 0.08814430861798557,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -41,10 +41,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.87x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.2730496453900709,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 39.53726791525947,
+      "base": 83.0,
+      "bull": 126.46273208474052,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.371408741805115,
+        "sd": 2.9692614846009873,
+        "minus1": 2.4021472572041276,
+        "base": 5.371408741805115,
+        "plus1": 8.340670226406102
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.726950354609929,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -61,7 +82,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.87x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 6.89x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -81,17 +102,15 @@
     "availableInputs": 5,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 2
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 0.039626579293938036,
@@ -104,10 +123,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 179994312704.0,
-    "shares": 1475363179.0
+    "shares": 1475363179.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -117,17 +142,10 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -141,6 +159,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "PSGO.JK",
   "name": "PT Palma Serasih Tbk",
-  "asOf": "2026-09-16T11:02:52.987734+00:00",
+  "asOf": "2026-09-16T11:30:53.693494+00:00",
   "price": 194.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 162.77561016177538,
-    "base": 222.17107131248787,
-    "bull": 270.0032670963019,
-    "dispersion": 0.3398819714590406,
-    "agreement": "LOW",
+    "bear": 141.3963443963391,
+    "base": 187.15952468365768,
+    "bull": 227.7409466527237,
+    "dispersion": 0.1932055418982736,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.13821138211382114,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.21x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -49,7 +50,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.16885553470919326,
+      "normalizedWeight": 0.14340344168260039,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.2701688555347092,
+      "normalizedWeight": 0.22944550669216063,
       "qcStatus": "VALID"
     },
     {
@@ -99,7 +100,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2701688555347092,
+      "normalizedWeight": 0.22944550669216063,
       "qcStatus": "VALID"
     },
     {
@@ -124,7 +125,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.07004377736085052,
+      "normalizedWeight": 0.05948587210537497,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 132.4797681754408,
+      "base": 182.95495374826424,
+      "bull": 233.43013932108764,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.12370285413459,
+        "sd": 1.4663326647026793,
+        "minus1": 3.6573701894319113,
+        "base": 5.12370285413459,
+        "plus1": 6.5900355188372695
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.17420862545145527,
       "qcStatus": "VALID"
     },
     {
@@ -140,7 +163,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.0825515947467167,
+      "normalizedWeight": 0.07010834926704908,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 103.48676802487972,
+      "base": 144.75,
+      "bull": 240.74025075691998,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.04145077720207254,
+        "sd": 0.016527649552520018
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.09390269810919909,
       "qcStatus": "VALID"
     }
   ],
@@ -170,10 +212,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 6,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "validMethodCount": 7,
+    "independentFamilies": 6,
+    "diagnosticCount": 1,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 21.23,
@@ -186,26 +228,27 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 3656900149248.0,
-    "shares": 18850000000.0
+    "shares": 18850000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 400.3104741344257,
+        "price": 194.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

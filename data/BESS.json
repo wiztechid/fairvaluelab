@@ -1,7 +1,7 @@
 {
   "ticker": "BESS.JK",
   "name": "PT Batulicin Nusantara Maritim Tbk",
-  "asOf": "2026-09-16T11:00:21.055618+00:00",
+  "asOf": "2026-09-16T11:27:44.565499+00:00",
   "price": 920.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 228.63193510139678,
-    "base": 322.69163059227117,
-    "bull": 419.23564301116915,
-    "dispersion": 0.5407098024073799,
+    "bear": 180.70150319654863,
+    "base": 293.9111754349068,
+    "bull": 408.8022321951283,
+    "dispersion": 0.5015643283529158,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.20914318992502,
+      "normalizedWeight": 0.141548012021481,
       "qcStatus": "VALID"
     },
     {
@@ -51,7 +51,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.92x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.06x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -75,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.419305525223848,
+      "normalizedWeight": 0.28378578114992364,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +100,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.17936958579020165,
+      "normalizedWeight": 0.12139725082524512,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 80.33254845921638,
+      "base": 233.6433229201637,
+      "bull": 386.954097381111,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 9.444185080136137,
+        "sd": 7.861949116690775,
+        "minus1": 1.5822359634453615,
+        "base": 9.444185080136137,
+        "plus1": 17.30613419682691
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.3232004729763019,
       "qcStatus": "VALID"
     },
     {
@@ -116,7 +138,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.19218169906093033,
+      "normalizedWeight": 0.13006848302704835,
       "qcStatus": "VALID"
     }
   ],
@@ -145,12 +167,12 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 4,
-    "diagnosticCount": 4,
+    "validMethodCount": 5,
+    "independentFamilies": 5,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -164,23 +186,22 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 3165218930688.0,
-    "shares": 3440455528.0
+    "shares": 3440455528.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -204,6 +225,5 @@
       }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "BMSR.JK",
   "name": "PT Bintang Mitra Semestaraya Tbk",
-  "asOf": "2026-09-16T11:01:04.204021+00:00",
+  "asOf": "2026-09-16T11:28:36.975217+00:00",
   "price": 370.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 91.1819673018525,
-    "base": 301.8142378798153,
-    "bull": 526.8845725049448,
-    "dispersion": 0.1641919443691695,
+    "bear": 126.16278995136943,
+    "base": 304.83551099504166,
+    "bull": 493.58402176064953,
+    "dispersion": 0.14266376756118854,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.40390707497360084,
+      "normalizedWeight": 0.2818717759764186,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.40390707497360084,
+      "normalizedWeight": 0.2818717759764186,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.19218585005279828,
+      "normalizedWeight": 0.13411938098747236,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 206.95995836379024,
+      "base": 311.81391499533254,
+      "bull": 416.6678716268747,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 1.9532054368374672,
+        "sd": 1.1847152848906939,
+        "minus1": 0.7684901519467733,
+        "base": 1.9532054368374672,
+        "plus1": 3.137920721728161
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.30213706705969046,
       "qcStatus": "VALID"
     },
     {
@@ -110,7 +132,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.51x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.75x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -130,11 +152,11 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
     "outlierMethodCount": 1
   },
@@ -149,10 +171,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 428903989248.0,
-    "shares": 1159200024.0
+    "shares": 1159200024.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -164,20 +192,22 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 865.8631494875814,
+        "price": 370.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "AKPI.JK",
   "name": "PT Argha Karya Prima Industry Tbk",
-  "asOf": "2026-09-16T11:00:57.688454+00:00",
+  "asOf": "2026-09-16T11:28:29.210435+00:00",
   "price": 550.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 541.1104729568158,
-    "base": 728.3859242707335,
-    "bull": 915.6613755846513,
-    "dispersion": 0.30998218698235797,
-    "agreement": "MEDIUM",
+    "bear": 397.8867235887247,
+    "base": 605.2401171528493,
+    "bull": 821.6642475443302,
+    "dispersion": 0.40503189557040814,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.41129032258064513,
+      "normalizedWeight": 0.2450352338244715,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.41129032258064513,
+      "normalizedWeight": 0.2450352338244715,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 72.87115328793271,
+      "base": 384.68466659467185,
+      "bull": 696.4981799014114,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 14.547295029453243,
+        "sd": 1.8541918330371145,
+        "minus1": 12.693103196416128,
+        "base": 14.547295029453243,
+        "plus1": 16.40148686249036
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2626521460602178,
       "qcStatus": "VALID"
     },
     {
@@ -83,7 +105,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.1774193548387097,
+      "normalizedWeight": 0.10570147341447791,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 398.1505105163262,
+      "base": 496.2,
+      "bull": 658.3192640877596,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.016666666666666666,
+        "sd": 0.004104372881355932
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.14157591287636134,
       "qcStatus": "VALID"
     }
   ],
@@ -104,14 +145,14 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -125,10 +166,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 336736387072.0,
-    "shares": 612248000.0
+    "shares": 612248000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -138,22 +185,7 @@
       "inputs": {
         "fcf": -411142520832.0
       }
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "ASSA.JK",
   "name": "PT Adi Sarana Armada Tbk",
-  "asOf": "2026-09-16T09:43:12.396281+00:00",
+  "asOf": "2026-09-16T11:34:42.814050+00:00",
   "price": 600.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 759.4179777965113,
-    "base": 1209.1310100918827,
-    "bull": 1658.8440423872544,
-    "dispersion": 0.10646376145735792,
+    "bear": 632.5720887320466,
+    "base": 1278.4099594234606,
+    "bull": 1924.247830114875,
+    "dispersion": 0.13158462363621334,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.3500432152117546,
+      "normalizedWeight": 0.2584556477345246,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3500432152117546,
+      "normalizedWeight": 0.2584556477345246,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.15730337078651685,
+      "normalizedWeight": 0.11614550095724314,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 274.6191773964714,
+      "base": 1473.91177497623,
+      "bull": 2673.204372555989,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.503081904148283,
+        "sd": 3.8761854879732685,
+        "minus1": 3.626896416175015,
+        "base": 7.503081904148283,
+        "plus1": 11.379267392121552
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2616464582003829,
       "qcStatus": "VALID"
     },
     {
@@ -108,8 +130,28 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.14261019878997408,
+      "normalizedWeight": 0.10529674537332483,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 420.7086086420926,
+      "base": 558.75,
+      "bull": 831.6172541594589,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.053691275167785234,
+        "sd": 0.017616987567389157
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.17x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -141,10 +183,10 @@
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 111.98,
@@ -157,26 +199,27 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2214682427392.0,
-    "shares": 3691137517.0
+    "shares": 3691137517.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 558.75,
+        "price": 600.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

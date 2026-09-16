@@ -1,14 +1,14 @@
 {
   "ticker": "KARW.JK",
   "name": "PT Meratus Jasa Prima Tbk",
-  "asOf": "2026-09-16T08:37:18.592931+00:00",
+  "asOf": "2026-09-16T11:34:24.995119+00:00",
   "price": 212.0,
   "companyProfile": {
     "sector": "Infrastruktur",
     "valuationProfile": "Infrastruktur",
     "sourceSector": "Industrials",
     "industry": "Marine Shipping",
-    "sectorNote": "DCF dan FCF mendapat bobot lebih besar untuk aset dan arus kas jangka panjang.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -22,9 +22,10 @@
   "methods": [
     {
       "name": "DCF",
-      "bear": 0.024376900903657295,
-      "base": 0.029739525229122866,
-      "bull": 0.04126235059871963,
+      "family": "cashflow",
+      "bear": 431.22737698569756,
+      "base": 526.0922013031834,
+      "bull": 729.9309820913502,
       "confidence": 0.85,
       "relevance": 1.02,
       "rawWeight": 0.867,
@@ -33,29 +34,28 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
-      "bear": 0.01667466572154058,
-      "base": 0.024035554193211645,
-      "bull": 0.029318093576335087,
+      "family": "cashflow",
+      "bear": 294.97483661405283,
+      "base": 425.188953677914,
+      "bull": 518.6370753653677,
       "confidence": 0.75,
       "relevance": 0.9,
       "rawWeight": 0.675,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.6914052596292686,
-    "bearTerminalValueShare": 0.6313413487529989,
+    "bearTerminalValueShare": 0.6313413487529987,
     "bullTerminalValueShare": 0.7446437120520003,
     "warning": false,
     "growth": -0.03,
@@ -73,85 +73,76 @@
   "quality": {
     "cashConversion": null,
     "roe": null,
-    "dataScore": 70,
-    "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
+    "dataScore": 57,
+    "dataLabel": "TERBATAS",
+    "availableInputs": 4,
+    "totalInputs": 7,
     "guards": [
-      "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
+      "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
       "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.996577686516085,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": 0.89,
-    "bvps": -0.055,
-    "currentPE": 238.20224719101122,
+    "epsTTM": null,
+    "bvps": null,
+    "currentPE": null,
     "currentPBV": null,
     "roe": null,
-    "fcf": 1566492.0,
+    "fcf": 27711243480.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 124476375040.0,
-    "shares": 587152700.0
+    "shares": 587152700.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "USD",
+    "fxApplied": true,
+    "fxPair": "USDIDR=X",
+    "fxFactor": 17690.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
-      "status": "NEGATIVE",
-      "reason": "Ekuitas/BVPS negatif; metode berbasis book value tidak digunakan.",
-      "inputs": {
-        "bvps": -0.055
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "BVPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol; EV/EBITDA tidak digunakan.",
+      "inputs": {
+        "ebitda": -40618.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.024376900903657295,
-        "base": 0.029739525229122866,
-        "bull": 0.04126235059871963,
-        "price": 212.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.01667466572154058,
-        "base": 0.024035554193211645,
-        "bull": 0.029318093576335087,
-        "price": 212.0
-      }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "TERBATAS"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "MKPI.JK",
   "name": "PT Metropolitan Kentjana Tbk",
-  "asOf": "2026-09-16T11:04:56.712533+00:00",
+  "asOf": "2026-09-16T11:33:26.455176+00:00",
   "price": 21750.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 21694.9750017242,
-    "base": 27035.62018613157,
-    "bull": 31883.153749338348,
-    "dispersion": 0.31613457240929366,
+    "bear": 23550.434851176997,
+    "base": 29189.30448183645,
+    "bull": 34856.70440115528,
+    "dispersion": 0.23541714065861552,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.12108641202254226,
+      "normalizedWeight": 0.10616978930752866,
       "qcStatus": "VALID"
     },
     {
@@ -48,9 +48,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.1162335629304947,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.95x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -74,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.2113337507827176,
+      "normalizedWeight": 0.18529956763434222,
       "qcStatus": "VALID"
     },
     {
@@ -99,7 +100,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2113337507827176,
+      "normalizedWeight": 0.18529956763434222,
       "qcStatus": "VALID"
     },
     {
@@ -124,7 +125,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2366938008766437,
+      "normalizedWeight": 0.20753551575046325,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 23800.811472499314,
+      "base": 30914.798967703777,
+      "bull": 38028.78646290824,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 22.51219901783714,
+        "sd": 5.724754370551049,
+        "minus1": 16.78744464728609,
+        "base": 22.51219901783714,
+        "plus1": 28.23695338838819
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.22510465994097864,
       "qcStatus": "VALID"
     },
     {
@@ -140,7 +163,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.10331872260488416,
+      "normalizedWeight": 0.09059089973234508,
       "qcStatus": "VALID"
     }
   ],
@@ -171,9 +194,9 @@
     "guards": [],
     "historyYears": 4.999315537303217,
     "validMethodCount": 6,
-    "independentFamilies": 4,
+    "independentFamilies": 5,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 1229.52,
@@ -186,26 +209,39 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 20623218704384.0,
-    "shares": 948194000.0
+    "shares": 948194000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 27531.925662701295,
+        "base": 47899.53271028038,
+        "bull": 184074.22180721522,
+        "price": 21750.0
+      }
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 14471.561284341016,
+        "price": 21750.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

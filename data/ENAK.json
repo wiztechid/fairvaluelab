@@ -1,7 +1,7 @@
 {
   "ticker": "ENAK.JK",
   "name": "PT Champ Resto Indonesia Tbk",
-  "asOf": "2026-09-16T11:03:23.144714+00:00",
+  "asOf": "2026-09-16T11:31:31.465670+00:00",
   "price": 224.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 352.1140648032759,
+    "base": 459.5036960863155,
+    "bull": 583.1105390903873,
+    "dispersion": 0.41029555748419766,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.32581736189402477,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,30 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3043968432919955,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 536.8330448072138,
+      "base": 700.0,
+      "bull": 863.1669551927863,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 11.529841189182187,
+        "sd": 1.9708510345267358,
+        "minus1": 9.55899015465545,
+        "base": 11.529841189182187,
+        "plus1": 13.500692223708924
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.3697857948139797,
       "qcStatus": "VALID"
     }
   ],
@@ -79,14 +101,12 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.602327173169062,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -100,10 +120,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 483723476992.0,
-    "shares": 2159479800.0
+    "shares": 2159479800.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -113,20 +139,12 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

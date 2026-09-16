@@ -1,7 +1,7 @@
 {
   "ticker": "KETR.JK",
   "name": "PT Ketrosden Triasmitra",
-  "asOf": "2026-09-16T09:42:56.112111+00:00",
+  "asOf": "2026-09-16T11:34:26.569036+00:00",
   "price": 925.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 207.88566325807477,
-    "base": 266.7215284920767,
-    "bull": 325.55739372607854,
-    "dispersion": 0.47715972610020685,
+    "bear": 218.16278736778443,
+    "base": 326.94211901433005,
+    "bull": 435.7214506608756,
+    "dispersion": 0.3756308479406205,
     "agreement": "LOW",
     "available": true
   },
@@ -42,7 +42,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.6986301369863014,
+      "normalizedWeight": 0.39947780678851175,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 231.88650797770165,
+      "base": 407.3586392849001,
+      "bull": 582.8307705920985,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 6.8860671780584735,
+        "sd": 2.0456901248266792,
+        "minus1": 4.840377053231794,
+        "base": 6.8860671780584735,
+        "plus1": 8.931757302885153
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.4281984334203655,
       "qcStatus": "VALID"
     },
     {
@@ -58,7 +80,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.30136986301369867,
+      "normalizedWeight": 0.17232375979112272,
       "qcStatus": "VALID"
     }
   ],
@@ -79,13 +101,12 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 3.8494182067077345,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -99,10 +120,16 @@
     "costOfEquity": 0.1066232,
     "terminalGrowth": 0.035,
     "marketCap": 2628168187904.0,
-    "shares": 2841262838.0
+    "shares": 2841262838.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -114,17 +141,10 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -138,6 +158,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

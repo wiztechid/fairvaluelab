@@ -1,7 +1,7 @@
 {
   "ticker": "AMFG.JK",
   "name": "PT Asahimas Flat Glass Tbk",
-  "asOf": "2026-09-16T11:01:45.973824+00:00",
+  "asOf": "2026-09-16T11:29:27.386846+00:00",
   "price": 3250.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 2285.7447911561967,
-    "base": 3689.006918811373,
-    "bull": 5203.415059142405,
-    "dispersion": 0.4624834902313478,
+    "bear": 2436.1788779050507,
+    "base": 3796.204090124486,
+    "bull": 5326.386067393054,
+    "dispersion": 0.42399768773254054,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.18566105614801487,
+      "normalizedWeight": 0.1667243567555094,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.17345496595143262,
+      "normalizedWeight": 0.15576323987538943,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +74,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.2312732879352435,
+      "normalizedWeight": 0.20768431983385255,
       "qcStatus": "VALID"
     },
     {
@@ -99,7 +99,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2312732879352435,
+      "normalizedWeight": 0.20768431983385255,
       "qcStatus": "VALID"
     },
     {
@@ -124,7 +124,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.09353719645380958,
+      "normalizedWeight": 0.0839967693550248,
       "qcStatus": "VALID"
     },
     {
@@ -140,7 +140,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.08480020557625595,
+      "normalizedWeight": 0.0761509172724126,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 3760.6455036588172,
+      "base": 4740.0,
+      "bull": 6409.05954840527,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.016877637130801686,
+        "sd": 0.004395306549257014
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.1019960770739587,
       "qcStatus": "VALID"
     }
   ],
@@ -170,9 +189,9 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 6,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
+    "validMethodCount": 7,
+    "independentFamilies": 5,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -186,26 +205,28 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1410500001792.0,
-    "shares": 434000000.0
+    "shares": 434000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "Hasil valuasi nol/negatif. Nilai dicatat sebagai diagnostik tetapi tidak layak masuk Composite FV.",
+      "inputs": {
+        "bear": -732.3344581956793,
+        "base": 1523.4764125530978,
+        "bull": 3779.2872833018746
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

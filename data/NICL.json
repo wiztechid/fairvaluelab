@@ -1,7 +1,7 @@
 {
   "ticker": "NICL.JK",
   "name": "PT PAM Mineral Tbk",
-  "asOf": "2026-09-16T11:01:25.942791+00:00",
+  "asOf": "2026-09-16T11:29:03.736974+00:00",
   "price": 454.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 168.30313803453532,
-    "base": 259.94646247083887,
-    "bull": 331.99713150941267,
-    "dispersion": 0.11968268391404811,
+    "bear": 156.59419336423957,
+    "base": 251.47135137439406,
+    "bull": 368.3264796967247,
+    "dispersion": 0.15863497310023078,
     "agreement": "HIGH",
     "available": true
   },
@@ -50,7 +50,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.24166737703520585,
+      "normalizedWeight": 0.16896120150187735,
       "qcStatus": "VALID"
     },
     {
@@ -75,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.26084732759355556,
+      "normalizedWeight": 0.182370820668693,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +100,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.26084732759355556,
+      "normalizedWeight": 0.182370820668693,
       "qcStatus": "VALID"
     },
     {
@@ -125,7 +125,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.12411559116869832,
+      "normalizedWeight": 0.08677513558614935,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 144.63669469187928,
+      "base": 263.85942021077796,
+      "bull": 383.0821457296766,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.505979797966636,
+        "sd": 2.719668288224619,
+        "minus1": 2.786311509742017,
+        "base": 5.505979797966636,
+        "plus1": 8.225648086191255
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.1954824482984683,
       "qcStatus": "VALID"
     },
     {
@@ -141,7 +163,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.11252237660898474,
+      "normalizedWeight": 0.0786697657786519,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 101.08682103284953,
+      "base": 172.25506514377548,
+      "bull": 582.0035153286675,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.03483206717313075,
+        "sd": 0.024522851091142488
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.10536980749746709,
       "qcStatus": "VALID"
     }
   ],
@@ -170,12 +211,12 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 3,
+    "validMethodCount": 7,
+    "independentFamilies": 6,
+    "diagnosticCount": 1,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -189,25 +230,17 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 4828128346112.0,
-    "shares": 10634644907.0
+    "shares": 10634644907.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
     {
       "name": "DCF",
       "family": "cashflow",
@@ -219,6 +252,5 @@
       }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

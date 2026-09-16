@@ -1,7 +1,7 @@
 {
   "ticker": "MNCN.JK",
   "name": "PT. Media Nusantara Citra Tbk",
-  "asOf": "2026-09-16T11:03:49.440538+00:00",
+  "asOf": "2026-09-16T11:32:03.595956+00:00",
   "price": 200.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 229.68173895113756,
+    "base": 424.17436004064285,
+    "bull": 618.6669811301482,
+    "dispersion": 0.01699741758223466,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -43,7 +43,8 @@
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.23x dari median metode."
     },
     {
       "name": "Historical P/E 5Y",
@@ -66,8 +67,30 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.568421052631579,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 186.8016213034918,
+      "base": 415.9968981692048,
+      "bull": 645.1921750349178,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 2.4783951608884283,
+        "sd": 1.3386918686479221,
+        "minus1": 1.1397032922405061,
+        "base": 2.4783951608884283,
+        "plus1": 3.81708702953635
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.43157894736842106,
       "qcStatus": "VALID"
     }
   ],
@@ -89,15 +112,13 @@
     "totalInputs": 7,
     "guards": [
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 4,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 90.42,
@@ -110,10 +131,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2645432205312.0,
-    "shares": 13227161510.0
+    "shares": 13227161510.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -123,13 +150,6 @@
       "inputs": {
         "fcf": -239524380672.0
       }
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
     },
     {
       "name": "Graham Number",
@@ -146,11 +166,20 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 338.7782971961943,
+        "price": 200.0
+      }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "BUAH.JK",
   "name": "PT Segar Kumala Indonesia Tbk",
-  "asOf": "2026-09-16T11:02:19.419411+00:00",
+  "asOf": "2026-09-16T11:30:11.319519+00:00",
   "price": 492.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 718.2947542035218,
-    "base": 1032.3729123919336,
-    "bull": 1285.3680585162017,
-    "dispersion": 0.3162680949994636,
-    "agreement": "MEDIUM",
+    "bear": 662.7857156929911,
+    "base": 934.7229773166221,
+    "bull": 1213.9469939837256,
+    "dispersion": 0.3410757203100686,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.23943661971830985,
+      "normalizedWeight": 0.15478358313489282,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2925243770314193,
+      "normalizedWeight": 0.18910211514217679,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +74,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.46803900325027087,
+      "normalizedWeight": 0.30256338422748286,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 636.9831520006377,
+      "base": 827.5493598891835,
+      "bull": 1018.1155677777293,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 20.060008626439483,
+        "sd": 4.921184319347486,
+        "minus1": 15.138824307091998,
+        "base": 20.060008626439483,
+        "plus1": 24.98119294578697
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.22972405098753323,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +114,26 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.50x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.19x dari median metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 420.8648918574264,
+      "base": 623.7617580953967,
+      "bull": 1204.3941955227049,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.02003970239882561,
+        "sd": 0.009661040623081148
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.12382686650791429,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -121,9 +162,9 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.1040383299110195,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 0,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -137,26 +178,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 983999971328.0,
-    "shares": 2000000000.0
+    "shares": 2000000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    }
-  ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "engineVersion": "3.6-transparent-negative-qc",
+  "methodDiagnostics": [],
+  "analysisStatus": "SIAP"
 }

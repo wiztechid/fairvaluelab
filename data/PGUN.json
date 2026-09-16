@@ -51,6 +51,28 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 494.21437168252186,
+      "base": 611.8556933442317,
+      "bull": 729.4970150059415,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 16.356822487401132,
+        "sd": 2.8570940959047837,
+        "minus1": 13.499728391496348,
+        "base": 16.356822487401132,
+        "plus1": 19.213916583305917
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE"
     }
   ],
   "dcfDiagnostics": {
@@ -81,7 +103,8 @@
       "P/E per-share gagal sanity check; metode P/E historis dinonaktifkan.",
       "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
@@ -106,13 +129,6 @@
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Graham Number",
       "family": "fundamental",
       "status": "OUTLIER",
@@ -127,8 +143,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -152,6 +168,16 @@
         "bear": 176.90335372621269,
         "base": 157.2474255344113,
         "bull": 176.90335372621269,
+        "price": 9400.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 611.8556933442317,
         "price": 9400.0
       }
     }

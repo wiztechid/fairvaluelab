@@ -1,7 +1,7 @@
 {
   "ticker": "BSBK.JK",
   "name": "PT Wulandari Bangun Laksana Tbk",
-  "asOf": "2026-09-16T11:04:40.890585+00:00",
+  "asOf": "2026-09-16T11:33:06.996519+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 22.0418913768748,
-    "base": 61.32526657390585,
-    "bull": 106.95108454903857,
-    "dispersion": 0.17044897442871024,
+    "bear": 17.09138078560819,
+    "base": 52.36991094620497,
+    "bull": 91.91208993087676,
+    "dispersion": 0.028886800437427997,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.6716417910447761,
+      "normalizedWeight": 0.451505016722408,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 28.69099301766372,
+      "base": 51.0,
+      "bull": 73.30900698233629,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 12.589607653768216,
+        "sd": 4.378177549409707,
+        "minus1": 8.21143010435851,
+        "base": 12.589607653768216,
+        "plus1": 16.96778520317792
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.5484949832775919,
       "qcStatus": "VALID"
     },
     {
@@ -57,9 +79,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": true,
-      "normalizedWeight": 0.3283582089552239,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.41x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -85,7 +108,7 @@
     "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 3.0,
@@ -98,10 +121,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1254594183168.0,
-    "shares": 25091882375.0
+    "shares": 25091882375.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -113,20 +142,22 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 76.23901830969383,
+        "price": 50.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

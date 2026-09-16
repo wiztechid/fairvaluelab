@@ -1,7 +1,7 @@
 {
   "ticker": "KBLI.JK",
   "name": "PT KMI Wire and Cable Tbk",
-  "asOf": "2026-09-16T11:01:57.809427+00:00",
+  "asOf": "2026-09-16T11:29:43.354612+00:00",
   "price": 382.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 393.0669333910546,
-    "base": 497.6997873380772,
-    "bull": 602.3326412851,
-    "dispersion": 0.41073532633578663,
-    "agreement": "LOW",
+    "bear": 329.29883030956654,
+    "base": 423.45531423467213,
+    "bull": 517.6117981597777,
+    "dispersion": 0.12744878487462566,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.36086607858861264,
+      "normalizedWeight": 0.3016085790884719,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.36086607858861264,
+      "normalizedWeight": 0.3016085790884719,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.14595028067361665,
+      "normalizedWeight": 0.12198391420911528,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 300.24496014924256,
+      "base": 399.0,
+      "bull": 497.7550398507575,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.080308847830867,
+        "sd": 1.6163840673654748,
+        "minus1": 3.4639247804653923,
+        "base": 5.080308847830867,
+        "plus1": 6.696692915196342
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.274798927613941,
       "qcStatus": "VALID"
     },
     {
@@ -107,9 +129,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": true,
-      "normalizedWeight": 0.13231756214915796,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.32x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -135,7 +158,7 @@
     "validMethodCount": 4,
     "independentFamilies": 3,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 54.02,
@@ -148,10 +171,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1530763804672.0,
-    "shares": 4007235090.764398
+    "shares": 4007235090.764398,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -163,20 +192,27 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 590.0968354974734,
+        "base": 945.0,
+        "bull": 2370.988586495992,
+        "price": 382.0
+      }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 923.7957937724339,
+        "price": 382.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 363.5343237431416,
+    "base": 417.97496554849226,
+    "bull": 472.4156073538429,
+    "dispersion": 0.024646438355719787,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -64,9 +64,31 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.28695652173913044,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 370.48720000000003,
+      "base": 412.0,
+      "bull": 453.5128000000001,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 8.230248884773603,
+        "sd": 0.5888225225538563,
+        "minus1": 7.641426362219747,
+        "base": 8.230248884773603,
+        "plus1": 8.81907140732746
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7130434782608696,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -99,9 +121,9 @@
       "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 1.672826830937714,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 2
   },
   "raw": {
@@ -121,17 +143,10 @@
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     },
     {
@@ -159,6 +174,6 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "engineVersion": "3.6-transparent-negative-qc"
 }

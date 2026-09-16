@@ -1,7 +1,7 @@
 {
   "ticker": "WEGE.JK",
   "name": "PT Wijaya Karya Bangunan Gedung Tbk",
-  "asOf": "2026-09-16T09:43:10.911165+00:00",
+  "asOf": "2026-09-16T11:34:41.325592+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 38.79457610518588,
+    "base": 53.87345022309605,
+    "bull": 80.73755496402873,
+    "dispersion": 0.22079756601108338,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -41,9 +41,28 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.3631123919308357,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 31.593388242764608,
+      "base": 44.679127725856695,
+      "bull": 76.26927909215605,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.01589108910891089,
+        "sd": 0.006581967422548706
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.6368876080691643,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -74,14 +93,12 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -95,10 +112,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 478599970816.0,
-    "shares": 9572000000.0
+    "shares": 9572000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -110,18 +133,12 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol; EV/EBITDA tidak digunakan.",
+      "inputs": {
+        "ebitda": -612725322137.0
+      }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

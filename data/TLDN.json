@@ -1,7 +1,7 @@
 {
   "ticker": "TLDN.JK",
   "name": "PT Teladan Prima Agro Tbk",
-  "asOf": "2026-09-16T11:03:03.052233+00:00",
+  "asOf": "2026-09-16T11:31:07.172251+00:00",
   "price": 615.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 596.975047540308,
-    "base": 840.5597025943132,
-    "bull": 956.356548542202,
-    "dispersion": 0.32701406043529585,
-    "agreement": "LOW",
+    "bear": 590.0805930004339,
+    "base": 847.4585128775018,
+    "bull": 1013.1195370622281,
+    "dispersion": 0.2834336536761521,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.32374100719424465,
+      "normalizedWeight": 0.23235800344234078,
       "qcStatus": "VALID"
     },
     {
@@ -58,7 +58,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.5179856115107914,
+      "normalizedWeight": 0.3717728055077453,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 572.5501811520957,
+      "base": 865.0,
+      "bull": 1157.4498188479045,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.991597501375116,
+        "sd": 2.5848260290184797,
+        "minus1": 5.4067714723566365,
+        "base": 7.991597501375116,
+        "plus1": 10.576423530393596
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2822719449225473,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +96,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.15827338129496404,
+      "normalizedWeight": 0.1135972461273666,
       "qcStatus": "VALID"
     }
   ],
@@ -106,9 +128,9 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.42984257357974,
-    "validMethodCount": 3,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -122,26 +144,29 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 7962115964928.0,
-    "shares": 12946530200.0
+    "shares": 12946530200.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 672.6140458489092,
+        "base": 1315.0147928994081,
+        "bull": 7730.0,
+        "price": 615.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,158 +1,163 @@
 {
   "ticker": "SULI.JK",
   "name": "PT SLJ Global Tbk",
-  "asOf": "2026-09-16T08:30:21.285299+00:00",
-  "price": 87.0,
+  "asOf": "2026-09-16T11:29:18.919512+00:00",
+  "price": 86.0,
   "companyProfile": {
     "sector": "Barang Baku",
     "valuationProfile": "Barang Baku",
     "sourceSector": "Basic Materials",
     "industry": "Lumber & Wood Production",
-    "sectorNote": "Arus kas dan laba ternormalisasi lebih penting pada bisnis bahan baku.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 41.58986799283316,
+    "base": 58.013784427896766,
+    "bull": 76.24574517723123,
+    "dispersion": 0.3865131258356249,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
       "name": "DCF",
-      "bear": 0.002394424296929565,
-      "base": 0.002921168776506697,
-      "bull": 0.004052999813736678,
+      "family": "cashflow",
+      "bear": 42.35736631161402,
+      "base": 51.675476265092065,
+      "bull": 71.69756754953187,
       "confidence": 0.85,
       "relevance": 0.595,
       "rawWeight": 0.5057499999999999,
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+      "included": true,
+      "normalizedWeight": 0.32039911308203983,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
-      "bear": 0.0016378712332889348,
-      "base": 0.0023608954714074734,
-      "bull": 0.002879773596991534,
+      "family": "cashflow",
+      "bear": 28.9739424581671,
+      "base": 41.764241381141765,
+      "bull": 50.943195530843255,
       "confidence": 0.75,
       "relevance": 0.9450000000000001,
       "rawWeight": 0.70875,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": true,
+      "normalizedWeight": 0.4490022172949002,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "bear": 65.08815081692977,
+      "base": 98.46011131725417,
+      "bull": 131.8320718175786,
+      "confidence": 0.8,
+      "relevance": 0.45499999999999996,
+      "rawWeight": 0.364,
+      "bands": {
+        "mean": 2.622436939067487,
+        "sd": 0.888845856198169,
+        "current": 2.2905679644532557,
+        "z": -0.3733706719787426,
+        "minus1": 65.08815081692977,
+        "base": 98.46011131725417,
+        "plus1": 131.8320718175786,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.23059866962305986,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.6914052596292686,
     "bearTerminalValueShare": 0.6313413487529989,
-    "bullTerminalValueShare": 0.7446437120520002,
+    "bullTerminalValueShare": 0.7446437120520003,
     "warning": false,
     "growth": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 89.85,
-    "ma50": 88.98,
-    "ma200": 106.05,
-    "rsi14": 45.45454545454546,
-    "return1m": -0.06451612903225812,
-    "return3m": 0.11538461538461542
+    "ma20": 89.8,
+    "ma50": 88.96,
+    "ma200": 106.045,
+    "rsi14": 43.47826086956522,
+    "return1m": -0.07526881720430112,
+    "return3m": 0.10256410256410264
   },
   "quality": {
     "cashConversion": null,
     "roe": -0.26108998,
-    "dataScore": 80,
-    "dataLabel": "CUKUP",
-    "availableInputs": 8,
-    "totalInputs": 10,
+    "dataScore": 86,
+    "dataLabel": "BAIK",
+    "availableInputs": 6,
+    "totalInputs": 7,
     "guards": [
-      "Jumlah saham Yahoo tidak konsisten dengan market cap; denominator direkonsiliasi dari market cap/harga.",
-      "P/BV per-share gagal sanity check; metode PBV historis dinonaktifkan.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
+      "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -0.0005736010026349415,
-    "bvps": 0.002122400947089458,
+    "epsTTM": null,
+    "bvps": 37.54527319626059,
     "currentPE": null,
-    "currentPBV": 40991.31227740307,
+    "currentPBV": 2.2905679644532557,
     "roe": -0.26108998,
-    "fcf": 1656419.0,
+    "fcf": 29302052110.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 549907595264.0,
-    "shares": 6320776957.057471
+    "marketCap": 543586811904.0,
+    "shares": 6320776882.604651,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "USD",
+    "fxApplied": true,
+    "fxPair": "USDIDR=X",
+    "fxFactor": 17690.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -0.0005736010026349415
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol; EV/EBITDA tidak digunakan.",
+      "inputs": {
+        "ebitda": -3377979.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.002394424296929565,
-        "base": 0.002921168776506697,
-        "bull": 0.004052999813736678,
-        "price": 87.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.0016378712332889348,
-        "base": 0.0023608954714074734,
-        "bull": 0.002879773596991534,
-        "price": 87.0
-      }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

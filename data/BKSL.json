@@ -1,7 +1,7 @@
 {
   "ticker": "BKSL.JK",
   "name": "PT Sentul City Tbk",
-  "asOf": "2026-09-16T11:04:40.363842+00:00",
+  "asOf": "2026-09-16T11:33:06.128586+00:00",
   "price": 68.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 118.77442670350345,
-    "base": 130.1386362459981,
-    "bull": 141.50284578849272,
-    "dispersion": 0.11683444161033998,
-    "agreement": "HIGH",
+    "bear": 91.50216989495665,
+    "base": 110.35860107699537,
+    "bull": 129.2150322590341,
+    "dispersion": 0.25342456721954476,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.4017857142857143,
+      "normalizedWeight": 0.2073095823095823,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4017857142857143,
+      "normalizedWeight": 0.2073095823095823,
       "qcStatus": "VALID"
     },
     {
@@ -91,10 +91,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.99x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.23218673218673216,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 85.94167169473359,
+      "base": 116.26182465051242,
+      "bull": 146.58197760629128,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 18.872628682205793,
+        "sd": 4.569640966620656,
+        "minus1": 14.302987715585136,
+        "base": 18.872628682205793,
+        "plus1": 23.44226964882645
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2518427518427518,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -109,7 +130,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.19642857142857142,
+      "normalizedWeight": 0.10135135135135134,
       "qcStatus": "VALID"
     }
   ],
@@ -133,10 +154,10 @@
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 5.4,
@@ -149,10 +170,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 11404205621248.0,
-    "shares": 167708906194.82352
+    "shares": 167708906194.82352,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -164,30 +191,12 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "Historical PBV 5Y",
-      "family": "book",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 60.0,
-        "price": 68.0
-      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

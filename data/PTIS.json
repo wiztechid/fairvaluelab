@@ -1,14 +1,14 @@
 {
   "ticker": "PTIS.JK",
   "name": "PT Indo Straits Tbk",
-  "asOf": "2026-09-16T07:59:50.355767+00:00",
-  "price": 266.0,
+  "asOf": "2026-09-16T11:28:12.384616+00:00",
+  "price": 260.0,
   "companyProfile": {
     "sector": "Energi",
     "valuationProfile": "Energi",
     "sourceSector": "Industrials",
     "industry": "Marine Shipping",
-    "sectorNote": "FCF dan laba historis lebih ditekankan karena laba sektor energi cenderung siklikal.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -22,23 +22,25 @@
   "methods": [
     {
       "name": "Historical PBV 5Y",
-      "bear": 210.12884781429716,
-      "base": 306.60227334217245,
-      "bull": 403.07569887004775,
+      "family": "book",
+      "bear": 206.66901531253748,
+      "base": 317.0670557048953,
+      "bull": 427.46509609725314,
       "confidence": 0.8,
       "relevance": 0.385,
       "rawWeight": 0.30800000000000005,
       "bands": {
-        "mean": 8294.071915584067,
-        "sd": 2609.75732680871,
-        "current": 7195.716801105339,
-        "z": -0.42086484562985393,
-        "minus1": 210.12884781429716,
-        "base": 306.60227334217245,
-        "plus1": 403.07569887004775
+        "mean": 0.4848592807228751,
+        "sd": 0.16882080145113956,
+        "current": 0.39759227809930175,
+        "z": -0.5169209118393525,
+        "minus1": 206.66901531253748,
+        "base": 317.0670557048953,
+        "plus1": 427.46509609725314,
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
-      "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "CANDIDATE"
@@ -46,53 +48,61 @@
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 258.7,
-    "ma50": 264.2,
-    "ma200": 304.63,
-    "rsi14": 55.88235294117647,
-    "return1m": 0.03100775193798455,
-    "return3m": -0.08275862068965523
+    "ma20": 258.4,
+    "ma50": 264.08,
+    "ma200": 304.6,
+    "rsi14": 51.42857142857143,
+    "return1m": 0.007751937984496138,
+    "return3m": -0.10344827586206895
   },
   "quality": {
     "cashConversion": null,
     "roe": -0.020299999,
-    "dataScore": 70,
+    "dataScore": 86,
     "dataLabel": "CUKUP",
-    "availableInputs": 7,
-    "totalInputs": 10,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "availableInputs": 6,
+    "totalInputs": 7,
     "guards": [
+      "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
       "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": -14.12,
-    "bvps": 0.03696643536042713,
+    "epsTTM": null,
+    "bvps": 653.9362415259559,
     "currentPE": null,
-    "currentPBV": 7195.716801105339,
+    "currentPBV": 0.39759227809930175,
     "roe": -0.020299999,
-    "fcf": -1564492.0,
+    "fcf": -27675863480.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.1119368,
     "terminalGrowth": 0.035,
-    "marketCap": 146343968768.0,
-    "shares": 550165300.0
+    "marketCap": 143042985984.0,
+    "shares": 550165300.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "USD",
+    "fxApplied": true,
+    "fxPair": "USDIDR=X",
+    "fxFactor": 17690.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
       "family": "earnings",
-      "status": "NEGATIVE",
-      "reason": "EPS/laba bersih negatif; metode berbasis P/E dan Graham tidak bermakna.",
-      "inputs": {
-        "eps": -14.12
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "DCF & FCF Yield",
@@ -100,24 +110,25 @@
       "status": "NEGATIVE",
       "reason": "Free cash flow negatif; DCF berbasis FCF dan FCF Yield dilewati, metode lain tetap dihitung.",
       "inputs": {
-        "fcf": -1564492.0
+        "fcf": -27675863480.0
       }
     },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol; EV/EBITDA tidak digunakan.",
+      "inputs": {
+        "ebitda": -571279.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "TERBATAS"
 }

@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 306.0266047932408,
-    "base": 411.0218462102666,
-    "bull": 516.0170876272923,
-    "dispersion": 0.7129336073016537,
-    "agreement": "LOW",
+    "bear": 74.71706450693154,
+    "base": 94.4270349814905,
+    "bull": 114.13700545604948,
+    "dispersion": 0.06783615344830089,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -72,9 +72,10 @@
       },
       "warning": null,
       "explanation": "EPS sekarang dikalikan median P/E historis 3 tahun yang lolos sanity check.",
-      "included": true,
-      "normalizedWeight": 0.7659574468085106,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.21x dari median metode."
     },
     {
       "name": "Graham Number",
@@ -89,7 +90,29 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.23404255319148934,
+      "normalizedWeight": 0.28695652173913044,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 77.2436,
+      "base": 98.0,
+      "bull": 118.75640000000001,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 23.345438754687564,
+        "sd": 5.956705310776722,
+        "minus1": 17.38873344391084,
+        "base": 23.345438754687564,
+        "plus1": 29.302144065464287
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7130434782608696,
       "qcStatus": "VALID"
     }
   ],
@@ -119,13 +142,14 @@
     "totalInputs": 10,
     "guards": [
       "Riwayat harga 3.4 tahun; Historical 5Y dinonaktifkan.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 3.359342915811088,
     "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 5,
-    "outlierMethodCount": 2
+    "outlierMethodCount": 3
   },
   "raw": {
     "epsTTM": 10.44,
@@ -144,17 +168,10 @@
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -178,6 +195,16 @@
         "bear": 5.906566171737477,
         "base": 10.50056208308885,
         "bull": 11.813132343474955,
+        "price": 440.0
+      }
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": null,
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 510.4719564145942,
         "price": 440.0
       }
     },

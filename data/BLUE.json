@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 340.2425117289946,
+    "base": 401.3931177614958,
+    "bull": 484.6490003926845,
+    "dispersion": 0.2041032223472994,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -139,9 +139,50 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.20728643216080403,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 294.0634352909395,
+      "base": 318.0,
+      "bull": 341.9365647090606,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.627988994849513,
+        "sd": 0.4585010220462004,
+        "minus1": 5.169487972803313,
+        "base": 5.627988994849513,
+        "plus1": 6.086490016895714
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.5150753768844221,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 420.6513486357731,
+      "base": 531.6745168101348,
+      "bull": 722.3166902901766,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.06394889904445368,
+        "sd": 0.016878132915069125
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.2776381909547739,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -170,11 +211,12 @@
     "totalInputs": 10,
     "guards": [
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos.",
+      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
     "diagnosticCount": 8,
     "outlierMethodCount": 5
   },
@@ -194,20 +236,6 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
     {
       "name": "DCF",
       "family": null,
@@ -275,6 +303,26 @@
       "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
       "inputs": {
         "base": 434.11426377642937,
+        "price": 3000.0
+      }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 318.0,
+        "price": 3000.0
+      }
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 531.6745168101348,
         "price": 3000.0
       }
     }

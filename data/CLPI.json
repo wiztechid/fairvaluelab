@@ -1,7 +1,7 @@
 {
   "ticker": "CLPI.JK",
   "name": "PT Colorpak Indonesia Tbk",
-  "asOf": "2026-09-16T11:01:07.019018+00:00",
+  "asOf": "2026-09-16T11:28:41.037384+00:00",
   "price": 1605.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1252.6409627978055,
-    "base": 1332.982637153071,
-    "bull": 1413.3243115083365,
-    "dispersion": 0.10444976266531299,
-    "agreement": "HIGH",
+    "bear": 1334.2285133125592,
+    "base": 1525.8338377414154,
+    "bull": 1760.6262758790028,
+    "dispersion": 0.4449429243679679,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.40390707497360084,
+      "normalizedWeight": 0.21944922547332185,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.40390707497360084,
+      "normalizedWeight": 0.21944922547332185,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.19218585005279828,
+      "normalizedWeight": 0.10441767068273092,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 995.9844819974495,
+      "base": 1144.7025731696824,
+      "bull": 1293.4206643419154,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 1.6064058760562456,
+        "sd": 0.4959874474263921,
+        "minus1": 1.1104184286298535,
+        "base": 1.6064058760562456,
+        "plus1": 2.1023933234826377
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.23522662076878942,
       "qcStatus": "VALID"
     },
     {
@@ -107,10 +129,28 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.36x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.09466437177280551,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 1352.9077031651423,
+      "base": 1755.2576160859112,
+      "bull": 2498.2190185737313,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.09714243563872071,
+        "sd": 0.028889812977419167
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.12679288582903042,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -131,10 +171,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1
+    "validMethodCount": 6,
+    "independentFamilies": 5,
+    "diagnosticCount": 1,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 242.84,
@@ -147,10 +187,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 491194810368.0,
-    "shares": 306040400.0
+    "shares": 306040400.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -160,32 +206,7 @@
       "inputs": {
         "fcf": -16941919232.0
       }
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 3272.4474766349863,
-        "price": 1605.0
-      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

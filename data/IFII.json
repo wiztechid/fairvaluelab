@@ -1,7 +1,7 @@
 {
   "ticker": "IFII.JK",
   "name": "PT Indonesia Fibreboard Industry Tbk",
-  "asOf": "2026-09-16T11:01:15.023063+00:00",
+  "asOf": "2026-09-16T11:28:50.313895+00:00",
   "price": 210.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 168.04454669435037,
-    "base": 229.8748886078526,
-    "bull": 265.8343502883312,
-    "dispersion": 0.2653483519966779,
+    "bear": 167.23429534061174,
+    "base": 233.94791852181876,
+    "bull": 280.44361511495043,
+    "dispersion": 0.24096266176325704,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -35,7 +35,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.85x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.74x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -50,7 +50,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.24166737703520585,
+      "normalizedWeight": 0.18886150156551862,
       "qcStatus": "VALID"
     },
     {
@@ -75,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.26084732759355556,
+      "normalizedWeight": 0.20385050962627407,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +100,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.26084732759355556,
+      "normalizedWeight": 0.20385050962627407,
       "qcStatus": "VALID"
     },
     {
@@ -125,7 +125,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.12411559116869832,
+      "normalizedWeight": 0.09699553660648857,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 164.33641161173736,
+      "base": 248.51520935131182,
+      "bull": 332.69400709088626,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 9.530729648561811,
+        "sd": 3.0425057100406017,
+        "minus1": 6.48822393852121,
+        "base": 9.530729648561811,
+        "plus1": 12.573235358602414
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.21850642861901273,
       "qcStatus": "VALID"
     },
     {
@@ -141,7 +163,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.11252237660898474,
+      "normalizedWeight": 0.08793551395643195,
       "qcStatus": "VALID"
     }
   ],
@@ -171,9 +193,9 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 3,
+    "validMethodCount": 6,
+    "independentFamilies": 5,
+    "diagnosticCount": 2,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -187,24 +209,28 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1976519884800.0,
-    "shares": 9412000000.0
+    "shares": 9412000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 120.83388830261363,
+        "base": 222.0,
+        "bull": 1200.0,
+        "price": 210.0
+      }
     },
     {
       "name": "DCF",
@@ -217,6 +243,5 @@
       }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

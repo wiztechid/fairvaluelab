@@ -1,7 +1,7 @@
 {
   "ticker": "MTLA.JK",
   "name": "PT Metropolitan Land Tbk",
-  "asOf": "2026-09-16T11:04:58.532333+00:00",
+  "asOf": "2026-09-16T11:33:28.779262+00:00",
   "price": 525.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 310.5534153733652,
-    "base": 341.03137440676437,
-    "bull": 371.81512537176934,
-    "dispersion": 0.33855877309158866,
-    "agreement": "LOW",
+    "bear": 356.89970273196934,
+    "base": 386.24682091536926,
+    "bull": 416.53029765376436,
+    "dispersion": 0.09449568514592244,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.15514993481095174,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.57x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -51,7 +52,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.64x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.88x dari median metode."
     },
     {
       "name": "Historical P/E 3Y",
@@ -75,7 +76,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.27078527730418217,
+      "normalizedWeight": 0.20041567695961995,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +101,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.27078527730418217,
+      "normalizedWeight": 0.20041567695961995,
       "qcStatus": "VALID"
     },
     {
@@ -125,7 +126,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.303279510580684,
+      "normalizedWeight": 0.22446555819477432,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 373.8520321480647,
+      "base": 408.4363298402636,
+      "bull": 443.02062753246247,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.139521731929618,
+        "sd": 0.5148889945177291,
+        "minus1": 6.624632737411888,
+        "base": 7.139521731929618,
+        "plus1": 7.654410726447347
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2434679334916864,
       "qcStatus": "VALID"
     },
     {
@@ -143,7 +166,26 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.58x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.41x dari median metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 353.5396478383998,
+      "base": 387.3147118466671,
+      "bull": 428.2247433056672,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.025044233289646133,
+        "sd": 0.002392576299624581
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.13123515439429928,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -172,10 +214,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
     "diagnosticCount": 3,
-    "outlierMethodCount": 2
+    "outlierMethodCount": 3
   },
   "raw": {
     "epsTTM": 48.77,
@@ -188,24 +230,26 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 4018941460480.0,
-    "shares": 7655126330.0
+    "shares": 7655126330.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "DCF",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 143.08353927534841,
+        "price": 525.0
+      }
     },
     {
       "name": "FCF Yield",
@@ -216,8 +260,17 @@
         "base": 94.62385779738108,
         "price": 525.0
       }
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 886.7324429088076,
+        "price": 525.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

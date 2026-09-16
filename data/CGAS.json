@@ -1,7 +1,7 @@
 {
   "ticker": "CGAS.JK",
   "name": "PT Citra Nusantara Gemilang Tbk",
-  "asOf": "2026-09-16T11:00:25.863448+00:00",
+  "asOf": "2026-09-16T11:27:51.046895+00:00",
   "price": 145.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 181.1306158770467,
-    "base": 243.92994934694485,
-    "bull": 306.7292828168431,
-    "dispersion": 0.10610731561301788,
-    "agreement": "HIGH",
+    "bear": 147.90856838640653,
+    "base": 193.5339302829983,
+    "bull": 240.1372699033862,
+    "dispersion": 0.22835085960061238,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -42,7 +42,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.6857142857142857,
+      "normalizedWeight": 0.31141868512110726,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 107.45240000000004,
+      "base": 146.00000000000003,
+      "bull": 184.5476,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 8.24815277607453,
+        "sd": 2.323576004109171,
+        "minus1": 5.924576771965359,
+        "base": 8.24815277607453,
+        "plus1": 10.571728780183701
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.35467128027681655,
       "qcStatus": "VALID"
     },
     {
@@ -58,7 +80,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.3142857142857143,
+      "normalizedWeight": 0.14273356401384082,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 144.0418448834227,
+      "base": 162.0,
+      "bull": 185.07373090258756,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.024691358024691357,
+        "sd": 0.0030783501683501685
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.1911764705882353,
       "qcStatus": "VALID"
     }
   ],
@@ -82,9 +123,9 @@
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 2.6885694729637235,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 4,
+    "independentFamilies": 4,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -98,10 +139,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 256871219200.0,
-    "shares": 1771525672.0
+    "shares": 1771525672.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -111,22 +158,7 @@
       "inputs": {
         "fcf": -75116830720.0
       }
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

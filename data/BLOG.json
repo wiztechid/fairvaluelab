@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 467.5148899316356,
-    "base": 520.44125413303,
-    "bull": 573.3676183344244,
-    "dispersion": 0.020386758871214813,
+    "bear": 450.98379296213074,
+    "base": 506.2385428824478,
+    "bull": 561.4932928027648,
+    "dispersion": 0.0698418495149976,
     "agreement": "HIGH",
     "available": true
   },
@@ -40,7 +40,7 @@
       "warning": null,
       "explanation": "EPS sekarang dikalikan rata-rata P/E historis 3 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
       "included": true,
-      "normalizedWeight": 0.4368932038834952,
+      "normalizedWeight": 0.2696404793608522,
       "qcStatus": "VALID"
     },
     {
@@ -63,7 +63,7 @@
       "warning": null,
       "explanation": "EPS sekarang dikalikan rata-rata P/E historis 5 tahun saham ini. Menilai apakah harga saat ini mahal atau murah dibanding kebiasaan valuasinya sendiri.",
       "included": true,
-      "normalizedWeight": 0.4368932038834952,
+      "normalizedWeight": 0.2696404793608522,
       "qcStatus": "VALID"
     },
     {
@@ -86,7 +86,7 @@
       "warning": "Bobot dikurangi karena ROE tinggi",
       "explanation": "BVPS sekarang dikalikan rata-rata P/BV historis 5 tahun. Lebih relevan pada bisnis yang nilai aset atau ekuitasnya penting.",
       "included": true,
-      "normalizedWeight": 0.12621359223300974,
+      "normalizedWeight": 0.07789613848202398,
       "qcStatus": "VALID"
     },
     {
@@ -101,10 +101,32 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
+      "included": true,
+      "normalizedWeight": 0.10985352862849534,
+      "qcStatus": "VALID",
       "qcReason": "Ditolak cross-method outlier: deviasi 1.19x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 456.8154999999999,
+      "base": 504.99999999999994,
+      "bull": 553.1845000000001,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 8.743554496889415,
+        "sd": 0.7509270332471836,
+        "minus1": 7.992627463642231,
+        "base": 8.743554496889415,
+        "plus1": 9.494481530136598
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2729693741677763,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -123,13 +145,13 @@
     "dataLabel": "BAIK",
     "availableInputs": 9,
     "totalInputs": 10,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
     "guards": [
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
     ],
-    "outlierMethodCount": 1
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 44.65,
@@ -157,30 +179,13 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 429.52272017041093,
-        "price": 366.0
-      }
     }
   ],
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "engineVersion": "3.6-transparent-negative-qc"
 }

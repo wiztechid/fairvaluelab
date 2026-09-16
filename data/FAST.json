@@ -1,7 +1,7 @@
 {
   "ticker": "FAST.JK",
   "name": "PT Fast Food Indonesia Tbk",
-  "asOf": "2026-09-16T11:03:26.144489+00:00",
+  "asOf": "2026-09-16T11:31:34.858082+00:00",
   "price": 426.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 138.45441221553958,
+    "base": 183.56733949173406,
+    "bull": 239.8618471671869,
+    "dispersion": 0.46114102834140946,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.32581736189402477,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,30 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3043968432919955,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 208.55198653241197,
+      "base": 292.0,
+      "bull": 375.44801346758805,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 18.608402105771983,
+        "sd": 5.317925306619021,
+        "minus1": 13.290476799152962,
+        "base": 18.608402105771983,
+        "plus1": 23.926327412391004
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.3697857948139797,
       "qcStatus": "VALID"
     }
   ],
@@ -80,14 +102,12 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -101,10 +121,16 @@
     "costOfEquity": 0.1168814,
     "terminalGrowth": 0.035,
     "marketCap": 1925691473920.0,
-    "shares": 4520402492.0
+    "shares": 4520402492.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -121,20 +147,12 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

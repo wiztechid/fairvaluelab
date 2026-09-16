@@ -1,7 +1,7 @@
 {
   "ticker": "MHKI.JK",
   "name": "PT Multi Hanna Kreasindo Tbk",
-  "asOf": "2026-09-16T11:02:04.055223+00:00",
+  "asOf": "2026-09-16T11:29:51.298430+00:00",
   "price": 130.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 118.35716248541148,
+    "base": 144.24713348381482,
+    "bull": 170.45971612197724,
+    "dispersion": 0.07039770331784442,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -34,7 +34,8 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.53x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -50,6 +51,29 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 7.87x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 103.85879766779708,
+      "base": 138.08579016204504,
+      "bull": 172.312782656293,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 7.56949249742165,
+        "sd": 2.406593904291273,
+        "minus1": 5.162898593130377,
+        "base": 7.56949249742165,
+        "plus1": 9.976086401712923
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.5150753768844221,
       "qcStatus": "VALID"
     },
     {
@@ -64,10 +88,28 @@
       "bands": null,
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.54x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.20728643216080403,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 150.92198581560282,
+      "base": 160.0,
+      "bull": 170.24,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.016625,
+        "sd": 0.001
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.2776381909547739,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -95,15 +137,13 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 2.4175222450376452,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1
+    "validMethodCount": 3,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 6.61,
@@ -116,25 +156,17 @@
     "costOfEquity": 0.1965854,
     "terminalGrowth": 0.035,
     "marketCap": 487500021760.0,
-    "shares": 3750000000.0
+    "shares": 3750000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
     {
       "name": "DCF",
       "family": "cashflow",
@@ -156,6 +188,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

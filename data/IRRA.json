@@ -1,7 +1,7 @@
 {
   "ticker": "IRRA.JK",
   "name": "PT Itama Ranoraya Tbk",
-  "asOf": "2026-09-16T11:04:16.106108+00:00",
+  "asOf": "2026-09-16T11:32:36.625489+00:00",
   "price": 368.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 376.9835760214676,
-    "base": 585.573715751237,
-    "bull": 794.1638554810065,
-    "dispersion": 0.02362817016273449,
+    "bear": 366.93452510551174,
+    "base": 565.2150968492346,
+    "bull": 763.4956685929573,
+    "dispersion": 0.09546761734854471,
     "agreement": "HIGH",
     "available": true
   },
@@ -41,10 +41,9 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.24x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.2980990783410138,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
@@ -68,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.6400742115027829,
+      "normalizedWeight": 0.2980990783410138,
       "qcStatus": "VALID"
     },
     {
@@ -93,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.15584415584415584,
+      "normalizedWeight": 0.07258064516129033,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 353.6270380094426,
+      "base": 637.4068835278854,
+      "bull": 921.186729046328,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 13.274265521613948,
+        "sd": 3.3082791031295518,
+        "minus1": 9.965986418484396,
+        "base": 13.274265521613948,
+        "plus1": 16.582544624743498
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.23617511520737325,
       "qcStatus": "VALID"
     },
     {
@@ -109,7 +130,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.20408163265306123,
+      "normalizedWeight": 0.09504608294930876,
       "qcStatus": "VALID"
     }
   ],
@@ -131,10 +152,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 3,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 42.48,
@@ -147,10 +168,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 554876796928.0,
-    "shares": 1507817400.0
+    "shares": 1507817400.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -162,30 +189,12 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
-    },
-    {
-      "name": "Historical P/E 3Y",
-      "family": "earnings",
-      "status": "OUTLIER",
-      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
-      "inputs": {
-        "base": 476.21301777577395,
-        "price": 368.0
-      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "CSRA.JK",
   "name": "PT Cisadane Sawit Raya Tbk",
-  "asOf": "2026-09-16T11:02:25.151889+00:00",
+  "asOf": "2026-09-16T11:30:18.844556+00:00",
   "price": 755.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 606.5655058892686,
-    "base": 747.8667933366277,
-    "bull": 889.1680807839869,
-    "dispersion": 0.010643406715469818,
+    "bear": 610.116547403278,
+    "base": 764.6946998235546,
+    "bull": 919.2728522438313,
+    "dispersion": 0.040928931663418086,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.4426229508196722,
+      "normalizedWeight": 0.3312883435582822,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4426229508196722,
+      "normalizedWeight": 0.3312883435582822,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.11475409836065573,
+      "normalizedWeight": 0.08588957055214723,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 620.6830611766719,
+      "base": 814.7679825407522,
+      "bull": 1008.8529039048324,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.390717597188291,
+        "sd": 0.9421118759743222,
+        "minus1": 4.448605721213969,
+        "base": 5.390717597188291,
+        "plus1": 6.332829473162613
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.25153374233128833,
       "qcStatus": "VALID"
     },
     {
@@ -111,6 +133,26 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "qcReason": "Ditolak cross-method outlier: deviasi 1.91x dari median metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 192.46478753544542,
+      "base": 314.36439389875363,
+      "bull": 857.4211144280716,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.03880846634281749,
+        "sd": 0.024579752126772315
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.38x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -131,10 +173,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 127.97,
@@ -147,10 +189,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1547749949440.0,
-    "shares": 2050000000.0
+    "shares": 2050000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -162,20 +210,6 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
-    {
       "name": "Graham Number",
       "family": "fundamental",
       "status": "OUTLIER",
@@ -184,8 +218,17 @@
         "base": 1435.3434102617878,
         "price": 755.0
       }
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 314.36439389875363,
+        "price": 755.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

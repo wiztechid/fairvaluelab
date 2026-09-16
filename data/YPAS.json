@@ -1,7 +1,7 @@
 {
   "ticker": "YPAS.JK",
   "name": "PT Yanaprima Hastapersada Tbk",
-  "asOf": "2026-09-16T11:01:45.239081+00:00",
+  "asOf": "2026-09-16T11:29:26.558981+00:00",
   "price": 1310.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 142.07824290135758,
-    "base": 233.66706730930014,
-    "bull": 309.7692800096578,
-    "dispersion": 0.5515450255208062,
+    "bear": 180.98519184371443,
+    "base": 251.9974006323022,
+    "bull": 311.99897936520813,
+    "dispersion": 0.4833026776125266,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.21612182173791564,
+      "normalizedWeight": 0.1482084690553746,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.3960603520536463,
+      "normalizedWeight": 0.2716037555087182,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +74,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.20340877340039118,
+      "normalizedWeight": 0.13949032381682316,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 265.89249078560164,
+      "base": 292.0,
+      "bull": 316.8648903368634,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 28.100243960372932,
+        "sd": 1.9946960407921555,
+        "minus1": 26.105547919580776,
+        "base": 28.100243960372932,
+        "plus1": 30
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.31423644376317306,
       "qcStatus": "VALID"
     },
     {
@@ -90,7 +112,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.18440905280804695,
+      "normalizedWeight": 0.1264610078559111,
       "qcStatus": "VALID"
     }
   ],
@@ -119,14 +141,13 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 5,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -140,23 +161,22 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 875080056832.0,
-    "shares": 668000089.0
+    "shares": 668000089.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -190,6 +210,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

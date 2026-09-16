@@ -1,7 +1,7 @@
 {
   "ticker": "MLPL.JK",
   "name": "PT Multipolar Tbk",
-  "asOf": "2026-09-16T11:02:44.853920+00:00",
+  "asOf": "2026-09-16T11:30:43.254109+00:00",
   "price": 88.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 186.35754286933036,
-    "base": 284.46489030267605,
-    "bull": 355.06699496681796,
-    "dispersion": 0.44617344136656373,
-    "agreement": "LOW",
+    "bear": 41.2962066827582,
+    "base": 87.40544893436257,
+    "bull": 133.5146911859669,
+    "dispersion": 0.29859619217697014,
+    "agreement": "MEDIUM",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.7068062827225131,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.61x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -58,7 +59,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.29319371727748683,
+      "normalizedWeight": 0.2545454545454546,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 24.106188820742222,
+      "base": 71.83657783877904,
+      "bull": 119.56696685681585,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 2.428122887299975,
+        "sd": 1.2504665213238688,
+        "minus1": 1.1776563659761061,
+        "base": 2.428122887299975,
+        "plus1": 3.6785894086238438
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7454545454545455,
       "qcStatus": "VALID"
     }
   ],
@@ -94,8 +117,8 @@
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -108,10 +131,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1373975740416.0,
-    "shares": 15613360686.545454
+    "shares": 15613360686.545454,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -121,20 +150,12 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

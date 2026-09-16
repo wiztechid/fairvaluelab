@@ -1,7 +1,7 @@
 {
   "ticker": "BOLT.JK",
   "name": "PT Garuda Metalindo Tbk",
-  "asOf": "2026-09-16T11:03:15.735180+00:00",
+  "asOf": "2026-09-16T11:31:22.798551+00:00",
   "price": 805.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 791.720297309316,
-    "base": 1003.5095170232208,
-    "bull": 1195.6278703332368,
-    "dispersion": 0.3721800054683268,
+    "bear": 805.6521229969461,
+    "base": 1021.6355566788429,
+    "bull": 1221.296356536236,
+    "dispersion": 0.34262951772365596,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.13821138211382114,
+      "normalizedWeight": 0.11468604047742605,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.16885553470919326,
+      "normalizedWeight": 0.1401141670991178,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +74,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.2701688555347092,
+      "normalizedWeight": 0.2241826673585885,
       "qcStatus": "VALID"
     },
     {
@@ -99,7 +99,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2701688555347092,
+      "normalizedWeight": 0.2241826673585885,
       "qcStatus": "VALID"
     },
     {
@@ -124,7 +124,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.07004377736085052,
+      "normalizedWeight": 0.058121432278152564,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 873.5697732241428,
+      "base": 1110.0,
+      "bull": 1346.4302267758576,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 12.919802932796664,
+        "sd": 2.5044081694518745,
+        "minus1": 10.41539476334479,
+        "base": 12.919802932796664,
+        "plus1": 15.424211102248538
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.1702127659574468,
       "qcStatus": "VALID"
     },
     {
@@ -140,7 +162,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.0825515947467167,
+      "normalizedWeight": 0.06850025947067982,
       "qcStatus": "VALID"
     }
   ],
@@ -170,9 +192,9 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 6,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
+    "validMethodCount": 7,
+    "independentFamilies": 5,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0
   },
   "raw": {
@@ -186,26 +208,29 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1886718656512.0,
-    "shares": 2343750000.0
+    "shares": 2343750000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 931.557196266303,
+        "base": 1560.0000000000002,
+        "bull": 4794.3260431591325,
+        "price": 805.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

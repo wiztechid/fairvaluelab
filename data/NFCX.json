@@ -1,7 +1,7 @@
 {
   "ticker": "NFCX.JK",
   "name": "PT NFC Indonesia Tbk",
-  "asOf": "2026-09-16T11:05:24.534557+00:00",
+  "asOf": "2026-09-16T11:34:01.227981+00:00",
   "price": 1700.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 1418.2214665046565,
+    "base": 1748.8168949344042,
+    "bull": 2079.412323364152,
+    "dispersion": 0.10660380123283447,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -41,10 +41,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.71x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.14583333333333331,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 1489.8490000000002,
+      "base": 1690.0,
+      "bull": 1890.151,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 25.481533057890456,
+        "sd": 2.8818465965795244,
+        "minus1": 22.59968646131093,
+        "base": 25.481533057890456,
+        "plus1": 28.36337965446998
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.8541666666666666,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -61,7 +82,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.71x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.91x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -82,15 +103,13 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 2
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 8.523965614768928,
@@ -103,10 +122,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1126100893696.0,
-    "shares": 662412300.0
+    "shares": 662412300.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -118,17 +143,10 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -142,6 +160,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

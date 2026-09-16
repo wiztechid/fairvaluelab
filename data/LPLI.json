@@ -1,7 +1,7 @@
 {
   "ticker": "LPLI.JK",
   "name": "PT Star Pacific Tbk",
-  "asOf": "2026-09-16T11:04:56.014070+00:00",
+  "asOf": "2026-09-16T11:33:25.511967+00:00",
   "price": 234.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -130,7 +130,7 @@
     "totalInputs": 7,
     "guards": [
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan."
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
@@ -149,10 +149,16 @@
     "costOfEquity": 0.11968580000000001,
     "terminalGrowth": 0.035,
     "marketCap": 3972949868544.0,
-    "shares": 16978418241.641026
+    "shares": 16978418241.641026,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -166,18 +172,19 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol; EV/EBITDA tidak digunakan.",
+      "inputs": {
+        "ebitda": -10021000000.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

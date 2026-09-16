@@ -1,7 +1,7 @@
 {
   "ticker": "AGII.JK",
   "name": "PT Samator Indo Gas Tbk",
-  "asOf": "2026-09-16T11:00:56.929024+00:00",
+  "asOf": "2026-09-16T11:28:28.483413+00:00",
   "price": 3300.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 397.2419403962933,
-    "base": 514.8952920066235,
-    "bull": 648.4684967640128,
-    "dispersion": 0.447777759113006,
+    "bear": 976.6565638065672,
+    "base": 1215.9871110462234,
+    "bull": 1478.4094127334135,
+    "dispersion": 0.43761084624845986,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.32745224991906763,
+      "normalizedWeight": 0.25040227750959276,
       "qcStatus": "VALID"
     },
     {
@@ -48,9 +48,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.45888637099384916,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.65x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -73,10 +74,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.69x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.1802203242975616,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 1238.5042949381227,
+      "base": 1557.6172180267674,
+      "bull": 1876.7301411154124,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 14.307901344791276,
+        "sd": 1.7319932687675175,
+        "minus1": 12.575908076023758,
+        "base": 14.307901344791276,
+        "plus1": 16.039894613558793
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.40599084045055084,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -91,7 +113,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.21366137908708321,
+      "normalizedWeight": 0.16338655774229488,
       "qcStatus": "VALID"
     }
   ],
@@ -124,9 +146,9 @@
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
+    "validMethodCount": 4,
+    "independentFamilies": 4,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -140,23 +162,22 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 10119977893888.0,
-    "shares": 3066660000.0
+    "shares": 3066660000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     },
     {
@@ -180,6 +201,5 @@
       }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

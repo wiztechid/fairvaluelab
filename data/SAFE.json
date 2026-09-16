@@ -1,7 +1,7 @@
 {
   "ticker": "SAFE.JK",
   "name": "PT Steady Safe Tbk",
-  "asOf": "2026-09-16T09:43:28.830650+00:00",
+  "asOf": "2026-09-16T11:34:59.952775+00:00",
   "price": 1055.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 285.1666115628692,
-    "base": 469.52271574425146,
-    "bull": 591.9298550627004,
-    "dispersion": 0.3859264104403111,
+    "bear": 259.29958898450343,
+    "base": 405.61669656402194,
+    "bull": 504.587254282434,
+    "dispersion": 0.46415481000477504,
     "agreement": "LOW",
     "available": true
   },
@@ -35,7 +35,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.10x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.69x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -50,7 +50,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2665726375176305,
+      "normalizedWeight": 0.2037369744879626,
       "qcStatus": "VALID"
     },
     {
@@ -75,7 +75,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.304654442877292,
+      "normalizedWeight": 0.23284225655767157,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +100,29 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.304654442877292,
+      "normalizedWeight": 0.23284225655767157,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 175.4289227891011,
+      "base": 198.4092227891011,
+      "bull": 221.38952278910108,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 3.2827740205523206,
+        "sd": 0.4374267362569471,
+        "minus1": 2.8453472842953733,
+        "base": 3.2827740205523206,
+        "plus1": 3.720200756809268
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2357168523176428,
       "qcStatus": "VALID"
     },
     {
@@ -116,7 +138,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.12411847672778563,
+      "normalizedWeight": 0.09486166007905138,
       "qcStatus": "VALID"
     }
   ],
@@ -148,8 +170,8 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
     "diagnosticCount": 2,
     "outlierMethodCount": 1
   },
@@ -164,26 +186,34 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 866373926912.0,
-    "shares": 821207512.0
+    "shares": 821207512.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 198.4092227891011,
+        "price": 1055.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

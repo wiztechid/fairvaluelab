@@ -1,14 +1,14 @@
 {
   "ticker": "CANI.JK",
   "name": "PT Capitol Nusantara Indonesia Tbk",
-  "asOf": "2026-09-16T08:28:21.828919+00:00",
+  "asOf": "2026-09-16T11:27:50.280847+00:00",
   "price": 135.0,
   "companyProfile": {
     "sector": "Energi",
     "valuationProfile": "Energi",
     "sourceSector": "Industrials",
     "industry": "Marine Shipping",
-    "sectorNote": "FCF dan laba historis lebih ditekankan karena laba sektor energi cenderung siklikal.",
+    "sectorNote": "Bobot metode disesuaikan dengan karakter sektor dan kualitas data.",
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
@@ -22,9 +22,10 @@
   "methods": [
     {
       "name": "DCF",
-      "bear": 0.006836967542173421,
-      "base": 0.010042564669873872,
-      "bull": 0.01395416714713361,
+      "family": "cashflow",
+      "bear": 120.94595582104782,
+      "base": 177.6529690100688,
+      "bull": 246.84921683279362,
       "confidence": 0.85,
       "relevance": 0.5525,
       "rawWeight": 0.46962499999999996,
@@ -33,30 +34,29 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
-      "bear": 0.00500154480226531,
-      "base": 0.006794330934224443,
-      "bull": 0.008184026119049491,
+      "family": "cashflow",
+      "bear": 88.47732755207333,
+      "base": 120.19171422643039,
+      "bull": 144.7754220459855,
       "confidence": 0.75,
       "relevance": 0.9900000000000001,
       "rawWeight": 0.7425,
       "bands": null,
       "warning": null,
-      "explanation": "Free cash flow per saham dibandingkan dengan required cash yield.",
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: hasil berada di luar economic sanity range 0.05x–5x harga pasar."
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.6548103826047201,
-    "bearTerminalValueShare": 0.5782556523250435,
-    "bullTerminalValueShare": 0.7123205321333719,
+    "bearTerminalValueShare": 0.5782556523250434,
+    "bullTerminalValueShare": 0.7123205321333718,
     "warning": false,
     "growth": 0.08,
     "costOfEquity": 0.1337816,
@@ -73,35 +73,45 @@
   "quality": {
     "cashConversion": null,
     "roe": null,
-    "dataScore": 60,
-    "dataLabel": "CUKUP",
-    "availableInputs": 6,
-    "totalInputs": 10,
+    "dataScore": 57,
+    "dataLabel": "TERBATAS",
+    "availableInputs": 4,
+    "totalInputs": 7,
     "guards": [
+      "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
       "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
     ],
     "historyYears": 4.996577686516085,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 6,
-    "outlierMethodCount": 2
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": null,
-    "bvps": -0.041,
+    "bvps": null,
     "currentPE": null,
     "currentPBV": null,
     "roe": null,
-    "fcf": 666958.0,
+    "fcf": 11798487020.0,
     "growthNormalized": 0.08,
     "costOfEquity": 0.1337816,
     "terminalGrowth": 0.035,
     "marketCap": 112514400256.0,
-    "shares": 833440000.0
+    "shares": 833440000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "USD",
+    "fxApplied": true,
+    "fxPair": "USDIDR=X",
+    "fxFactor": 17690.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -113,11 +123,9 @@
     {
       "name": "PBV & Graham",
       "family": "book",
-      "status": "NEGATIVE",
-      "reason": "Ekuitas/BVPS negatif; metode berbasis book value tidak digunakan.",
-      "inputs": {
-        "bvps": -0.041
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "BVPS tidak tersedia/tervalidasi.",
+      "inputs": {}
     },
     {
       "name": "Historical EV/EBITDA",
@@ -129,35 +137,10 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "DCF",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.006836967542173421,
-        "base": 0.010042564669873872,
-        "bull": 0.01395416714713361,
-        "price": 135.0
-      }
-    },
-    {
-      "name": "FCF Yield",
-      "family": null,
-      "status": "OUTLIER",
-      "reason": "Metode ditolak saat final QC karena nilai negatif/tidak valid/di luar skala harga.",
-      "inputs": {
-        "bear": 0.00500154480226531,
-        "base": 0.006794330934224443,
-        "bull": 0.008184026119049491,
-        "price": 135.0
-      }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "TERBATAS"
 }

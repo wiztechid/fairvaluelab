@@ -1,7 +1,7 @@
 {
   "ticker": "CTRA.JK",
   "name": "PT Ciputra Development Tbk",
-  "asOf": "2026-09-16T11:04:43.580626+00:00",
+  "asOf": "2026-09-16T11:33:10.152742+00:00",
   "price": 600.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1065.8034342153917,
-    "base": 1292.514671905912,
-    "bull": 1519.2259095964325,
-    "dispersion": 0.033632345842205674,
+    "bear": 1020.308574353677,
+    "base": 1241.2868173813383,
+    "bull": 1462.2650604089995,
+    "dispersion": 0.07096487387301786,
     "agreement": "HIGH",
     "available": true
   },
@@ -42,7 +42,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054,
+      "normalizedWeight": 0.23069036226930964,
       "qcStatus": "VALID"
     },
     {
@@ -67,7 +67,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32051282051282054,
+      "normalizedWeight": 0.23069036226930964,
       "qcStatus": "VALID"
     },
     {
@@ -92,7 +92,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.358974358974359,
+      "normalizedWeight": 0.25837320574162675,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 903.4644586600544,
+      "base": 1109.7186934438357,
+      "bull": 1315.9729282276173,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 5.038505838090223,
+        "sd": 0.9611130823283407,
+        "minus1": 4.077392755761882,
+        "base": 5.038505838090223,
+        "plus1": 5.9996189204185635
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2802460697197539,
       "qcStatus": "VALID"
     },
     {
@@ -131,9 +153,9 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -147,10 +169,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 11121416208384.0,
-    "shares": 18535695255.0
+    "shares": 18535695255.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -162,18 +190,16 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 1568.7539204576929,
+        "base": 2268.9416498993965,
+        "bull": 4098.030921979438,
+        "price": 600.0
+      }
     },
     {
       "name": "Graham Number",
@@ -186,6 +212,5 @@
       }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

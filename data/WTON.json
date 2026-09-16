@@ -1,7 +1,7 @@
 {
   "ticker": "WTON.JK",
   "name": "PT Wijaya Karya Beton Tbk",
-  "asOf": "2026-09-16T11:01:44.725027+00:00",
+  "asOf": "2026-09-16T11:29:25.986769+00:00",
   "price": 78.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 44.51680677231913,
+    "base": 66.03531761594193,
+    "bull": 88.50212681672957,
+    "dispersion": 0.11438476254188346,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -41,8 +41,8 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.27399713467048714,
       "qcStatus": "VALID"
     },
     {
@@ -66,8 +66,30 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.27399713467048714,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 41.61610011011129,
+      "base": 63.975405866859425,
+      "bull": 86.33471162360757,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 6.138014324973964,
+        "sd": 3.3361226559805135,
+        "minus1": 2.8018916689934508,
+        "base": 6.138014324973964,
+        "plus1": 9.474136980954478
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.29369627507163326,
       "qcStatus": "VALID"
     },
     {
@@ -85,7 +107,26 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.82x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.08x dari median metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 43.465757374776786,
+      "base": 53.4758662247665,
+      "bull": 69.4761312132273,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.008602011196350819,
+        "sd": 0.0019810322793148874
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.1583094555873926,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -116,14 +157,12 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC.",
-      "Composite FV tidak diterbitkan setelah QC outlier: minimal 2 keluarga valuasi independen wajib lolos."
+      "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 1,
     "outlierMethodCount": 1
   },
   "raw": {
@@ -137,25 +176,17 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 679806435328.0,
-    "shares": 8715466600.0
+    "shares": 8715466600.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -167,6 +198,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "EXCL.JK",
   "name": "PT XLSMART Telecom Sejahtera Tbk",
-  "asOf": "2026-09-16T09:42:44.984967+00:00",
+  "asOf": "2026-09-16T11:34:15.179655+00:00",
   "price": 2540.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 3999.7131333545867,
-    "base": 6089.2924539534315,
-    "bull": 7397.868876910529,
-    "dispersion": 0.5013631158838877,
-    "agreement": "LOW",
+    "bear": 1929.4167485014627,
+    "base": 2376.4393139588747,
+    "bull": 2823.461879416286,
+    "dispersion": 0.06433956329962895,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -32,9 +32,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.6676557863501483,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.01x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -58,7 +59,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.3323442136498516,
+      "normalizedWeight": 0.2906574394463668,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 1762.7125411396005,
+      "base": 2285.096208755909,
+      "bull": 2807.4798763722174,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 6.095006899634239,
+        "sd": 0.5695087940475501,
+        "minus1": 5.5254981055866885,
+        "base": 6.095006899634239,
+        "plus1": 6.664515693681789
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.7093425605536332,
       "qcStatus": "VALID"
     }
   ],
@@ -94,7 +117,7 @@
     "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -107,10 +130,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 46227651559424.0,
-    "shares": 18199862451.0
+    "shares": 18199862451.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -120,20 +149,27 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil berada di luar economic sanity guard 0,05x–5x harga pasar; diklasifikasikan extreme/outlier dan tidak masuk Composite FV.",
+      "inputs": {
+        "bear": 11100.613341071221,
+        "base": 12176.738095238095,
+        "bull": 13483.905954794613,
+        "price": 2540.0
+      }
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 7826.503281763416,
+        "price": 2540.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

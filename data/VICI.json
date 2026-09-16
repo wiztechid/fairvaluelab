@@ -1,7 +1,7 @@
 {
   "ticker": "VICI.JK",
   "name": "PT Victoria Care Indonesia Tbk",
-  "asOf": "2026-09-16T11:03:06.231054+00:00",
+  "asOf": "2026-09-16T11:31:11.095264+00:00",
   "price": 1225.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 137.36402742927046,
-    "base": 194.16688030529926,
-    "bull": 252.2323702081123,
-    "dispersion": 0.16183202119811382,
-    "agreement": "HIGH",
+    "bear": 304.4269048385192,
+    "base": 385.63612388020925,
+    "bull": 471.81918334254357,
+    "dispersion": 0.4795476375139637,
+    "agreement": "LOW",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.6260623229461756,
+      "normalizedWeight": 0.22788203753351205,
       "qcStatus": "VALID"
     },
     {
@@ -57,10 +57,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.85x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.11548772942874817,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 390.94047644435295,
+      "base": 521.7620544769004,
+      "bull": 652.5836325094479,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 17.089493657904672,
+        "sd": 4.229609290241608,
+        "minus1": 12.859884367663064,
+        "base": 17.089493657904672,
+        "plus1": 21.31910294814628
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.33821406475561966,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -75,7 +96,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.37393767705382436,
+      "normalizedWeight": 0.1361105382553104,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 281.5734218361521,
+      "base": 334.75026567481405,
+      "bull": 412.6890980286675,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.014936507936507935,
+        "sd": 0.0028208498687664063
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.18230563002680966,
       "qcStatus": "VALID"
     }
   ],
@@ -105,14 +145,13 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Composite FV belum diterbitkan: minimal 2 keluarga valuasi independen setelah QC."
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1
+    "validMethodCount": 5,
+    "independentFamilies": 5,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0
   },
   "raw": {
     "epsTTM": 15.1,
@@ -125,25 +164,17 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 8217299517440.0,
-    "shares": 6708000000.0
+    "shares": 6708000000.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
     {
       "name": "DCF",
       "family": "cashflow",
@@ -165,6 +196,5 @@
       }
     }
   ],
-  "analysisStatus": "TERBATAS",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

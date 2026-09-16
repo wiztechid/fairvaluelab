@@ -1,7 +1,7 @@
 {
   "ticker": "SMDM.JK",
   "name": "PT Suryamas Dutamakmur Tbk",
-  "asOf": "2026-09-16T11:05:06.720555+00:00",
+  "asOf": "2026-09-16T11:33:39.381516+00:00",
   "price": 550.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -46,6 +46,29 @@
       "qcStatus": "VALID"
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 57.566308068829,
+      "base": 89.91123052189731,
+      "bull": 122.25615297496562,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 6.4913122774194365,
+        "sd": 3.252733370086241,
+        "minus1": 3.2385789073331956,
+        "base": 6.4913122774194365,
+        "plus1": 9.744045647505677
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.27x dari median metode."
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
       "bear": 162.94018176283612,
@@ -86,7 +109,7 @@
     "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 3.82,
@@ -99,10 +122,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2624675905536.0,
-    "shares": 4772138237.0
+    "shares": 4772138237.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -114,20 +143,22 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 89.91123052189731,
+        "price": 550.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "ELTY.JK",
   "name": "PT Bakrieland Development Tbk",
-  "asOf": "2026-09-16T11:04:46.753920+00:00",
+  "asOf": "2026-09-16T11:33:13.835228+00:00",
   "price": 35.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 30.159313323540104,
-    "base": 33.37851947965039,
-    "bull": 37.281333886879366,
-    "dispersion": 0.49067889166851486,
-    "agreement": "LOW",
+    "bear": 10.666125991939547,
+    "base": 19.779009099951374,
+    "bull": 29.54971912256356,
+    "dispersion": 0.10156781397417303,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3097060624617268,
+      "normalizedWeight": 0.2980259281084266,
       "qcStatus": "VALID"
     },
     {
@@ -49,7 +49,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.22734231475811392,
+      "normalizedWeight": 0.21876841484973486,
       "qcStatus": "VALID"
     },
     {
@@ -73,8 +73,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.38x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 6.6566000000000045,
+      "base": 20.0,
+      "bull": 33.343399999999995,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 13.851631199960845,
+        "sd": 4.521835698647446,
+        "minus1": 9.329795501313399,
+        "base": 13.851631199960845,
+        "plus1": 18.373466898608292
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
       "included": true,
-      "normalizedWeight": 0.4629516227801592,
+      "normalizedWeight": 0.48320565704183854,
       "qcStatus": "VALID"
     }
   ],
@@ -110,7 +133,7 @@
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -123,10 +146,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1523267010560.0,
-    "shares": 43521914587.42857
+    "shares": 43521914587.42857,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "P/E & Graham",
@@ -136,20 +165,22 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 49.394370195306365,
+        "price": 35.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

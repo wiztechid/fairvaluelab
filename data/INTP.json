@@ -1,7 +1,7 @@
 {
   "ticker": "INTP.JK",
   "name": "PT Indocement Tunggal Prakarsa Tbk",
-  "asOf": "2026-09-16T11:01:18.436524+00:00",
+  "asOf": "2026-09-16T11:28:54.917084+00:00",
   "price": 5225.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 7402.119886645367,
-    "base": 10059.725690950885,
-    "bull": 12738.742875839635,
-    "dispersion": 0.1014434454475983,
+    "bear": 7393.145485315839,
+    "base": 10614.711624592112,
+    "bull": 15465.77691575227,
+    "dispersion": 0.043189789470905474,
     "agreement": "HIGH",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.14813750837881834,
+      "normalizedWeight": 0.12444694714825837,
       "qcStatus": "VALID"
     },
     {
@@ -74,9 +74,10 @@
       },
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
-      "included": true,
-      "normalizedWeight": 0.2930192473427176,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.24x dari median metode."
     },
     {
       "name": "Historical P/E 5Y",
@@ -100,7 +101,7 @@
       "warning": null,
       "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2930192473427176,
+      "normalizedWeight": 0.2461587965569946,
       "qcStatus": "VALID"
     },
     {
@@ -125,7 +126,29 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.1394235372977114,
+      "normalizedWeight": 0.11712653849247846,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 6807.772008120517,
+      "base": 10168.63852749224,
+      "bull": 13529.505046863962,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 9.928537603673409,
+        "sd": 3.604830242253132,
+        "minus1": 6.323707361420277,
+        "base": 9.928537603673409,
+        "plus1": 13.533367845926541
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
+      "included": true,
+      "normalizedWeight": 0.2638564878127262,
       "qcStatus": "VALID"
     },
     {
@@ -141,7 +164,26 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.12640045963803506,
+      "normalizedWeight": 0.10618614753438983,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 6744.947606989082,
+      "base": 10712.019516638482,
+      "bull": 26009.806872915684,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.043689240789103995,
+        "sd": 0.025696027602760275
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru dinilai terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.14222508245515245,
       "qcStatus": "VALID"
     }
   ],
@@ -171,10 +213,10 @@
     "totalInputs": 7,
     "guards": [],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1
+    "validMethodCount": 6,
+    "independentFamilies": 6,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2
   },
   "raw": {
     "epsTTM": 706.42,
@@ -187,25 +229,17 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 17927357071360.0,
-    "shares": 3431073399.0
+    "shares": 3431073399.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
-    },
     {
       "name": "FCF Yield",
       "family": "cashflow",
@@ -215,8 +249,17 @@
         "base": 6885.064379927767,
         "price": 5225.0
       }
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 8298.764725780044,
+        "price": 5225.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }

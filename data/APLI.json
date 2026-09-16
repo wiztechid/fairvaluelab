@@ -1,7 +1,7 @@
 {
   "ticker": "APLI.JK",
   "name": "PT Asiaplast Industries Tbk",
-  "asOf": "2026-09-16T11:01:00.101227+00:00",
+  "asOf": "2026-09-16T11:28:31.996798+00:00",
   "price": 292.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 233.6438643074644,
-    "base": 327.6615539477921,
-    "bull": 421.67924358811973,
-    "dispersion": 0.5159066807336655,
-    "agreement": "LOW",
+    "bear": 88.96236716023876,
+    "base": 145.76427597255028,
+    "bull": 204.1449713386228,
+    "dispersion": 0.04225288322351178,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -41,8 +41,31 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.13x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 74.95569982425697,
+      "base": 142.16476450665002,
+      "bull": 211.5879810632201,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 6.8884041459682415,
+        "sd": 6.598865295511683,
+        "minus1": 0.5,
+        "base": 6.8884041459682415,
+        "plus1": 13.487269441479924
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis; net debt dikembalikan ke equity value.",
       "included": true,
-      "normalizedWeight": 0.5244956772334294,
+      "normalizedWeight": 0.7130434782608696,
       "qcStatus": "VALID"
     },
     {
@@ -58,7 +81,7 @@
       "warning": null,
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi; bobot sengaja rendah.",
       "included": true,
-      "normalizedWeight": 0.4755043227665707,
+      "normalizedWeight": 0.28695652173913044,
       "qcStatus": "VALID"
     }
   ],
@@ -79,7 +102,7 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi digunakan.",
+      "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV tidak diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
@@ -87,7 +110,7 @@
     "validMethodCount": 2,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
     "epsTTM": 4.135380810076443,
@@ -100,10 +123,16 @@
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 397900021760.0,
-    "shares": 1362671400.0
+    "shares": 1362671400.0,
+    "quoteCurrency": "IDR",
+    "financialCurrency": "IDR",
+    "fxApplied": false,
+    "fxPair": null,
+    "fxFactor": 1.0
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
+  "engineVersion": "3.6-transparent-negative-qc",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",
@@ -115,20 +144,22 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal diproses: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "status": "OUTLIER",
+      "reason": "Nilai berbeda ekstrem dari kelompok metode valid sehingga dikeluarkan dari Composite FV.",
+      "inputs": {
+        "base": 484.4596372713953,
+        "price": 292.0
+      }
     }
   ],
-  "analysisStatus": "SIAP",
-  "engineVersion": "3.6-transparent-negative-qc"
+  "analysisStatus": "SIAP"
 }
