@@ -1,7 +1,7 @@
 {
   "ticker": "LMSH.JK",
   "name": "PT Lionmesh Prima Tbk",
-  "asOf": "2026-09-17T03:08:59.368330+00:00",
+  "asOf": "2026-09-17T03:21:27.311518+00:00",
   "price": 256.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -19,7 +19,33 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 106.35236455208727,
+      "base": 148.89331037292217,
+      "bull": 191.43425619375708,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
+      "bands": {
+        "normalizedEPS": 21.270472910417453,
+        "growthAdjustment": 0.01321739997725,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE",
+      "countsForIndependence": true
+    }
+  ],
   "dcfDiagnostics": null,
   "technical": {
     "ma20": 256.0,
@@ -40,18 +66,19 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 20.9930 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.996577686516085,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 20.993000032268537,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -67,6 +94,17 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 20.993
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 20.993000064537075
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.037763999935,
     "growthNormalizedQuarterly": null
   },
@@ -76,13 +114,6 @@
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
