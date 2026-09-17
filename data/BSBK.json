@@ -1,7 +1,7 @@
 {
   "ticker": "BSBK.JK",
   "name": "PT Wulandari Bangun Laksana Tbk",
-  "asOf": "2026-09-17T00:45:48.245244+00:00",
+  "asOf": "2026-09-17T02:43:24.688781+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,20 +12,45 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 22.353037780236,
+    "base": 55.16762572511303,
+    "bull": 93.53461348879854,
+    "dispersion": 0.02482543927394422,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 3.0,
+      "base": 54.03409905863174,
+      "bull": 114.5113906979926,
+      "confidence": 0.9,
+      "relevance": 0.75,
+      "rawWeight": 0.675,
+      "bands": {
+        "mean": 18.011366352877246,
+        "sd": 20.159097213120283,
+        "current": 16.666666666666668,
+        "z": -0.06670436041825317,
+        "minus1": 3.0,
+        "base": 54.03409905863174,
+        "plus1": 114.5113906979926,
+        "coverageYears": 3.8576317590691307
+      },
+      "warning": null,
+      "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
+      "included": true,
+      "normalizedWeight": 0.587979094076655,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 60.99121525766723,
-      "base": 76.23901907208403,
-      "bull": 91.48682288650083,
+      "bear": 60.99121464775507,
+      "base": 76.23901830969383,
+      "bull": 91.4868219716326,
       "confidence": 0.6,
       "relevance": 0.2,
       "rawWeight": 0.12,
@@ -34,18 +59,40 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE",
-      "countsForIndependence": false
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.34x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 49.97100924251782,
+      "base": 56.78523777558844,
+      "bull": 63.59946630865905,
+      "confidence": 0.86,
+      "relevance": 0.55,
+      "rawWeight": 0.47300000000000003,
+      "warning": null,
+      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
+      "bands": {
+        "forwardEPS": 3.1527445871155253,
+        "growthUsed": 0.05091486237184181,
+        "historicalPE": 18.011366352877246
+      },
+      "included": true,
+      "normalizedWeight": 0.41202090592334495,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 50.3,
-    "ma50": 51.64,
-    "ma200": 59.96,
+    "ma20": 50.15,
+    "ma50": 51.6,
+    "ma200": 59.86,
     "rsi14": null,
-    "return1m": -0.05660377358490565,
-    "return3m": -0.019607843137254943
+    "return1m": -0.07407407407407407,
+    "return3m": -0.05660377358490565
   },
   "quality": {
     "cashConversion": -0.14205163115247132,
@@ -55,17 +102,16 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
-    "historyYears": 3.8548939082819986,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "historyYears": 3.8576317590691307,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 3.0000000600000023,
+    "epsTTM": 3.0,
     "bvps": 86.10945056038268,
     "currentPE": 16.666666666666668,
     "currentPBV": 0.5806563585600678,
@@ -81,32 +127,13 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 3.0
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 3.000000120000005
-      },
-      {
-        "source": "WISS reconciled EPS",
-        "value": 3.0
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 2.776024817906871
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07833055749514124,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.11-sector-aware+3.12-atomic-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.13-sector-midcycle+3.12-atomic-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -193,6 +220,6 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
   },
-  "engineGeneration": "3.11-sector-aware",
+  "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.12-atomic-qc"
 }
