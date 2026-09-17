@@ -2,7 +2,7 @@
 import json, glob, math, os
 import numpy as np
 from des_universe import TICKERS, SECTOR_BY_TICKER, DES_SOURCE
-OUT='data';QC_VERSION='3.18-evidence-ladder-qc'
+OUT='data';QC_VERSION='3.19-sector-waterfall-qc'
 def finite(x):return isinstance(x,(int,float)) and math.isfinite(x)
 def family(m):
     if m.get('family'):return m['family']
@@ -10,16 +10,16 @@ def family(m):
 def robust_keep(methods,price):
     cand=[]
     for m in methods:
-        vals=[m.get('bear'),m.get('base'),m.get('bull')];sane=price and all(finite(v) and v>0 and .05*price<=v<=5*price for v in vals);m['qcStatus']='CANDIDATE' if sane else 'OUTLIER';m['included']=False;m['normalizedWeight']=0
+        vals=[m.get('bear'),m.get('base'),m.get('bull')];sane=all(finite(v) and v>0 for v in vals) and vals[0]<=vals[1]<=vals[2];m['qcStatus']='CANDIDATE' if sane else 'OUTLIER';m['included']=False;m['normalizedWeight']=0
         if sane:cand.append(m)
-        else:m['qcReason']='Ditolak: hasil di luar economic sanity range 0.05x–5x harga pasar. Harga hanya guard QC, bukan target valuasi.'
+        else:m['qcReason']='Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode.'
     if len(cand)==1:
         cand[0]['qcStatus']='VALID';return cand
     if not cand:return []
     logs=np.log(np.array([m['base'] for m in cand],float));med=float(np.median(logs));mad=float(np.median(np.abs(logs-med)));keep=[]
     for m,l in zip(cand,logs):
         ratio=math.exp(abs(float(l)-med));z=abs(float(l)-med)/(1.4826*mad) if mad>1e-9 else 0
-        if ratio<=2.5 and z<=3.5:keep.append(m);m['qcStatus']='VALID'
+        if ratio<=3.5 and z<=3.5:keep.append(m);m['qcStatus']='VALID'
         else:m['qcStatus']='OUTLIER';m['qcReason']=f'Ditolak cross-method outlier: deviasi {ratio:.2f}x dari median metode.'
     return keep
 def capped_weights(keep,cap=.60):
@@ -51,18 +51,19 @@ def process(path):
     else:
         bear=base=bull=disp=None;agr='INSUFFICIENT';msg='Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.'
         if msg not in guards:guards.append(msg)
-    ratio=(base/price) if suf and price and base else None;extreme=bool(ratio is not None and (ratio<.25 or ratio>3.0));review=[]
+    ratio=(base/price) if suf and price and base else None;large_gap=bool(ratio is not None and (ratio<.50 or ratio>2.0));extreme=bool(ratio is not None and (ratio<.25 or ratio>3.0));review=[]
     if extreme:
         direction='BELOW_MARKET' if ratio<.25 else 'ABOVE_MARKET';review.append('EXTREME_VALUATION');guards.append(f'Extreme Valuation Review: Base FV = {ratio:.2f}x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya.')
         d['valuationReview']={'required':True,'status':'REVIEW','reason':'EXTREME_VALUATION','direction':direction,'baseToPrice':ratio,'thresholds':{'low':.25,'high':3.0},'checks':['currency_and_units','shares_and_dilution','earnings_quality_and_oneoffs','cycle_and_corporate_actions','cashflow_confirmation','independent_model_agreement'],'policy':'Market price is a review trigger only; it never pulls fair value toward market.'}
     else:d['valuationReview']={'required':False,'status':'PASS','reason':None,'baseToPrice':ratio,'thresholds':{'low':.25,'high':3.0}}
-    d['fairValue']={'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agr,'available':suf,'indicative':False,'referenceOnly':False};q['validMethodCount']=len(keep);q['independentFamilies']=len(ifam);q['outlierMethodCount']=sum(m.get('qcStatus')=='OUTLIER' for m in methods);q['reviewFlags']=review
+    d['fairValue']={'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agr,'available':suf,'indicative':False,'referenceOnly':False};q['validMethodCount']=len(keep);q['independentFamilies']=len(ifam);q['outlierMethodCount']=sum(m.get('qcStatus')=='OUTLIER' for m in methods);q['reviewFlags']=review + (['LARGE_MARKET_GAP'] if large_gap and not extreme else [])
     score=q.get('dataScore')
     if finite(score):q['dataLabel']='BAIK' if score>=80 else ('CUKUP' if score>=60 else 'TERBATAS')
     conf=0
     if suf:
         conf=45+min(20,5*len(ifam))+(15 if agr=='HIGH' else 8 if agr=='MEDIUM' else 2)+(10 if q.get('dataLabel')=='BAIK' else 5 if q.get('dataLabel')=='CUKUP' else 0)
         if extreme:conf-=25
+        elif large_gap:conf-=12
         if (d.get('quarterlyNormalization') or {}).get('status') in ('INSUFFICIENT','LIMITED'):conf-=8
         if finite(q.get('cashConversion')) and q['cashConversion']<0:conf-=5
     q['valuationConfidence']=max(0,min(100,int(round(conf))))
