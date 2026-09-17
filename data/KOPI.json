@@ -1,8 +1,8 @@
 {
   "ticker": "KOPI.JK",
   "name": "PT Mitra Energi Persada Tbk",
-  "asOf": "2026-09-17T02:38:18.179826+00:00",
-  "price": 202.0,
+  "asOf": "2026-09-17T03:08:02.032249+00:00",
+  "price": 200.0,
   "companyProfile": {
     "sector": "Energi",
     "valuationProfile": "Energi",
@@ -21,22 +21,6 @@
   },
   "methods": [
     {
-      "name": "DCF",
-      "family": "cashflow",
-      "bear": 459.40456375417125,
-      "base": 728.2506683406971,
-      "bull": 1005.782925048683,
-      "confidence": 0.85,
-      "relevance": 0.85,
-      "rawWeight": 0.7224999999999999,
-      "bands": null,
-      "warning": "Porsi nilai jangka panjang tinggi",
-      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID"
-    },
-    {
       "name": "FCF Yield",
       "family": "cashflow",
       "bear": 254.07384366751344,
@@ -50,21 +34,22 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.14x dari median metode."
     },
     {
       "name": "Mid-Cycle Earnings",
       "family": "earnings_midcycle",
-      "bear": 12.251808858578508,
-      "base": 17.15253240200991,
-      "bull": 22.053255945441315,
+      "bear": 12.19115634116034,
+      "base": 17.067618877624476,
+      "bull": 21.944081414088615,
       "confidence": 0.66,
       "relevance": 1.05,
       "rawWeight": 0.6930000000000001,
       "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
       "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
       "bands": {
-        "normalizedEPS": 2.4503617717157016,
+        "normalizedEPS": 2.438231268232068,
         "growthAdjustment": 0.028267662500000002,
         "peBand": [
           5.0,
@@ -76,7 +61,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 26.33x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.14x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -89,12 +74,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 204.85,
-    "ma50": 202.88,
-    "ma200": 242.3,
-    "rsi14": 43.33333333333333,
-    "return1m": -0.009803921568627416,
-    "return3m": 0.06878306878306883
+    "ma20": 204.75,
+    "ma50": 202.84,
+    "ma200": 242.29,
+    "rsi14": 40.625,
+    "return1m": -0.019607843137254943,
+    "return3m": 0.05820105820105814
   },
   "quality": {
     "cashConversion": null,
@@ -106,18 +91,21 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.3830 per saham.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.3712 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 2,
+    "reviewFlags": [],
+    "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": 2.3829999338481596,
+    "epsTTM": 2.3712029048001577,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -126,7 +114,7 @@
     "growthNormalized": 0.08076475000000001,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 140847874048.0,
+    "marketCap": 139453333504.0,
     "shares": 697266668.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -140,7 +128,7 @@
       },
       {
         "source": "Price / Yahoo trailingPE",
-        "value": 2.382999867696319
+        "value": 2.359405809600316
       }
     ],
     "epsSource": "Yahoo TTM cross-check",
@@ -149,7 +137,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.12-atomic-qc",
+  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -235,6 +223,16 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
   },
+  "valuationReview": {
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": null,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
+  },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.12-atomic-qc"
+  "qcVersion": "3.14-extreme-review-qc"
 }

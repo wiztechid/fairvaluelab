@@ -1,7 +1,7 @@
 {
   "ticker": "MDKI.JK",
   "name": "PT Emdeki Utama Tbk",
-  "asOf": "2026-09-17T02:39:17.681281+00:00",
+  "asOf": "2026-09-17T03:09:02.578284+00:00",
   "price": 193.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 72.8357699073928,
+    "base": 108.31519280353851,
+    "bull": 144.5643265860095,
+    "dispersion": 0.01569073943730988,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.5104203461674319,
       "qcStatus": "VALID"
     },
     {
@@ -50,7 +50,33 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.50x dari median metode."
+    },
+    {
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 78.60766107464417,
+      "base": 110.05072550450186,
+      "bull": 141.4937899343595,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
+      "bands": {
+        "normalizedEPS": 15.721532214928835,
+        "growthAdjustment": 0.01744321238625,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.4895796538325681,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -81,16 +107,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 15.4520 per saham."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
+    "reviewFlags": [],
+    "valuationConfidence": 67
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 15.451999702328841,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -106,22 +134,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 15.452
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 15.451999404657682
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.049837749675,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.12-atomic-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -204,6 +236,16 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
   },
+  "valuationReview": {
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.5612186155623757,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
+  },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.12-atomic-qc"
+  "qcVersion": "3.14-extreme-review-qc"
 }

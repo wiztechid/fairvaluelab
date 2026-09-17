@@ -1,8 +1,8 @@
 {
   "ticker": "BMHS.JK",
   "name": "PT Bundamedik Tbk",
-  "asOf": "2026-09-17T02:42:49.532330+00:00",
-  "price": 202.0,
+  "asOf": "2026-09-17T03:12:39.098782+00:00",
+  "price": 200.0,
   "companyProfile": {
     "sector": "Kesehatan",
     "valuationProfile": "Kesehatan",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 195.9693676357565,
+    "base": 270.40753529553473,
+    "bull": 344.845702955313,
+    "dispersion": 0.050708303964835014,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": {
         "mean": 1.8507636174767277,
         "sd": 0.6149105664795899,
-        "current": 0.8912648942674136,
-        "z": -1.5603874376440103,
+        "current": 0.8824404893736769,
+        "z": -1.574738150373273,
         "minus1": 280.09889978514013,
         "base": 419.4648001227437,
         "plus1": 558.8307004603473,
@@ -43,6 +43,55 @@
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.57x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 225.216063669371,
+      "base": 289.066589993015,
+      "bull": 352.91711631665896,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 200.2550867182192,
+        "sd": 44.23338126434548,
+        "current": 138.55291040244958,
+        "sampleCount": 489,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 114.47832411010184,
+      "base": 256.0,
+      "bull": 397.5216758898982,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 177.34772531513548,
+        "sd": 98.04120039788785,
+        "current": 138.55291040244958,
+        "sampleCount": 861,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3,
       "qcStatus": "VALID"
     },
     {
@@ -59,18 +108,40 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.11x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 235.15262825478655,
+      "base": 267.2188957440756,
+      "bull": 299.28516323336464,
+      "confidence": 0.76,
+      "relevance": 1.05,
+      "rawWeight": 0.798,
+      "warning": "HIGH MULTIPLE · confidence diturunkan.",
+      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
+      "bands": {
+        "forwardEPS": 1.4153437804402338,
+        "growthUsed": -0.0195,
+        "historicalPE": 188.80140601667733
+      },
+      "included": true,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 195.95,
-    "ma50": 188.5,
-    "ma200": 188.855,
-    "rsi14": 70.0,
-    "return1m": 0.06878306878306883,
-    "return3m": 0.11602209944751385
+    "ma20": 195.85,
+    "ma50": 188.46,
+    "ma200": 188.845,
+    "rsi14": 66.66666666666666,
+    "return1m": 0.05820105820105814,
+    "return3m": 0.1049723756906078
   },
   "quality": {
     "cashConversion": -10.592947306917535,
@@ -82,38 +153,52 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Historical P/E 3Y adaptive: median 200.3x, current 138.6x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 177.3x, current 138.6x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 2,
+    "reviewFlags": [],
+    "valuationConfidence": 67
   },
   "raw": {
     "epsTTM": 1.4434918719431247,
     "bvps": 226.64417873884332,
-    "currentPE": 139.93843950647408,
-    "currentPBV": 0.8912648942674136,
+    "currentPE": 138.55291040244958,
+    "currentPBV": 0.8824404893736769,
     "roe": 0.00087,
     "fcf": -131553402880.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 1737890201600.0,
+    "marketCap": 1720683331584.0,
     "shares": 8603416176.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "WISS reconciled EPS",
+        "value": 1.4434918719431247
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 1.4434918719431247
+      }
+    ],
+    "epsSource": "Multi-source EPS median",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.12-atomic-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -200,6 +285,16 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
   },
+  "valuationReview": {
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.3520376764776736,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
+  },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.12-atomic-qc"
+  "qcVersion": "3.14-extreme-review-qc"
 }
