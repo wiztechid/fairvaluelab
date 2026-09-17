@@ -1,7 +1,7 @@
 {
   "ticker": "SULI.JK",
   "name": "PT SLJ Global Tbk",
-  "asOf": "2026-09-17T12:07:47.376034+00:00",
+  "asOf": "2026-09-17T13:42:53.001627+00:00",
   "price": 87.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -17,7 +17,9 @@
     "bull": 89.85327344028575,
     "dispersion": 0.38651313193140946,
     "agreement": "LOW",
-    "available": true
+    "available": true,
+    "indicative": false,
+    "referenceOnly": false
   },
   "methods": [
     {
@@ -105,7 +107,8 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
@@ -113,7 +116,7 @@
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 67
   },
   "raw": {
     "epsTTM": null,
@@ -122,7 +125,7 @@
     "currentPBV": 2.3102808024236636,
     "roe": -0.26108998,
     "fcf": 29389842317.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": -0.25,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 549907595264.0,
@@ -132,12 +135,13 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17743.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -151,47 +155,73 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -59935481397.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.25,
+    "confidence": 0.72,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.2794212630056867
+          }
+        ],
+        "normalGrowth": -0.2794212630056867,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.33469202944945664
+          }
+        ],
+        "normalGrowth": -0.33469202944945664,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.33218526653241554
+          }
+        ],
+        "normalGrowth": -0.33218526653241554,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.4458407781606707
+          }
+        ],
+        "normalGrowth": -0.4458407781606707,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -200,10 +230,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.8269545009784736
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -234,5 +270,5 @@
     }
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

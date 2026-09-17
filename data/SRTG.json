@@ -1,7 +1,7 @@
 {
   "ticker": "SRTG.JK",
   "name": "PT Saratoga Investama Sedaya Tbk",
-  "asOf": "2026-09-17T12:12:02.187732+00:00",
+  "asOf": "2026-09-17T13:48:13.248342+00:00",
   "price": 1770.0,
   "companyProfile": {
     "sector": "Keuangan",
@@ -17,7 +17,9 @@
     "bull": 2132.0213945732185,
     "dispersion": 0.20793829402636832,
     "agreement": "MEDIUM",
-    "available": true
+    "available": true,
+    "indicative": false,
+    "referenceOnly": false
   },
   "methods": [
     {
@@ -264,16 +266,21 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 2472.8223779868044,
+        "base": 4700.15,
+        "bull": 20660.0,
+        "price": 1770.0
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -313,10 +320,21 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.7061039494313515
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.7176836352994695
+          }
+        ],
+        "normalGrowth": 0.7138237400100969,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       }
     },
     "notes": [
@@ -347,5 +365,5 @@
     }
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

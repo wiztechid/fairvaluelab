@@ -1,7 +1,7 @@
 {
   "ticker": "SMDM.JK",
   "name": "PT Suryamas Dutamakmur Tbk",
-  "asOf": "2026-09-17T12:12:53.237773+00:00",
+  "asOf": "2026-09-17T13:49:19.527530+00:00",
   "price": 540.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,15 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 168.3181196443331,
-    "base": 211.05776038463947,
-    "bull": 255.38911359153727,
-    "dispersion": 0.022079348294114638,
-    "agreement": "LIMITED",
-    "available": false,
-    "indicative": true,
-    "referenceOnly": false,
-    "evidenceLevel": "INDICATIVE"
+    "bear": 113.63736398132197,
+    "base": 136.52394319653123,
+    "bull": 167.1260154113739,
+    "dispersion": 0.37796888697265396,
+    "agreement": "LOW",
+    "available": true,
+    "indicative": false,
+    "referenceOnly": false
   },
   "methods": [
     {
@@ -44,10 +43,28 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "indicativeWeight": 0.863013698630137
+      "included": true,
+      "normalizedWeight": 0.3070674248578391,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 57.566308068829,
+      "base": 89.91123052189731,
+      "bull": 122.25615297496562,
+      "confidence": 0.82,
+      "relevance": 0.65,
+      "rawWeight": 0.533,
+      "bands": {
+        "mean": 6.4913122774194365,
+        "sd": 3.252733370086241
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.2164906580016247,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
@@ -61,11 +78,10 @@
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.048740861088545896,
       "qcStatus": "VALID",
-      "countsForIndependence": false,
-      "indicativeWeight": 0.136986301369863
+      "countsForIndependence": false
     },
     {
       "name": "Justified PBV / ROE",
@@ -84,11 +100,10 @@
         "growth": -0.02,
         "costOfEquity": 0.105
       },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.07x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.4277010560519903,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -109,18 +124,15 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
-      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 46,
-    "indicativeMethodCount": 2
+    "valuationConfidence": 59
   },
   "raw": {
     "epsTTM": 3.799999908518523,
@@ -163,8 +175,8 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "INDIKATIF",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -177,17 +189,10 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -198,10 +203,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.16720725543910353
+          }
+        ],
+        "normalGrowth": -0.16720725543910353,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -253,10 +264,14 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "LIMITED_EVIDENCE",
-    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.2528221170306134,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

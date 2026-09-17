@@ -1,7 +1,7 @@
 {
   "ticker": "FIRE.JK",
   "name": "PT Alfa Energi Investama Tbk",
-  "asOf": "2026-09-17T12:05:54.744213+00:00",
+  "asOf": "2026-09-17T13:40:47.904615+00:00",
   "price": 122.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,12 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 25.146465716785166,
-    "base": 28.080564578549335,
-    "bull": 31.01466344031351,
-    "dispersion": 0.022862861963293013,
-    "agreement": "HIGH",
-    "available": true
+    "bear": 32.149857588295006,
+    "base": 47.38382922024607,
+    "bull": 62.61780085219713,
+    "dispersion": 0.5882689711813466,
+    "agreement": "LOW",
+    "available": true,
+    "indicative": false,
+    "referenceOnly": false
   },
   "methods": [
     {
@@ -41,10 +43,9 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.43x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.0763131813676908,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 3Y",
@@ -67,7 +68,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.30000000000000004,
+      "normalizedWeight": 0.2229930624380575,
       "qcStatus": "VALID"
     },
     {
@@ -91,7 +92,26 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.30000000000000004,
+      "normalizedWeight": 0.2229930624380575,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 39.53726791525947,
+      "base": 83.0,
+      "bull": 126.46273208474052,
+      "confidence": 0.82,
+      "relevance": 1.25,
+      "rawWeight": 1.025,
+      "bands": {
+        "mean": 5.371408741805115,
+        "sd": 2.9692614846009873
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.25396432111000994,
       "qcStatus": "VALID"
     },
     {
@@ -110,7 +130,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.68x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.76x dari median metode."
     },
     {
       "name": "Forward Earnings Power",
@@ -129,7 +149,7 @@
         "historicalPE": 5.4965193773066705
       },
       "included": true,
-      "normalizedWeight": 0.39999999999999997,
+      "normalizedWeight": 0.22373637264618437,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -154,18 +174,15 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.0100 per saham.",
-      "Extreme Valuation Review: Base FV = 0.23x harga pasar. Angka tetap ditampilkan, tetapi perlu verifikasi currency/unit/shares, earnings quality, dan model sebelum dianggap SIAP penuh."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.0100 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 2,
-    "reviewFlags": [
-      "EXTREME_VALUATION"
-    ],
-    "valuationConfidence": 42
+    "validMethodCount": 5,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1,
+    "reviewFlags": [],
+    "valuationConfidence": 64
   },
   "raw": {
     "epsTTM": 5.010000247420106,
@@ -208,8 +225,8 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "REVIEW",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -220,17 +237,10 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -241,10 +251,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.3183831486571256
+          }
+        ],
+        "normalGrowth": -0.3183831486571256,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -295,24 +311,15 @@
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "EXTREME_VALUATION",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.23016856211925685,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.3883920427889022,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Market price is a review trigger only; it never pulls fair value toward market."
+    }
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

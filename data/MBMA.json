@@ -1,7 +1,7 @@
 {
   "ticker": "MBMA.JK",
   "name": "PT Merdeka Battery Materials Tbk.",
-  "asOf": "2026-09-17T12:07:08.454323+00:00",
+  "asOf": "2026-09-17T13:42:24.638667+00:00",
   "price": 520.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,12 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1137.129760664939,
-    "base": 1417.8185466077464,
-    "bull": 1698.5073325505537,
-    "dispersion": 0.05308405094566958,
+    "bear": 1158.8223302507909,
+    "base": 1442.4691938643964,
+    "bull": 1726.1160574780015,
+    "dispersion": 0.07266710004288637,
     "agreement": "HIGH",
-    "available": true
+    "available": true,
+    "indicative": false,
+    "referenceOnly": false
   },
   "methods": [
     {
@@ -69,6 +71,26 @@
       "qcStatus": "VALID"
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 341.5266,
+      "base": 429.0,
+      "bull": 516.4734,
+      "confidence": 0.82,
+      "relevance": 1.25,
+      "rawWeight": 1.025,
+      "bands": {
+        "mean": 25.117634020573437,
+        "sd": 3.975986148323146
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.16x dari median metode."
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
       "bear": 195.96586448652022,
@@ -89,17 +111,17 @@
     {
       "name": "Forward Earnings Power",
       "family": "forward_earnings",
-      "bear": 1331.3516608459595,
-      "base": 1512.8996145976812,
-      "bull": 1694.447568349403,
+      "bear": 1385.583084810589,
+      "base": 1574.526232739306,
+      "bull": 1763.4693806680225,
       "confidence": 0.76,
       "relevance": 1.05,
       "rawWeight": 0.798,
       "warning": "HIGH MULTIPLE · confidence diturunkan.",
       "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
       "bands": {
-        "forwardEPS": 11.449249697255427,
-        "growthUsed": 0.11699999999999999,
+        "forwardEPS": 11.915624684923397,
+        "growthUsed": 0.1625,
         "historicalPE": 132.13962963532433
       },
       "included": true,
@@ -136,8 +158,8 @@
     "historyYears": 3.4168377823408624,
     "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2,
     "reviewFlags": [],
     "valuationConfidence": 67
   },
@@ -148,7 +170,7 @@
     "currentPBV": 1.9986135811218777,
     "roe": 0.07353,
     "fcf": -320694576004.0,
-    "growthNormalized": 0.18,
+    "growthNormalized": 0.25,
     "costOfEquity": 0.1064756,
     "terminalGrowth": 0.035,
     "marketCap": 56157620142080.0,
@@ -178,11 +200,11 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -196,43 +218,54 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": 0.25,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.24315973238649824
+          }
+        ],
+        "normalGrowth": 0.24315973238649824,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 9.132094804957237
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 9.319397448365137
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
         "observations": [],
@@ -274,12 +307,12 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 2.72657412809182,
+    "baseToPrice": 2.773979218969993,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "PGUN.JK",
   "name": "PT Pradiksi Gunatama Tbk",
-  "asOf": "2026-09-17T12:09:38.739158+00:00",
+  "asOf": "2026-09-17T13:45:09.559557+00:00",
   "price": 10050.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -18,7 +18,9 @@
     "dispersion": null,
     "agreement": "INSUFFICIENT",
     "available": false,
-    "indicative": false
+    "indicative": false,
+    "referenceOnly": false,
+    "evidenceLevel": "UNVALUED"
   },
   "methods": [],
   "dcfDiagnostics": {
@@ -51,7 +53,8 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
@@ -62,13 +65,13 @@
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": 20.68,
+    "epsTTM": 20.680000195071045,
     "bvps": 334.3967300134274,
     "currentPE": 485.9767891682785,
     "currentPBV": 30.054121640473134,
     "roe": 0.06353,
     "fcf": 162407153664.0,
-    "growthNormalized": 0.008446069998231363,
+    "growthNormalized": -0.22791031386852897,
     "costOfEquity": 0.22,
     "terminalGrowth": 0.035,
     "marketCap": 57665380155392.0,
@@ -78,21 +81,45 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 20.68
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 20.680000390142094
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 20.68
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 27.764427956225845
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.008446069998231363,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.22791031386852897
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "analysisStatus": "BELUM_DINILAI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 494.21437168252186,
+        "base": 611.8556933442317,
+        "bull": 729.4970150059415,
+        "price": 10050.0
+      }
     },
     {
       "name": "Graham Number",
@@ -100,17 +127,17 @@
       "status": "OUTLIER",
       "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
       "inputs": {
-        "bear": 315.5640521734986,
-        "base": 394.45506521687327,
-        "bull": 473.3460782602479,
+        "bear": 315.5640536618306,
+        "base": 394.4550670772882,
+        "bull": 473.34608049274584,
         "price": 10050.0
       }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -119,42 +146,86 @@
       "status": "OUTLIER",
       "reason": "Hasil sector model tidak lolos economic sanity guard 0.05x–5x harga.",
       "inputs": {
-        "justifiedPBV": 0.2603777202404518,
+        "justifiedPBV": 0.3480416666666667,
         "roe": 0.06353,
-        "growth": 0.008446069998231363,
+        "growth": -0.02,
         "costOfEquity": 0.22
       }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.22791031386852897,
+    "confidence": 0.75,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.05208501905049978
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.3391437226415437
+          }
+        ],
+        "normalGrowth": -0.2434574881111957,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.221469289580711
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.04357096778337177
+          }
+        ],
+        "normalGrowth": -0.04477578467132248,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.2306658607301868
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.6702541835606655
+          }
+        ],
+        "normalGrowth": -0.5237247426171725,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.2854229411259096
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.6840663729586973
+          }
+        ],
+        "normalGrowth": -0.5511852290144347,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "operatingCashFlow": {
         "observations": [],
@@ -163,10 +234,21 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.6932231525837758
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 4.628958485009989
+          }
+        ],
+        "normalGrowth": 0.7689256158054081,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       }
     },
     "notes": [
@@ -188,14 +270,10 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "NO_DEFENSIBLE_METHOD",
+    "reason": "NO_VALID_METHOD",
+    "policy": "No value is fabricated or anchored to market price."
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

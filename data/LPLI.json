@@ -1,7 +1,7 @@
 {
   "ticker": "LPLI.JK",
   "name": "PT Star Pacific Tbk",
-  "asOf": "2026-09-17T12:12:38.464516+00:00",
+  "asOf": "2026-09-17T13:48:59.356566+00:00",
   "price": 226.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -70,25 +70,25 @@
     {
       "name": "Justified PBV / ROE",
       "family": "book_profitability",
-      "bear": 698.7369132474882,
-      "base": 873.4211415593603,
-      "bull": 1048.1053698712324,
+      "bear": 299.1228460475957,
+      "base": 373.9035575594947,
+      "bull": 448.68426907139354,
       "confidence": 0.78,
       "relevance": 1.35,
       "rawWeight": 1.0530000000000002,
       "warning": null,
       "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity.",
       "bands": {
-        "justifiedPBV": 4.972055495920454,
+        "justifiedPBV": 2.1284912281706516,
         "roe": 0.27732,
-        "growth": 0.08,
+        "growth": -0.02,
         "costOfEquity": 0.11968580000000001
       },
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.94x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.19x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -110,7 +110,7 @@
     "guards": [
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
@@ -129,7 +129,7 @@
     "currentPBV": 1.286532336590634,
     "roe": 0.27732,
     "fcf": -9043874816.0,
-    "growthNormalized": 0.18,
+    "growthNormalized": -0.2,
     "costOfEquity": 0.11968580000000001,
     "terminalGrowth": 0.035,
     "marketCap": 3837122576384.0,
@@ -155,11 +155,11 @@
     ],
     "epsSource": "Multi-source EPS median",
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.2
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -175,41 +175,61 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -10021000000.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": -0.2,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.4159733777038269
+          }
+        ],
+        "normalGrowth": -0.4159733777038269,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.20953642384105964
+          }
+        ],
+        "normalGrowth": -0.20953642384105964,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.20925925925925926
+          }
+        ],
+        "normalGrowth": -0.20925925925925926,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
         "observations": [],
@@ -224,10 +244,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.32871972318339093
+          }
+        ],
+        "normalGrowth": 0.32871972318339093,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -251,8 +277,8 @@
     "required": false,
     "status": "LIMITED_EVIDENCE",
     "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

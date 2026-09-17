@@ -1,7 +1,7 @@
 {
   "ticker": "ASGR.JK",
   "name": "PT Astra Graphia Tbk",
-  "asOf": "2026-09-17T12:08:03.214774+00:00",
+  "asOf": "2026-09-17T13:43:09.622890+00:00",
   "price": 2160.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,12 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1531.060293196615,
-    "base": 2195.8215935247486,
-    "bull": 2684.715609565841,
-    "dispersion": 0.461102220680539,
+    "bear": 1559.3747537132579,
+    "base": 2231.7467868815047,
+    "bull": 2728.251535762711,
+    "dispersion": 0.4500887247135166,
     "agreement": "LOW",
-    "available": true
+    "available": true,
+    "indicative": false,
+    "referenceOnly": false
   },
   "methods": [
     {
@@ -146,17 +148,17 @@
     {
       "name": "Forward Earnings Power",
       "family": "forward_earnings",
-      "bear": 1292.4977014666679,
-      "base": 1639.9122212150346,
-      "bull": 1987.3267409634016,
+      "bear": 1430.714912936615,
+      "base": 1815.2812713995115,
+      "bull": 2199.847629862408,
       "confidence": 0.86,
       "relevance": 1.05,
       "rawWeight": 0.903,
       "warning": null,
       "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
       "bands": {
-        "forwardEPS": 234.87058478182473,
-        "growthUsed": 0.046333924002747245,
+        "forwardEPS": 259.9871921444699,
+        "growthUsed": 0.1582268558647982,
         "historicalPE": 6.98219499363182
       },
       "included": true,
@@ -218,7 +220,7 @@
     "diagnosticCount": 2,
     "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 69
+    "valuationConfidence": 77
   },
   "raw": {
     "epsTTM": 224.47000846854706,
@@ -227,7 +229,7 @@
     "currentPBV": 1.3925444322664553,
     "roe": 0.15494001,
     "fcf": 470810361856.0,
-    "growthNormalized": 0.07128296000422653,
+    "growthNormalized": 0.24342593209968955,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2913365917696.0,
@@ -257,11 +259,11 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07128296000422653,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.24342593209968955
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -269,46 +271,95 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 2287.3348504488517,
+        "base": 4283.257113821139,
+        "bull": 33619.835602028965,
+        "price": 2160.0
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.24342593209968955,
+    "confidence": 0.75,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.053440882427563174
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.010128026507614352
+          }
+        ],
+        "normalGrowth": 0.01106160980411149,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.47652421175880244
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.06751365617136185
+          }
+        ],
+        "normalGrowth": 0.20385050803384203,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.47652421175880244
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.06751365617136185
+          }
+        ],
+        "normalGrowth": 0.20385050803384203,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.47450397877984085
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.1674623328254614
+          }
+        ],
+        "normalGrowth": 0.2698095481435879,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "operatingCashFlow": {
         "observations": [],
@@ -317,10 +368,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 1.875028197608843
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -344,12 +401,12 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.0165840710762726,
+    "baseToPrice": 1.0332161050377338,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

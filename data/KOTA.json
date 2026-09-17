@@ -1,7 +1,7 @@
 {
   "ticker": "KOTA.JK",
   "name": "PT DMS Propertindo Tbk",
-  "asOf": "2026-09-17T12:10:46.089865+00:00",
+  "asOf": "2026-09-17T13:46:37.733831+00:00",
   "price": 194.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 64.22964013181942,
-    "base": 75.56428250802284,
-    "bull": 159.5022163062032,
-    "dispersion": 0.44553312394758887,
+    "bear": 64.22963980423353,
+    "base": 75.56428212262767,
+    "bull": 159.50221476462255,
+    "dispersion": 0.4455331200743598,
     "agreement": "LIMITED",
     "available": false,
     "indicative": true,
@@ -52,9 +52,9 @@
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 106.33481087080213,
-      "base": 132.91851358850266,
-      "bull": 159.5022163062032,
+      "bear": 106.33480984308171,
+      "base": 132.91851230385214,
+      "bull": 159.50221476462255,
       "confidence": 0.6,
       "relevance": 0.2,
       "rawWeight": 0.12,
@@ -86,7 +86,7 @@
     "totalInputs": 7,
     "guards": [
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
@@ -99,13 +99,13 @@
     "indicativeMethodCount": 2
   },
   "raw": {
-    "epsTTM": 6.7,
+    "epsTTM": 6.699999870489696,
     "bvps": 117.19622722770791,
     "currentPE": 28.955223880597014,
     "currentPBV": 1.6553433893658132,
     "roe": 0.05898,
     "fcf": -272756948992.0,
-    "growthNormalized": 0.18,
+    "growthNormalized": 0.25,
     "costOfEquity": 0.20891,
     "terminalGrowth": 0.035,
     "marketCap": 2045959995392.0,
@@ -115,12 +115,31 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 6.7
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 6.699999740979392
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 6.7
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 3.94761475696871
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -136,35 +155,52 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 3.656600000000001,
+        "base": 17.0,
+        "bull": 30.3434,
+        "price": 194.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": 0.25,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 1.9319122441417131
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 11.044460945259715
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
         "observations": [],
@@ -212,8 +248,8 @@
     "required": false,
     "status": "LIMITED_EVIDENCE",
     "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "BSBK.JK",
   "name": "PT Wulandari Bangun Laksana Tbk",
-  "asOf": "2026-09-17T12:12:16.947652+00:00",
+  "asOf": "2026-09-17T13:48:30.962101+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,15 +12,37 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
+    "bear": 34.62671532823097,
+    "base": 55.63810457679951,
+    "bull": 91.48682288650083,
+    "dispersion": 0.19835911386416386,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 28.69099301766372,
+      "base": 51.0,
+      "bull": 73.30900698233629,
+      "confidence": 0.82,
+      "relevance": 0.65,
+      "rawWeight": 0.533,
+      "bands": {
+        "mean": 12.589607653768216,
+        "sd": 4.378177549409707
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.8162327718223583
+    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -35,8 +57,9 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE",
-      "countsForIndependence": false
+      "qcStatus": "VALID",
+      "countsForIndependence": false,
+      "indicativeWeight": 0.18376722817764163
     }
   ],
   "dcfDiagnostics": null,
@@ -57,15 +80,17 @@
     "totalInputs": 7,
     "guards": [
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 3.8576317590691307,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": 3.0000000600000023,
@@ -74,7 +99,7 @@
     "currentPBV": 0.5806563585600678,
     "roe": 0.03472,
     "fcf": -9894704128.0,
-    "growthNormalized": 0.07833055749514124,
+    "growthNormalized": 0.10503087126437374,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1254594183168.0,
@@ -104,12 +129,12 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07833055749514124,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.10503087126437374
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -122,49 +147,86 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.10503087126437374,
+    "confidence": 0.75,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.015708879071092197
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.004557283942707047
+          }
+        ],
+        "normalGrowth": 0.00827448231883543,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.0717491759173845
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.46060626326072607
+          }
+        ],
+        "normalGrowth": -0.2831544502013559,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.04903029816634552
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.5277878514005743
+          }
+        ],
+        "normalGrowth": -0.3355151348782676,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.12513314927001962
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.19173612120708916
+          }
+        ],
+        "normalGrowth": 0.1695351305613993,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "operatingCashFlow": {
         "observations": [],
@@ -173,10 +235,21 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 4.183172901545211
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.008387667254650122
+          }
+        ],
+        "normalGrowth": 0.5055917781697667,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       }
     },
     "notes": [
@@ -198,14 +271,10 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.14-extreme-review-qc"
+  "qcVersion": "3.18-evidence-ladder-qc"
 }
