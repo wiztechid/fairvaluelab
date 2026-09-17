@@ -1,7 +1,7 @@
 {
   "ticker": "NAIK.JK",
   "name": "PT Adiwarna Anugerah Abadi Tbk",
-  "asOf": "2026-09-17T00:12:24.873507+00:00",
+  "asOf": "2026-09-17T00:42:06.339274+00:00",
   "price": 92.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,30 +12,99 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 123.63819528415807,
+    "base": 172.43985320058064,
+    "bull": 221.2415111170032,
+    "dispersion": 0.17603957444586799,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 101.78184473637447,
+      "base": 168.09675179252432,
+      "bull": 234.41165884867416,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 18.866078563005193,
+        "sd": 7.442750874590963,
+        "current": 10.325477496071805,
+        "sampleCount": 240,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.29999999999999993,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 101.78184473637447,
+      "base": 168.09675179252432,
+      "bull": 234.41165884867416,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 18.866078563005193,
+        "sd": 7.442750874590963,
+        "current": 10.325477496071805,
+        "sampleCount": 240,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.29999999999999993,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 90.13001648320133,
-      "base": 112.66252060400166,
-      "bull": 135.19502472480198,
+      "bear": 90.13001428383318,
+      "base": 112.66251785479146,
+      "bull": 135.19502142574976,
       "confidence": 0.6,
       "relevance": 0.2,
       "rawWeight": 0.12,
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.0469208211143695,
       "qcStatus": "VALID",
       "countsForIndependence": false
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 165.2323831419797,
+      "base": 187.76407175224966,
+      "bull": 210.29576036251962,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 9.95246951427624,
+        "growthUsed": 0.11699999999999999,
+        "historicalPE": 18.866078563005193
+      },
+      "included": true,
+      "normalizedWeight": 0.35307917888563056,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     },
     {
       "name": "Justified PBV / ROE",
@@ -56,8 +125,9 @@
       },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.59x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -73,21 +143,20 @@
     "cashConversion": -0.15413665641727642,
     "roe": 0.1402,
     "dataScore": 100,
-    "dataLabel": "CUKUP",
+    "dataLabel": "BAIK",
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
     ],
     "historyYears": 1.839835728952772,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 4,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 8.91,
+    "epsTTM": 8.909999565153303,
     "bvps": 63.313847356763176,
     "currentPE": 10.325476992143658,
     "currentPBV": 1.4530786524722632,
@@ -103,13 +172,32 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 8.91
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 8.909999130306606
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 8.91
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 9.222902333355036
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "TERBATAS",
+  "engineVersion": "3.11-sector-aware+3.12-atomic-qc",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -195,5 +283,7 @@
       "dcf": 1.0
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
-  }
+  },
+  "engineGeneration": "3.11-sector-aware",
+  "qcVersion": "3.12-atomic-qc"
 }
