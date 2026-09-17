@@ -1,7 +1,7 @@
 {
   "ticker": "EXCL.JK",
   "name": "PT XLSMART Telecom Sejahtera Tbk",
-  "asOf": "2026-09-17T13:50:15.364433+00:00",
+  "asOf": "2026-09-17T23:16:15.650085+00:00",
   "price": 2580.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1992.1292836518774,
-    "base": 2410.8017202018946,
-    "bull": 2829.474156751912,
-    "dispersion": 0.06433956329962895,
-    "agreement": "HIGH",
+    "bear": 3482.7210398786387,
+    "base": 5278.31602363447,
+    "bull": 6423.236158180737,
+    "dispersion": 0.7316545959960882,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false
@@ -34,10 +34,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.01x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.5562422744128553,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical PBV 5Y",
@@ -61,27 +60,32 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4,
+      "normalizedWeight": 0.27688504326328794,
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 1762.7125411396005,
-      "base": 2285.096208755909,
-      "bull": 2807.4798763722174,
-      "confidence": 0.82,
-      "relevance": 1.0,
-      "rawWeight": 0.82,
-      "bands": {
-        "mean": 6.095006899634239,
-        "sd": 0.5695087940475501
-      },
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 901.5901435616845,
+      "base": 1229.4411048568422,
+      "bull": 1557.2920661520002,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
       "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 1639.2548064757898,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
       "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.1668726823238566,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     }
   ],
   "dcfDiagnostics": {
@@ -110,16 +114,17 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
+    "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 80
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 47
   },
   "raw": {
     "epsTTM": null,
@@ -128,7 +133,7 @@
     "currentPBV": 1.5738858838832412,
     "roe": -0.13436,
     "fcf": 14058289889280.0,
-    "growthNormalized": -0.14597894816488766,
+    "growthNormalized": 0.03152333461844687,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 46955648516096.0,
@@ -138,13 +143,12 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": 0.03152333461844687,
-    "growthNormalizedQuarterly": -0.14597894816488766
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -156,47 +160,37 @@
       "inputs": {}
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 11100.613341071221,
-        "base": 12176.738095238095,
-        "bull": 13483.905954794613,
-        "price": 2580.0
-      }
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": -0.14597894816488766,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.16005262958778088
-          }
-        ],
-        "normalGrowth": 0.16005262958778088,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.5063260401662324
-          }
-        ],
-        "normalGrowth": 0.5063260401662324,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
         "observations": [],
@@ -205,16 +199,10 @@
         "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.8276087224190746
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -223,16 +211,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.41754869556179186
-          }
-        ],
-        "normalGrowth": -0.41754869556179186,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -250,18 +232,20 @@
       "dividend": 0.65,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.9344192713960832,
+    "baseToPrice": 2.0458589238893294,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

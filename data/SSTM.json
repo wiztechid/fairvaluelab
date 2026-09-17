@@ -1,7 +1,7 @@
 {
   "ticker": "SSTM.JK",
   "name": "PT Sunson Textile Manufacturer Tbk",
-  "asOf": "2026-09-17T13:47:25.529523+00:00",
+  "asOf": "2026-09-17T23:14:14.953272+00:00",
   "price": 462.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -69,7 +69,6 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
     ],
@@ -88,7 +87,7 @@
     "currentPBV": 2.687976939395163,
     "roe": -0.04676,
     "fcf": -3675172864.0,
-    "growthNormalized": 0.056160654758586726,
+    "growthNormalized": -0.01441476976580396,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 540960030720.0,
@@ -98,13 +97,12 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": -0.01441476976580396,
-    "growthNormalizedQuarterly": 0.056160654758586726
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -128,58 +126,40 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.056160654758586726,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.293129077485659
-          }
-        ],
-        "normalGrowth": 0.293129077485659,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.18080776796848552
-          }
-        ],
-        "normalGrowth": -0.18080776796848552,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.15311850998051912
-          }
-        ],
-        "normalGrowth": -0.15311850998051912,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
         "observations": [],
@@ -215,7 +195,9 @@
       "dividend": 0.85,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
@@ -223,6 +205,6 @@
     "reason": "ONLY_ONE_VALID_METHOD",
     "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

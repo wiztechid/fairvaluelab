@@ -1,7 +1,7 @@
 {
   "ticker": "SRTG.JK",
   "name": "PT Saratoga Investama Sedaya Tbk",
-  "asOf": "2026-09-17T13:48:13.248342+00:00",
+  "asOf": "2026-09-17T23:14:50.304807+00:00",
   "price": 1770.0,
   "companyProfile": {
     "sector": "Keuangan",
@@ -187,6 +187,29 @@
       "normalizedWeight": 0.2265978050355068,
       "qcStatus": "VALID",
       "countsForIndependence": true
+    },
+    {
+      "name": "Residual Income",
+      "family": "residual_income",
+      "bear": 2390.419508420654,
+      "base": 1751.7446565368914,
+      "bull": 2137.1284809750073,
+      "confidence": 0.8,
+      "relevance": 1.25,
+      "rawWeight": 1.0,
+      "warning": null,
+      "explanation": "Book value ditambah present value excess return (ROE di atas/bawah cost of equity).",
+      "bands": {
+        "bvps": 4346.217288037552,
+        "roe": 0.0634,
+        "costOfEquity": 0.105,
+        "growth": 0.03531237370278803
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
     }
   ],
   "dcfDiagnostics": {
@@ -221,7 +244,7 @@
     "validMethodCount": 7,
     "independentFamilies": 5,
     "diagnosticCount": 1,
-    "outlierMethodCount": 1,
+    "outlierMethodCount": 2,
     "reviewFlags": [],
     "valuationConfidence": 75
   },
@@ -266,21 +289,16 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 2472.8223779868044,
-        "base": 4700.15,
-        "bull": 20660.0,
-        "price": 1770.0
-      }
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
@@ -320,21 +338,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.7061039494313515
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7176836352994695
-          }
-        ],
-        "normalGrowth": 0.7138237400100969,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -352,7 +359,9 @@
       "dividend": 1.15,
       "dcf": 0.15
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
@@ -364,6 +373,6 @@
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "TAXI.JK",
   "name": "PT Express Transindo Utama Tbk",
-  "asOf": "2026-09-17T13:51:26.237723+00:00",
+  "asOf": "2026-09-17T23:17:05.358395+00:00",
   "price": 14.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -78,6 +78,31 @@
       "included": true,
       "normalizedWeight": 0.40000000000000013,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 1.9823768114009823,
+      "base": 2.703241106455885,
+      "bull": 3.4241054015107872,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
+      "warning": null,
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 3.604321475274513,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.54x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -112,7 +137,7 @@
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
     "valuationConfidence": 59
   },
@@ -139,7 +164,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -153,17 +178,15 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -19509592000.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -174,16 +197,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 2.8497635369186587
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -231,7 +248,9 @@
       "dividend": 0.65,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
@@ -243,6 +262,6 @@
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "PPRE.JK",
   "name": "PT PP Presisi Tbk",
-  "asOf": "2026-09-17T13:50:43.310299+00:00",
+  "asOf": "2026-09-17T23:16:35.580831+00:00",
   "price": 105.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 29.484072091496277,
-    "base": 51.90392522663106,
-    "bull": 74.32377836176585,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "bear": 41.95821346847968,
+    "base": 63.70197190593571,
+    "bull": 99.28638169830397,
+    "dispersion": 0.20324265057712784,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical PBV 5Y"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -47,7 +46,33 @@
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5544554455445544
+    },
+    {
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 57.48158940428125,
+      "base": 78.38398555129261,
+      "bull": 99.28638169830397,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
+      "warning": null,
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 104.51198073505681,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "countsForIndependence": false,
+      "indicativeWeight": 0.44554455445544555
     }
   ],
   "dcfDiagnostics": {
@@ -81,15 +106,16 @@
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 1,
+    "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 30
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": null,
@@ -98,7 +124,7 @@
     "currentPBV": 1.0046695054625396,
     "roe": -0.54035,
     "fcf": 1326371569664.0,
-    "growthNormalized": 0.27,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.108542,
     "terminalGrowth": 0.035,
     "marketCap": 1073548492800.0,
@@ -110,12 +136,12 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": 0.27
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
-  "analysisStatus": "REFERENSI",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -128,88 +154,47 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -955054019192.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.27,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.41612919316152275
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.2863305846852191
-          }
-        ],
-        "normalGrowth": 0.32959678751065363,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.11058137897749976
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9125191195819516
-          }
-        ],
-        "normalGrowth": -0.5368604596591666,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.12960055546155058
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9312816832425315
-          }
-        ],
-        "normalGrowth": -0.5432001851538502,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.6802475530275449
-          }
-        ],
-        "normalGrowth": 0.6802475530275449,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -218,21 +203,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 1.6977604461016171
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9638814257417543
-          }
-        ],
-        "normalGrowth": 0.0,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -250,14 +224,16 @@
       "dividend": 0.65,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

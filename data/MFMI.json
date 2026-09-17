@@ -1,7 +1,7 @@
 {
   "ticker": "MFMI.JK",
   "name": "PT Multifiling Mitra Indonesia Tbk",
-  "asOf": "2026-09-17T13:43:40.310303+00:00",
+  "asOf": "2026-09-17T23:11:33.397597+00:00",
   "price": 1300.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 431.7430638617787,
-    "base": 625.7339188695265,
-    "bull": 915.0364065047993,
-    "dispersion": 0.5247978311845518,
-    "agreement": "LOW",
+    "bear": 243.08520140550144,
+    "base": 361.9617458537158,
+    "bull": 460.5744069313639,
+    "dispersion": 0.2570484890921823,
+    "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
     "referenceOnly": false
@@ -35,7 +35,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.33442622950819667,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -55,23 +55,24 @@
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 726.860657890297,
-      "base": 986.6304347826087,
-      "bull": 1535.3390016701485,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.02939297124600639,
-        "sd": 0.010504634553944459
-      },
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 255.2160017496039,
+      "base": 327.2000022430819,
+      "bull": 399.1840027365599,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 34.356000235523595,
+        "requiredReturn": 0.105
+      },
       "included": true,
       "normalizedWeight": 0.4,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -104,13 +105,15 @@
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 34.3560 per saham."
     ],
-    "historyYears": 4.996577686516085,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 54
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 48
   },
   "raw": {
     "epsTTM": 34.356000235523595,
@@ -145,7 +148,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -161,6 +164,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -222,18 +232,20 @@
       "dividend": 0.65,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.4813337837457896,
+    "baseToPrice": 0.278432112195166,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

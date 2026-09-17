@@ -1,7 +1,7 @@
 {
   "ticker": "MDKA.JK",
   "name": "PT Merdeka Copper Gold Tbk",
-  "asOf": "2026-09-17T13:42:25.904616+00:00",
+  "asOf": "2026-09-17T23:10:40.020658+00:00",
   "price": 2870.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,59 +12,67 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1822.7755942771553,
-    "base": 2317.842058850365,
-    "bull": 2812.908523423575,
-    "dispersion": 0.0941041914151017,
-    "agreement": "HIGH",
-    "available": true,
-    "indicative": false,
-    "referenceOnly": false
+    "bear": 1335.9445779874982,
+    "base": 1812.3505775386857,
+    "bull": 3258.501208631055,
+    "dispersion": 0.7139529008552188,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
       "name": "Historical PBV 5Y",
       "family": "book",
-      "bear": 1906.1113584384807,
-      "base": 2584.6051471259116,
-      "bull": 3263.0989358133425,
+      "bear": 1903.425635394973,
+      "base": 2580.9634220130138,
+      "bull": 3258.501208631055,
       "confidence": 0.8,
       "relevance": 0.45499999999999996,
       "rawWeight": 0.364,
       "bands": {
         "mean": 4.493891668486323,
         "sd": 1.1797073094483108,
-        "current": 4.990111972383004,
-        "z": 0.42063001553219015,
-        "minus1": 1906.1113584384807,
-        "base": 2584.6051471259116,
-        "plus1": 3263.0989358133425,
+        "current": 4.997152992775236,
+        "z": 0.4265984623967982,
+        "minus1": 1903.425635394973,
+        "base": 2580.9634220130138,
+        "plus1": 3258.501208631055,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4000000000000001,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.6425419240953222
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 1767.2184181696048,
-      "base": 2140.0,
-      "bull": 2512.781581830396,
-      "confidence": 0.82,
-      "relevance": 1.25,
-      "rawWeight": 1.025,
-      "bands": {
-        "mean": 26.861391491900275,
-        "sd": 2.976824487269456
-      },
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 315.87986245011064,
+      "base": 430.7452669774235,
+      "bull": 545.6106715047365,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
       "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID"
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 574.3270226365647,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "countsForIndependence": false,
+      "indicativeWeight": 0.3574580759046779
     }
   ],
   "dcfDiagnostics": null,
@@ -87,24 +95,26 @@
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 72
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 575.1373948888456,
+    "bvps": 574.3270226365647,
     "currentPE": null,
-    "currentPBV": 4.990111972383004,
+    "currentPBV": 4.997152992775236,
     "roe": 0.04484,
-    "fcf": -6192137234976.0,
-    "growthNormalized": 0.25,
+    "fcf": -6183412474176.0,
+    "growthNormalized": 0.18,
     "costOfEquity": 0.1341506,
     "terminalGrowth": 0.035,
     "marketCap": 70076506046464.0,
@@ -113,20 +123,14 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17743.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 1.71
-      }
-    ],
+    "fxFactor": 17718.0,
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": 0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -142,58 +146,47 @@
       "status": "NEGATIVE",
       "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
-        "fcf": -6192137234976.0
+        "fcf": -6183412474176.0
       }
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.25,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.23520865650650613
-          }
-        ],
-        "normalGrowth": 0.23520865650650613,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 3.1540866312663773
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 3.180613396228403
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
         "observations": [],
@@ -229,18 +222,16 @@
       "dividend": 0.55,
       "dcf": 0.85
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.8076104734670261,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

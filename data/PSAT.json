@@ -1,7 +1,7 @@
 {
   "ticker": "PSAT.JK",
   "name": "PT Pancaran Samudera Transport Tbk",
-  "asOf": "2026-09-17T13:41:08.168963+00:00",
+  "asOf": "2026-09-17T23:09:40.588616+00:00",
   "price": 860.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,64 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1189.512,
-    "base": 1314.9,
-    "bull": 1440.288,
-    "dispersion": 0.03131989150059666,
-    "agreement": "HIGH",
+    "bear": 148.29785750249135,
+    "base": 197.70530935260015,
+    "bull": 247.11276120270895,
+    "dispersion": 0.6992092751960247,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false
   },
   "methods": [
-    {
-      "name": "Historical P/E 3Y",
-      "family": "earnings",
-      "bear": 1242.0,
-      "base": 1350.0,
-      "bull": 1458.0,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "bands": {
-        "mean": 86.89478011425567,
-        "sd": 6.951582409140453,
-        "current": 55.35519325797028,
-        "sampleCount": 83,
-        "adaptive": true,
-        "hardCap": null,
-        "epsSource": "Multi-source EPS median"
-      },
-      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
-      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
-      "included": true,
-      "normalizedWeight": 0.3,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical P/E 5Y",
-      "family": "earnings",
-      "bear": 1242.0,
-      "base": 1350.0,
-      "bull": 1458.0,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "bands": {
-        "mean": 86.89478011425567,
-        "sd": 6.951582409140453,
-        "current": 55.35519325797028,
-        "sampleCount": 83,
-        "adaptive": true,
-        "hardCap": null,
-        "epsSource": "Multi-source EPS median"
-      },
-      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
-      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
-      "included": true,
-      "normalizedWeight": 0.3,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -82,32 +34,79 @@
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.37x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.052770448548812667,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     },
     {
-      "name": "Forward Earnings Power",
-      "family": "forward_earnings",
-      "bear": 1110.78,
-      "base": 1262.25,
-      "bull": 1413.72,
-      "confidence": 0.76,
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 76.8645135095318,
+      "base": 107.61031891334453,
+      "bull": 138.35612431715725,
+      "confidence": 0.66,
       "relevance": 1.05,
-      "rawWeight": 0.798,
-      "warning": "HIGH MULTIPLE · confidence diturunkan.",
-      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
       "bands": {
-        "forwardEPS": 14.526189010896864,
-        "growthUsed": -0.065,
-        "historicalPE": 86.89478011425567
+        "normalizedEPS": 15.37290270190636,
+        "growthAdjustment": -0.010499999999999999,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
       },
       "included": true,
-      "normalizedWeight": 0.4,
+      "normalizedWeight": 0.4063324538258576,
       "qcStatus": "VALID",
       "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 87.30622623633863,
+      "base": 111.9310592773572,
+      "bull": 136.55589231837578,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 15.536031027697181,
+        "requiredReturn": 0.1388
+      },
+      "included": true,
+      "normalizedWeight": 0.42216358839050133,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 479.28862738055653,
+      "base": 653.5754009734861,
+      "bull": 827.8621745664157,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
+      "warning": null,
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 871.4338679646481,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.11873350923482852,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     }
   ],
   "dcfDiagnostics": null,
@@ -128,16 +127,17 @@
     "totalInputs": 7,
     "guards": [
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Historical P/E 3Y adaptive: median 86.9x, current 55.4x; confidence diturunkan.",
-      "Historical P/E 5Y adaptive: median 86.9x, current 55.4x; confidence diturunkan."
+      "Extreme Valuation Review: Base FV = 0.23x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 1.1937029431895962,
-    "validMethodCount": 3,
+    "validMethodCount": 4,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 75
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "EXTREME_VALUATION"
+    ],
+    "valuationConfidence": 29
   },
   "raw": {
     "epsTTM": 15.536031027697181,
@@ -146,7 +146,7 @@
     "currentPBV": 0.9868792476572509,
     "roe": -0.02901,
     "fcf": -181522563072.0,
-    "growthNormalized": -0.25,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
     "marketCap": 1274823573504.0,
@@ -156,24 +156,13 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "WISS reconciled EPS",
-        "value": 15.536031027697181
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 15.536031027697181
-      }
-    ],
-    "epsSource": "Multi-source EPS median",
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": -0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -189,70 +178,46 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": -0.25,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.12672615647193985
-          }
-        ],
-        "normalGrowth": -0.12672615647193985,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.3391721911052009
-          }
-        ],
-        "normalGrowth": -0.3391721911052009,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.3858682140339562
-          }
-        ],
-        "normalGrowth": -0.3858682140339562,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.5308716992380296
-          }
-        ],
-        "normalGrowth": -0.5308716992380296,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -261,16 +226,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.4727912766076595
-          }
-        ],
-        "normalGrowth": -0.4727912766076595,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -288,18 +247,30 @@
       "dividend": 0.55,
       "dcf": 0.85
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 1.5289534883720932,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "EXTREME_VALUATION",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.2298898945960467,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Market price is a review trigger only; it never pulls fair value toward market."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

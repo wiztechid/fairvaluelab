@@ -1,7 +1,7 @@
 {
   "ticker": "IDEA.JK",
   "name": "PT Idea Indonesia Akademi Tbk",
-  "asOf": "2026-09-17T13:46:26.769880+00:00",
+  "asOf": "2026-09-17T23:13:32.378844+00:00",
   "price": 112.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 23.761309428188795,
-    "base": 38.76179049780076,
-    "bull": 68.05334807026709,
-    "dispersion": 0.3490486347317101,
+    "bear": 24.689789393564663,
+    "base": 37.72810447249565,
+    "bull": 48.86562853891431,
+    "dispersion": 0.3832127787095088,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -35,7 +35,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.33442622950819667,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -51,27 +51,28 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.26557377049180325,
+      "normalizedWeight": 0.2655737704918033,
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 13.947371596474627,
-      "base": 23.441358024691358,
-      "bull": 73.41501324132481,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.021329822251481237,
-        "sd": 0.014519226190476192
-      },
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 16.26857150991429,
+      "base": 20.857142961428575,
+      "bull": 25.445714412942863,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 2.1900000109500004,
+        "requiredReturn": 0.105
+      },
       "included": true,
-      "normalizedWeight": 0.40000000000000013,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.4,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -107,10 +108,12 @@
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 54
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 42
   },
   "raw": {
     "epsTTM": 2.1900000109500004,
@@ -145,7 +148,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -161,6 +164,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -222,18 +232,20 @@
       "dividend": 0.85,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.3460874151589354,
+    "baseToPrice": 0.3368580756472826,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

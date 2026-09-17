@@ -1,7 +1,7 @@
 {
   "ticker": "PTPW.JK",
   "name": "PT Pratama Widya Tbk",
-  "asOf": "2026-09-17T13:50:45.718664+00:00",
+  "asOf": "2026-09-17T23:16:37.149767+00:00",
   "price": 1170.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,36 +12,37 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 792.0290293317206,
-    "base": 920.0,
-    "bull": 1097.2936740678676,
+    "bear": 559.5720047269486,
+    "base": 717.4000060601905,
+    "bull": 875.2280073934324,
     "dispersion": null,
     "agreement": "SINGLE_METHOD",
     "available": false,
     "indicative": false,
     "referenceOnly": true,
     "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical Dividend Yield"
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 792.0290293317206,
-      "base": 920.0,
-      "bull": 1097.2936740678676,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.0061891304347826085,
-        "sd": 0.001
-      },
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 559.5720047269486,
+      "base": 717.4000060601905,
+      "bull": 875.2280073934324,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 75.32700063632001,
+        "requiredReturn": 0.105
+      },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -76,12 +77,12 @@
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 75.3270 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical Dividend Yield); belum cukup bukti untuk FV gabungan."
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 1,
     "independentFamilies": 1,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 26
@@ -119,7 +120,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -135,6 +136,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -196,7 +204,9 @@
       "dividend": 0.65,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
@@ -204,6 +214,6 @@
     "reason": "ONLY_ONE_VALID_METHOD",
     "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "SMKL.JK",
   "name": "PT Satyamitra Kemas Lestari Tbk",
-  "asOf": "2026-09-17T13:42:48.814452+00:00",
+  "asOf": "2026-09-17T23:10:56.516042+00:00",
   "price": 156.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,35 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 138.65892471614862,
-    "base": 195.83853928509825,
-    "bull": 280.1032541216714,
-    "dispersion": 0.26410519082639433,
-    "agreement": "MEDIUM",
+    "bear": 207.2193660446168,
+    "base": 275.3817549473075,
+    "bull": 343.54414384999825,
+    "dispersion": 0.1437842106377914,
+    "agreement": "HIGH",
     "available": true,
     "indicative": false,
     "referenceOnly": false
   },
   "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 94.71141924891647,
-      "base": 136.88609865470855,
-      "bull": 246.77352872955933,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.021916031134523152,
-        "sd": 0.00975913563829787
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.39999999999999997,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Mid-Cycle Earnings",
       "family": "earnings_midcycle",
@@ -62,7 +43,27 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.6000000000000001,
+      "normalizedWeight": 0.4904458598726115,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 245.00914148179348,
+      "base": 314.1142839510173,
+      "bull": 383.21942642024106,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 32.98199981485681,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.5095541401273885,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -92,10 +93,10 @@
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 60
+    "valuationConfidence": 67
   },
   "raw": {
     "epsTTM": 32.98199981485681,
@@ -130,7 +131,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -155,6 +156,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -216,18 +224,20 @@
       "dividend": 0.55,
       "dcf": 0.85
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.255375251827553,
+    "baseToPrice": 1.7652676599186379,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

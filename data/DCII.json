@@ -1,7 +1,7 @@
 {
   "ticker": "DCII.JK",
   "name": "PT DCI Indonesia Tbk",
-  "asOf": "2026-09-17T13:49:34.272163+00:00",
+  "asOf": "2026-09-17T23:15:47.151883+00:00",
   "price": 195800.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 56713.08415122249,
-    "base": 80656.73350272827,
-    "bull": 104600.38285423405,
-    "dispersion": 0.0015567146023471052,
+    "bear": 53535.9188424912,
+    "base": 73622.13027575696,
+    "bull": 93708.34170902272,
+    "dispersion": 0.14092898844444332,
     "agreement": "HIGH",
     "available": true,
     "indicative": false,
@@ -25,16 +25,16 @@
     {
       "name": "Historical P/E 3Y",
       "family": "earnings",
-      "bear": 46839.47497373556,
-      "base": 57778.35085816862,
-      "bull": 68717.22674260168,
+      "bear": 47543.64709819535,
+      "base": 58646.975113551365,
+      "bull": 69750.30312890737,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "bands": {
         "mean": 124.80204001612096,
         "sd": 23.628123779642035,
-        "current": 422.93071837826125,
+        "current": 416.6666633333333,
         "sampleCount": 333,
         "adaptive": true,
         "hardCap": null,
@@ -42,24 +42,23 @@
       },
       "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.39x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.3,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical P/E 5Y",
       "family": "earnings",
-      "bear": 42919.28375493275,
-      "base": 80799.61627909503,
-      "bull": 118679.9488032573,
+      "bear": 43564.52077432613,
+      "base": 82014.33607436792,
+      "bull": 120464.15137440972,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "bands": {
         "mean": 174.5282929397626,
         "sd": 81.82204416165152,
-        "current": 422.93071837826125,
+        "current": 416.6666633333333,
         "sampleCount": 761,
         "adaptive": true,
         "hardCap": null,
@@ -68,29 +67,75 @@
       "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.4311377245508982,
+      "normalizedWeight": 0.3,
       "qcStatus": "VALID"
     },
     {
       "name": "Forward Earnings Power",
       "family": "forward_earnings",
-      "bear": 67167.33287262102,
-      "base": 80548.4433985345,
-      "bull": 93929.55392444797,
+      "bear": 65508.67120183687,
+      "base": 78559.34229845293,
+      "bull": 91610.01339506898,
       "confidence": 0.76,
       "relevance": 1.25,
       "rawWeight": 0.95,
       "warning": "HIGH MULTIPLE · confidence diturunkan.",
       "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
       "bands": {
-        "forwardEPS": 538.190985211018,
-        "growthUsed": 0.1625,
+        "forwardEPS": 524.9006441992052,
+        "growthUsed": 0.11699999999999999,
         "historicalPE": 149.66516647794177
       },
       "included": true,
-      "normalizedWeight": 0.5688622754491018,
+      "normalizedWeight": 0.4000000000000001,
       "qcStatus": "VALID",
       "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 3490.8343136409608,
+      "base": 4475.428607232001,
+      "bull": 5460.022900823041,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 469.92000375936004,
+        "requiredReturn": 0.105
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 13.10x dari median metode."
+    },
+    {
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 899.1232035260135,
+      "base": 1226.077095717291,
+      "bull": 1553.0309879085685,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
+      "warning": null,
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 1634.769460956388,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 47.83x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -113,25 +158,27 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Historical P/E 3Y adaptive: median 124.8x, current 422.9x; confidence diturunkan.",
-      "Historical P/E 5Y adaptive: median 174.5x, current 422.9x; confidence diturunkan."
+      "Historical P/E 3Y adaptive: median 124.8x, current 416.7x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 174.5x, current 416.7x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
+    "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 4,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 75
+    "outlierMethodCount": 2,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 55
   },
   "raw": {
-    "epsTTM": 462.959987278295,
+    "epsTTM": 469.92000375936004,
     "bvps": 1634.769460956388,
-    "currentPE": 422.93070675652325,
+    "currentPE": 416.66666666666663,
     "currentPBV": 119.77223986399359,
     "roe": 0.2674,
     "fcf": -1581175537664.0,
-    "growthNormalized": 0.35,
+    "growthNormalized": 0.18,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 466737417945088.0,
@@ -144,15 +191,15 @@
     "epsCandidates": [
       {
         "source": "Yahoo trailingEps",
-        "value": 462.96
+        "value": 469.92
       },
       {
         "source": "Price / Yahoo trailingPE",
-        "value": 462.95997455658994
+        "value": 469.9200075187201
       },
       {
         "source": "WISS reconciled EPS",
-        "value": 462.96
+        "value": 469.92
       },
       {
         "source": "Latest annual NI / shares",
@@ -161,11 +208,11 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": 0.35
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -182,7 +229,7 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
@@ -191,17 +238,17 @@
       "status": "OUTLIER",
       "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
       "inputs": {
-        "bear": 3301.271425284709,
-        "base": 4126.589281605886,
-        "bull": 4951.907137927063,
+        "bear": 3325.9940688208853,
+        "base": 4157.492586026106,
+        "bull": 4988.9911032313275,
         "price": 195800.0
       }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     },
     {
@@ -218,78 +265,34 @@
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.35,
-    "confidence": 0.6699999999999999,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.10929969801642292
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.6399853005712084
-          }
-        ],
-        "normalGrowth": 0.46309009971961324,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.09242329543741745
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7448922553467272
-          }
-        ],
-        "normalGrowth": 0.46578707175201234,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.09317085044023665
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7450912750915186
-          }
-        ],
-        "normalGrowth": 0.46567056658093353,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.09810311690482154
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7908945436923589
-          }
-        ],
-        "normalGrowth": 0.4945619901599653,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -319,18 +322,20 @@
       "dividend": 0.25,
       "dcf": 1.15
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.4119342875522383,
+    "baseToPrice": 0.37600679405391707,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

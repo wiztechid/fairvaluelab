@@ -1,7 +1,7 @@
 {
   "ticker": "PPGL.JK",
   "name": "PT Prima Globalindo Logistik Tbk",
-  "asOf": "2026-09-17T13:51:19.741862+00:00",
+  "asOf": "2026-09-17T23:17:00.415550+00:00",
   "price": 468.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 774.8791141171695,
-    "base": 1159.1103111678278,
-    "bull": 1434.2502891348502,
-    "dispersion": 0.6400596311845546,
+    "bear": 617.9624172774522,
+    "base": 940.9403345338769,
+    "bull": 1166.4371755047248,
+    "dispersion": 0.78005288054964,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -35,27 +35,28 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.6,
+      "normalizedWeight": 0.49606299212598426,
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 316.10066118142475,
-      "base": 369.8636363636364,
-      "bull": 445.6627707002881,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.10679611650485436,
-        "sd": 0.01816407766990291
-      },
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 162.4241840867731,
+      "base": 208.23613344458087,
+      "bull": 254.04808280238865,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 23.923999488087766,
+        "requiredReturn": 0.11488880000000001
+      },
       "included": true,
-      "normalizedWeight": 0.4000000000000001,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.5039370078740157,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -68,12 +69,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 378.8,
-    "ma50": 277.96,
-    "ma200": 224.275,
+    "ma20": 390.9,
+    "ma50": 282.68,
+    "ma200": 225.955,
     "rsi14": null,
-    "return1m": 1.2285714285714286,
-    "return3m": 1.8888888888888888
+    "return1m": 1.1272727272727274,
+    "return3m": 1.8536585365853657
   },
   "quality": {
     "cashConversion": null,
@@ -89,13 +90,15 @@
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 23.9240 per saham."
     ],
-    "historyYears": 4.996577686516085,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 54
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 42
   },
   "raw": {
     "epsTTM": 23.923999488087766,
@@ -130,7 +133,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -146,6 +149,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -207,18 +217,20 @@
       "dividend": 0.65,
       "dcf": 1.0
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 2.4767314341192903,
+    "baseToPrice": 2.010556270371532,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

@@ -1,7 +1,7 @@
 {
   "ticker": "MDKI.JK",
   "name": "PT Emdeki Utama Tbk",
-  "asOf": "2026-09-17T13:42:27.119190+00:00",
+  "asOf": "2026-09-17T23:10:40.727264+00:00",
   "price": 191.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 78.88501763464728,
-    "base": 108.26969455159555,
-    "bull": 133.7729527863821,
-    "dispersion": 0.33205651847261125,
-    "agreement": "LOW",
+    "bear": 75.85491811774608,
+    "base": 108.91958633151117,
+    "bull": 138.492821644696,
+    "dispersion": 0.24690583075205436,
+    "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
     "referenceOnly": false
@@ -35,7 +35,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2892024417091964,
+      "normalizedWeight": 0.25402127098532123,
       "qcStatus": "VALID"
     },
     {
@@ -51,26 +51,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2836985890123086,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 171.04349806701168,
-      "base": 178.20000000000002,
-      "bull": 185.98151210615646,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.050505050505050504,
-        "sd": 0.0021131437070087346
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.14970479335534875,
+      "normalizedWeight": 0.24918695613957986,
       "qcStatus": "VALID"
     },
     {
@@ -94,7 +75,27 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.2773941759231462,
+      "normalizedWeight": 0.243649468225367,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 114.78628309403345,
+      "base": 147.161901402607,
+      "bull": 179.53751971118052,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 15.451999647273734,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.2531423046497319,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -132,10 +133,10 @@
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
     "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 65
   },
   "raw": {
     "epsTTM": 15.451999647273734,
@@ -170,7 +171,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -186,6 +187,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -247,18 +255,20 @@
       "dividend": 0.55,
       "dcf": 0.85
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.5668570395371495,
+    "baseToPrice": 0.5702596143011056,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

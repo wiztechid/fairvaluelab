@@ -1,7 +1,7 @@
 {
   "ticker": "TOBA.JK",
   "name": "PT TBS Energi Utama Tbk",
-  "asOf": "2026-09-17T13:41:27.794925+00:00",
+  "asOf": "2026-09-17T23:09:57.355540+00:00",
   "price": 535.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 454.5741357327315,
-    "base": 570.6229027023168,
-    "bull": 739.5859459567974,
-    "dispersion": 0.19777316484691304,
+    "bear": 381.1960985418108,
+    "base": 520.2453150378452,
+    "bull": 712.2823057196622,
+    "dispersion": 0.30703416027834635,
     "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
@@ -25,9 +25,9 @@
     {
       "name": "DCF",
       "family": "cashflow",
-      "bear": 575.2986675901961,
-      "base": 681.6594162824606,
-      "bull": 990.7907030705662,
+      "bear": 578.6814210689117,
+      "base": 685.6675704667689,
+      "bull": 996.616547777508,
       "confidence": 0.85,
       "relevance": 0.85,
       "rawWeight": 0.7224999999999999,
@@ -41,9 +41,9 @@
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 439.41159938295397,
-      "base": 576.6461828158383,
-      "bull": 689.800591641379,
+      "bear": 441.99533753522013,
+      "base": 580.0368596777876,
+      "bull": 693.8566158987777,
       "confidence": 0.75,
       "relevance": 0.9900000000000001,
       "rawWeight": 0.7425,
@@ -57,52 +57,57 @@
     {
       "name": "Historical PBV 5Y",
       "family": "book",
-      "bear": 162.5342656725703,
-      "base": 379.07005558422134,
-      "bull": 595.6058454958724,
+      "bear": 162.30525385710422,
+      "base": 378.53594346171633,
+      "bull": 594.7666330663284,
       "confidence": 0.8,
       "relevance": 0.385,
       "rawWeight": 0.30800000000000005,
       "bands": {
-        "mean": 0.914563941805749,
-        "sd": 0.5224254003878228,
-        "current": 1.2907685575743544,
-        "z": 0.7201116474990108,
-        "minus1": 162.5342656725703,
-        "base": 379.07005558422134,
-        "plus1": 595.6058454958724,
+        "mean": 0.907936652112904,
+        "sd": 0.5186397006537675,
+        "current": 1.2832232110859776,
+        "z": 0.7235978242699294,
+        "minus1": 162.30525385710422,
+        "base": 378.53594346171633,
+        "plus1": 594.7666330663284,
         "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.18064516129032263,
+      "normalizedWeight": 0.2413320274240941,
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 553.2431460585323,
-      "base": 570.2365204499883,
-      "bull": 588.3069107712058,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.03255640306122449,
-        "sd": 0.001
-      },
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 229.30539087660324,
+      "base": 312.6891693771862,
+      "bull": 396.0729478777692,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 416.91889250291496,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
       "included": true,
-      "normalizedWeight": 0.21935483870967748,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.158667972575906,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     }
   ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.6546169954726043,
-    "bearTerminalValueShare": 0.5990188059724618,
-    "bullTerminalValueShare": 0.7240085060819982,
+    "bearTerminalValueShare": 0.5990188059724617,
+    "bullTerminalValueShare": 0.7240085060819983,
     "warning": false,
     "growth": -0.03,
     "costOfEquity": 0.115922,
@@ -125,41 +130,39 @@
     "totalInputs": 7,
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 78
+    "valuationConfidence": 65
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 414.4817417968298,
+    "bvps": 416.91889250291496,
     "currentPE": null,
-    "currentPBV": 1.2907685575743544,
+    "currentPBV": 1.2832232110859776,
     "roe": -0.34333,
-    "fcf": 584211766732.0,
-    "growthNormalized": -0.25,
+    "fcf": 583388608632.0,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.115922,
     "terminalGrowth": 0.035,
-    "marketCap": 4445622501376.0,
-    "shares": 8309574775.0,
+    "marketCap": 4413407625216.0,
+    "shares": 8249360331.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17743.0,
-    "epsCandidates": [],
+    "fxFactor": 17718.0,
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": -0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -173,81 +176,47 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -2352572120052.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": -0.25,
-    "confidence": 0.75,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.20648158009602002
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.13866950851376292
-          }
-        ],
-        "normalGrowth": -0.02361914564383527,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9691725705855676
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.9474981052355171
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9398131758054412
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.8490557171937871
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.8094452728790521
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -256,16 +225,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.8827584293985019
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -283,18 +246,20 @@
       "dividend": 0.55,
       "dcf": 0.85
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.0665848648641434,
+    "baseToPrice": 0.972421149603449,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

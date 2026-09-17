@@ -1,7 +1,7 @@
 {
   "ticker": "WGSH.JK",
   "name": "PT Wira Global Solusi Tbk",
-  "asOf": "2026-09-17T13:50:01.787218+00:00",
+  "asOf": "2026-09-17T23:16:06.122860+00:00",
   "price": 131.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,36 +12,37 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 30.38509395132693,
-    "base": 49.49790794979079,
-    "bull": 100.0,
+    "bear": 44.19999871786267,
+    "base": 56.66666502290086,
+    "bull": 69.13333132793905,
     "dispersion": null,
     "agreement": "SINGLE_METHOD",
     "available": false,
     "indicative": false,
     "referenceOnly": true,
     "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical Dividend Yield"
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 30.38509395132693,
-      "base": 49.49790794979079,
-      "bull": 100.0,
-      "confidence": 0.68,
-      "relevance": 0.25,
-      "rawWeight": 0.17,
-      "bands": {
-        "mean": 0.010101437024513948,
-        "sd": 0.006354
-      },
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 44.19999871786267,
+      "base": 56.66666502290086,
+      "bull": 69.13333132793905,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 5.94999982740459,
+        "requiredReturn": 0.105
+      },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -66,12 +67,12 @@
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.9500 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical Dividend Yield); belum cukup bukti untuk FV gabungan."
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.780287474332649,
     "validMethodCount": 1,
     "independentFamilies": 1,
-    "diagnosticCount": 3,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 26
@@ -109,7 +110,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -134,6 +135,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -195,7 +203,9 @@
       "dividend": 0.25,
       "dcf": 1.15
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
@@ -203,6 +213,6 @@
     "reason": "ONLY_ONE_VALID_METHOD",
     "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }

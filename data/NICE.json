@@ -1,7 +1,7 @@
 {
   "ticker": "NICE.JK",
   "name": "PT Adhi Kartiko Pratama Tbk",
-  "asOf": "2026-09-17T13:42:29.127562+00:00",
+  "asOf": "2026-09-17T23:10:42.258512+00:00",
   "price": 358.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 51.554401122339385,
-    "base": 61.59314924567885,
+    "bear": 40.63348225995527,
+    "base": 56.04217054185659,
     "bull": 88.28342116840393,
-    "dispersion": 0.08277787924503771,
+    "dispersion": 0.5703067774704584,
     "agreement": "LIMITED",
     "available": false,
     "indicative": true,
@@ -38,7 +38,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "indicativeWeight": 0.5048034934497816
+      "indicativeWeight": 0.7810810810810811
     },
     {
       "name": "FCF Yield",
@@ -54,8 +54,33 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
+    },
+    {
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 13.372172667033322,
+      "base": 18.234780909590892,
+      "bull": 23.097389152148462,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
+      "warning": null,
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 24.313041212787855,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "indicativeWeight": 0.49519650655021835
+      "countsForIndependence": false,
+      "indicativeWeight": 0.21891891891891896
     }
   ],
   "dcfDiagnostics": {
@@ -94,7 +119,7 @@
     "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
     "valuationConfidence": 46,
     "indicativeMethodCount": 2
@@ -106,7 +131,7 @@
     "currentPBV": 14.724607952858808,
     "roe": -0.0872,
     "fcf": 55331405824.0,
-    "growthNormalized": 0.14778538057450935,
+    "growthNormalized": 0.009960898170172067,
     "costOfEquity": 0.16315400000000002,
     "terminalGrowth": 0.035,
     "marketCap": 2177363083264.0,
@@ -118,11 +143,11 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": 0.009960898170172067,
-    "growthNormalizedQuarterly": 0.14778538057450935
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.13-sector-midcycle+3.18-evidence-ladder-qc",
+  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -137,70 +162,46 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.14778538057450935,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.5320824862248763
-          }
-        ],
-        "normalGrowth": 0.5320824862248763,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.1525043192055826
-          }
-        ],
-        "normalGrowth": 0.1525043192055826,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.16373163159742377
-          }
-        ],
-        "normalGrowth": 0.16373163159742377,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.14463942148712716
-          }
-        ],
-        "normalGrowth": 0.14463942148712716,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -209,16 +210,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.3693834888487053
-          }
-        ],
-        "normalGrowth": -0.3693834888487053,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -236,7 +231,9 @@
       "dividend": 0.55,
       "dcf": 0.85
     },
-    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
+    "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
+    "waterfallVersion": "3.19-sector-waterfall",
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
   },
   "valuationReview": {
     "required": false,
@@ -244,6 +241,6 @@
     "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
     "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
-  "engineGeneration": "3.13-sector-midcycle",
-  "qcVersion": "3.18-evidence-ladder-qc"
+  "engineGeneration": "3.19-sector-waterfall",
+  "qcVersion": "3.19-sector-waterfall-qc"
 }
