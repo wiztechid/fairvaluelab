@@ -1,7 +1,7 @@
 {
   "ticker": "PSSI.JK",
   "name": "PT IMC Pelita Logistik Tbk",
-  "asOf": "2026-09-17T08:47:38.397695+00:00",
+  "asOf": "2026-09-17T09:31:22.676155+00:00",
   "price": 358.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 169.32054247941127,
-    "base": 201.64259995183266,
-    "bull": 320.28850680288963,
-    "dispersion": 0.37861919370013447,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -43,26 +43,6 @@
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.80x dari median metode."
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 227.02891995545596,
-      "base": 247.07946576827203,
-      "bull": 267.13001158108807,
-      "confidence": 0.82,
-      "relevance": 1.25,
-      "rawWeight": 1.025,
-      "bands": {
-        "mean": 3.172601907955804,
-        "sd": 1.572034766700361
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.6,
       "qcStatus": "VALID"
     },
     {
@@ -77,29 +57,10 @@
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.07758620689655171,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": false
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 83.30661319553154,
-      "base": 141.40193370165744,
-      "bull": 467.23967474044997,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.035360195360195364,
-        "sd": 0.024659049309664696
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.32241379310344825,
-      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": null,
@@ -121,15 +82,16 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 1,
-    "outlierMethodCount": 1,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 54
+    "valuationConfidence": 0
   },
   "raw": {
     "epsTTM": 0.8514454537274148,
@@ -138,7 +100,7 @@
     "currentPBV": 0.6777149750504067,
     "roe": -0.02123,
     "fcf": -103565695827.0,
-    "growthNormalized": 0.18537632849807814,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1833385852928.0,
@@ -148,24 +110,13 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17743.0,
-    "epsCandidates": [
-      {
-        "source": "WISS reconciled EPS",
-        "value": 0.8514454537274148
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 0.8514454537274148
-      }
-    ],
-    "epsSource": "Multi-source EPS median",
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": 0.18537632849807814
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -178,13 +129,27 @@
       }
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
+    },
+    {
       "name": "Mid-Cycle Earnings",
       "family": "earnings_midcycle",
       "status": "OUTLIER",
       "reason": "Hasil sector model tidak lolos economic sanity guard 0.05x–5x harga.",
       "inputs": {
-        "normalizedEPS": 0.896146340048104,
-        "growthAdjustment": 0.0525,
+        "normalizedEPS": 0.842505276463277,
+        "growthAdjustment": -0.010499999999999999,
         "peBand": [
           5.0,
           7.0,
@@ -194,27 +159,16 @@
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.18537632849807814,
-    "confidence": 0.56,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.295132499113553
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.16977251857543052
-          }
-        ],
-        "normalGrowth": -0.21155917875480468,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -229,16 +183,10 @@
         "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 1.7606861527266777
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -274,7 +222,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.5632474858989739,
+    "baseToPrice": null,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

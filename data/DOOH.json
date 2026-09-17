@@ -1,7 +1,7 @@
 {
   "ticker": "DOOH.JK",
   "name": "PT Era Media Sejahtera Tbk",
-  "asOf": "2026-09-17T08:51:43.627165+00:00",
+  "asOf": "2026-09-17T09:34:37.983234+00:00",
   "price": 458.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,33 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 99.6267168744757,
-    "base": 125.36228420498273,
-    "bull": 151.09785153548978,
-    "dispersion": 0.35621219785644653,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 77.2436,
-      "base": 98.0,
-      "bull": 118.75640000000001,
-      "confidence": 0.82,
-      "relevance": 0.9,
-      "rawWeight": 0.738,
-      "bands": {
-        "mean": 23.345438754687564,
-        "sd": 5.956705310776722
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.5734265734265734,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Graham Number",
       "family": "fundamental",
@@ -51,8 +32,8 @@
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.09324009324009325,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": false
     },
@@ -73,8 +54,8 @@
         "growth": 0.06999999999999999,
         "costOfEquity": 0.105
       },
-      "included": true,
-      "normalizedWeight": 0.33333333333333337,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -110,15 +91,16 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 10.4300 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 10.4300 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 3.36208076659822,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 1,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67
+    "valuationConfidence": 0
   },
   "raw": {
     "epsTTM": 10.4299999887274,
@@ -127,7 +109,7 @@
     "currentPBV": 14.700126580709458,
     "roe": 0.27622998,
     "fcf": 7313643520.0,
-    "growthNormalized": 0.35,
+    "growthNormalized": 0.18,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 3544412323840.0,
@@ -157,75 +139,58 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": 0.35
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.35,
-    "confidence": 0.64,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.2545448758761748
-          }
-        ],
-        "normalGrowth": 0.2545448758761748,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 10.826095202701419
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 10.918231614518307
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 10.808652643575158
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -261,7 +226,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.273716777740137,
+    "baseToPrice": null,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
