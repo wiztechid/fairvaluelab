@@ -1,7 +1,7 @@
 {
   "ticker": "KUAS.JK",
   "name": "PT Ace Oldfields Tbk",
-  "asOf": "2026-09-17T09:33:01.396764+00:00",
+  "asOf": "2026-09-17T09:43:57.296845+00:00",
   "price": 99.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -19,7 +19,27 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 27.454010570420877,
+      "base": 49.6875,
+      "bull": 261.2998038731893,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.03018867924528302,
+        "sd": 0.024448146807960713
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE"
+    }
+  ],
   "dcfDiagnostics": null,
   "technical": {
     "ma20": 99.45,
@@ -40,18 +60,19 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.4380 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.895277207392197,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 5.438000225265048,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -67,6 +88,17 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 5.438
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 5.438000450530097
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.05764099935,
     "growthNormalizedQuarterly": null
   },
@@ -76,13 +108,6 @@
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -104,13 +129,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],

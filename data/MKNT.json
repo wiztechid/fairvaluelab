@@ -1,7 +1,7 @@
 {
   "ticker": "MKNT.JK",
   "name": "PT Mitra Komunikasi Nusantara Tbk",
-  "asOf": "2026-09-17T09:35:12.397164+00:00",
+  "asOf": "2026-09-17T09:47:06.143154+00:00",
   "price": 1.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -21,12 +21,12 @@
   },
   "methods": [],
   "dcfDiagnostics": {
-    "terminalValueShare": 0.6914052596292686,
-    "bearTerminalValueShare": 0.631341348752999,
-    "bullTerminalValueShare": 0.7446437120520002,
+    "terminalValueShare": 0.5851101816015056,
+    "bearTerminalValueShare": 0.5376683510128314,
+    "bullTerminalValueShare": 0.6505437929987339,
     "warning": false,
     "growth": -0.03,
-    "costOfEquity": 0.105,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035
   },
   "technical": {
@@ -50,6 +50,7 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.996577686516085,
@@ -66,9 +67,9 @@
     "currentPE": null,
     "currentPBV": null,
     "roe": null,
-    "fcf": 213332066304.0,
+    "fcf": 209646272512.0,
     "growthNormalized": -0.03,
-    "costOfEquity": 0.105,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
     "marketCap": 5500000256.0,
     "shares": 5500000000.0,
@@ -77,6 +78,7 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
@@ -103,15 +105,17 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -8243601974.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -122,10 +126,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": 3.81668689219628
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],

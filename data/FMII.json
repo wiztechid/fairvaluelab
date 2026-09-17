@@ -1,7 +1,7 @@
 {
   "ticker": "FMII.JK",
   "name": "PT Fortune Mate Indonesia Tbk",
-  "asOf": "2026-09-17T09:36:25.173363+00:00",
+  "asOf": "2026-09-17T09:48:48.812582+00:00",
   "price": 254.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 181.5901131816538,
+    "base": 290.42515119474683,
+    "bull": 399.2601892078398,
+    "dispersion": 0.11130415379576494,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -41,8 +41,56 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.289211935730681,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 271.8573528244679,
+      "base": 342.2162000554287,
+      "bull": 412.5750472863895,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 150.65783500069875,
+        "sd": 30.974897141761737,
+        "current": 111.82138684252635,
+        "sampleCount": 487,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.2754399387911247,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 105.60303745180336,
+      "base": 256.3336169547262,
+      "bull": 407.0641964576491,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 112.84874229227722,
+        "sd": 66.35788362045083,
+        "current": 111.82138684252635,
+        "sampleCount": 879,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Multi-source EPS median"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Multi-source EPS median) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.2754399387911247,
       "qcStatus": "VALID"
     },
     {
@@ -59,8 +107,30 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.65x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 251.3351114241091,
+      "base": 293.4390477892285,
+      "bull": 335.5429841543479,
+      "confidence": 0.76,
+      "relevance": 0.55,
+      "rawWeight": 0.41800000000000004,
+      "warning": "HIGH MULTIPLE · confidence diturunkan.",
+      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
+      "bands": {
+        "forwardEPS": 2.227185756072969,
+        "growthUsed": -0.0195,
+        "historicalPE": 131.753288646488
+      },
+      "included": true,
+      "normalizedWeight": 0.15990818668706966,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -82,15 +152,16 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Historical P/E 3Y adaptive: median 150.7x, current 111.8x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 112.8x, current 111.8x; confidence diturunkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 72
   },
   "raw": {
     "epsTTM": 2.2714796084375,
@@ -109,13 +180,24 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "WISS reconciled EPS",
+        "value": 2.2714796084375
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 2.2714796084375
+      }
+    ],
+    "epsSource": "Multi-source EPS median",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -131,14 +213,14 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -206,7 +288,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": null,
+    "baseToPrice": 1.1434061070659325,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

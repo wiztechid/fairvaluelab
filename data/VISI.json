@@ -1,7 +1,7 @@
 {
   "ticker": "VISI.JK",
   "name": "PT Satu Visi Putra Tbk",
-  "asOf": "2026-09-17T09:33:14.538202+00:00",
+  "asOf": "2026-09-17T09:44:16.589632+00:00",
   "price": 1230.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -19,7 +19,27 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 88.95533689324456,
+      "base": 90.98619145101702,
+      "bull": 93.01704600878944,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 27.21477672168978,
+        "sd": 0.4972294883332811
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE"
+    }
+  ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.48318628904031974,
     "bearTerminalValueShare": 0.42353697100706783,
@@ -50,12 +70,13 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 2.5544147843942504,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 0
@@ -67,7 +88,7 @@
     "currentPBV": 20.727456997763404,
     "roe": -0.030550001,
     "fcf": 13722956800.0,
-    "growthNormalized": 0.11933145457457059,
+    "growthNormalized": -0.18426302479136902,
     "costOfEquity": 0.22,
     "terminalGrowth": 0.035,
     "marketCap": 3782250070016.0,
@@ -77,8 +98,9 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.11933145457457059,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.18426302479136902
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -94,43 +116,54 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": -0.18426302479136902,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.1808548690886015
+          }
+        ],
+        "normalGrowth": -0.1808548690886015,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.18767118049413656
+          }
+        ],
+        "normalGrowth": -0.18767118049413656,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.5503824445423711
+          }
+        ],
+        "normalGrowth": -0.5503824445423711,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
         "observations": [],
