@@ -15,11 +15,8 @@ on:
       - 'postprocess_qc.py'
       - 'validate_engine.py'
       - 'snapshot_backtest.py'
-      - 'collect_idx_disclosures.py'
-      - 'idx_catalyst.py'
       - 'catalyst_snapshot.py'
       - 'fv_timeline.py'
-      - 'data/idx_disclosures.json'
       - 'des_universe.py'
       - 'requirements.txt'
       - '.github/workflows/update-fair-value.yml'
@@ -58,13 +55,9 @@ jobs:
         run: python postprocess_qc.py
       - name: Validate all DES valuations before publication
         run: python validate_engine.py
-      - name: Collect public IDX disclosures
-        run: python collect_idx_disclosures.py
-      - name: Build verified IDX disclosure catalyst layer
-        run: python idx_catalyst.py
       - name: Lock quarterly valuation snapshots and update target progress
         run: python snapshot_backtest.py
-      - name: Bind point-in-time catalysts to locked snapshots
+      - name: Bind cached point-in-time catalysts to locked snapshots
         run: python catalyst_snapshot.py
       - name: Build FV timeline and quarter-over-quarter attribution
         run: python fv_timeline.py
@@ -81,7 +74,7 @@ jobs:
           cp -a /tmp/fv-data/. data/
           git add data/
           if git diff --cached --quiet; then echo "No valuation data changes to commit."; exit 0; fi
-          git commit -m "data: refresh FV timelines, catalysts and backtest progress"
+          git commit -m "data: refresh FV timelines and backtest progress"
           if git push origin HEAD:main; then exit 0; fi
           echo "Main moved during final push; retrying safely..."
           cp -a data/. /tmp/fv-data/
@@ -90,5 +83,5 @@ jobs:
           rm -rf data && mkdir -p data
           cp -a /tmp/fv-data/. data/
           git add data/
-          git commit -m "data: refresh FV timelines, catalysts and backtest progress"
+          git commit -m "data: refresh FV timelines and backtest progress"
           git push origin HEAD:main
