@@ -1,0 +1,32 @@
+name: Apply Fair Value UI v3.17
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'patch_ui_v317.py'
+      - '.github/workflows/apply-ui-v317.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply UI v3.17
+        run: python patch_ui_v317.py
+      - name: Commit UI
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then echo "No UI changes."; exit 0; fi
+          git commit -m "ui: show indicative FV and verified market actors"
+          git pull --rebase origin main
+          git push origin HEAD:main
