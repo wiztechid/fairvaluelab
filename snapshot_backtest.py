@@ -66,8 +66,12 @@ def main():
         if p.name in ('summary.json','errors.json'):continue
         try:d=json.load(open(p,encoding='utf-8'))
         except:continue
+        # data/ now also contains collector feeds/status files. Snapshot only
+        # valuation ticker objects; disclosure feeds are JSON arrays and must
+        # never be interpreted as ticker valuation documents.
+        if not isinstance(d,dict):continue
         fv=d.get('fairValue') or {}
-        if not fv.get('available'):continue
+        if not isinstance(fv,dict) or not fv.get('available'):continue
         ticker=(d.get('ticker') or p.stem).replace('.JK','');fq=financial_quarter(d)
         if not fq:continue
         anchor,source=report_anchor(d);asof=anchor.isoformat();tdir=OUT/ticker;tdir.mkdir(parents=True,exist_ok=True);sp=tdir/f'{fq}.json'
