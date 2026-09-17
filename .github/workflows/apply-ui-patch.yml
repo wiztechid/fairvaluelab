@@ -1,0 +1,32 @@
+name: Apply Fair Value UI Patch
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'patch_ui_v315.py'
+      - '.github/workflows/apply-ui-patch.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply UI patch
+        run: python patch_ui_v315.py
+      - name: Commit patched UI
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then echo "No UI changes."; exit 0; fi
+          git commit -m "ui: show margin of safety and IDX catalyst card"
+          git pull --rebase origin main
+          git push origin HEAD:main
