@@ -1,7 +1,7 @@
 {
   "ticker": "NEST.JK",
   "name": "PT Esta Indonesia Tbk",
-  "asOf": "2026-09-17T03:23:27.963196+00:00",
+  "asOf": "2026-09-17T04:12:06.920649+00:00",
   "price": 725.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -41,7 +41,7 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 6.0008 per saham.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.9800 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 2.108145106091718,
@@ -53,13 +53,13 @@
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": 6.000763833691552,
+    "epsTTM": 5.979999955459311,
     "bvps": 89526.14756279635,
     "currentPE": 0.12995038801599054,
     "currentPBV": 0.008098192759734947,
     "roe": 0.066750005,
     "fcf": -61965099008.0,
-    "growthNormalized": 0.0996124799127018,
+    "growthNormalized": -0.062493983367855305,
     "costOfEquity": 0.1334864,
     "terminalGrowth": 0.035,
     "marketCap": 2981562624.0,
@@ -76,7 +76,7 @@
       },
       {
         "source": "Price / Yahoo trailingPE",
-        "value": 6.021527667383103
+        "value": 5.979999910918622
       },
       {
         "source": "WISS reconciled EPS",
@@ -89,7 +89,7 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.0996124799127018,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.062493983367855305
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -110,7 +110,7 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
@@ -119,49 +119,85 @@
       "status": "OUTLIER",
       "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
       "inputs": {
-        "bear": 2781.374456251744,
-        "base": 3476.71807031468,
-        "bull": 4172.061684377616,
+        "bear": 2776.5582222432704,
+        "base": 3470.6977778040878,
+        "bull": 4164.837333364905,
         "price": 725.0
       }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "Justified PBV / ROE",
+      "family": "book_profitability",
+      "status": "OUTLIER",
+      "reason": "Hasil sector model tidak lolos economic sanity guard 0.05x–5x harga.",
+      "inputs": {
+        "justifiedPBV": 0.5651966884362394,
+        "roe": 0.066750005,
+        "growth": -0.02,
+        "costOfEquity": 0.1334864
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.062493983367855305,
+    "confidence": 0.72,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.5234653010781019
+          }
+        ],
+        "normalGrowth": 0.5234653010781019,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.04949884893865908
+          }
+        ],
+        "normalGrowth": -0.04949884893865908,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.08576931228395202
+          }
+        ],
+        "normalGrowth": -0.08576931228395202,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.11335627914695012
+          }
+        ],
+        "normalGrowth": -0.11335627914695012,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -170,10 +206,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.013799460300786937
+          }
+        ],
+        "normalGrowth": 0.013799460300786937,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
