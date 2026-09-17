@@ -1,8 +1,8 @@
-# Final pipeline QC: preserve upstream engine generation and publish consistent status/quality semantics.
+# Final pipeline QC: full FV requires independent evidence; single methods remain reference-only.
 import json, glob, math, os
 import numpy as np
 from des_universe import TICKERS, SECTOR_BY_TICKER, DES_SOURCE
-OUT='data';QC_VERSION='3.14-extreme-review-qc'
+OUT='data';QC_VERSION='3.18-evidence-ladder-qc'
 def finite(x):return isinstance(x,(int,float)) and math.isfinite(x)
 def family(m):
     if m.get('family'):return m['family']
@@ -12,8 +12,10 @@ def robust_keep(methods,price):
     for m in methods:
         vals=[m.get('bear'),m.get('base'),m.get('bull')];sane=price and all(finite(v) and v>0 and .05*price<=v<=5*price for v in vals);m['qcStatus']='CANDIDATE' if sane else 'OUTLIER';m['included']=False;m['normalizedWeight']=0
         if sane:cand.append(m)
-        else:m['qcReason']='Ditolak: hasil di luar economic sanity range 0.05x–5x harga pasar.'
-    if len(cand)<2:return []
+        else:m['qcReason']='Ditolak: hasil di luar economic sanity range 0.05x–5x harga pasar. Harga hanya guard QC, bukan target valuasi.'
+    if len(cand)==1:
+        cand[0]['qcStatus']='VALID';return cand
+    if not cand:return []
     logs=np.log(np.array([m['base'] for m in cand],float));med=float(np.median(logs));mad=float(np.median(np.abs(logs-med)));keep=[]
     for m,l in zip(cand,logs):
         ratio=math.exp(abs(float(l)-med));z=abs(float(l)-med)/(1.4826*mad) if mad>1e-9 else 0
@@ -40,34 +42,29 @@ def capped_weights(keep,cap=.60):
 def process(path):
     try:d=json.load(open(path,encoding='utf-8'))
     except:return None
-    upstream=d.get('engineVersion') or 'unknown';price=d.get('price');methods=d.get('methods') or [];q=d.setdefault('quality',{});guards=q.setdefault('guards',[]);keep=robust_keep(methods,price)
+    upstream=d.get('engineGeneration') or d.get('engineVersion') or 'unknown';price=d.get('price');methods=d.get('methods') or [];q=d.setdefault('quality',{});guards=q.setdefault('guards',[]);keep=robust_keep(methods,price)
     independent=[m for m in keep if m.get('countsForIndependence',True)];ifam={family(m) for m in independent};suf=len(keep)>=2 and len(ifam)>=2
     if suf:
         weights=capped_weights(keep,.60)
         for m,w in zip(keep,weights):m['included']=True;m['normalizedWeight']=float(w)
         comp=lambda k:sum(m[k]*m['normalizedWeight'] for m in keep);bear,base,bull=comp('bear'),comp('base'),comp('bull');a=np.array([m['base'] for m in keep],float);disp=float(np.std(a)/np.mean(a)) if np.mean(a)>0 else None;agr='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW'
     else:
-        bear=base=bull=disp=None;agr='INSUFFICIENT';msg='Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.'
+        bear=base=bull=disp=None;agr='INSUFFICIENT';msg='Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.'
         if msg not in guards:guards.append(msg)
-    # Extreme valuation is not automatically wrong. Keep the calculated range visible,
-    # but downgrade publication state to REVIEW until stronger evidence confirms it.
-    ratio=(base/price) if suf and price and base else None;extreme=bool(ratio is not None and (ratio<.25 or ratio>3.0))
-    review=[]
+    ratio=(base/price) if suf and price and base else None;extreme=bool(ratio is not None and (ratio<.25 or ratio>3.0));review=[]
     if extreme:
-        direction='BELOW_MARKET' if ratio<.25 else 'ABOVE_MARKET';review.append('EXTREME_VALUATION')
-        guards.append(f'Extreme Valuation Review: Base FV = {ratio:.2f}x harga pasar. Angka tetap ditampilkan, tetapi perlu verifikasi currency/unit/shares, earnings quality, dan model sebelum dianggap SIAP penuh.')
-        d['valuationReview']={'required':True,'status':'REVIEW','reason':'EXTREME_VALUATION','direction':direction,'baseToPrice':ratio,'thresholds':{'low':.25,'high':3.0},'checks':['currency_and_units','shares_and_dilution','earnings_quality_and_oneoffs','cashflow_confirmation','independent_model_agreement'],'policy':'Market price is a review trigger only; it never pulls fair value toward market.'}
+        direction='BELOW_MARKET' if ratio<.25 else 'ABOVE_MARKET';review.append('EXTREME_VALUATION');guards.append(f'Extreme Valuation Review: Base FV = {ratio:.2f}x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya.')
+        d['valuationReview']={'required':True,'status':'REVIEW','reason':'EXTREME_VALUATION','direction':direction,'baseToPrice':ratio,'thresholds':{'low':.25,'high':3.0},'checks':['currency_and_units','shares_and_dilution','earnings_quality_and_oneoffs','cycle_and_corporate_actions','cashflow_confirmation','independent_model_agreement'],'policy':'Market price is a review trigger only; it never pulls fair value toward market.'}
     else:d['valuationReview']={'required':False,'status':'PASS','reason':None,'baseToPrice':ratio,'thresholds':{'low':.25,'high':3.0}}
-    d['fairValue']={'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agr,'available':suf};q['validMethodCount']=len(keep);q['independentFamilies']=len(ifam);q['outlierMethodCount']=sum(m.get('qcStatus')=='OUTLIER' for m in methods);q['reviewFlags']=review
+    d['fairValue']={'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agr,'available':suf,'indicative':False,'referenceOnly':False};q['validMethodCount']=len(keep);q['independentFamilies']=len(ifam);q['outlierMethodCount']=sum(m.get('qcStatus')=='OUTLIER' for m in methods);q['reviewFlags']=review
     score=q.get('dataScore')
     if finite(score):q['dataLabel']='BAIK' if score>=80 else ('CUKUP' if score>=60 else 'TERBATAS')
-    # Confidence is evidence quality, distinct from data completeness and model agreement.
     conf=0
     if suf:
         conf=45+min(20,5*len(ifam))+(15 if agr=='HIGH' else 8 if agr=='MEDIUM' else 2)+(10 if q.get('dataLabel')=='BAIK' else 5 if q.get('dataLabel')=='CUKUP' else 0)
         if extreme:conf-=25
         if (d.get('quarterlyNormalization') or {}).get('status') in ('INSUFFICIENT','LIMITED'):conf-=8
-        if finite((q or {}).get('cashConversion')) and q['cashConversion']<0:conf-=5
+        if finite(q.get('cashConversion')) and q['cashConversion']<0:conf-=5
     q['valuationConfidence']=max(0,min(100,int(round(conf))))
     fresh=d.get('freshnessStatus','FRESH');d['analysisStatus']='STALE' if fresh=='STALE' else ('REVIEW' if extreme else ('SIAP' if suf else 'TERBATAS'))
     d['engineGeneration']=upstream;d['qcVersion']=QC_VERSION;d['engineVersion']=f'{upstream}+{QC_VERSION}'
@@ -76,7 +73,7 @@ rows={}
 for path in glob.glob(os.path.join(OUT,'*.json')):
     if path.endswith('summary.json'):continue
     d=process(path)
-    if d:rows[(d.get('ticker') or os.path.basename(path)).replace('.JK','').replace('.json','')]=d
+    if d and d.get('ticker'):rows[d['ticker'].replace('.JK','')]=d
 old={}
 try:old=json.load(open(os.path.join(OUT,'summary.json'),encoding='utf-8'))
 except:pass
@@ -88,5 +85,5 @@ for ticker in TICKERS:
         stocks.append({'ticker':ticker,'sector':cp.get('sector') or SECTOR_BY_TICKER.get(ticker),'valuationProfile':cp.get('valuationProfile'),'price':d.get('price'),**f,'dataLabel':q.get('dataLabel'),'valuationConfidence':q.get('valuationConfidence'),'validMethods':q.get('validMethodCount',0),'independentFamilies':q.get('independentFamilies',0),'outliers':q.get('outlierMethodCount',0),'reviewFlags':q.get('reviewFlags',[]),'status':status,'freshnessStatus':d.get('freshnessStatus','FRESH'),'engineVersion':d.get('engineVersion')})
     else:
         e=errmap.get(ticker,{});errors.append({'ticker':ticker,'sector':SECTOR_BY_TICKER.get(ticker),'error':e.get('error','Belum ada JSON hasil yang dapat digunakan.'),'status':e.get('status','GAGAL_FETCH')})
-old['universeSource']=DES_SOURCE;old['requested']=len(TICKERS);old['count']=len(stocks);old['stocks']=stocks;old['errors']=errors;old['qcVersion']=QC_VERSION;old['statusCounts']={k:sum(x['status']==k for x in stocks) for k in ['SIAP','REVIEW','TERBATAS','STALE']};old['statusCounts']['ERROR']=len(errors)
+old['universeSource']=DES_SOURCE;old['requested']=len(TICKERS);old['count']=len(stocks);old['stocks']=stocks;old['errors']=errors;old['qcVersion']=QC_VERSION;old['statusCounts']={k:sum(x['status']==k for x in stocks) for k in ['SIAP','REVIEW','INDIKATIF','REFERENSI','BELUM_DINILAI','TERBATAS','STALE']};old['statusCounts']['ERROR']=len(errors)
 json.dump(old,open(os.path.join(OUT,'summary.json'),'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False);print('QC:',len(TICKERS),'DES =',old['statusCounts'])
