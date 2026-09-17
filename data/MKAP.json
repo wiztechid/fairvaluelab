@@ -1,7 +1,7 @@
 {
   "ticker": "MKAP.JK",
   "name": "PT Multikarya Asia Pasifik Raya Tbk",
-  "asOf": "2026-09-16T23:36:56.710960+00:00",
+  "asOf": "2026-09-17T00:10:22.731556+00:00",
   "price": 1140.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,20 +12,68 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 167.58175081736266,
+    "base": 189.75109414699426,
+    "bull": 211.92043747662586,
+    "dispersion": 0.03510903887764285,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 163.03232238661133,
+      "base": 184.12614671204372,
+      "bull": 205.21997103747609,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 20.43575417996756,
+        "sd": 2.3411569531409757,
+        "current": 126.52608106548278,
+        "sampleCount": 388,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 163.03232238661133,
+      "base": 184.12614671204372,
+      "bull": 205.21997103747609,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 20.43575417996756,
+        "sd": 2.3411569531409757,
+        "current": 126.52608106548278,
+        "sampleCount": 388,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 113.11433021615238,
-      "base": 141.39291277019046,
-      "bull": 169.67149532422854,
+      "bear": 113.6198721194023,
+      "base": 142.02484014925287,
+      "bull": 170.42980817910345,
       "confidence": 0.6,
       "relevance": 0.15,
       "rawWeight": 0.09,
@@ -34,8 +82,30 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE",
-      "countsForIndependence": false
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.30x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 174.40589346348972,
+      "base": 198.18851529942012,
+      "bull": 221.97113713535052,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 9.698125821737337,
+        "growthUsed": 0.07637355605648276,
+        "historicalPE": 20.43575417996756
+      },
+      "included": true,
+      "normalizedWeight": 0.39999999999999997,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -67,18 +137,19 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Historical P/E 3Y adaptive: median 20.4x, current 126.5x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 20.4x, current 126.5x; confidence diturunkan."
     ],
     "historyYears": 2.5927446954141,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 1
   },
   "raw": {
-    "epsTTM": 8.93,
+    "epsTTM": 9.010000075873686,
     "bvps": 99.49959328923077,
-    "currentPE": 127.65957446808511,
+    "currentPE": 126.52608213096559,
     "currentPBV": 11.457333264530908,
     "roe": 0.13265,
     "fcf": 15699274752.0,
@@ -92,13 +163,32 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 9.01
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 9.010000151747372
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 9.01
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 17.028977591692307
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.11749777854843502,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {

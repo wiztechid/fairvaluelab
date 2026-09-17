@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-16T23:40:04.707369+00:00",
+  "asOf": "2026-09-17T00:13:48.705261+00:00",
   "price": 500.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 750.4870753634568,
-    "base": 1146.6524843087504,
-    "bull": 1500.770566656878,
-    "dispersion": 0.2598815193383768,
+    "bear": 739.0093762910396,
+    "base": 1061.3204707448388,
+    "bull": 1392.3937220710354,
+    "dispersion": 0.20310489366611828,
     "agreement": "MEDIUM",
     "available": true
   },
@@ -23,9 +23,9 @@
     {
       "name": "DCF",
       "family": "cashflow",
-      "bear": 989.106741091842,
-      "base": 1567.130441524621,
-      "bull": 2168.6289615542887,
+      "bear": 954.7861703360846,
+      "base": 1364.8780235787276,
+      "bull": 1891.2757002550732,
       "confidence": 0.85,
       "relevance": 1.0,
       "rawWeight": 0.85,
@@ -40,8 +40,8 @@
       "name": "FCF Yield",
       "family": "cashflow",
       "bear": 653.1076402544471,
-      "base": 1073.605078968204,
-      "bull": 1306.2152805088942,
+      "base": 1006.981406048303,
+      "bull": 1247.3892935192405,
       "confidence": 0.75,
       "relevance": 0.9,
       "rawWeight": 0.675,
@@ -79,11 +79,11 @@
     }
   ],
   "dcfDiagnostics": {
-    "terminalValueShare": 0.7223003058765485,
-    "bearTerminalValueShare": 0.6357955628653281,
-    "bullTerminalValueShare": 0.7698503717776513,
+    "terminalValueShare": 0.708477211625143,
+    "bearTerminalValueShare": 0.6313413487529989,
+    "bullTerminalValueShare": 0.7585945860207767,
     "warning": true,
-    "growth": 0.03833491016482819,
+    "growth": 0.006136286067138189,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035
   },
@@ -103,7 +103,8 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 327.0000 per saham."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
@@ -112,13 +113,13 @@
     "outlierMethodCount": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 326.99999869199996,
     "bvps": 1112.2996705723126,
     "currentPE": null,
     "currentPBV": 0.44951914778751534,
     "roe": -0.19538,
     "fcf": 434350260224.0,
-    "growthNormalized": 0.03833491016482819,
+    "growthNormalized": 0.006136286067138189,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2078286151680.0,
@@ -128,7 +129,18 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "growthNormalizedLegacy": 0.03833491016482819,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 327.0
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 326.999997384
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
+    "growthNormalizedLegacy": 0.006136286067138189,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
@@ -138,18 +150,23 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
-    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
       "inputs": {}
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 2288.579617981537,
+        "base": 2860.7245224769213,
+        "bull": 3432.8694269723055,
+        "price": 500.0
+      }
     },
     {
       "name": "Historical Dividend Yield",

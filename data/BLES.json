@@ -1,7 +1,7 @@
 {
   "ticker": "BLES.JK",
   "name": "PT Superior Prima Sukses Tbk",
-  "asOf": "2026-09-16T23:37:27.729283+00:00",
+  "asOf": "2026-09-17T00:10:56.473858+00:00",
   "price": 197.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 202.21985095568928,
-    "base": 281.31205097009234,
-    "bull": 348.90228013878874,
-    "dispersion": 0.4901992978454776,
-    "agreement": "LOW",
+    "bear": 319.56095894094113,
+    "base": 397.6351589100946,
+    "bull": 476.1023675737274,
+    "dispersion": 0.17045465988725883,
+    "agreement": "HIGH",
     "available": true
   },
   "methods": [
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.302882096069869,
+      "normalizedWeight": 0.18372536554354735,
       "qcStatus": "VALID"
     },
     {
@@ -48,26 +48,97 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.14x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 332.2085292002999,
+      "base": 411.24530800691844,
+      "bull": 490.282086813537,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 17.15666742700979,
+        "sd": 3.2973208498332043,
+        "current": 8.218606795786394,
+        "sampleCount": 324,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.297117903930131,
+      "normalizedWeight": 0.22886204704386523,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 332.2085292002999,
+      "base": 411.24530800691844,
+      "bull": 490.282086813537,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 17.15666742700979,
+        "sd": 3.2973208498332043,
+        "current": 8.218606795786394,
+        "sampleCount": 324,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.22886204704386523,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 130.90783602839244,
-      "base": 163.63479503549055,
-      "bull": 196.36175404258867,
+      "bear": 208.5732529588315,
+      "base": 260.71656619853934,
+      "bull": 312.8598794382472,
       "confidence": 0.6,
       "relevance": 0.15,
       "rawWeight": 0.09,
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.58x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 394.2338297269085,
+      "base": 447.99298832603233,
+      "bull": 501.75214692515624,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 26.111888583954,
+        "growthUsed": 0.08935708105026155,
+        "historicalPE": 17.15666742700979
+      },
       "included": true,
-      "normalizedWeight": 0.06030150753768844,
+      "normalizedWeight": 0.22962492053401146,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": true
     },
     {
       "name": "Justified PBV / ROE",
@@ -87,7 +158,7 @@
         "costOfEquity": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.33969849246231154,
+      "normalizedWeight": 0.12892561983471074,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -118,16 +189,17 @@
     "totalInputs": 7,
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 23.9700 per saham."
     ],
     "historyYears": 2.190280629705681,
-    "validMethodCount": 4,
-    "independentFamilies": 2,
+    "validMethodCount": 5,
+    "independentFamilies": 4,
     "diagnosticCount": 2,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 9.442393208891078,
+    "epsTTM": 23.969999404400284,
     "bvps": 126.03370802268438,
     "currentPE": 20.863354834079807,
     "currentPBV": 1.563073903725364,
@@ -143,6 +215,25 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 23.97
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 23.969998808800565
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 9.442393208891078
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 9.442393208891078
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.13747243238501777,
     "growthNormalizedQuarterly": null
   },

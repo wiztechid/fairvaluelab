@@ -1,7 +1,7 @@
 {
   "ticker": "ATLA.JK",
   "name": "PT Atlantis Subsea Indonesia Tbk",
-  "asOf": "2026-09-16T23:36:32.285831+00:00",
+  "asOf": "2026-09-17T00:09:57.875295+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,20 +12,68 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 22.442230007082934,
+    "base": 24.822203233175728,
+    "bull": 27.20217645926852,
+    "dispersion": 0.005847399998250622,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 22.949827872384596,
+      "base": 24.945465078678907,
+      "bull": 26.941102284973223,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 83.151548599232,
+        "sd": 6.6521238879385605,
+        "current": 166.66666333333328,
+        "sampleCount": 281,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 22.949827872384596,
+      "base": 24.945465078678907,
+      "bull": 26.941102284973223,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "bands": {
+        "mean": 83.151548599232,
+        "sd": 6.6521238879385605,
+        "current": 166.66666333333328,
+        "sampleCount": 281,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": "HIGH MULTIPLE · P/E >60x diterima karena konsisten dengan distribusi historis emiten; confidence diturunkan.",
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.3,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 15.365243953463839,
-      "base": 19.206554941829797,
-      "bull": 23.047865930195755,
+      "bear": 10.853011429830138,
+      "base": 13.566264287287671,
+      "bull": 16.279517144745206,
       "confidence": 0.6,
       "relevance": 0.15,
       "rawWeight": 0.09,
@@ -34,30 +82,53 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.82x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 21.680833209130444,
+      "base": 24.637310464920958,
+      "bull": 27.59378772071147,
+      "confidence": 0.76,
+      "relevance": 1.05,
+      "rawWeight": 0.798,
+      "warning": "HIGH MULTIPLE · confidence diturunkan.",
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 0.29629406643604606,
+        "growthUsed": -0.012353131632784562,
+        "historicalPE": 83.151548599232
+      },
+      "included": true,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": true
     },
     {
       "name": "Justified PBV / ROE",
       "family": "book_profitability",
       "bear": 5.453141423160482,
-      "base": 6.117783375546989,
-      "bull": 7.341340050656387,
+      "base": 6.643519093046594,
+      "bull": 7.972222911655913,
       "confidence": 0.78,
       "relevance": 0.65,
       "rawWeight": 0.507,
       "warning": null,
       "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity; cocok sebagai anchor untuk bisnis yang nilai bukunya bermakna.",
       "bands": {
-        "justifiedPBV": 0.22437647956693924,
+        "justifiedPBV": 0.24365841915745526,
         "roe": 0.01121,
-        "growth": -0.015922067896591632,
+        "growth": -0.019004817896591635,
         "costOfEquity": 0.105
       },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.71x dari median metode."
     }
   ],
   "dcfDiagnostics": null,
@@ -80,22 +151,24 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 0.3000 per saham.",
+      "Historical P/E 3Y adaptive: median 83.2x, current 166.7x; confidence diturunkan.",
+      "Historical P/E 5Y adaptive: median 83.2x, current 166.7x; confidence diturunkan."
     ],
     "historyYears": 2.4175222450376452,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 0
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 0.60131171147499,
+    "epsTTM": 0.3000000060000002,
     "bvps": 27.26570711580241,
     "currentPE": 83.151548599232,
     "currentPBV": 1.8338053653859376,
     "roe": 0.01121,
     "fcf": -58981953536.0,
-    "growthNormalized": -0.015922067896591632,
+    "growthNormalized": -0.019004817896591635,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 309978890240.0,
@@ -105,13 +178,32 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "growthNormalizedLegacy": -0.015922067896591632,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 0.3
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 0.3000000120000005
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 0.60131171147499
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 0.60131171147499
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
+    "growthNormalizedLegacy": -0.019004817896591635,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {

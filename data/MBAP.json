@@ -1,7 +1,7 @@
 {
   "ticker": "MBAP.JK",
   "name": "PT Mitrabara Adiperdana Tbk",
-  "asOf": "2026-09-16T23:36:54.064597+00:00",
+  "asOf": "2026-09-17T00:10:19.817726+00:00",
   "price": 1720.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 542.0607806897033,
+    "base": 817.0109624617571,
+    "bull": 1091.9611442338112,
+    "dispersion": 0.0405138540969481,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -44,14 +44,62 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.41x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.59x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 453.41877581413434,
+      "base": 836.1977256914681,
+      "bull": 1218.9766755688017,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 15.783271247974605,
+        "sd": 7.224970611984142,
+        "current": 32.465080581351444,
+        "sampleCount": 493,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.28037383177570097,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 384.19409430109056,
+      "base": 788.0296539350471,
+      "bull": 1191.8652135690038,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 14.87409663691616,
+        "sd": 7.622415107634626,
+        "current": 32.465080581351444,
+        "sampleCount": 831,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.28037383177570097,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 919.4563799091283,
-      "base": 1149.3204748864102,
-      "bull": 1379.1845698636923,
+      "bear": 1417.5705088271045,
+      "base": 1771.9631360338806,
+      "bull": 2126.3557632406564,
       "confidence": 0.6,
       "relevance": 0.15,
       "rawWeight": 0.09,
@@ -60,8 +108,30 @@
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.08x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 700.7241761184713,
+      "base": 796.2774728618991,
+      "bull": 891.8307696053272,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 51.94689093021179,
+        "growthUsed": -0.0195,
+        "historicalPE": 15.328683942445384
+      },
+      "included": true,
+      "normalizedWeight": 0.2813084112149533,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": true
     },
     {
       "name": "Justified PBV / ROE",
@@ -80,8 +150,8 @@
         "growth": -0.02,
         "costOfEquity": 0.105
       },
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.15794392523364487,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -107,16 +177,16 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 52.9800 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1
+    "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 22.288707446155342,
+    "epsTTM": 52.98000094871166,
     "bvps": 2633.9946304582377,
     "currentPE": 77.16912271181023,
     "currentPBV": 0.6530005718731364,
@@ -132,13 +202,32 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17665.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 52.98
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 52.98000189742332
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 22.288707446155342
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 22.288707446155342
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {

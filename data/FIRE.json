@@ -1,7 +1,7 @@
 {
   "ticker": "FIRE.JK",
   "name": "PT Alfa Energi Investama Tbk",
-  "asOf": "2026-09-16T23:36:46.638353+00:00",
+  "asOf": "2026-09-17T00:10:11.043824+00:00",
   "price": 122.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 24.744924276144214,
+    "base": 27.632171135038284,
+    "bull": 30.51941799393235,
+    "dispersion": 0.022862861963293013,
+    "agreement": "HIGH",
+    "available": true
   },
   "methods": [
     {
@@ -44,14 +44,62 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.87x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.48x dari median metode."
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 24.560455941953013,
+      "base": 27.097840696706974,
+      "bull": 29.635225451460936,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 5.4965193773066705,
+        "sd": 0.5146825028712549,
+        "current": 24.746450152129814,
+        "sampleCount": 215,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.30000000000000004,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 24.560455941953013,
+      "base": 27.097840696706974,
+      "bull": 29.635225451460936,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 5.4965193773066705,
+        "sd": 0.5146825028712549,
+        "current": 24.746450152129814,
+        "sampleCount": 215,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": true,
+      "normalizedWeight": 0.30000000000000004,
+      "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 9.630419165036308,
-      "base": 12.038023956295385,
-      "bull": 14.445628747554462,
+      "bear": 107.4175788105097,
+      "base": 134.2719735131371,
+      "bull": 161.12636821576453,
       "confidence": 0.6,
       "relevance": 0.15,
       "rawWeight": 0.09,
@@ -62,7 +110,28 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.87x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.72x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 25.02162677743101,
+      "base": 28.433666792535238,
+      "bull": 31.845706807639466,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai 65% normalized growth lalu dikapitalisasi dengan median adaptive historical P/E. Growth di-shrink dan di-cap agar tidak mengejar harga pasar.",
+      "bands": {
+        "forwardEPS": 5.173031302305335,
+        "growthUsed": 0.04929640375332931,
+        "historicalPE": 5.4965193773066705
+      },
+      "included": true,
+      "normalizedWeight": 0.39999999999999997,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -85,16 +154,16 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 4.9300 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 2
   },
   "raw": {
-    "epsTTM": 0.039626579293938036,
+    "epsTTM": 4.930000030307378,
     "bvps": 162.53290746250894,
     "currentPE": 3078.741646990035,
     "currentPBV": 0.7506172251803311,
@@ -110,13 +179,32 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 4.93
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 4.930000060614755
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 0.039626579293938036
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 0.039626579293938036
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07584062115896817,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.11-sector-aware-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
