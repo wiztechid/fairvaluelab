@@ -1,7 +1,7 @@
 {
   "ticker": "MFMI.JK",
   "name": "PT Multifiling Mitra Indonesia Tbk",
-  "asOf": "2026-09-17T04:10:35.696117+00:00",
+  "asOf": "2026-09-17T04:38:42.413266+00:00",
   "price": 1300.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 431.7430638617787,
-    "base": 625.7339188695265,
-    "bull": 915.0364065047993,
-    "dispersion": 0.5247978311845518,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.33442622950819667,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID"
     },
     {
@@ -48,27 +48,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.2655737704918033,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 726.860657890297,
-      "base": 986.6304347826087,
-      "bull": 1535.3390016701485,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.02939297124600639,
-        "sd": 0.010504634553944459
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID"
     }
   ],
@@ -100,15 +81,16 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 34.3560 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 34.3560 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.996577686516085,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 54
+    "valuationConfidence": 0
   },
   "raw": {
     "epsTTM": 34.356000235523595,
@@ -144,7 +126,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -159,6 +141,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -226,7 +215,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.4813337837457896,
+    "baseToPrice": null,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

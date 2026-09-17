@@ -1,7 +1,7 @@
 {
   "ticker": "KDSI.JK",
   "name": "PT Kedawung Setia Industrial Tbk",
-  "asOf": "2026-09-17T04:09:13.119942+00:00",
+  "asOf": "2026-09-17T04:37:48.343499+00:00",
   "price": 464.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,59 +12,14 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 642.3161364439013,
-    "base": 903.2654474298885,
-    "bull": 1229.231281942058,
-    "dispersion": 0.5899399260224931,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
-  "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 229.46153403663155,
-      "base": 331.3032886723508,
-      "bull": 595.6863521235264,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.060367647058823526,
-        "sd": 0.026792931222707417
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.39999999999999997,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Mid-Cycle Earnings",
-      "family": "earnings_midcycle",
-      "bear": 917.5525380487477,
-      "base": 1284.5735532682468,
-      "bull": 1651.5945684877458,
-      "confidence": 0.66,
-      "relevance": 1.05,
-      "rawWeight": 0.6930000000000001,
-      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
-      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
-      "bands": {
-        "normalizedEPS": 183.51050760974954,
-        "growthAdjustment": 0.02323195,
-        "peBand": [
-          5.0,
-          7.0,
-          9.0
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.6000000000000001,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": null,
   "technical": {
     "ma20": 464.4,
@@ -85,18 +40,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 179.3440 per saham."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 54
+    "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": 179.34399684230885,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -112,26 +67,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 179.344
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 179.34399368461771
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.066377,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -153,6 +104,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -220,7 +178,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.9466927746333804,
+    "baseToPrice": null,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

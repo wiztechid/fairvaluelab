@@ -1,7 +1,7 @@
 {
   "ticker": "RANC.JK",
   "name": "PT Supra Boga Lestari Tbk",
-  "asOf": "2026-09-17T04:12:15.937368+00:00",
+  "asOf": "2026-09-17T04:39:47.038038+00:00",
   "price": 545.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 326.4634889545072,
-    "base": 735.6461142985,
-    "bull": 1144.8287396424926,
-    "dispersion": 0.20024374659509142,
-    "agreement": "MEDIUM",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false
   },
   "methods": [
     {
@@ -35,7 +35,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 14.96x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.87x dari median metode."
     },
     {
       "name": "Historical PBV 5Y",
@@ -58,28 +58,10 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 279.3479942297123,
-      "base": 848.9550600122113,
-      "bull": 1418.56212579471,
-      "confidence": 0.82,
-      "relevance": 0.9,
-      "rawWeight": 0.738,
-      "bands": {
-        "mean": 12.108234981763086,
-        "sd": 6.530352643360024
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.87x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -110,15 +92,15 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 2,
     "reviewFlags": [],
-    "valuationConfidence": 65
+    "valuationConfidence": 0
   },
   "raw": {
     "epsTTM": null,
@@ -127,7 +109,7 @@
     "currentPBV": 3.2376779028802747,
     "roe": -0.14097999,
     "fcf": 6670834688.0,
-    "growthNormalized": 0.20555134555898247,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.1238186,
     "terminalGrowth": 0.035,
     "marketCap": 852645707776.0,
@@ -137,14 +119,13 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": 0.20555134555898247
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -155,54 +136,43 @@
       "inputs": {}
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.20555134555898247,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.09328468075724006
-          }
-        ],
-        "normalGrowth": 0.09328468075724006,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.3178180103607249
-          }
-        ],
-        "normalGrowth": 0.3178180103607249,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 8.377733636701407
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
         "observations": [],
@@ -217,16 +187,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.8257148182596544
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -250,7 +214,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.3498093840339451,
+    "baseToPrice": null,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
