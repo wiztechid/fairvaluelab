@@ -21,13 +21,17 @@ on:
       - 'data/idx_disclosures.json'
       - 'des_universe.py'
       - 'requirements.txt'
+      - '.github/workflows/update-fair-value.yml'
 
 permissions:
   contents: write
 
+# Never cancel a production valuation run just because another engine update
+# arrives while it is running. GitHub will keep the newest pending run, so the
+# final code state is always recalculated and published automatically.
 concurrency:
   group: fair-value-data-update
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
