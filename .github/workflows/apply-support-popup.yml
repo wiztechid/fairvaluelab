@@ -1,0 +1,37 @@
+name: Apply Saweria Support Popup
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'patch_support_popup.py'
+      - 'assets/saweria-qr.svg'
+      - '.github/workflows/apply-support-popup.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: support-popup-patch
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply popup patch
+        run: python patch_support_popup.py
+      - name: Commit UI
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then echo "Popup already applied."; exit 0; fi
+          git commit -m "ui: show Saweria popup every 10 successful analyses"
+          git pull --rebase origin main
+          git push origin HEAD:main
