@@ -1,8 +1,8 @@
 {
   "ticker": "KOCI.JK",
   "name": "PT Kokoh Exa Nusantara Tbk",
-  "asOf": "2026-09-17T05:44:03.481811+00:00",
-  "price": 119.0,
+  "asOf": "2026-09-17T07:08:52.602386+00:00",
+  "price": 118.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 23.64091044289803,
+    "base": 25.34580421444668,
+    "bull": 28.28429170272807,
+    "dispersion": 0.34307166304479525,
+    "agreement": "LOW",
+    "available": true
   },
   "methods": [
     {
@@ -32,8 +32,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -48,8 +48,27 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.26557377049180325,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 34.35385215627762,
+      "base": 35.333333333333336,
+      "bull": 36.37030673259775,
+      "confidence": 0.68,
+      "relevance": 0.7,
+      "rawWeight": 0.476,
+      "bands": {
+        "mean": 0.05660377358490566,
+        "sd": 0.0016138606676342553
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID"
     }
   ],
@@ -63,12 +82,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 113.6,
-    "ma50": 107.68,
-    "ma200": 121.17,
-    "rsi14": 67.34693877551021,
-    "return1m": 0.09174311926605494,
-    "return3m": 0.3370786516853932
+    "ma20": 113.55,
+    "ma50": 107.66,
+    "ma200": 121.165,
+    "rsi14": 66.0,
+    "return1m": 0.08256880733944949,
+    "return3m": 0.3258426966292134
   },
   "quality": {
     "cashConversion": null,
@@ -81,15 +100,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Extreme Valuation Review: Base FV = 0.21x harga pasar. Angka tetap ditampilkan, tetapi perlu verifikasi currency/unit/shares, earnings quality, dan model sebelum dianggap SIAP penuh."
     ],
     "historyYears": 2.948665297741273,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 0
+    "reviewFlags": [
+      "EXTREME_VALUATION"
+    ],
+    "valuationConfidence": 29
   },
   "raw": {
     "epsTTM": null,
@@ -101,20 +123,21 @@
     "growthNormalized": 0.065675,
     "costOfEquity": 0.192674,
     "terminalGrowth": 0.035,
-    "marketCap": 531639074816.0,
+    "marketCap": 527171518464.0,
     "shares": 4467555405.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.065675,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -136,13 +159,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -207,14 +223,23 @@
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "EXTREME_VALUATION",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.21479495096988713,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Market price is a review trigger only; it never pulls fair value toward market."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "MIRA.JK",
   "name": "PT Mitra International Resources Tbk",
-  "asOf": "2026-09-17T05:45:33.929452+00:00",
+  "asOf": "2026-09-17T07:10:53.491580+00:00",
   "price": 23.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -103,7 +103,8 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
@@ -111,7 +112,7 @@
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 65
+    "valuationConfidence": 73
   },
   "raw": {
     "epsTTM": null,
@@ -120,7 +121,7 @@
     "currentPBV": 0.6244995965187013,
     "roe": -0.05325,
     "fcf": 9346266112.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": -0.18334003859202813,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 91113398272.0,
@@ -130,8 +131,9 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.18334003859202813
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -149,47 +151,73 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -4677448462.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.18334003859202813,
+    "confidence": 0.72,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.19194476077882672
+          }
+        ],
+        "normalGrowth": 0.19194476077882672,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.17037374456408072
+          }
+        ],
+        "normalGrowth": -0.17037374456408072,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.1701539464621037
+          }
+        ],
+        "normalGrowth": -0.1701539464621037,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.19198423461065972
+          }
+        ],
+        "normalGrowth": -0.19198423461065972,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -198,10 +226,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.7910772991260306
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [

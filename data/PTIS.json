@@ -1,7 +1,7 @@
 {
   "ticker": "PTIS.JK",
   "name": "PT Indo Straits Tbk",
-  "asOf": "2026-09-17T05:38:51.081086+00:00",
+  "asOf": "2026-09-17T07:01:55.835013+00:00",
   "price": 262.0,
   "companyProfile": {
     "sector": "Energi",
@@ -66,6 +66,7 @@
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
@@ -83,7 +84,7 @@
     "currentPBV": 0.39940887762296673,
     "roe": -0.020299999,
     "fcf": -27761910540.0,
-    "growthNormalized": 0.18,
+    "growthNormalized": -0.13508297045192624,
     "costOfEquity": 0.1119368,
     "terminalGrowth": 0.035,
     "marketCap": 144143319040.0,
@@ -93,8 +94,9 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17745.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.13508297045192624
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -121,41 +123,61 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -10137345855.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": -0.13508297045192624,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.43241161384067306
+          }
+        ],
+        "normalGrowth": 0.43241161384067306,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.7025775547445255
+          }
+        ],
+        "normalGrowth": -0.7025775547445255,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.71170254584133
+          }
+        ],
+        "normalGrowth": -0.71170254584133,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
         "observations": [],
@@ -170,10 +192,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 9.988919265477948
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [

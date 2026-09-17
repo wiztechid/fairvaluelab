@@ -1,7 +1,7 @@
 {
   "ticker": "TFCO.JK",
   "name": "PT Tifico Fiber Indonesia Tbk",
-  "asOf": "2026-09-17T05:43:03.345373+00:00",
+  "asOf": "2026-09-17T07:07:31.687147+00:00",
   "price": 800.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,12 +12,12 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 501.91281998237037,
+    "base": 541.301673513051,
+    "bull": 569.6589541086554,
+    "dispersion": 0.2742490634709383,
+    "agreement": "MEDIUM",
+    "available": true
   },
   "methods": [
     {
@@ -41,9 +41,28 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "CANDIDATE"
+      "included": true,
+      "normalizedWeight": 0.4,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 396.5547768091578,
+      "base": 415.64843532082455,
+      "bull": 416.3561389406977,
+      "confidence": 0.82,
+      "relevance": 0.9,
+      "rawWeight": 0.738,
+      "bands": {
+        "mean": 29.889216064114596,
+        "sd": 2.9889216064114597
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.6,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -76,15 +95,15 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.996577686516085,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 73
   },
   "raw": {
     "epsTTM": null,
@@ -93,7 +112,7 @@
     "currentPBV": 0.6969640517053973,
     "roe": -0.00511,
     "fcf": 10522973522880.0,
-    "growthNormalized": -0.020805472252479668,
+    "growthNormalized": 0.35,
     "costOfEquity": 0.11599580000000001,
     "terminalGrowth": 0.035,
     "marketCap": 3858461097984.0,
@@ -103,13 +122,14 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17745.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.020805472252479668,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.35
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -120,49 +140,66 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.35,
+    "confidence": 0.64,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.07092685037423596
+          }
+        ],
+        "normalGrowth": 0.07092685037423596,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 2.759694322685083
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 2.7890843593815524
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 2.461044274342553
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -198,7 +235,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": null,
+    "baseToPrice": 0.6766270918913138,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

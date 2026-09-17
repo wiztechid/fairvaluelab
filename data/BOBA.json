@@ -1,7 +1,7 @@
 {
   "ticker": "BOBA.JK",
   "name": "PT Formosa Ingredient Factory Tbk",
-  "asOf": "2026-09-17T05:40:48.241157+00:00",
+  "asOf": "2026-09-17T07:04:32.839087+00:00",
   "price": 208.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -51,6 +51,26 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 148.29685827475623,
+      "base": 196.07635372029608,
+      "bull": 289.2784531971231,
+      "confidence": 0.68,
+      "relevance": 0.85,
+      "rawWeight": 0.5780000000000001,
+      "bands": {
+        "mean": 0.03060032424184627,
+        "sd": 0.009859062894215174
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.57x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -81,18 +101,19 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 16.9660 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.876112251882272,
     "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 16.965999823651487,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -108,6 +129,17 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 16.966
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 16.96599964730297
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07820375,
     "growthNormalizedQuarterly": null
   },
@@ -117,13 +149,6 @@
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -136,13 +161,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],

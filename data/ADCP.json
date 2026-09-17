@@ -1,7 +1,7 @@
 {
   "ticker": "ADCP.JK",
   "name": "PT Adhi Commuter Properti Tbk",
-  "asOf": "2026-09-17T05:43:36.695841+00:00",
+  "asOf": "2026-09-17T07:08:17.621149+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -106,6 +106,7 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.561259411362081,
@@ -133,6 +134,7 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
@@ -152,15 +154,17 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -2050840553610.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -171,10 +175,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": 0.5829322320653236
+          }
+        ],
+        "normalGrowth": 0.5829322320653236,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],

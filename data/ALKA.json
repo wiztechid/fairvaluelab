@@ -1,7 +1,7 @@
 {
   "ticker": "ALKA.JK",
   "name": "PT Alakasa Industrindo Tbk",
-  "asOf": "2026-09-17T05:39:08.543894+00:00",
+  "asOf": "2026-09-17T07:02:19.430980+00:00",
   "price": 7400.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -41,18 +41,19 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 37.9130 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.996577686516085,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 37.912999035882706,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -68,6 +69,17 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 37.913
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 37.912998071765415
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.06862925,
     "growthNormalizedQuarterly": null
   },
@@ -77,13 +89,6 @@
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -110,9 +115,24 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "status": "OUTLIER",
+      "reason": "Hasil sector model tidak lolos economic sanity guard 0.05x–5x harga.",
+      "inputs": {
+        "normalizedEPS": 38.82367827706188,
+        "growthAdjustment": 0.0240202375,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {

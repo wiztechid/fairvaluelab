@@ -1,7 +1,7 @@
 {
   "ticker": "ESIP.JK",
   "name": "PT Sinergi Inti Plastindo Tbk",
-  "asOf": "2026-09-17T05:39:23.451254+00:00",
+  "asOf": "2026-09-17T07:02:38.818768+00:00",
   "price": 120.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -19,7 +19,33 @@
     "agreement": "INSUFFICIENT",
     "available": false
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 15.199705600994243,
+      "base": 21.27958784139194,
+      "bull": 27.359470081789635,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
+      "bands": {
+        "normalizedEPS": 3.0399411201988484,
+        "growthAdjustment": 0.0167026997725,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE",
+      "countsForIndependence": true
+    }
+  ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.46359276447880854,
     "bearTerminalValueShare": 0.39961049846048063,
@@ -50,18 +76,19 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.9900 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 2.9900000470925017,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -77,6 +104,17 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 2.99
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 2.990000094185003
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.04772199935,
     "growthNormalizedQuarterly": null
   },
@@ -86,13 +124,6 @@
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -110,8 +141,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],

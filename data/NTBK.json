@@ -1,7 +1,7 @@
 {
   "ticker": "NTBK.JK",
   "name": "PT Nusatama Berkah Tbk",
-  "asOf": "2026-09-17T05:40:32.404677+00:00",
+  "asOf": "2026-09-17T07:04:12.257171+00:00",
   "price": 81.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -40,18 +40,19 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 0.2226 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.602327173169062,
     "validMethodCount": 0,
     "independentFamilies": 0,
-    "diagnosticCount": 5,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 0
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 0.2226341549763243,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -67,6 +68,17 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 0.224
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 0.2212683099526486
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.08,
     "growthNormalizedQuarterly": null
   },
@@ -76,13 +88,6 @@
   "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -107,8 +112,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],

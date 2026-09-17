@@ -1,7 +1,7 @@
 {
   "ticker": "SHID.JK",
   "name": "PT Hotel Sahid Jaya International Tbk",
-  "asOf": "2026-09-17T05:42:56.905915+00:00",
+  "asOf": "2026-09-17T07:07:22.606821+00:00",
   "price": 745.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -65,6 +65,7 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
@@ -82,7 +83,7 @@
     "currentPBV": 1.157482565752971,
     "roe": -0.012519999,
     "fcf": -30341677056.0,
-    "growthNormalized": 0.04961652261715843,
+    "growthNormalized": 0.25,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 833898020864.0,
@@ -92,8 +93,9 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.04961652261715843,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -121,34 +123,46 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": 0.25,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.19333093051374495
+          }
+        ],
+        "normalGrowth": 0.19333093051374495,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.7047239212101122
+          }
+        ],
+        "normalGrowth": 0.7047239212101122,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
         "observations": [],
