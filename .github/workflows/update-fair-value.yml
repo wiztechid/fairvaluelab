@@ -15,6 +15,7 @@ on:
       - 'postprocess_qc.py'
       - 'validate_engine.py'
       - 'snapshot_backtest.py'
+      - 'collect_idx_disclosures.py'
       - 'idx_catalyst.py'
       - 'catalyst_snapshot.py'
       - 'fv_timeline.py'
@@ -26,9 +27,6 @@ on:
 permissions:
   contents: write
 
-# Never cancel a production valuation run just because another engine update
-# arrives while it is running. GitHub will keep the newest pending run, so the
-# final code state is always recalculated and published automatically.
 concurrency:
   group: fair-value-data-update
   cancel-in-progress: false
@@ -60,6 +58,8 @@ jobs:
         run: python postprocess_qc.py
       - name: Validate all DES valuations before publication
         run: python validate_engine.py
+      - name: Collect public IDX disclosures
+        run: python collect_idx_disclosures.py
       - name: Build verified IDX disclosure catalyst layer
         run: python idx_catalyst.py
       - name: Lock quarterly valuation snapshots and update target progress
