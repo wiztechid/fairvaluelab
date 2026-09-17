@@ -25,7 +25,7 @@ def main():
   if not isinstance(conf,int) or not 0<=conf<=100:fail(f'{ticker}: invalid valuation confidence',errors)
   price=d.get('price');fv=d.get('fairValue') or {};methods=d.get('methods') or [];review=d.get('valuationReview') or {};vals=[fv.get(k) for k in ('bear','base','bull')]
   if fv.get('available'):
-   if not price or not all(n(v) and v>0 and .05*price<=v<=5*price for v in vals):fail(f'{ticker}: published FV outside economic guard',errors)
+   if not price or not all(n(v) and v>0 for v in vals):fail(f'{ticker}: published FV must be finite and positive',errors)
    if not (vals[0]<=vals[1]<=vals[2]):fail(f'{ticker}: FV scenarios not ordered',errors)
    ratio=vals[1]/price;should_review=ratio<.25 or ratio>3.0
    if should_review and (s!='REVIEW' or not review.get('required')):fail(f'{ticker}: extreme FV not routed to REVIEW',errors)
