@@ -12,6 +12,7 @@ on:
       - 'augment_models.py'
       - 'quarterly_normalizer.py'
       - 'sector_models.py'
+      - 'sector_waterfall.py'
       - 'postprocess_qc.py'
       - 'indicative_fv.py'
       - 'validate_engine.py'
@@ -52,7 +53,9 @@ jobs:
         run: python quarterly_normalizer.py
       - name: Add sector-aware forward earnings and justified PBV models
         run: python sector_models.py
-      - name: Reject extreme outliers, cap family dominance and rebuild composites
+      - name: Add v3.19 sector valuation waterfall
+        run: python sector_waterfall.py
+      - name: Reject outliers, cap family dominance and rebuild composites
         run: python postprocess_qc.py
       - name: Publish indicative FV for limited independent evidence
         run: python indicative_fv.py
