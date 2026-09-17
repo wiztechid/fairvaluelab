@@ -1,19 +1,16 @@
 from pathlib import Path
 p=Path('index.html')
 s=p.read_text(encoding='utf-8')
-css=""".supportOverlay{position:fixed;inset:0;background:#0f172ab8;z-index:99;display:none;align-items:center;justify-content:center;padding:18px}.supportOverlay.open{display:flex}.supportModal{width:min(92vw,390px);max-height:90vh;overflow:auto;background:#fff;border-radius:18px;padding:20px;text-align:center;box-shadow:0 24px 70px #0f172a55;position:relative}.supportClose{position:absolute;right:12px;top:10px;width:38px;height:38px;border:0;border-radius:50%;background:#f1f5f9;color:#475569;font-size:22px;cursor:pointer}.supportTitle{font-size:21px;font-weight:900;margin:4px 34px 6px}.supportText{font-size:12px;line-height:1.55;color:#64748b;margin:0 auto 13px;max-width:310px}.supportQR{display:block;width:min(250px,72vw);height:auto;margin:8px auto 12px;border-radius:12px;border:1px solid #e5eaf1;padding:8px;background:#fff}.supportActions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.supportLink,.supportLater{min-height:42px;padding:11px 15px;border-radius:10px;font-weight:900;font-size:12px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.supportLink{background:#08a982;color:#fff}.supportLater{border:1px solid #dce3ed;background:#fff;color:#64748b;cursor:pointer}.supportFine{font-size:9px;color:#94a3b8;margin-top:10px}"""
-if '.supportOverlay{' not in s:
-    s=s.replace('@media(max-width:760px)',css+'@media(max-width:760px)',1)
-modal="""<div id=supportOverlay class=supportOverlay role=dialog aria-modal=true aria-labelledby=supportTitle><div class=supportModal><button id=supportClose class=supportClose type=button aria-label=\"Tutup\">×</button><div id=supportTitle class=supportTitle>☕ Cuan nih? Dukung WISS 😁</div><p class=supportText>Kalau WISS Fair Value membantu analisis Anda, dukungan sukarela membantu pengembangan data, QC, dan fitur berikutnya.</p><img class=supportQR src=\"assets/saweria-qr.svg\" alt=\"QR Saweria WISS\"><div class=supportActions><a class=supportLink href=\"https://saweria.co/kopilatte\" target=_blank rel=\"noopener noreferrer\">Buka Saweria</a><button id=supportLater class=supportLater type=button>Nanti saja</button></div><div class=supportFine>Sepenuhnya sukarela · tidak memengaruhi akses atau hasil analisis.</div></div></div>"""
-if 'id=supportOverlay' not in s:
-    s=s.replace('</main><script>','</main>'+modal+'<script>',1)
-js="""function supportDay(){let x=new Date();return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}function supportState(){let day=supportDay(),key='wiss:support:'+day;try{let v=JSON.parse(localStorage.getItem(key)||'{}');return{key,count:Number(v.count)||0,shown:Number(v.shown)||0}}catch(e){return{key,count:0,shown:0}}}function saveSupportState(x){localStorage.setItem(x.key,JSON.stringify({count:x.count,shown:x.shown}))}function openSupport(){let o=document.getElementById('supportOverlay');if(o){o.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('supportClose')?.focus(),0)}}function closeSupport(){let o=document.getElementById('supportOverlay');if(o){o.classList.remove('open');document.body.style.overflow=''}}function trackSupportAnalyze(){let x=supportState();x.count+=1;if(x.count%10===0&&x.shown<3){x.shown+=1;saveSupportState(x);openSupport()}else saveSupportState(x)}function initSupportPopup(){let o=document.getElementById('supportOverlay');document.getElementById('supportClose')?.addEventListener('click',closeSupport);document.getElementById('supportLater')?.addEventListener('click',closeSupport);o?.addEventListener('click',e=>{if(e.target===o)closeSupport()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&o?.classList.contains('open'))closeSupport()})}initSupportPopup();"""
-if 'function supportDay()' not in s:
-    s=s.replace('async function go(q0)',js+'async function go(q0)',1)
-old="scenario='base';remember(q);render();loadCatalysts(q);loadMarketActors(q)"
-new="scenario='base';remember(q);render();loadCatalysts(q);loadMarketActors(q);trackSupportAnalyze()"
+url='https://saweria.co/kopilatte'
+old='<img class=supportQR src="assets/saweria-qr.svg" alt="QR Saweria WISS">'
+new=f'<a class=supportQRLink href="{url}" target=_blank rel="noopener noreferrer" aria-label="Buka Saweria kopilatte"><img class=supportQR src="assets/saweria-qr.svg" alt="QR Saweria WISS — ketuk untuk membuka Saweria"></a>'
 if new not in s:
-    if old not in s: raise SystemExit('go success anchor not found')
+    if old not in s: raise SystemExit('support QR anchor not found')
     s=s.replace(old,new,1)
+css='.supportQRLink{display:block;width:fit-content;margin:8px auto 12px;border-radius:12px;text-decoration:none}.supportQRLink:focus-visible{outline:3px solid #08a982;outline-offset:3px}.supportQRLink .supportQR{margin:0;cursor:pointer}'
+if '.supportQRLink{' not in s:
+    anchor='.supportActions{display:flex'
+    if anchor not in s: raise SystemExit('support CSS anchor not found')
+    s=s.replace(anchor,css+anchor,1)
 p.write_text(s,encoding='utf-8')
-print('SUPPORT_POPUP_PATCHED',s.count('trackSupportAnalyze()'),s.count('id=supportOverlay'))
+print('SAWERIA_CLICKABLE',new in s,url in s)
