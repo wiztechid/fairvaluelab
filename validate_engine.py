@@ -1,7 +1,7 @@
 import json, math, sys
 from pathlib import Path
 from des_universe import TICKERS
-DATA=Path('data');REGRESSION=['AADI','DSSA','BUMI','TPIA','BRMS'];EXPECTED_QC='3.18-evidence-ladder-qc'
+DATA=Path('data');REGRESSION=['AADI','DSSA','BUMI','TPIA','BRMS'];EXPECTED_QC='3.19-sector-waterfall-qc'
 def n(x):return isinstance(x,(int,float)) and math.isfinite(x)
 def fail(msg,errors):errors.append(msg);print('FAIL',msg)
 def main():
