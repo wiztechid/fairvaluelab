@@ -9,6 +9,7 @@ on:
     paths:
       - 'collect_idx_disclosures.py'
       - 'idx_catalyst.py'
+      - 'market_actors.py'
       - 'des_universe.py'
       - 'requirements.txt'
       - '.github/workflows/update-idx-catalysts.yml'
@@ -37,6 +38,8 @@ jobs:
         run: python collect_idx_disclosures.py
       - name: Build catalyst layer from verified disclosures
         run: python idx_catalyst.py
+      - name: Build verified controller and broker actor layer
+        run: python market_actors.py
       - name: Validate disclosure ingestion health
         run: |
           python - <<'PY'
@@ -48,15 +51,15 @@ jobs:
               raise SystemExit('idx_disclosures.json must be a list')
           print('IDX_DISCLOSURE_RECORDS',len(rows))
           if len(rows)==0:
-              print('IDX source unavailable/blocked: preserving production state; no fabricated catalyst data.')
+              print('IDX source unavailable/blocked: preserving honest empty state; no fabricated catalyst/controller/broker data.')
           PY
-      - name: Commit catalyst data only when changed
+      - name: Commit verified IDX actor data only when changed
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/idx_disclosures.json data/idx_collector_status.json data/idx_catalysts.json 2>/dev/null || true
-          if git diff --cached --quiet; then echo "No IDX catalyst data changes to commit."; exit 0; fi
-          git commit -m "data: refresh verified IDX catalysts"
+          git add data/idx_disclosures.json data/idx_collector_status.json data/catalysts/ data/market_actors/ 2>/dev/null || true
+          if git diff --cached --quiet; then echo "No IDX catalyst/actor data changes to commit."; exit 0; fi
+          git commit -m "data: refresh verified IDX catalysts and market actors"
           git pull --rebase origin main
           git push origin HEAD:main
