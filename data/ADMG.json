@@ -1,7 +1,7 @@
 {
   "ticker": "ADMG.JK",
   "name": "PT. Polychem Indonesia Tbk",
-  "asOf": "2026-09-17T09:42:03.879604+00:00",
+  "asOf": "2026-09-17T12:06:30.204950+00:00",
   "price": 250.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 229.2267116413993,
-    "base": 333.26141919324914,
-    "bull": 427.58787130510376,
-    "dispersion": 0.3691995404869933,
+    "bear": 213.83222854614436,
+    "base": 312.4997473932784,
+    "bull": 401.4590108004171,
+    "dispersion": 0.43587353171937576,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.30288209606986893,
+      "normalizedWeight": 0.302882096069869,
       "qcStatus": "VALID"
     },
     {
@@ -74,51 +74,8 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.32070484581497805,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "bear": 325.7856387129377,
-      "base": 407.2320483911721,
-      "bull": 488.6784580694065,
-      "confidence": 0.6,
-      "relevance": 0.15,
-      "rawWeight": 0.09,
-      "bands": null,
-      "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.07929515418502203,
-      "qcStatus": "VALID",
-      "countsForIndependence": false
-    },
-    {
-      "name": "Mid-Cycle Earnings",
-      "family": "earnings_midcycle",
-      "bear": 75.46424944458313,
-      "base": 105.64994922241638,
-      "bull": 135.83564900024965,
-      "confidence": 0.66,
-      "relevance": 1.05,
-      "rawWeight": 0.6930000000000001,
-      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
-      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
-      "bands": {
-        "normalizedEPS": 15.092849888916627,
-        "growthAdjustment": 0.0525,
-        "peBand": [
-          5.0,
-          7.0,
-          9.0
-        ]
-      },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.31x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -147,25 +104,24 @@
     "totalInputs": 7,
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 14.3400 per saham."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
+    "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67
+    "valuationConfidence": 59
   },
   "raw": {
-    "epsTTM": 14.339999894457602,
+    "epsTTM": null,
     "bvps": 513.9871143884617,
     "currentPE": null,
     "currentPBV": 0.486393516493985,
     "roe": 0.02566,
     "fcf": 135549706688.0,
-    "growthNormalized": 0.35,
+    "growthNormalized": 0.026440781038796206,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 972294914048.0,
@@ -175,19 +131,8 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17743.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 14.34
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 14.339999788915204
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.026440781038796206,
-    "growthNormalizedQuarterly": 0.35
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -196,75 +141,56 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -47712914216.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.35,
-    "confidence": 0.64,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7713697201297678
-          }
-        ],
-        "normalGrowth": 0.7713697201297678,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 3.3560014668543605
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 3.365934052896174
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 2.70188667333503
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -300,7 +226,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.3330456767729966,
+    "baseToPrice": 1.2499989895731136,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

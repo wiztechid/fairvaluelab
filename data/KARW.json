@@ -1,7 +1,7 @@
 {
   "ticker": "KARW.JK",
   "name": "PT Meratus Jasa Prima Tbk",
-  "asOf": "2026-09-17T09:50:24.497980+00:00",
+  "asOf": "2026-09-17T12:13:44.325783+00:00",
   "price": 212.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,12 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 349.7304987439523,
+    "base": 482.87249337910316,
+    "bull": 732.1178866730825,
+    "dispersion": 0.10607089933078145,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -34,7 +37,8 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
@@ -50,7 +54,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -83,7 +88,8 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 0.8900 per saham.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.996577686516085,
     "validMethodCount": 2,
@@ -91,7 +97,8 @@
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 38,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": 0.889999976070756,
@@ -127,7 +134,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -140,17 +147,15 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -720685174.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -161,16 +166,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.5202127638562164
-          }
-        ],
-        "normalGrowth": 0.5202127638562164,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -197,16 +196,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.3580529034277665
-          }
-        ],
-        "normalGrowth": -0.3580529034277665,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -228,13 +221,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

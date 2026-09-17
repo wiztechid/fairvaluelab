@@ -1,7 +1,7 @@
 {
   "ticker": "HYGN.JK",
   "name": "PT Ecocare Indo Pasifik Tbk",
-  "asOf": "2026-09-17T09:43:42.683207+00:00",
+  "asOf": "2026-09-17T12:08:11.964899+00:00",
   "price": 180.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,12 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 33.869123687575176,
+    "base": 51.65421514456543,
+    "bull": 86.03710922349849,
+    "dispersion": 0.23929651503658753,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -34,7 +37,8 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
@@ -50,27 +54,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 172.57269508177149,
-      "base": 185.0,
-      "bull": 199.35602615551062,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.016216216216216217,
-        "sd": 0.0011677621621621608
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.97x dari median metode."
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -102,15 +87,17 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 2.5927446954141,
     "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": null,
@@ -136,7 +123,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -158,6 +145,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -223,13 +217,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

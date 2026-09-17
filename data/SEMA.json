@@ -1,7 +1,7 @@
 {
   "ticker": "SEMA.JK",
   "name": "PT Semacom Integrated Tbk",
-  "asOf": "2026-09-17T09:41:50.142824+00:00",
+  "asOf": "2026-09-17T12:06:18.855205+00:00",
   "price": 246.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,12 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 24.35971026387751,
+    "base": 37.03273764703019,
+    "bull": 61.92375530365461,
+    "dispersion": 0.20596328861265406,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -34,7 +37,8 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4931740614334471
     },
     {
       "name": "FCF Yield",
@@ -50,7 +54,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.506825938566553
     },
     {
       "name": "Mid-Cycle Earnings",
@@ -108,7 +113,8 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 17.4710 per saham.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.684462696783025,
     "validMethodCount": 2,
@@ -116,7 +122,8 @@
     "diagnosticCount": 3,
     "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": 17.471000135080658,
@@ -152,7 +159,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -172,8 +179,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -239,13 +246,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "KOKA.JK",
   "name": "PT Koka Indonesia Tbk",
-  "asOf": "2026-09-17T09:50:27.781883+00:00",
+  "asOf": "2026-09-17T12:13:46.964723+00:00",
   "price": 189.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,12 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 63.03435308842894,
+    "base": 94.00557214107339,
+    "bull": 145.84891660312687,
+    "dispersion": 0.15298167402930207,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -34,7 +37,8 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5970149253731343
     },
     {
       "name": "FCF Yield",
@@ -50,7 +54,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4029850746268656
     }
   ],
   "dcfDiagnostics": {
@@ -81,8 +86,8 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 2.9349760438056127,
     "validMethodCount": 2,
@@ -90,7 +95,8 @@
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": null,
@@ -109,14 +115,13 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": 0.007916,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -143,8 +148,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -210,13 +215,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

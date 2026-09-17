@@ -1,7 +1,7 @@
 {
   "ticker": "BEST.JK",
   "name": "PT Bekasi Fajar Industrial Estate Tbk",
-  "asOf": "2026-09-17T09:48:33.024982+00:00",
+  "asOf": "2026-09-17T12:12:13.363894+00:00",
   "price": 126.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 165.77385526485654,
-    "base": 226.26203371565424,
-    "bull": 275.19918155811064,
-    "dispersion": 0.4781406876731271,
+    "bear": 166.77857672282136,
+    "base": 218.6357967242256,
+    "bull": 264.3258133930055,
+    "dispersion": 0.4808319291256003,
     "agreement": "LOW",
     "available": true
   },
@@ -33,7 +33,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.30229007633587784,
+      "normalizedWeight": 0.16139550048907728,
       "qcStatus": "VALID"
     },
     {
@@ -58,28 +58,8 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.6000000000000001,
+      "normalizedWeight": 0.3286599282686664,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 48.87448837189822,
-      "base": 71.7966608988506,
-      "bull": 94.71883342580297,
-      "confidence": 0.82,
-      "relevance": 0.65,
-      "rawWeight": 0.533,
-      "bands": {
-        "mean": 10.805840768362362,
-        "sd": 1.5868566328915419
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.87x dari median metode."
     },
     {
       "name": "Graham Number",
@@ -94,9 +74,31 @@
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.09770992366412211,
+      "normalizedWeight": 0.052168242582328,
       "qcStatus": "VALID",
       "countsForIndependence": false
+    },
+    {
+      "name": "Justified PBV / ROE",
+      "family": "book_profitability",
+      "bear": 169.143131261001,
+      "base": 211.42891407625126,
+      "bull": 253.71469689150146,
+      "confidence": 0.78,
+      "relevance": 1.35,
+      "rawWeight": 1.0530000000000002,
+      "warning": null,
+      "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity.",
+      "bands": {
+        "justifiedPBV": 0.45780162304077143,
+        "roe": 0.05195,
+        "growth": 0.007157582437785168,
+        "costOfEquity": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.4577763286599283,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -129,12 +131,12 @@
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 24.1500 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 1,
-    "outlierMethodCount": 1,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 64
   },
   "raw": {
     "epsTTM": 24.14999954718752,
@@ -143,7 +145,7 @@
     "currentPBV": 0.2728245791506737,
     "roe": 0.05195,
     "fcf": 336762535936.0,
-    "growthNormalized": 0.25,
+    "growthNormalized": 0.007157582437785168,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1215561203712.0,
@@ -173,7 +175,7 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.007157582437785168,
-    "growthNormalizedQuarterly": 0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -182,59 +184,43 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.25,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.9691090478246671
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 4.954574441523674
-          }
-        ],
-        "normalGrowth": 1.3230363492748891,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 100.5457023723395
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 506.384258960279
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
         "observations": [],
@@ -276,7 +262,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.7957304263147162,
+    "baseToPrice": 1.7352047359065523,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

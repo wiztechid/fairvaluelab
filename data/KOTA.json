@@ -1,7 +1,7 @@
 {
   "ticker": "KOTA.JK",
   "name": "PT DMS Propertindo Tbk",
-  "asOf": "2026-09-17T09:46:49.072667+00:00",
+  "asOf": "2026-09-17T12:10:46.089865+00:00",
   "price": 194.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,12 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false
+    "bear": 64.22964013181942,
+    "base": 75.56428250802284,
+    "bull": 159.5022163062032,
+    "dispersion": 0.44553312394758887,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -43,14 +46,15 @@
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.7
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 106.33480984308171,
-      "base": 132.91851230385214,
-      "bull": 159.50221476462255,
+      "bear": 106.33481087080213,
+      "base": 132.91851358850266,
+      "bull": 159.5022163062032,
       "confidence": 0.6,
       "relevance": 0.2,
       "rawWeight": 0.12,
@@ -60,7 +64,8 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": false,
+      "indicativeWeight": 0.3
     }
   ],
   "dcfDiagnostics": null,
@@ -81,7 +86,8 @@
     "totalInputs": 7,
     "guards": [
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
@@ -89,16 +95,17 @@
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2
   },
   "raw": {
-    "epsTTM": 6.699999870489696,
+    "epsTTM": 6.7,
     "bvps": 117.19622722770791,
     "currentPE": 28.955223880597014,
     "currentPBV": 1.6553433893658132,
     "roe": 0.05898,
     "fcf": -272756948992.0,
-    "growthNormalized": 0.25,
+    "growthNormalized": 0.18,
     "costOfEquity": 0.20891,
     "terminalGrowth": 0.035,
     "marketCap": 2045959995392.0,
@@ -108,32 +115,13 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 6.7
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 6.699999740979392
-      },
-      {
-        "source": "WISS reconciled EPS",
-        "value": 6.7
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 3.94761475696871
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": 0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "TERBATAS",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -148,52 +136,35 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 3.656600000000001,
-        "base": 17.0,
-        "bull": 30.3434,
-        "price": 194.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.25,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 1.9319122441417131
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 11.044460945259715
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
         "observations": [],
@@ -239,13 +210,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": null,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

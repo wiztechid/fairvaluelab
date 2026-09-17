@@ -1,7 +1,7 @@
 {
   "ticker": "TALF.JK",
   "name": "PT Tunas Alfin Tbk",
-  "asOf": "2026-09-17T09:43:18.111719+00:00",
+  "asOf": "2026-09-17T12:07:48.125952+00:00",
   "price": 705.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,12 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 459.44156581779833,
-    "base": 684.627424346764,
-    "bull": 911.7149759062737,
-    "dispersion": 0.2084206524631102,
-    "agreement": "MEDIUM",
-    "available": true
+    "bear": 490.72595459100353,
+    "base": 747.3646742075446,
+    "bull": 1242.6425323417604,
+    "dispersion": 0.20484225329768957,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -32,9 +35,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.302882096069869,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5048034934497816
     },
     {
       "name": "FCF Yield",
@@ -48,28 +52,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.29711790393013104,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 460.87882320914514,
-      "base": 590.5215495555929,
-      "bull": 821.6461895807104,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.013547346419483824,
-        "sd": 0.003810795454545455
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4000000000000001,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.49519650655021835
     },
     {
       "name": "Mid-Cycle Earnings",
@@ -95,7 +81,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.45x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.46x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -126,15 +112,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 15.2100 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 15.2100 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 60
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2
   },
   "raw": {
     "epsTTM": 15.209999805182559,
@@ -170,7 +159,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -185,6 +174,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -250,13 +246,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.971102729569878,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived and shown with lower confidence; market price is not a valuation anchor."
   },
   "engineGeneration": "3.13-sector-midcycle",
   "qcVersion": "3.14-extreme-review-qc"

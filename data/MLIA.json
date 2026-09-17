@@ -1,7 +1,7 @@
 {
   "ticker": "MLIA.JK",
   "name": "PT Mulia Industrindo Tbk",
-  "asOf": "2026-09-17T09:44:03.016824+00:00",
+  "asOf": "2026-09-17T12:08:27.645587+00:00",
   "price": 216.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,12 +12,13 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 193.3707940547028,
-    "base": 295.507347818277,
-    "bull": 509.0651473626698,
-    "dispersion": 0.44381263303082374,
-    "agreement": "LOW",
-    "available": true
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false,
+    "indicative": false
   },
   "methods": [
     {
@@ -41,28 +42,9 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.45161290322580644,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 106.68925596001894,
-      "base": 171.73333333333332,
-      "bull": 439.9573294834345,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.04076086956521739,
-        "sd": 0.024850235667564443
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.5483870967741936,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "CANDIDATE"
     }
   ],
   "dcfDiagnostics": null,
@@ -84,15 +66,16 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi yang benar-benar independen wajib lolos QC."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 0
   },
   "raw": {
     "epsTTM": null,
@@ -118,7 +101,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.13-sector-midcycle+3.14-extreme-review-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "TERBATAS",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -140,13 +123,16 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "Hasil nol/negatif/tidak lengkap; tidak masuk Composite FV.",
-      "inputs": {
-        "bear": -28.691786979862425,
-        "base": -14.45049157348595,
-        "bull": -0.20919616710947833
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
@@ -156,21 +142,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.10735081531996249
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.054647531971458774
-          }
-        ],
-        "normalGrowth": 0.000648082874318355,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -197,21 +172,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 6.332527486475779
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.603803287883784
-          }
-        ],
-        "normalGrowth": 0.09746447474414399,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -235,7 +199,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.368089573232764,
+    "baseToPrice": null,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
