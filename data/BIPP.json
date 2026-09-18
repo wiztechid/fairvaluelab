@@ -1,7 +1,7 @@
 {
   "ticker": "BIPP.JK",
   "name": "PT Bhuwanatala Indah Permai Tbk",
-  "asOf": "2026-09-17T23:39:33.292606+00:00",
+  "asOf": "2026-09-18T01:35:55.177680+00:00",
   "price": 69.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -95,7 +95,6 @@
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
@@ -106,7 +105,20 @@
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 46,
-    "indicativeMethodCount": 2
+    "indicativeMethodCount": 2,
+    "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 47.575187789823666,
+        "base": 48.402731953925525,
+        "bull": 49.23027611802739,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -115,7 +127,7 @@
     "currentPBV": 0.4319696187277881,
     "roe": -0.07441,
     "fcf": -101811576832.0,
-    "growthNormalized": 0.13000000000000003,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.12226880000000001,
     "terminalGrowth": 0.035,
     "marketCap": 346978189312.0,
@@ -125,13 +137,12 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": 0.13000000000000003
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -154,105 +165,47 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "Hasil nol/negatif/tidak lengkap; tidak masuk Composite FV.",
-      "inputs": {
-        "bear": -66.50047952088634,
-        "base": -43.214795432511856,
-        "bull": -19.92911134413737
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
-      "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "ebit": 23710027483.0,
-        "netDebt": 655241731346.0,
-        "multipleBand": [
-          7,
-          10,
-          13
-        ]
-      }
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "revenue": 255337831129.0,
-        "netDebt": 655241731346.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.13000000000000003,
-    "confidence": 0.64,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.46766521818153794
-          }
-        ],
-        "normalGrowth": -0.46766521818153794,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.8281960604648132
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9415066628323544
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 10.527921718391912
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -284,7 +237,8 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
@@ -293,5 +247,5 @@
     "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

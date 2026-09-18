@@ -1,7 +1,7 @@
 {
   "ticker": "FLMC.JK",
   "name": "PT Falmaco Nonwoven Industri Tbk",
-  "asOf": "2026-09-17T23:35:34.558217+00:00",
+  "asOf": "2026-09-18T01:33:05.620184+00:00",
   "price": 105.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,14 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 69.07758755908912,
-    "base": 80.8826715587796,
-    "bull": 101.50977354284204,
-    "dispersion": 0.05694007494177846,
-    "agreement": "HIGH",
-    "available": true,
+    "bear": 70.84028833763497,
+    "base": 76.63854028672898,
+    "bull": 98.73157839519234,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "DCF"
   },
   "methods": [
     {
@@ -34,8 +36,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.5414012738853503,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID"
     },
     {
@@ -54,26 +56,6 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 66.99662136219472,
-      "base": 85.89310431050605,
-      "bull": 104.78958725881738,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 16.13099984744683,
-        "requiredReturn": 0.1878032
-      },
-      "included": true,
-      "normalizedWeight": 0.4585987261146497,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -104,18 +86,32 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 16.1310 per saham."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 67
+    "valuationConfidence": 26,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF"
+        ],
+        "bear": 70.84028833763497,
+        "base": 76.63854028672898,
+        "bull": 98.73157839519234,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 16.13099984744683,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -131,26 +127,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 16.131
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 16.130999694893664
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -168,8 +160,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -233,18 +225,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.7703111577026629,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

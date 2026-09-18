@@ -1,7 +1,7 @@
 {
   "ticker": "TAXI.JK",
   "name": "PT Express Transindo Utama Tbk",
-  "asOf": "2026-09-17T23:42:29.186798+00:00",
+  "asOf": "2026-09-18T01:37:58.845232+00:00",
   "price": 14.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 16.291900287856222,
-    "base": 19.254281227159723,
-    "bull": 22.88121654137018,
+    "bear": 17.890587946109914,
+    "base": 20.895054281498695,
+    "bull": 24.367689459922993,
     "dispersion": 0.4511974914246226,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -80,32 +81,6 @@
       "qcStatus": "VALID"
     },
     {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "bear": 0.21925540521852493,
-      "base": 0.3220483306749989,
-      "bull": 0.4419734103742185,
-      "confidence": 0.52,
-      "relevance": 0.65,
-      "rawWeight": 0.338,
-      "warning": null,
-      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
-      "bands": {
-        "revenue": 3503062000.0,
-        "netDebt": -665212000.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 34.24x dari median metode."
-    },
-    {
       "name": "Adjusted Asset Floor",
       "family": "asset_floor",
       "bear": 1.9823768114009823,
@@ -128,7 +103,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.08x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.54x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -163,9 +138,35 @@
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 2,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 59,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 9.416835623067946,
+        "base": 12.33548741661712,
+        "bull": 16.190476896237335,
+        "weight": 0.25
+      },
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 26.36434026915188,
+        "base": 29.454621146380266,
+        "bull": 32.54490202360865,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.3877954840034925,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
@@ -190,7 +191,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -204,17 +205,15 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -19509592000.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -225,16 +224,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 2.8497635369186587
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -284,18 +277,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.3753058019399802,
+    "baseToPrice": 1.4925038772499069,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

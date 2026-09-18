@@ -1,7 +1,7 @@
 {
   "ticker": "PPGL.JK",
   "name": "PT Prima Globalindo Logistik Tbk",
-  "asOf": "2026-09-17T23:42:22.412016+00:00",
+  "asOf": "2026-09-18T01:37:54.334577+00:00",
   "price": 468.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 223.8947749246338,
-    "base": 272.8871346122031,
-    "bull": 330.69395796154845,
-    "dispersion": 0.2795840983861227,
-    "agreement": "MEDIUM",
+    "bear": 187.41252010012278,
+    "base": 946.7554472409348,
+    "bull": 1853.8022371410177,
+    "dispersion": 0.78005288054964,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -34,28 +35,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.56x dari median metode."
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 316.10066118142475,
-      "base": 369.8636363636364,
-      "bull": 445.6627707002881,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.10679611650485436,
-        "sd": 0.01816407766990291
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.40000000000000013,
+      "normalizedWeight": 0.49606299212598426,
       "qcStatus": "VALID"
     },
     {
@@ -74,7 +55,7 @@
         "requiredReturn": 0.11488880000000001
       },
       "included": true,
-      "normalizedWeight": 0.6,
+      "normalizedWeight": 0.5039370078740157,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -107,16 +88,43 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 23.9240 per saham."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 60
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP",
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 15,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "FCF Yield"
+        ],
+        "bear": 1080.7314160743326,
+        "base": 1685.2747610372887,
+        "bull": 2093.3086347578915,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 162.4241840867731,
+        "base": 208.23613344458087,
+        "bull": 254.04808280238865,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 8.09309476294997,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 23.923999488087766,
@@ -151,8 +159,8 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -167,6 +175,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -230,18 +245,21 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.583092167974793,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 2.0229817248737922,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 8.09309476294997,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

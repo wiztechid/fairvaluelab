@@ -1,7 +1,7 @@
 {
   "ticker": "SSIA.JK",
   "name": "PT Surya Semesta Internusa Tbk",
-  "asOf": "2026-09-17T23:41:51.399410+00:00",
+  "asOf": "2026-09-18T01:37:33.159264+00:00",
   "price": 1725.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 505.93608250839685,
-    "base": 665.398172708842,
-    "bull": 824.860262909287,
-    "dispersion": 0.33652749124387343,
+    "bear": 425.49685324519385,
+    "base": 591.1081308458779,
+    "bull": 756.719408446562,
+    "dispersion": 0.34012685168230045,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -115,17 +116,17 @@
     {
       "name": "Forward Earnings Power",
       "family": "forward_earnings",
-      "bear": 524.0728207023586,
-      "base": 793.2531674309984,
-      "bull": 1062.433514159638,
+      "bear": 468.78959919137077,
+      "base": 709.5747379512776,
+      "bull": 950.3598767111844,
       "confidence": 0.86,
       "relevance": 1.05,
       "rawWeight": 0.903,
       "warning": null,
       "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
       "bands": {
-        "forwardEPS": 50.731498718919404,
-        "growthUsed": 0.1625,
+        "forwardEPS": 45.37995105135726,
+        "growthUsed": 0.039870581972952616,
         "historicalPE": 15.63630461276258
       },
       "included": true,
@@ -196,7 +197,6 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 43.6400 per saham."
     ],
     "historyYears": 4.999315537303217,
@@ -207,7 +207,53 @@
     "reviewFlags": [
       "LARGE_MARKET_GAP"
     ],
-    "valuationConfidence": 57
+    "valuationConfidence": 45,
+    "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 397.3937311562904,
+        "base": 627.6433628838512,
+        "bull": 857.8929946114118,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings",
+        "methods": [
+          "Historical P/E 3Y",
+          "Historical P/E 5Y"
+        ],
+        "bear": 566.8241195797226,
+        "base": 682.368316069676,
+        "bull": 797.9125125596295,
+        "weight": 0.25
+      },
+      {
+        "family": "forward_earnings",
+        "methods": [
+          "Forward Earnings Power"
+        ],
+        "bear": 468.78959919137077,
+        "base": 709.5747379512776,
+        "bull": 950.3598767111844,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 268.9799630533915,
+        "base": 344.846106478707,
+        "bull": 420.7122499040225,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 4,
+    "crossFamilySpreadRatio": 2.0576562258361797,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 43.639998897995184,
@@ -216,7 +262,7 @@
     "currentPBV": 1.4587375496983699,
     "roe": 0.05962,
     "fcf": -877055508480.0,
-    "growthNormalized": 0.25,
+    "growthNormalized": 0.061339356881465565,
     "costOfEquity": 0.1265492,
     "terminalGrowth": 0.035,
     "marketCap": 8116554956800.0,
@@ -238,11 +284,11 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.061339356881465565,
-    "growthNormalizedQuarterly": 0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -258,79 +304,41 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 13.025932062001155,
-        "base": 61.4263376638821,
-        "bull": 109.8267432657631,
-        "price": 1725.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
-      "inputs": {}
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
       "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "ebit": 113804606239.0,
-        "netDebt": 1009754975560.0,
-        "multipleBand": [
-          7,
-          10,
-          13
-        ]
-      }
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.25,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.8277912375168024
-          }
-        ],
-        "normalGrowth": 0.8277912375168024,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 4.476335172831229
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 7.8768624779442415
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
         "observations": [],
@@ -368,18 +376,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.3857380711355606,
+    "baseToPrice": 0.3426713802005089,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

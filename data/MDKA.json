@@ -1,7 +1,7 @@
 {
   "ticker": "MDKA.JK",
   "name": "PT Merdeka Copper Gold Tbk",
-  "asOf": "2026-09-17T23:33:28.253256+00:00",
+  "asOf": "2026-09-18T01:31:33.345701+00:00",
   "price": 2870.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1821.8114368135011,
-    "base": 2316.385368805206,
-    "bull": 2810.9593007969106,
-    "dispersion": 0.09340538839103893,
-    "agreement": "HIGH",
-    "available": true,
-    "indicative": false,
-    "referenceOnly": false
+    "bear": 1335.9445779874982,
+    "base": 1812.3505775386857,
+    "bull": 3258.501208631055,
+    "dispersion": 0.7139529008552188,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -43,28 +44,10 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4000000000000001,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 1767.4019710925202,
-      "base": 2140.0,
-      "bull": 2512.5980289074805,
-      "confidence": 0.82,
-      "relevance": 1.25,
-      "rawWeight": 1.025,
-      "bands": {
-        "mean": 26.885503749090724,
-        "sd": 2.9795569513673095
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.6425419240953222
     },
     {
       "name": "Adjusted Asset Floor",
@@ -87,9 +70,9 @@
       },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
+      "qcStatus": "VALID",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.97x dari median metode."
+      "indicativeWeight": 0.3574580759046779
     }
   ],
   "dcfDiagnostics": null,
@@ -112,15 +95,30 @@
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 72
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2,
+    "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 1903.425635394973,
+        "base": 2580.9634220130138,
+        "bull": 3258.501208631055,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -129,7 +127,7 @@
     "currentPBV": 4.997152992775236,
     "roe": 0.04484,
     "fcf": -6183412474176.0,
-    "growthNormalized": 0.25,
+    "growthNormalized": 0.18,
     "costOfEquity": 0.1341506,
     "terminalGrowth": 0.035,
     "marketCap": 70076506046464.0,
@@ -139,19 +137,13 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17718.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 1.72
-      }
-    ],
     "growthNormalizedLegacy": 0.18,
-    "growthNormalizedQuarterly": 0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -171,84 +163,43 @@
       }
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "ebit": 2998179240414.0,
-        "netDebt": 29839218120942.0,
-        "multipleBand": [
-          7,
-          10,
-          13
-        ]
-      }
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "revenue": 33571420366284.0,
-        "netDebt": 29839218120942.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      }
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.25,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.23520865650650613
-          }
-        ],
-        "normalGrowth": 0.23520865650650613,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 3.1540866312663773
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 3.180613396228403
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
         "observations": [],
@@ -286,18 +237,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.807102915960002,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

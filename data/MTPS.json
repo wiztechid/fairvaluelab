@@ -1,7 +1,7 @@
 {
   "ticker": "MTPS.JK",
   "name": "PT Meta Epsi Tbk.",
-  "asOf": "2026-09-17T23:41:42.432598+00:00",
+  "asOf": "2026-09-18T01:37:26.867894+00:00",
   "price": 81.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -105,7 +105,20 @@
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 46,
-    "indicativeMethodCount": 2
+    "indicativeMethodCount": 2,
+    "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 13.242111323691557,
+        "base": 38.427456737564704,
+        "bull": 63.612802151437855,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -114,7 +127,7 @@
     "currentPBV": 4.107335772846213,
     "roe": -0.087740004,
     "fcf": -47130087424.0,
-    "growthNormalized": 0.11398161383113362,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.1263278,
     "terminalGrowth": 0.035,
     "marketCap": 168872919040.0,
@@ -126,11 +139,11 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": 0.11398161383113362
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -154,36 +167,21 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
-      "inputs": {}
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
       "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "ebit": 428255516.0,
-        "netDebt": 29762257728.0,
-        "multipleBand": [
-          7,
-          10,
-          13
-        ]
-      }
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.11398161383113362,
-    "confidence": 0.64,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
@@ -193,40 +191,22 @@
         "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.5254167397427087
-          }
-        ],
-        "normalGrowth": 0.5254167397427087,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.4380062372073501
-          }
-        ],
-        "normalGrowth": 0.4380062372073501,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.26483044313765314
-          }
-        ],
-        "normalGrowth": 0.26483044313765314,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -235,16 +215,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9769666295973811
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -264,7 +238,8 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
@@ -273,5 +248,5 @@
     "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

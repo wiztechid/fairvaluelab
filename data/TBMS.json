@@ -1,7 +1,7 @@
 {
   "ticker": "TBMS.JK",
   "name": "PT Tembaga Mulia Semanan Tbk",
-  "asOf": "2026-09-17T23:33:58.738121+00:00",
+  "asOf": "2026-09-18T01:31:54.985353+00:00",
   "price": 1225.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,38 +12,17 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 536.6920546891322,
-    "base": 766.5498494479758,
-    "bull": 1340.7929538746678,
+    "bear": null,
+    "base": null,
+    "bull": null,
     "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "agreement": "INSUFFICIENT",
     "available": false,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical Dividend Yield"
+    "referenceOnly": false,
+    "evidenceLevel": "UNVALUED"
   },
-  "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 536.6920546891322,
-      "base": 766.5498494479758,
-      "bull": 1340.7929538746678,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.037479623824451413,
-        "sd": 0.016052005252191547
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID"
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": null,
   "technical": {
     "ma20": 1224.75,
@@ -65,17 +44,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical Dividend Yield); belum cukup bukti untuk FV gabungan."
+      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26
+    "valuationConfidence": 0,
+    "familyConsensus": [],
+    "familyConsensusCount": 0
   },
   "raw": {
     "epsTTM": null,
@@ -94,19 +74,13 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17718.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 0.019
-      }
-    ],
     "growthNormalizedLegacy": 0.058391750000000006,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "REFERENSI",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "BELUM_DINILAI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -137,6 +111,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -200,14 +181,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "NO_DEFENSIBLE_METHOD",
+    "reason": "NO_VALID_METHOD",
+    "policy": "No value is fabricated or anchored to market price."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

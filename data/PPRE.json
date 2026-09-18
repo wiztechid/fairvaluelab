@@ -1,7 +1,7 @@
 {
   "ticker": "PPRE.JK",
   "name": "PT PP Presisi Tbk",
-  "asOf": "2026-09-17T23:41:46.966070+00:00",
+  "asOf": "2026-09-18T01:37:30.197148+00:00",
   "price": 105.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 35.07958271220972,
-    "base": 96.93056574421068,
-    "bull": 167.01169932154016,
-    "dispersion": 0.4152287446553844,
-    "agreement": "LOW",
-    "available": true,
-    "indicative": false,
-    "referenceOnly": false
+    "bear": 41.95821346847968,
+    "base": 63.70197190593571,
+    "bull": 99.28638169830397,
+    "dispersion": 0.20324265057712784,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -43,34 +44,10 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.317981072555205,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "bear": 25.830062952669206,
-      "base": 141.61221041727572,
-      "bull": 276.6913824593167,
-      "confidence": 0.52,
-      "relevance": 0.65,
-      "rawWeight": 0.338,
-      "warning": null,
-      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
-      "bands": {
-        "revenue": 3945960175467.0,
-        "netDebt": 1511588515385.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.42649842271293376,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": true
+      "indicativeWeight": 0.5544554455445544
     },
     {
       "name": "Adjusted Asset Floor",
@@ -91,10 +68,11 @@
           0.95
         ]
       },
-      "included": true,
-      "normalizedWeight": 0.25552050473186116,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": false,
+      "indicativeWeight": 0.44554455445544555
     }
   ],
   "dcfDiagnostics": {
@@ -126,15 +104,31 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2,
+    "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 29.484072091496277,
+        "base": 51.90392522663106,
+        "bull": 74.32377836176585,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -143,7 +137,7 @@
     "currentPBV": 1.0046695054625396,
     "roe": -0.54035,
     "fcf": 1326371569664.0,
-    "growthNormalized": 0.27,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.108542,
     "terminalGrowth": 0.035,
     "marketCap": 1073548492800.0,
@@ -155,12 +149,12 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": 0.27
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -173,88 +167,47 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -955054019192.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.27,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.41612919316152275
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.2863305846852191
-          }
-        ],
-        "normalGrowth": 0.32959678751065363,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.11058137897749976
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9125191195819516
-          }
-        ],
-        "normalGrowth": -0.5368604596591666,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.12960055546155058
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9312816832425315
-          }
-        ],
-        "normalGrowth": -0.5432001851538502,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.6802475530275449
-          }
-        ],
-        "normalGrowth": 0.6802475530275449,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -263,21 +216,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 1.6977604461016171
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9638814257417543
-          }
-        ],
-        "normalGrowth": 0.0,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -297,18 +239,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.9231482451829589,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

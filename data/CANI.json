@@ -1,7 +1,7 @@
 {
   "ticker": "CANI.JK",
   "name": "PT Capitol Nusantara Indonesia Tbk",
-  "asOf": "2026-09-17T23:31:44.797974+00:00",
+  "asOf": "2026-09-18T01:30:16.558936+00:00",
   "price": 135.0,
   "companyProfile": {
     "sector": "Energi",
@@ -87,7 +87,6 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
@@ -98,7 +97,21 @@
     "outlierMethodCount": 0,
     "reviewFlags": [],
     "valuationConfidence": 38,
-    "indicativeMethodCount": 2
+    "indicativeMethodCount": 2,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 104.87738085938271,
+        "base": 149.158058156707,
+        "bull": 196.12225414511613,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -117,13 +130,12 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17718.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": 0.08,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -151,8 +163,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -216,7 +228,8 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
@@ -225,5 +238,5 @@
     "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

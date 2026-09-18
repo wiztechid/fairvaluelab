@@ -1,7 +1,7 @@
 {
   "ticker": "ZONE.JK",
   "name": "PT Mega Perintis Tbk",
-  "asOf": "2026-09-17T23:38:42.279423+00:00",
+  "asOf": "2026-09-18T01:35:19.087609+00:00",
   "price": 715.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 635.2731474170035,
-    "base": 973.7337902961838,
-    "bull": 1300.7574260094884,
-    "dispersion": 0.3999886104274005,
+    "bear": 591.244052708643,
+    "base": 895.4147085643867,
+    "bull": 1136.884848619763,
+    "dispersion": 0.39628706069087527,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3010981225646475,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -51,26 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.23910733262486716,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 507.2064303957208,
-      "base": 698.2949491891073,
-      "bull": 1120.4037339937713,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.017184715447154473,
-        "sd": 0.006474290592334494
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.20474672334396032,
+      "normalizedWeight": 0.2655737704918033,
       "qcStatus": "VALID"
     },
     {
@@ -89,7 +71,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.25504782146652494,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -121,16 +103,41 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 56.4310 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 54,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 763.2863949339951,
+        "base": 1253.39132676558,
+        "bull": 1618.09522699643,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 419.2017104832909,
+        "base": 537.4380903631935,
+        "bull": 655.674470243096,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.3321594602990547,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 56.43099948813532,
@@ -165,7 +172,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -181,6 +188,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -244,18 +258,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.3618654409736837,
+    "baseToPrice": 1.252328263726415,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

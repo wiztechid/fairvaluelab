@@ -1,7 +1,7 @@
 {
   "ticker": "SHID.JK",
   "name": "PT Hotel Sahid Jaya International Tbk",
-  "asOf": "2026-09-17T23:38:22.264068+00:00",
+  "asOf": "2026-09-18T01:35:05.167017+00:00",
   "price": 770.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -79,7 +79,20 @@
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 30
+    "valuationConfidence": 30,
+    "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 694.6610915865746,
+        "base": 1275.6584961456306,
+        "bull": 1856.6559007046867,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -88,7 +101,7 @@
     "currentPBV": 1.196324262590319,
     "roe": -0.012519999,
     "fcf": -30341677056.0,
-    "growthNormalized": 0.25,
+    "growthNormalized": 0.04961652261715843,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 861881171968.0,
@@ -100,11 +113,11 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": 0.04961652261715843,
-    "growthNormalizedQuarterly": 0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -128,61 +141,34 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
-      "inputs": {}
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
       "status": "INVALID",
-      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
-      "inputs": {
-        "revenue": 123996855122.0,
-        "netDebt": 390988831830.0,
-        "multipleBand": [
-          0.7,
-          1.1,
-          1.6
-        ]
-      }
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "LIMITED",
-    "sustainableGrowth": 0.25,
-    "confidence": 0.48,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.19333093051374495
-          }
-        ],
-        "normalGrowth": 0.19333093051374495,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7047239212101122
-          }
-        ],
-        "normalGrowth": 0.7047239212101122,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
         "observations": [],
@@ -226,7 +212,8 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
@@ -235,5 +222,5 @@
     "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

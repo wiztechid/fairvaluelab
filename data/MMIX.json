@@ -1,7 +1,7 @@
 {
   "ticker": "MMIX.JK",
   "name": "PT Multi Medika Internasional Tbk",
-  "asOf": "2026-09-17T23:38:59.759662+00:00",
+  "asOf": "2026-09-18T01:35:31.773055+00:00",
   "price": 850.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 94.64998087969266,
-    "base": 127.47170565264702,
-    "bull": 162.64605510913913,
-    "dispersion": 0.2601828194696926,
-    "agreement": "MEDIUM",
+    "bear": 25.66775303764971,
+    "base": 95.29762245981937,
+    "bull": 178.2830712544752,
+    "dispersion": 0.7007299357398614,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,7 +36,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.5089820359281437,
+      "normalizedWeight": 0.5414012738853503,
       "qcStatus": "VALID"
     },
     {
@@ -56,65 +57,22 @@
       "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
     },
     {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "bear": 113.53345654049974,
-      "base": 141.91682067562468,
-      "bull": 170.3001848107496,
-      "confidence": 0.6,
-      "relevance": 0.2,
-      "rawWeight": 0.12,
-      "bands": null,
-      "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
-      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.0718562874251497,
-      "qcStatus": "VALID",
-      "countsForIndependence": false
-    },
-    {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 694.0727842619123,
-      "base": 889.8369028998875,
-      "bull": 1085.6010215378626,
+      "bear": 22.245385965963084,
+      "base": 28.519725597388568,
+      "bull": 34.794065228814056,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 162.78000025604337,
+        "eps": 5.217181850871724,
         "requiredReturn": 0.1829324
       },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.87x dari median metode."
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
-      "bear": 62.29527397174123,
-      "base": 82.97648362133275,
-      "bull": 103.65769327092426,
-      "confidence": 0.7,
-      "relevance": 1.0,
-      "rawWeight": 0.7,
-      "warning": null,
-      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
-      "bands": {
-        "ebit": 33092867897.0,
-        "netDebt": -1208003155.0,
-        "multipleBand": [
-          9,
-          12,
-          15
-        ]
-      },
       "included": true,
-      "normalizedWeight": 0.41916167664670656,
+      "normalizedWeight": 0.4585987261146497,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -147,22 +105,47 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 162.7800 per saham.",
-      "Extreme Valuation Review: Base FV = 0.15x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "Extreme Valuation Review: Base FV = 0.12x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 3.780971937029432,
-    "validMethodCount": 3,
+    "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
     "reviewFlags": [
-      "EXTREME_VALUATION"
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 40
+    "valuationConfidence": 0,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF"
+        ],
+        "bear": 118.62913118118578,
+        "base": 162.07551932225016,
+        "bull": 210.14412301802986,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 22.245385965963084,
+        "base": 28.519725597388568,
+        "bull": 34.794065228814056,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 5.682927024273008,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 162.78000025604337,
+    "epsTTM": 5.217181850871724,
     "bvps": 5.499005872683725,
     "currentPE": 162.92320725948548,
     "currentPBV": 154.5733937514723,
@@ -178,31 +161,12 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 162.78
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 162.78000051208673
-      },
-      {
-        "source": "WISS reconciled EPS",
-        "value": 5.217181850871724
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 5.217181850871724
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.053635,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -210,14 +174,26 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 20.325504086490866,
+        "base": 25.40688010811358,
+        "bull": 30.488256129736293,
+        "price": 850.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -281,14 +257,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": true,
     "status": "REVIEW",
-    "reason": "EXTREME_VALUATION",
+    "reason": "FORENSIC_EXTREME",
     "direction": "BELOW_MARKET",
-    "baseToPrice": 0.14996671253252591,
+    "baseToPrice": 0.11211484995272866,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
@@ -301,8 +278,9 @@
       "cashflow_confirmation",
       "independent_model_agreement"
     ],
-    "policy": "Market price is a review trigger only; it never pulls fair value toward market."
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

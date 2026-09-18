@@ -1,7 +1,7 @@
 {
   "ticker": "GLVA.JK",
   "name": "PT Galva Technologies Tbk",
-  "asOf": "2026-09-17T23:40:44.899061+00:00",
+  "asOf": "2026-09-18T01:36:45.315390+00:00",
   "price": 332.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,56 +12,17 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 235.0398217737656,
-    "base": 312.99282786871134,
-    "bull": 443.26086169865755,
-    "dispersion": 0.05531218756598142,
-    "agreement": "HIGH",
-    "available": true,
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "evidenceLevel": "UNVALUED"
   },
-  "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 237.78354009042687,
-      "base": 334.0,
-      "bull": 561.0040292470742,
-      "confidence": 0.68,
-      "relevance": 0.25,
-      "rawWeight": 0.17,
-      "bands": {
-        "mean": 0.029940119760479042,
-        "sd": 0.012114935842600516
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 233.21067622932475,
-      "base": 298.98804644785224,
-      "bull": 364.76541666637974,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 32.872001576271956,
-        "requiredReturn": 0.1099442
-      },
-      "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": {
     "terminalValueShare": 0.7189113916560865,
     "bearTerminalValueShare": 0.6368506937080605,
@@ -92,18 +53,21 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 32.8720 per saham."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67
+    "valuationConfidence": 0,
+    "familyConsensus": [],
+    "familyConsensusCount": 0
   },
   "raw": {
-    "epsTTM": 32.872001576271956,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -119,26 +83,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 32.872
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 32.87200315254391
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.06883399805,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "BELUM_DINILAI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -151,6 +111,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -214,18 +181,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.9427494815322631,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "NO_DEFENSIBLE_METHOD",
+    "reason": "NO_VALID_METHOD",
+    "policy": "No value is fabricated or anchored to market price."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

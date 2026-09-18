@@ -1,7 +1,7 @@
 {
   "ticker": "ESIP.JK",
   "name": "PT Sinergi Inti Plastindo Tbk",
-  "asOf": "2026-09-17T23:33:05.171848+00:00",
+  "asOf": "2026-09-18T01:31:16.696375+00:00",
   "price": 120.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 13.095298221183992,
-    "base": 17.668108241085495,
-    "bull": 22.240918260986998,
+    "bear": 13.134755859555431,
+    "base": 17.73582348359124,
+    "bull": 22.336891107627046,
     "dispersion": 0.1998082784867197,
     "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -107,9 +108,35 @@
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "EXTREME_VALUATION"
+      "EXTREME_VALUATION",
+      "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 35
+    "valuationConfidence": 10,
+    "familyConsensus": [
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 15.199705600994243,
+        "base": 21.27958784139194,
+        "bull": 27.359470081789635,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 11.06980611811662,
+        "base": 14.192059125790538,
+        "bull": 17.314312133464455,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.4994010138191702,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 2.9900000470925017,
@@ -144,7 +171,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -165,8 +192,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -230,14 +257,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": true,
     "status": "REVIEW",
-    "reason": "EXTREME_VALUATION",
+    "reason": "FORENSIC_EXTREME",
     "direction": "BELOW_MARKET",
-    "baseToPrice": 0.14723423534237912,
+    "baseToPrice": 0.147798529029927,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
@@ -250,8 +278,9 @@
       "cashflow_confirmation",
       "independent_model_agreement"
     ],
-    "policy": "Market price is a review trigger only; it never pulls fair value toward market."
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

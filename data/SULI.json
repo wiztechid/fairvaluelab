@@ -1,7 +1,7 @@
 {
   "ticker": "SULI.JK",
   "name": "PT SLJ Global Tbk",
-  "asOf": "2026-09-17T23:33:56.759246+00:00",
+  "asOf": "2026-09-18T01:31:53.532273+00:00",
   "price": 87.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 34.72823215037698,
-    "base": 49.48221118592028,
-    "bull": 66.75316915294114,
-    "dispersion": 0.5731582689815664,
+    "bear": 50.45663971516056,
+    "base": 72.70488132268498,
+    "bull": 96.72908863186126,
+    "dispersion": 0.48052714321228696,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -76,33 +77,8 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.1609729132117192,
+      "normalizedWeight": 0.25701676963812886,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "bear": 6.088985934826755,
-      "base": 19.917264558739806,
-      "bull": 36.050256286638366,
-      "confidence": 0.52,
-      "relevance": 0.65,
-      "rawWeight": 0.338,
-      "warning": null,
-      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
-      "bands": {
-        "revenue": 291351549606.0,
-        "netDebt": 92621075334.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.1494748479823107,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
     },
     {
       "name": "Adjusted Asset Floor",
@@ -124,7 +100,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.08955223880597016,
+      "normalizedWeight": 0.14298323036187116,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -156,16 +132,41 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 3,
+    "validMethodCount": 4,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 72
+    "valuationConfidence": 59,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 35.72210610220569,
+        "base": 46.793807172271634,
+        "bull": 61.41743964564124,
+        "weight": 0.25
+      },
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 65.19117332811543,
+        "base": 98.61595547309834,
+        "bull": 132.04073761808127,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.107457405849522,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
@@ -174,7 +175,7 @@
     "currentPBV": 2.3135405958574933,
     "roe": -0.26108998,
     "fcf": 29348431842.0,
-    "growthNormalized": -0.25,
+    "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 549907595264.0,
@@ -184,13 +185,12 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17718.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": -0.25
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -204,73 +204,47 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -59851031922.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": -0.25,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.2794212630056867
-          }
-        ],
-        "normalGrowth": -0.2794212630056867,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.33469202944945664
-          }
-        ],
-        "normalGrowth": -0.33469202944945664,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.33218526653241554
-          }
-        ],
-        "normalGrowth": -0.33218526653241554,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.4458407781606707
-          }
-        ],
-        "normalGrowth": -0.4458407781606707,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -279,16 +253,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.8269545009784736
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -308,18 +276,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.5687610481140262,
+    "baseToPrice": 0.8356882910653446,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

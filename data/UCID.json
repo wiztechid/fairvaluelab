@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-17T23:36:36.724210+00:00",
+  "asOf": "2026-09-18T01:33:49.520571+00:00",
   "price": 500.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1073.0316230062826,
-    "base": 1462.3882856822947,
-    "bull": 1887.1841585108755,
-    "dispersion": 0.7013240191407654,
+    "bear": 759.2436242131948,
+    "base": 1714.6064811818787,
+    "bull": 3425.714272011429,
+    "dispersion": 0.5714499101207778,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2739284563325814,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -51,7 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.21753142120528524,
+      "normalizedWeight": 0.2655737704918033,
       "qcStatus": "VALID"
     },
     {
@@ -76,26 +77,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.09023525620367386,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 269.61845834676404,
-      "base": 379.6492188547949,
-      "bull": 641.4055624990621,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.017573706644584963,
-        "sd": 0.007171794983568214
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.18627135030615538,
+      "normalizedWeight": 0.11200000000000003,
       "qcStatus": "VALID"
     },
     {
@@ -114,7 +96,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.23203351595230423,
+      "normalizedWeight": 0.2880000000000001,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -145,17 +127,56 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 327.0000 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 327.0000 per saham.",
+      "Extreme Valuation Review: Base FV = 3.43x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "LARGE_MARKET_GAP"
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 65
+    "valuationConfidence": 0,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 803.9469052952659,
+        "base": 1185.9297148135154,
+        "bull": 1569.3324968871568,
+        "weight": 0.25
+      },
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 615.6389469989857,
+        "base": 843.6040269035498,
+        "bull": 1071.569106808114,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 2429.1428474262857,
+        "base": 3114.2857018285713,
+        "bull": 3799.428556230857,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 3.6916439496615054,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 326.99999869199996,
@@ -164,7 +185,7 @@
     "currentPBV": 0.44951914778751534,
     "roe": -0.19538,
     "fcf": 434350260224.0,
-    "growthNormalized": 0.35,
+    "growthNormalized": 0.006136286067138189,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 2078286151680.0,
@@ -186,22 +207,20 @@
     ],
     "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.006136286067138189,
-    "growthNormalizedQuarterly": 0.35
+    "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -736105000000.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Graham Number",
@@ -214,71 +233,44 @@
         "bull": 3432.8694269723055,
         "price": 500.0
       }
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "READY",
-    "sustainableGrowth": 0.35,
-    "confidence": 0.72,
+    "status": "INSUFFICIENT",
+    "sustainableGrowth": null,
+    "confidence": 0.25,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": -0.07783844628114178
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.1678189656507465
-          }
-        ],
-        "normalGrowth": 0.0859331616734504,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebitda": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.9583749583749583
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 8.62984418697563
-          }
-        ],
-        "normalGrowth": 1.3194583194583194,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 1.4845464580222063
-          }
-        ],
-        "normalGrowth": 1.4845464580222063,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 1.3582890173410407
-          }
-        ],
-        "normalGrowth": 1.3582890173410407,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "operatingCashFlow": {
         "observations": [],
@@ -287,21 +279,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.7114963183730716
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 1.3888799661259474
-          }
-        ],
-        "normalGrowth": 1.163085416874989,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -321,18 +302,30 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 2.9247765713645895,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "direction": "ABOVE_MARKET",
+    "baseToPrice": 3.4292129623637573,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

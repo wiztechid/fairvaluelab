@@ -1,7 +1,7 @@
 {
   "ticker": "EKAD.JK",
   "name": "PT Ekadharma International Tbk",
-  "asOf": "2026-09-17T23:33:03.121318+00:00",
+  "asOf": "2026-09-18T01:31:15.483177+00:00",
   "price": 402.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 125.66042138751506,
-    "base": 169.17135983781102,
-    "bull": 213.715211376932,
-    "dispersion": 0.37831093014497646,
+    "bear": 130.5143297193561,
+    "base": 594.586837684932,
+    "bull": 1148.5735288054152,
+    "dispersion": 0.7561064041124322,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.302882096069869,
+      "normalizedWeight": 0.5104203461674319,
       "qcStatus": "VALID"
     },
     {
@@ -50,28 +51,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.29711790393013104,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 203.2888884861656,
-      "base": 242.12520593080723,
-      "bull": 299.30431416441303,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.03717085119412125,
-        "sd": 0.007101120909324406
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4000000000000001,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.07x dari median metode."
     },
     {
       "name": "Mid-Cycle Earnings",
@@ -93,11 +76,10 @@
           9.0
         ]
       },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.31x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.4895796538325681,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     },
     {
       "name": "Earnings Power Value",
@@ -118,7 +100,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.75x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.58x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -148,18 +130,42 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 146.2730 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
+    "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 2,
     "reviewFlags": [
-      "LARGE_MARKET_GAP"
+      "CROSS_FAMILY_CONFLICT"
     ],
-    "valuationConfidence": 42
+    "valuationConfidence": 39,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF"
+        ],
+        "bear": 91.50048281334116,
+        "base": 145.01592191039566,
+        "bull": 200.51191722761712,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 745.826966756763,
+        "base": 1044.1577534594683,
+        "bull": 1342.4885401621734,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 7.2002973170397535,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 146.27299839474483,
@@ -194,8 +200,8 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -210,6 +216,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -273,18 +286,21 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.42082427820351004,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 1.4790717355346568,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 7.2002973170397535,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

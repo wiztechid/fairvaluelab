@@ -1,7 +1,7 @@
 {
   "ticker": "ZYRX.JK",
   "name": "PT Zyrexindo Mandiri Buana Tbk",
-  "asOf": "2026-09-17T23:41:10.471600+00:00",
+  "asOf": "2026-09-18T01:37:03.865002+00:00",
   "price": 129.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,56 +12,17 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 280.78703553279075,
-    "base": 376.52973125233444,
-    "bull": 571.9350447895499,
-    "dispersion": 0.43078782417049016,
-    "agreement": "LOW",
-    "available": true,
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "evidenceLevel": "UNVALUED"
   },
-  "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 121.64758586289773,
-      "base": 197.32432432432432,
-      "bull": 522.1576073299306,
-      "confidence": 0.68,
-      "relevance": 0.25,
-      "rawWeight": 0.17,
-      "bands": {
-        "mean": 0.024832214765100672,
-        "sd": 0.01544807493602434
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 386.8800019793861,
-      "base": 496.0000025376745,
-      "bull": 605.1200030959628,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 52.08000026645582,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.6,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    }
-  ],
+  "methods": [],
   "dcfDiagnostics": null,
   "technical": {
     "ma20": 129.7,
@@ -82,20 +43,21 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 52.0800 per saham."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
+    "diagnosticCount": 5,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP"
-    ],
-    "valuationConfidence": 42
+    "reviewFlags": [],
+    "valuationConfidence": 0,
+    "familyConsensus": [],
+    "familyConsensusCount": 0
   },
   "raw": {
-    "epsTTM": 52.08000026645582,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -111,26 +73,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 52.08
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 52.08000053291164
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.06223975,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "BELUM_DINILAI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -152,6 +110,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -215,18 +180,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 2.918835125987089,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "NO_DEFENSIBLE_METHOD",
+    "reason": "NO_VALID_METHOD",
+    "policy": "No value is fabricated or anchored to market price."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

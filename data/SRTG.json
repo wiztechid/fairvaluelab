@@ -1,7 +1,7 @@
 {
   "ticker": "SRTG.JK",
   "name": "PT Saratoga Investama Sedaya Tbk",
-  "asOf": "2026-09-17T23:39:18.846824+00:00",
+  "asOf": "2026-09-18T01:35:45.572701+00:00",
   "price": 1770.0,
   "companyProfile": {
     "sector": "Keuangan",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 1183.7524742834153,
-    "base": 1659.3972132344895,
-    "bull": 2132.0213945732185,
+    "bear": 1266.6459331284343,
+    "base": 1757.0493644642222,
+    "bull": 2223.319237165291,
     "dispersion": 0.20793829402636832,
     "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -246,7 +247,64 @@
     "diagnosticCount": 1,
     "outlierMethodCount": 2,
     "reviewFlags": [],
-    "valuationConfidence": 75
+    "valuationConfidence": 75,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 1301.299261570764,
+        "base": 2087.4013008353113,
+        "bull": 2752.8355469262633,
+        "weight": 0.25
+      },
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 1519.8699782039846,
+        "base": 2025.1366508554345,
+        "bull": 2530.4033235068846,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings",
+        "methods": [
+          "Historical P/E 3Y",
+          "Historical P/E 5Y"
+        ],
+        "bear": 836.141954108178,
+        "base": 1443.9110311212635,
+        "bull": 2051.680108134349,
+        "weight": 0.25
+      },
+      {
+        "family": "forward_earnings",
+        "methods": [
+          "Forward Earnings Power"
+        ],
+        "bear": 1274.5227465297319,
+        "base": 1477.0531829722095,
+        "bull": 1679.583619414687,
+        "weight": 0.25
+      },
+      {
+        "family": "book_profitability",
+        "methods": [
+          "Justified PBV / ROE"
+        ],
+        "bear": 1401.3957252295133,
+        "base": 1751.7446565368916,
+        "bull": 2102.0935878442697,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 5,
+    "crossFamilySpreadRatio": 1.4456578389143186,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 244.9699972140545,
@@ -289,21 +347,16 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 2472.8223779868044,
-        "base": 4700.15,
-        "bull": 20660.0,
-        "price": 1770.0
-      }
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
@@ -343,21 +396,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 1,
-            "growth": 0.7061039494313515
-          },
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.7176836352994695
-          }
-        ],
-        "normalGrowth": 0.7138237400100969,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 2
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -377,18 +419,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.9375125498499941,
+    "baseToPrice": 0.9926832567594476,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

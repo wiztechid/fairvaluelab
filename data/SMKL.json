@@ -1,7 +1,7 @@
 {
   "ticker": "SMKL.JK",
   "name": "PT Satyamitra Kemas Lestari Tbk",
-  "asOf": "2026-09-17T23:33:52.216109+00:00",
+  "asOf": "2026-09-18T01:31:50.523056+00:00",
   "price": 156.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,35 +12,17 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 183.67265529946184,
-    "base": 246.39609436900201,
-    "bull": 323.29108841908385,
-    "dispersion": 0.3169715267745256,
-    "agreement": "MEDIUM",
+    "bear": 206.48320158804842,
+    "base": 274.627225161521,
+    "bull": 342.77124873499355,
+    "dispersion": 0.1437842106377914,
+    "agreement": "HIGH",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 94.71141924891647,
-      "base": 136.88609865470855,
-      "bull": 246.77352872955933,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.021916031134523152,
-        "sd": 0.00975913563829787
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.2092893116955792,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Mid-Cycle Earnings",
       "family": "earnings_midcycle",
@@ -62,7 +44,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.38780078343592617,
+      "normalizedWeight": 0.4904458598726115,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
@@ -82,7 +64,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.4029099048684947,
+      "normalizedWeight": 0.5095541401273885,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -110,12 +92,37 @@
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 32.9820 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 3,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 65
+    "valuationConfidence": 67,
+    "familyConsensus": [
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 167.95726169430336,
+        "base": 235.14016637202468,
+        "bull": 302.32307104974603,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 245.00914148179348,
+        "base": 314.1142839510173,
+        "bull": 383.21942642024106,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.3358597503671257,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 32.98199981485681,
@@ -150,7 +157,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -175,6 +182,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -238,18 +252,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.5794621433910385,
+    "baseToPrice": 1.7604309305225705,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

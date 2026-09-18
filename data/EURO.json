@@ -1,7 +1,7 @@
 {
   "ticker": "EURO.JK",
   "name": "PT Estee Gold Feet Tbk",
-  "asOf": "2026-09-17T23:35:32.188151+00:00",
+  "asOf": "2026-09-18T01:33:03.637234+00:00",
   "price": 1505.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,14 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 6.461024879890326,
-    "base": 7.075182811152111,
-    "bull": 7.689340742413895,
-    "dispersion": 0.4056135820421527,
-    "agreement": "LOW",
-    "available": true,
+    "bear": 3.2990532563065487,
+    "base": 4.229555456803268,
+    "bull": 5.160057657299986,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
     {
@@ -37,33 +39,8 @@
         "eps": 0.75,
         "requiredReturn": 0.17732360000000003
       },
-      "included": true,
-      "normalizedWeight": 0.5070422535211268,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
-      "bear": 9.713338549862211,
-      "base": 10.002113804196634,
-      "bull": 10.290889058531059,
-      "confidence": 0.7,
-      "relevance": 1.0,
-      "rawWeight": 0.7,
-      "warning": null,
-      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
-      "bands": {
-        "ebit": 245346000.0,
-        "netDebt": -22549500000.0,
-        "multipleBand": [
-          9,
-          12,
-          15
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.49295774647887325,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -88,17 +65,29 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Extreme Valuation Review: Base FV = 0.00x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.1095140314852845,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "EXTREME_VALUATION"
+    "reviewFlags": [],
+    "valuationConfidence": 30,
+    "familyConsensus": [
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 3.2990532563065487,
+        "base": 4.229555456803268,
+        "bull": 5.160057657299986,
+        "weight": 0.25
+      }
     ],
-    "valuationConfidence": 29
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 0.75,
@@ -117,28 +106,13 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 0.75
-      },
-      {
-        "source": "WISS reconciled EPS",
-        "value": 0.75
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 0.7802096596904872
-      }
-    ],
-    "epsSource": "Multi-source EPS median",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "REVIEW",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -153,14 +127,9 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 13.81887242898663,
-        "base": 14.371301278111929,
-        "bull": 14.92373012723723,
-        "price": 1505.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Graham Number",
@@ -177,8 +146,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     },
     {
@@ -254,28 +223,15 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "EXTREME_VALUATION",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.004701118146944924,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Market price is a review trigger only; it never pulls fair value toward market."
+    "required": false,
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

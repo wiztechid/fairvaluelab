@@ -1,7 +1,7 @@
 {
   "ticker": "MDKI.JK",
   "name": "PT Emdeki Utama Tbk",
-  "asOf": "2026-09-17T23:33:29.536910+00:00",
+  "asOf": "2026-09-18T01:31:34.074241+00:00",
   "price": 191.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 86.91699499214222,
-    "base": 116.97081750125088,
-    "bull": 144.01158812728318,
-    "dispersion": 0.29931587832983975,
+    "bear": 82.7371345749382,
+    "base": 115.39218466990026,
+    "bull": 145.70714236115262,
+    "dispersion": 0.24690583075205436,
     "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.22450089334265516,
+      "normalizedWeight": 0.25402127098532123,
       "qcStatus": "VALID"
     },
     {
@@ -51,26 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2202283849918434,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 171.04349806701168,
-      "base": 178.20000000000002,
-      "bull": 185.98151210615646,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.050505050505050504,
-        "sd": 0.0021131437070087346
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.11621222714208035,
+      "normalizedWeight": 0.24918695613957986,
       "qcStatus": "VALID"
     },
     {
@@ -94,7 +76,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.21533442088091356,
+      "normalizedWeight": 0.243649468225367,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
@@ -114,7 +96,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.22372407364250757,
+      "normalizedWeight": 0.2531423046497319,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -146,16 +128,51 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 15.4520 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 70
+    "valuationConfidence": 65,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 54.81745983621418,
+        "base": 88.96392749470007,
+        "bull": 116.0901179420568,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 78.60766079456695,
+        "base": 110.05072511239374,
+        "bull": 141.49378943022052,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 114.78628309403345,
+        "base": 147.161901402607,
+        "bull": 179.53751971118052,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 1.654174962221334,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 15.451999647273734,
@@ -190,7 +207,7 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
+  "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -206,6 +223,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -269,18 +293,19 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.6124126570746119,
+    "baseToPrice": 0.6041475637167553,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     }
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }

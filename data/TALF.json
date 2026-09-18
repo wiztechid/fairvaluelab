@@ -1,7 +1,7 @@
 {
   "ticker": "TALF.JK",
   "name": "PT Tunas Alfin Tbk",
-  "asOf": "2026-09-17T23:33:57.702320+00:00",
+  "asOf": "2026-09-18T01:31:54.259224+00:00",
   "price": 705.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 459.44156581779833,
-    "base": 684.627424346764,
-    "bull": 911.7149759062737,
-    "dispersion": 0.2084206524631102,
-    "agreement": "MEDIUM",
+    "bear": 97.6964342543538,
+    "base": 333.1018486421467,
+    "bull": 820.4864924396281,
+    "dispersion": 0.7521356126574592,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.302882096069869,
+      "normalizedWeight": 0.25402127098532123,
       "qcStatus": "VALID"
     },
     {
@@ -51,26 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.29711790393013104,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 460.87882320914514,
-      "base": 590.5215495555929,
-      "bull": 821.6461895807104,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
-      "bands": {
-        "mean": 0.013547346419483824,
-        "sd": 0.003810795454545455
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4000000000000001,
+      "normalizedWeight": 0.24918695613957986,
       "qcStatus": "VALID"
     },
     {
@@ -93,11 +75,10 @@
           9.0
         ]
       },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.44x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.243649468225367,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     },
     {
       "name": "Earnings Power Value",
@@ -114,11 +95,10 @@
         "eps": 15.209999805182559,
         "requiredReturn": 0.105
       },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.08x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.2531423046497319,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -148,16 +128,53 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 15.2100 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 2,
-    "reviewFlags": [],
-    "valuationConfidence": 60
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 32,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF",
+          "FCF Yield"
+        ],
+        "bear": 457.4302924077307,
+        "base": 745.8968113087528,
+        "bull": 969.1332332029135,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 77.53685258282049,
+        "base": 108.55159361594868,
+        "bull": 139.56633464907688,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 112.98856998135615,
+        "base": 144.85714100173865,
+        "bull": 176.72571202212114,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 6.871357540338899,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 15.209999805182559,
@@ -192,8 +209,8 @@
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
-  "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "engineVersion": "3.20-family-consensus",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -208,6 +225,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -271,18 +295,21 @@
     },
     "principle": "Sector-aware evidence weighting; market price is QC guard only, never valuation target.",
     "waterfallVersion": "3.19-sector-waterfall",
-    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction."
+    "marketAnchorPolicy": "Market price is not a valuation target. Distance to market is reviewed only after fundamental model construction.",
+    "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.971102729569878,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 0.47248489169098823,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 6.871357540338899,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
-  "qcVersion": "3.19-sector-waterfall-qc"
+  "qcVersion": "3.20-family-consensus-qc"
 }
