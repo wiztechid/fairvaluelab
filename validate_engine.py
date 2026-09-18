@@ -1,7 +1,7 @@
 import json, math, sys
 from pathlib import Path
 from des_universe import TICKERS
-DATA=Path('data');REGRESSION=['AADI','DSSA','BUMI','TPIA','BRMS'];EXPECTED_QC='3.19-sector-waterfall-qc'
+DATA=Path('data');REGRESSION=['AADI','DSSA','BUMI','TPIA','BRMS'];EXPECTED_QC='3.20-family-consensus-qc'
 def n(x):return isinstance(x,(int,float)) and math.isfinite(x)
 def fail(msg,errors):errors.append(msg);print('FAIL',msg)
 def main():
@@ -29,7 +29,8 @@ def main():
    if not (vals[0]<=vals[1]<=vals[2]):fail(f'{ticker}: FV scenarios not ordered',errors)
    ratio=vals[1]/price;should_review=ratio<.25 or ratio>3.0
    if should_review and (s!='REVIEW' or not review.get('required')):fail(f'{ticker}: extreme FV not routed to REVIEW',errors)
-   if not should_review and s=='REVIEW':fail(f'{ticker}: REVIEW without extreme trigger',errors)
+   conflict='CROSS_FAMILY_CONFLICT' in (q.get('reviewFlags') or [])
+   if s=='REVIEW' and not (should_review or conflict):fail(f'{ticker}: REVIEW without extreme or cross-family conflict trigger',errors)
    inc=[m for m in methods if m.get('included')];fam={m.get('family') for m in inc if m.get('countsForIndependence',True)}
    if len(inc)<2 or len(fam)<2:fail(f'{ticker}: full FV without >=2 independent families',errors)
    weights={}
