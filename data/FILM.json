@@ -1,7 +1,7 @@
 {
   "ticker": "FILM.JK",
   "name": "PT.MD Entertainment Tbk",
-  "asOf": "2026-09-17T23:13:25.778766+00:00",
+  "asOf": "2026-09-17T23:37:18.629516+00:00",
   "price": 790.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -81,7 +81,33 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 6.50x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 7.31x dari median metode."
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 17.190193296411103,
+      "base": 35.42781472723256,
+      "bull": 58.22484151575937,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 496408302088.0,
+        "netDebt": 160326434364.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 8.73x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -111,6 +137,7 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
@@ -118,7 +145,7 @@
     "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "outlierMethodCount": 2,
     "reviewFlags": [],
     "valuationConfidence": 46,
     "indicativeMethodCount": 2
@@ -130,7 +157,7 @@
     "currentPBV": 2.7712677788115654,
     "roe": -0.087799996,
     "fcf": 327855964160.0,
-    "growthNormalized": -0.02214153973207989,
+    "growthNormalized": -0.20300942975127817,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 8601177423872.0,
@@ -140,8 +167,9 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.02214153973207989,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.20300942975127817
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -159,29 +187,42 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -229778398113.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.20300942975127817,
+    "confidence": 0.64,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.23028462301323582
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.24320092515178748
+          }
+        ],
+        "normalGrowth": -0.0853724090967797,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
         "observations": [],
@@ -196,10 +237,16 @@
         "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.937845751091275
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -208,10 +255,21 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.5726635818281607
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.4668196814246637
+          }
+        ],
+        "normalGrowth": 0.12032526034038887,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       }
     },
     "notes": [

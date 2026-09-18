@@ -1,7 +1,7 @@
 {
   "ticker": "MMIX.JK",
   "name": "PT Multi Medika Internasional Tbk",
-  "asOf": "2026-09-17T23:14:35.897898+00:00",
+  "asOf": "2026-09-17T23:38:59.759662+00:00",
   "price": 850.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 74.4276684073257,
-    "base": 100.82700245479771,
-    "bull": 129.72880989176528,
-    "dispersion": 0.7007299357398614,
-    "agreement": "LOW",
+    "bear": 94.64998087969266,
+    "base": 127.47170565264702,
+    "bull": 162.64605510913913,
+    "dispersion": 0.2601828194696926,
+    "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
     "referenceOnly": false
@@ -35,7 +35,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.5414012738853503,
+      "normalizedWeight": 0.5089820359281437,
       "qcStatus": "VALID"
     },
     {
@@ -56,22 +56,65 @@
       "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
     },
     {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 113.53345654049974,
+      "base": 141.91682067562468,
+      "bull": 170.3001848107496,
+      "confidence": 0.6,
+      "relevance": 0.2,
+      "rawWeight": 0.12,
+      "bands": null,
+      "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.0718562874251497,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
+    },
+    {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 22.245385965963084,
-      "base": 28.519725597388568,
-      "bull": 34.794065228814056,
+      "bear": 694.0727842619123,
+      "base": 889.8369028998875,
+      "bull": 1085.6010215378626,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 5.217181850871724,
+        "eps": 162.78000025604337,
         "requiredReturn": 0.1829324
       },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.87x dari median metode."
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 62.29527397174123,
+      "base": 82.97648362133275,
+      "bull": 103.65769327092426,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 33092867897.0,
+        "netDebt": -1208003155.0,
+        "multipleBand": [
+          9,
+          12,
+          15
+        ]
+      },
       "included": true,
-      "normalizedWeight": 0.4585987261146497,
+      "normalizedWeight": 0.41916167664670656,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -105,20 +148,21 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Extreme Valuation Review: Base FV = 0.12x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 162.7800 per saham.",
+      "Extreme Valuation Review: Base FV = 0.15x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 3.780971937029432,
-    "validMethodCount": 2,
+    "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 2,
     "reviewFlags": [
       "EXTREME_VALUATION"
     ],
-    "valuationConfidence": 34
+    "valuationConfidence": 40
   },
   "raw": {
-    "epsTTM": 5.217181850871724,
+    "epsTTM": 162.78000025604337,
     "bvps": 5.499005872683725,
     "currentPE": 162.92320725948548,
     "currentPBV": 154.5733937514723,
@@ -134,6 +178,25 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 162.78
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 162.78000051208673
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 5.217181850871724
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 5.217181850871724
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.053635,
     "growthNormalizedQuarterly": null
   },
@@ -147,26 +210,14 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 20.325504086490866,
-        "base": 25.40688010811358,
-        "bull": 30.488256129736293,
-        "price": 850.0
-      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -237,7 +288,7 @@
     "status": "REVIEW",
     "reason": "EXTREME_VALUATION",
     "direction": "BELOW_MARKET",
-    "baseToPrice": 0.1186200028879973,
+    "baseToPrice": 0.14996671253252591,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

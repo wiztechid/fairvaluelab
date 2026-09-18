@@ -1,7 +1,7 @@
 {
   "ticker": "PACK.JK",
   "name": "PT Abadi Nusantara Hijau Investama Tbk",
-  "asOf": "2026-09-17T23:10:46.459193+00:00",
+  "asOf": "2026-09-17T23:33:37.056599+00:00",
   "price": 615.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,14 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 127.26095033978794,
-    "base": 169.2404654916585,
-    "bull": 211.21998064352903,
-    "dispersion": 0.1276579249684608,
-    "agreement": "HIGH",
-    "available": true,
+    "bear": null,
+    "base": null,
+    "bull": null,
+    "dispersion": null,
+    "agreement": "INSUFFICIENT",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false
+    "referenceOnly": false,
+    "evidenceLevel": "UNVALUED"
   },
   "methods": [
     {
@@ -42,10 +43,11 @@
           9.0
         ]
       },
-      "included": true,
-      "normalizedWeight": 0.4904458598726115,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.60x dari median metode."
     },
     {
       "name": "Earnings Power Value",
@@ -62,10 +64,37 @@
         "eps": 19.98999989972496,
         "requiredReturn": 0.105
       },
-      "included": true,
-      "normalizedWeight": 0.5095541401273885,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.66x dari median metode."
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 8.49776091145732,
+      "base": 11.332963071520965,
+      "bull": 14.16816523158461,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 32239746019.0,
+        "netDebt": -64211850654.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.60x dari median metode."
     },
     {
       "name": "Adjusted Asset Floor",
@@ -90,7 +119,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 63.58x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 17.64x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -124,17 +153,17 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 19.9900 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 19.9900 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
     ],
     "historyYears": 3.6057494866529773,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 0,
+    "independentFamilies": 0,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP"
-    ],
-    "valuationConfidence": 60
+    "outlierMethodCount": 4,
+    "reviewFlags": [],
+    "valuationConfidence": 0
   },
   "raw": {
     "epsTTM": 19.98999989972496,
@@ -178,14 +207,14 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.19-sector-waterfall+3.19-sector-waterfall-qc",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "BELUM_DINILAI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
@@ -203,8 +232,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
@@ -284,13 +313,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.2751877487669244,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "NO_DEFENSIBLE_METHOD",
+    "reason": "NO_VALID_METHOD",
+    "policy": "No value is fabricated or anchored to market price."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.19-sector-waterfall-qc"

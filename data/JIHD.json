@@ -1,7 +1,7 @@
 {
   "ticker": "JIHD.JK",
   "name": "PT Jakarta International Hotels & Development Tbk",
-  "asOf": "2026-09-17T23:13:37.260166+00:00",
+  "asOf": "2026-09-17T23:37:36.460878+00:00",
   "price": 430.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 383.54917970743264,
-    "base": 555.6376957205541,
-    "bull": 714.90479521016,
-    "dispersion": 0.29606673170665204,
-    "agreement": "MEDIUM",
+    "bear": 455.20032065665345,
+    "base": 675.3189635188327,
+    "bull": 897.7660154040406,
+    "dispersion": 0.32115672458468375,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false
@@ -76,8 +76,33 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4000000000000001,
+      "normalizedWeight": 0.18122977346278324,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 641.2236662016079,
+      "base": 918.2234350703743,
+      "bull": 1264.473146156332,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 1612859188000.0,
+        "netDebt": -364434445000.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.21877022653721695,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -105,15 +130,16 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 65
+    "valuationConfidence": 72
   },
   "raw": {
     "epsTTM": null,
@@ -122,7 +148,7 @@
     "currentPBV": 0.2857282071895415,
     "roe": -0.02308,
     "fcf": 127462957056.0,
-    "growthNormalized": 0.026799359372909996,
+    "growthNormalized": -0.2079610462742671,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1001487335424.0,
@@ -132,8 +158,9 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.026799359372909996,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.2079610462742671
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -151,47 +178,93 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -35326159000.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.2079610462742671,
+    "confidence": 0.75,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.01094578912128763
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.013118971032142213
+          }
+        ],
+        "normalGrowth": 0.005097384314332264,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.037973392599970235
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.09502386270596452
+          }
+        ],
+        "normalGrowth": -0.07600703933729976,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.037973392599970235
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.09502386270596452
+          }
+        ],
+        "normalGrowth": -0.07600703933729976,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.35964178482334264
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.5061400682280723
+          }
+        ],
+        "normalGrowth": -0.4573073070931624,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "operatingCashFlow": {
         "observations": [],
@@ -200,10 +273,21 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.0528721864131072
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.300975790513601
+          }
+        ],
+        "normalGrowth": 0.18302646487136492,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       }
     },
     "notes": [
@@ -229,7 +313,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.2921806877222188,
+    "baseToPrice": 1.5705092174856574,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

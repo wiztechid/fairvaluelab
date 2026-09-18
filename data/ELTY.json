@@ -1,7 +1,7 @@
 {
   "ticker": "ELTY.JK",
   "name": "PT Bakrieland Development Tbk",
-  "asOf": "2026-09-17T23:15:10.213661+00:00",
+  "asOf": "2026-09-17T23:39:46.780773+00:00",
   "price": 35.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 34.96241485959271,
-    "base": 40.659808903829756,
-    "bull": 46.905880494136134,
-    "dispersion": 0.6834728272141252,
+    "bear": 24.51491713559679,
+    "base": 30.2391968686271,
+    "bull": 36.426928943179256,
+    "dispersion": 0.4849141539835403,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -35,7 +35,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2601196272082348,
+      "normalizedWeight": 0.2197156620843614,
       "qcStatus": "VALID"
     },
     {
@@ -51,7 +51,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.20656558631242172,
+      "normalizedWeight": 0.17448008459640466,
       "qcStatus": "VALID"
     },
     {
@@ -76,7 +76,26 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.42064264849074967,
+      "normalizedWeight": 0.3553048995417694,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 6.6566000000000045,
+      "base": 20.0,
+      "bull": 33.343399999999995,
+      "confidence": 0.82,
+      "relevance": 0.65,
+      "rawWeight": 0.533,
+      "bands": {
+        "mean": 13.851631199960845,
+        "sd": 4.521835698647446
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.25049935377746446,
       "qcStatus": "VALID"
     },
     {
@@ -98,10 +117,11 @@
           0.95
         ]
       },
-      "included": true,
-      "normalizedWeight": 0.11267213798859366,
-      "qcStatus": "VALID",
-      "countsForIndependence": false
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": false,
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.44x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -130,15 +150,16 @@
     "totalInputs": 7,
     "guards": [
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 4,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 0,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 59
+    "valuationConfidence": 64
   },
   "raw": {
     "epsTTM": null,
@@ -147,7 +168,7 @@
     "currentPBV": 0.2740805401049169,
     "roe": -0.0075499997,
     "fcf": 79264997376.0,
-    "growthNormalized": -0.016109104354612002,
+    "growthNormalized": -0.2,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 1523267010560.0,
@@ -157,8 +178,9 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.016109104354612002,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.2
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -174,43 +196,84 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
+      "name": "Historical Dividend Yield",
+      "family": "income",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
       "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "ebit": 64128000000.0,
+        "netDebt": 908499000000.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      }
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 1425943000000.0,
+        "netDebt": 908499000000.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": -0.2,
+    "confidence": 0.48,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.02875638735569308
+          }
+        ],
+        "normalGrowth": -0.02875638735569308,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.37564587028611085
+          }
+        ],
+        "normalGrowth": -0.37564587028611085,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.540545304971207
+          }
+        ],
+        "normalGrowth": -0.540545304971207,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
         "observations": [],
@@ -225,10 +288,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.8055261411608567
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -254,7 +323,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.1617088258237074,
+    "baseToPrice": 0.8639770533893457,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
