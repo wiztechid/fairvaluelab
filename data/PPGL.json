@@ -1,7 +1,7 @@
 {
   "ticker": "PPGL.JK",
   "name": "PT Prima Globalindo Logistik Tbk",
-  "asOf": "2026-09-18T01:37:54.334577+00:00",
+  "asOf": "2026-09-18T09:42:47.037033+00:00",
   "price": 468.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,15 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 187.41252010012278,
-    "base": 946.7554472409348,
-    "bull": 1853.8022371410177,
-    "dispersion": 0.78005288054964,
-    "agreement": "LOW",
-    "available": true,
+    "bear": 1080.7314160743326,
+    "base": 1685.2747610372887,
+    "bull": 2093.3086347578915,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "FCF Yield"
   },
   "methods": [
     {
@@ -35,29 +36,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.49606299212598426,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 162.4241840867731,
-      "base": 208.23613344458087,
-      "bull": 254.04808280238865,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 23.923999488087766,
-        "requiredReturn": 0.11488880000000001
-      },
-      "included": true,
-      "normalizedWeight": 0.5039370078740157,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -88,18 +69,17 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 23.9240 per saham."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (FCF Yield); belum cukup bukti untuk FV gabungan."
     ],
-    "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "historyYears": 4.991101984941821,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP",
-      "CROSS_FAMILY_CONFLICT"
-    ],
-    "valuationConfidence": 15,
+    "reviewFlags": [],
+    "valuationConfidence": 26,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -110,24 +90,12 @@
         "base": 1685.2747610372887,
         "bull": 2093.3086347578915,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 162.4241840867731,
-        "base": 208.23613344458087,
-        "bull": 254.04808280238865,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 8.09309476294997,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 23.923999488087766,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -143,26 +111,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 23.924
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 23.923998976175533
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.0614207513,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -249,16 +213,10 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 2.0229817248737922,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    },
-    "familySpreadRatio": 8.09309476294997,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    "required": false,
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
