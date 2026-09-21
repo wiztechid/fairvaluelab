@@ -1,7 +1,7 @@
 {
   "ticker": "KIAS.JK",
   "name": "PT Keramika Indonesia Assosiasi Tbk",
-  "asOf": "2026-09-18T09:37:29.437169+00:00",
+  "asOf": "2026-09-21T09:39:10.577879+00:00",
   "price": 21.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 11.04376436119699,
-    "base": 21.0,
-    "bull": 30.95623563880301,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 20.717253070623386,
+    "base": 33.893347073022184,
+    "bull": 49.11893512117031,
+    "dispersion": 0.38040937784172996,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical PBV 5Y"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -45,9 +44,34 @@
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.5185185185185185,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 30.39074178004978,
+      "base": 46.786694146044375,
+      "bull": 67.28163460353761,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 611942000000.0,
+        "netDebt": -25347000000.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.48148148148148157,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -69,17 +93,15 @@
     "guards": [
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.991101984941821,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 22,
+    "valuationConfidence": 49,
     "familyConsensus": [
       {
         "family": "book",
@@ -90,9 +112,21 @@
         "base": 21.0,
         "bull": 30.95623563880301,
         "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 30.39074178004978,
+        "base": 46.786694146044375,
+        "bull": 67.28163460353761,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.2279378164783035,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
@@ -111,13 +145,14 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.01887946708959165,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -137,15 +172,17 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -11048000000.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
@@ -156,10 +193,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.04302106969205832
+          }
+        ],
+        "normalGrowth": 0.04302106969205832,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -214,9 +257,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.6139689082391517,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

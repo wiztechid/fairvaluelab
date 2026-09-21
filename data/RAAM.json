@@ -1,8 +1,8 @@
 {
   "ticker": "RAAM.JK",
   "name": "PT Tripar Multivision Plus Tbk",
-  "asOf": "2026-09-18T09:40:02.390185+00:00",
-  "price": 174.0,
+  "asOf": "2026-09-21T09:42:55.517398+00:00",
+  "price": 173.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
     "valuationProfile": "Barang Konsumen Non-Primer",
@@ -25,12 +25,12 @@
   "methods": [],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 184.15,
-    "ma50": 193.7,
-    "ma200": 214.65,
-    "rsi14": 19.354838709677423,
-    "return1m": -0.05434782608695654,
-    "return3m": -0.24347826086956526
+    "ma20": 183.05,
+    "ma50": 193.22,
+    "ma200": 214.305,
+    "rsi14": 20.689655172413794,
+    "return1m": -0.06486486486486487,
+    "return3m": -0.2207207207207207
   },
   "quality": {
     "cashConversion": null,
@@ -42,10 +42,11 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
     ],
-    "historyYears": 3.3648186173853527,
+    "historyYears": 3.373032169746749,
     "validMethodCount": 0,
     "independentFamilies": 0,
     "diagnosticCount": 4,
@@ -59,19 +60,20 @@
     "epsTTM": null,
     "bvps": 190.2653713381433,
     "currentPE": null,
-    "currentPBV": 0.9145121825177732,
+    "currentPBV": 0.9092563653768665,
     "roe": -0.0983,
     "fcf": -3882429440.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 1185569964032.0,
+    "marketCap": 1178756317184.0,
     "shares": 6813620000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
@@ -100,16 +102,33 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -40142046863.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 180957047079.0,
+        "netDebt": 323151506107.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -119,10 +138,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.2888782757062853
+          }
+        ],
+        "normalGrowth": 0.2888782757062853,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -149,10 +174,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.6323561894962701
+          }
+        ],
+        "normalGrowth": -0.6323561894962701,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [

@@ -1,7 +1,7 @@
 {
   "ticker": "MCAS.JK",
   "name": "PT M Cash Integrasi Tbk",
-  "asOf": "2026-09-18T09:41:46.340688+00:00",
+  "asOf": "2026-09-21T09:45:30.049847+00:00",
   "price": 266.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 765.1595936814774,
-    "base": 1025.0,
-    "bull": 1284.8404063185228,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 922.5,
+    "base": 3429.5830336931513,
+    "bull": 6417.582674124933,
+    "dispersion": 0.7011298487512555,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical PBV 5Y"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -41,23 +40,48 @@
         "minus1": 765.1595936814774,
         "base": 1025.0,
         "plus1": 1284.8404063185228,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.40000000000000013,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 3648.3582922253777,
+      "base": 5834.1660673863025,
+      "bull": 8566.425786337457,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 4737712122968.0,
+        "netDebt": 153289358838.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.6,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 281.5,
-    "ma50": 253.52,
-    "ma200": 390.71,
-    "rsi14": 36.36363636363636,
-    "return1m": -0.06338028169014087,
-    "return3m": 0.27884615384615374
+    "ma20": 279.8,
+    "ma50": 255.66,
+    "ma200": 388.065,
+    "rsi14": 37.5,
+    "return1m": -0.09523809523809523,
+    "return3m": 0.35025380710659904
   },
   "quality": {
     "cashConversion": null,
@@ -68,18 +92,20 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
+      "Extreme Valuation Review: Base FV = 14.70x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 30,
+    "reviewFlags": [
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
+    ],
+    "valuationConfidence": 2,
     "familyConsensus": [
       {
         "family": "book",
@@ -90,9 +116,23 @@
         "base": 1025.0,
         "bull": 1284.8404063185228,
         "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 3648.3582922253777,
+        "base": 5834.1660673863025,
+        "bull": 8566.425786337457,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 5.691869334035417,
+    "forensicChecks": [
+      "NON_POSITIVE_EARNINGS"
+    ]
   },
   "raw": {
     "epsTTM": null,
@@ -101,7 +141,7 @@
     "currentPBV": 1.4089446681437292,
     "roe": -0.07916,
     "fcf": -195270541312.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": 0.2582270152626262,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 230620725248.0,
@@ -113,12 +153,12 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.2582270152626262
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -141,46 +181,70 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.2582270152626262,
+    "confidence": 0.64,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.40794241807907705
+          }
+        ],
+        "normalGrowth": -0.40794241807907705,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 5.342678548605571
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 1.641771957068245
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.13037835877104365
+          }
+        ],
+        "normalGrowth": 0.13037835877104365,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -216,10 +280,27 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "direction": "ABOVE_MARKET",
+    "baseToPrice": 12.893169299598313,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": [
+      "NON_POSITIVE_EARNINGS"
+    ]
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,8 +1,8 @@
 {
   "ticker": "HOKI.JK",
   "name": "PT Buyung Poetra Sembada Tbk",
-  "asOf": "2026-09-18T09:38:15.682858+00:00",
-  "price": 50.0,
+  "asOf": "2026-09-21T09:40:19.981261+00:00",
+  "price": 52.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 81.5524097838862,
-    "base": 110.57644056384957,
-    "bull": 139.60047134381296,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 89.95187430321664,
+    "base": 134.94834501167992,
+    "bull": 198.23254646605622,
+    "dispersion": 0.007793018789737992,
+    "agreement": "HIGH",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical PBV 5Y"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -36,28 +35,73 @@
       "bands": {
         "mean": 1.8101925359766684,
         "sd": 0.475138136242588,
-        "current": 0.8185254140692919,
-        "z": -2.0871132966709873,
+        "current": 0.8512664306320635,
+        "z": -2.0182048802224806,
         "minus1": 81.5524097838862,
         "base": 110.57644056384957,
         "plus1": 139.60047134381296,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.21x dari median metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 96.0617809100755,
+      "base": 136.0,
+      "bull": 200.0,
+      "confidence": 0.68,
+      "relevance": 0.85,
+      "rawWeight": 0.5780000000000001,
+      "bands": {
+        "mean": 0.007352941176470588,
+        "sd": 0.00305702614379085
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.6,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 83.84196769635777,
+      "base": 133.89669002335987,
+      "bull": 196.46509293211244,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 1211043057867.0,
+        "netDebt": 36328312937.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.39999999999999997,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 55.05,
+    "ma20": 54.85,
     "ma50": 54.54,
-    "ma200": 64.82,
-    "rsi14": 22.222222222222214,
-    "return1m": -0.1071428571428571,
-    "return3m": -0.09090909090909094
+    "ma200": 64.705,
+    "rsi14": 30.0,
+    "return1m": -0.054545454545454564,
+    "return3m": -0.054545454545454564
   },
   "quality": {
     "cashConversion": null,
@@ -68,55 +112,68 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 30,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 48,
     "familyConsensus": [
       {
-        "family": "book",
+        "family": "income",
         "methods": [
-          "Historical PBV 5Y"
+          "Historical Dividend Yield"
         ],
-        "bear": 81.5524097838862,
-        "base": 110.57644056384957,
-        "bull": 139.60047134381296,
+        "bear": 96.0617809100755,
+        "base": 136.0,
+        "bull": 200.0,
+        "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 83.84196769635777,
+        "base": 133.89669002335987,
+        "bull": 196.46509293211244,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.0157084538555299,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
     "bvps": 61.085458240600545,
     "currentPE": null,
-    "currentPBV": 0.8185254140692919,
+    "currentPBV": 0.8512664306320635,
     "roe": -0.14093,
     "fcf": -99136126976.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 483887611904.0,
+    "marketCap": 503243112448.0,
     "shares": 9677752680.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -138,16 +195,11 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -6483741275.0
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -157,10 +209,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.07706452990038692
+          }
+        ],
+        "normalGrowth": 0.07706452990038692,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -187,10 +245,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.814928687582869
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -215,9 +279,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 2.5951604809938447,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

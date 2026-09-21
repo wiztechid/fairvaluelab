@@ -1,8 +1,8 @@
 {
   "ticker": "APII.JK",
   "name": "PT Arita Prima Indonesia Tbk",
-  "asOf": "2026-09-18T09:37:13.369035+00:00",
-  "price": 200.0,
+  "asOf": "2026-09-21T09:38:47.311042+00:00",
+  "price": 195.0,
   "companyProfile": {
     "sector": "Perindustrian",
     "valuationProfile": "Perindustrian",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 290.52077446347323,
-    "base": 446.1836615095607,
-    "bull": 722.6779986818565,
-    "dispersion": 0.1975214231290601,
-    "agreement": "LIMITED",
-    "available": false,
-    "indicative": true,
+    "bear": 204.31362685654005,
+    "base": 307.5853150088329,
+    "bull": 394.03709354118337,
+    "dispersion": 0.4002204936509745,
+    "agreement": "LOW",
+    "available": true,
+    "indicative": false,
     "referenceOnly": false,
-    "evidenceLevel": "INDICATIVE"
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,10 +35,9 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "indicativeWeight": 0.5573770491803279
+      "included": true,
+      "normalizedWeight": 0.3344262295081967,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -52,10 +51,29 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.2655737704918033,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 139.52342794822397,
+      "base": 178.8761896772102,
+      "bull": 218.22895140619642,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 18.78199991610707,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID",
-      "indicativeWeight": 0.4426229508196722
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -68,12 +86,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 192.45,
-    "ma50": 188.48,
-    "ma200": 191.45,
-    "rsi14": 62.50000000000001,
-    "return1m": 0.05263157894736836,
-    "return3m": 0.1560693641618498
+    "ma20": 192.85,
+    "ma50": 188.68,
+    "ma200": 191.475,
+    "rsi14": 54.054054054054056,
+    "return1m": 0.020942408376963373,
+    "return3m": 0.0893854748603351
   },
   "quality": {
     "cashConversion": null,
@@ -85,18 +103,15 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 18.7820 per saham."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 42,
-    "indicativeMethodCount": 2,
+    "valuationConfidence": 54,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -108,12 +123,24 @@
         "base": 436.2944403404556,
         "bull": 569.8452356761703,
         "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 139.52342794822397,
+        "base": 178.8761896772102,
+        "bull": 218.22895140619642,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.4390861697566777,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 18.78199991610707,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -122,29 +149,33 @@
     "growthNormalized": 0.048573500000000006,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 215152001024.0,
+    "marketCap": 209773199360.0,
     "shares": 1075760000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 18.782
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 18.781999832214133
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.048573500000000006,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "INDIKATIF",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -162,8 +193,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
@@ -232,9 +263,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "LIMITED_EVIDENCE",
-    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.5773605897888865,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

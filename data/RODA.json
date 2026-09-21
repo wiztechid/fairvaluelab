@@ -1,8 +1,8 @@
 {
   "ticker": "RODA.JK",
   "name": "PT Pikko Land Development Tbk",
-  "asOf": "2026-09-18T09:41:25.314421+00:00",
-  "price": 64.0,
+  "asOf": "2026-09-21T09:44:58.326770+00:00",
+  "price": 63.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
@@ -67,12 +67,12 @@
       "bands": {
         "mean": 0.3405982429031829,
         "sd": 0.07584575532627619,
-        "current": 0.46379335203837674,
-        "z": 1.6242848212827252,
+        "current": 0.4565465809127771,
+        "z": 1.528738655324918,
         "minus1": 36.53385528372123,
         "base": 47.0,
         "plus1": 57.46614471627877,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
@@ -115,12 +115,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 64.35,
-    "ma50": 64.02,
-    "ma200": 60.33,
-    "rsi14": 52.38095238095237,
-    "return1m": -0.09859154929577463,
-    "return3m": 0.16363636363636358
+    "ma20": 64.15,
+    "ma50": 64.1,
+    "ma200": 60.42,
+    "rsi14": 47.61904761904762,
+    "return1m": -0.07352941176470584,
+    "return3m": 0.16666666666666674
   },
   "quality": {
     "cashConversion": null,
@@ -130,15 +130,16 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
-    "historyYears": 4.993839835728953,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 4,
     "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 59,
+    "valuationConfidence": 67,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -170,21 +171,22 @@
     "epsTTM": null,
     "bvps": 137.9924910926802,
     "currentPE": null,
-    "currentPBV": 0.46379335203837674,
+    "currentPBV": 0.4565465809127771,
     "roe": -0.033770002,
     "fcf": 100893474816.0,
-    "growthNormalized": 0.14312890034839446,
+    "growthNormalized": -0.1279631694707577,
     "costOfEquity": 0.10529480000000001,
     "terminalGrowth": 0.035,
-    "marketCap": 869896224768.0,
+    "marketCap": 856304123904.0,
     "shares": 13592128209.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.14312890034839446,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.1279631694707577
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -202,47 +204,88 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -25698918121.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 155642205153.0,
+        "netDebt": 371611036595.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.1279631694707577,
+    "confidence": 0.72,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.05286035805005329
+          }
+        ],
+        "normalGrowth": 0.05286035805005329,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.9200846703387358
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.9200846703387358
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.02006138421540382
+          }
+        ],
+        "normalGrowth": 0.02006138421540382,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -251,10 +294,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.664565766061772
+          }
+        ],
+        "normalGrowth": -0.664565766061772,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -281,7 +330,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.3550984182964851,
+    "baseToPrice": 1.376607916999604,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

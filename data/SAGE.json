@@ -1,7 +1,7 @@
 {
   "ticker": "SAGE.JK",
   "name": "PT Saptausaha Gemilangindah Tbk",
-  "asOf": "2026-09-18T09:41:25.950060+00:00",
+  "asOf": "2026-09-21T09:44:59.423167+00:00",
   "price": 30.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -51,8 +51,8 @@
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 30.25,
-    "ma50": 31.74,
+    "ma20": 30.2,
+    "ma50": 31.78,
     "ma200": 32.255,
     "rsi14": 53.33333333333333,
     "return1m": 0.0,
@@ -68,10 +68,11 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "Referensi Nilai dari satu metode valid (Adjusted Asset Floor); belum cukup bukti untuk FV gabungan."
     ],
-    "historyYears": 3.5318275154004106,
+    "historyYears": 3.540041067761807,
     "validMethodCount": 1,
     "independentFamilies": 0,
     "diagnosticCount": 4,
@@ -98,6 +99,7 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
@@ -126,16 +128,33 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -3706208882.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 3814795277.0,
+        "netDebt": 20994369768.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -145,10 +164,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 52.22848250602063
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -175,10 +200,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 7.157996823781346
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [

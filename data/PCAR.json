@@ -1,7 +1,7 @@
 {
   "ticker": "PCAR.JK",
   "name": "PT Prima Cakrawala Abadi Tbk",
-  "asOf": "2026-09-18T09:38:35.308678+00:00",
+  "asOf": "2026-09-21T09:40:47.556899+00:00",
   "price": 44.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 48.85546170388583,
-    "base": 50.361414749775676,
-    "bull": 51.867367795665515,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 45.32527327479811,
+    "base": 126.26664152823258,
+    "bull": 222.38905513735844,
+    "dispersion": 0.601150278963307,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical PBV 5Y"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -41,20 +40,45 @@
         "minus1": 48.85546170388583,
         "base": 50.361414749775676,
         "plus1": 51.867367795665515,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.4530744336569579,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 122.34259320969733,
+      "base": 202.17186830668948,
+      "bull": 301.9584621779297,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 232835392352.0,
+        "netDebt": 20251745157.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.5469255663430421,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 42.55,
-    "ma50": 41.42,
-    "ma200": 40.265,
+    "ma20": 42.6,
+    "ma50": 41.52,
+    "ma200": 40.31,
     "rsi14": 60.0,
     "return1m": 0.023255813953488413,
     "return3m": 0.1282051282051282
@@ -68,17 +92,19 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Extreme Valuation Review: Base FV = 3.03x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 30,
+    "reviewFlags": [
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 7,
     "familyConsensus": [
       {
         "family": "book",
@@ -89,9 +115,21 @@
         "base": 50.361414749775676,
         "bull": 51.867367795665515,
         "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 122.34259320969733,
+        "base": 202.17186830668948,
+        "bull": 301.9584621779297,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 4.014419954467026,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
@@ -110,13 +148,14 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.02102805568434815,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -138,15 +177,17 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -9361855035.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -157,10 +198,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 1.2154193047806512
+          }
+        ],
+        "normalGrowth": 1.2154193047806512,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -214,10 +261,25 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "direction": "ABOVE_MARKET",
+    "baseToPrice": 2.8696963983689225,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded.",
+    "familySpreadRatio": 4.014419954467026
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

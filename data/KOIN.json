@@ -1,7 +1,7 @@
 {
   "ticker": "KOIN.JK",
   "name": "PT Kokoh Inti Arebama Tbk",
-  "asOf": "2026-09-18T09:37:31.353956+00:00",
+  "asOf": "2026-09-21T09:39:13.455085+00:00",
   "price": 78.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,17 +12,57 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false,
+    "bear": 47.46908579395715,
+    "base": 54.92857153071429,
+    "bull": 62.38805726747143,
+    "dispersion": 0.2561768507199832,
+    "agreement": "MEDIUM",
+    "available": true,
     "indicative": false,
     "referenceOnly": false,
-    "evidenceLevel": "UNVALUED"
+    "familyConsensus": true
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 63.0696,
+      "base": 69.0,
+      "bull": 74.9304,
+      "confidence": 0.82,
+      "relevance": 1.0,
+      "rawWeight": 0.82,
+      "bands": {
+        "mean": 1.5951751745442493,
+        "sd": 0.38560130382849206
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.5324675324675324,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 31.86857158791429,
+      "base": 40.85714306142857,
+      "bull": 49.84571453494286,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 4.29000002145,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.4675324675324675,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    }
+  ],
   "dcfDiagnostics": {
     "terminalValueShare": 0.7096883838595447,
     "bearTerminalValueShare": 0.6313413487529989,
@@ -35,7 +75,7 @@
   "technical": {
     "ma20": 78.0,
     "ma50": 78.0,
-    "ma200": 81.47,
+    "ma200": 81.5,
     "rsi14": null,
     "return1m": 0.0,
     "return3m": 0.08333333333333326
@@ -53,21 +93,43 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 4.2900 per saham."
     ],
     "historyYears": 4.991101984941821,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0,
-    "familyConsensus": [],
-    "familyConsensusCount": 0
+    "valuationConfidence": 55,
+    "familyConsensus": [
+      {
+        "family": "enterprise",
+        "methods": [
+          "Historical EV/EBITDA"
+        ],
+        "bear": 63.0696,
+        "base": 69.0,
+        "bull": 74.9304,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 31.86857158791429,
+        "base": 40.85714306142857,
+        "bull": 49.84571453494286,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.6888111803671328,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 4.29000002145,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -83,22 +145,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 4.29
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 4.2900000429
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.00884467307342196,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "BELUM_DINILAI",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -107,17 +173,10 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -128,10 +187,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.15746737461704807
+          }
+        ],
+        "normalGrowth": 0.15746737461704807,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -158,10 +223,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.9720191868433075
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -186,9 +257,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "NO_DEFENSIBLE_METHOD",
-    "reason": "NO_VALID_METHOD",
-    "policy": "No value is fabricated or anchored to market price."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.7042124555219781,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

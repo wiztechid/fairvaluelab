@@ -1,7 +1,7 @@
 {
   "ticker": "BOBA.JK",
   "name": "PT Formosa Ingredient Factory Tbk",
-  "asOf": "2026-09-18T09:37:53.539622+00:00",
+  "asOf": "2026-09-21T09:39:48.595285+00:00",
   "price": 206.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 69.69474741448803,
-    "base": 91.00867935424313,
-    "bull": 113.26051972681196,
-    "dispersion": 0.3239707295180383,
+    "bear": 58.186267642522694,
+    "base": 126.03123747626078,
+    "bull": 215.6839890923257,
+    "dispersion": 0.4917537990167439,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3344262295081967,
+      "normalizedWeight": 0.3010981225646475,
       "qcStatus": "VALID"
     },
     {
@@ -52,7 +52,26 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2655737704918033,
+      "normalizedWeight": 0.23910733262486716,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 148.29685827475623,
+      "base": 196.07635372029608,
+      "bull": 289.2784531971231,
+      "confidence": 0.68,
+      "relevance": 0.85,
+      "rawWeight": 0.5780000000000001,
+      "bands": {
+        "mean": 0.03060032424184627,
+        "sd": 0.009859062894215174
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.20474672334396032,
       "qcStatus": "VALID"
     },
     {
@@ -71,7 +90,7 @@
         "requiredReturn": 0.14455640000000003
       },
       "included": true,
-      "normalizedWeight": 0.4,
+      "normalizedWeight": 0.25504782146652494,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -86,12 +105,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 211.9,
-    "ma50": 221.52,
-    "ma200": 218.2,
+    "ma20": 211.7,
+    "ma50": 220.56,
+    "ma200": 218.275,
     "rsi14": 38.888888888888886,
     "return1m": -0.01904761904761909,
-    "return3m": -0.3481012658227848
+    "return3m": -0.4046242774566474
   },
   "quality": {
     "cashConversion": null,
@@ -105,15 +124,15 @@
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 16.9660 per saham."
     ],
-    "historyYears": 4.878850102669404,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "historyYears": 4.887063655030801,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "LARGE_MARKET_GAP"
+      "CROSS_FAMILY_CONFLICT"
     ],
-    "valuationConfidence": 30,
+    "valuationConfidence": 44,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -127,6 +146,16 @@
         "weight": 0.25
       },
       {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 148.29685827475623,
+        "base": 196.07635372029608,
+        "bull": 289.2784531971231,
+        "weight": 0.25
+      },
+      {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
@@ -137,8 +166,8 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.8153657121310303,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 3.0328241610620617,
     "forensicChecks": []
   },
   "raw": {
@@ -175,7 +204,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -190,13 +219,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -264,14 +286,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.441789705603122,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 0.6118021236711688,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 3.0328241610620617,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

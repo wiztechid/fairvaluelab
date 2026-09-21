@@ -1,8 +1,8 @@
 {
   "ticker": "KBLM.JK",
   "name": "PT Kabelindo Murni Tbk",
-  "asOf": "2026-09-18T09:37:28.739356+00:00",
-  "price": 372.0,
+  "asOf": "2026-09-21T09:39:09.697404+00:00",
+  "price": 368.0,
   "companyProfile": {
     "sector": "Perindustrian",
     "valuationProfile": "Perindustrian",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 504.07279864652946,
-    "base": 774.7422871437261,
-    "bull": 1252.6658971204376,
-    "dispersion": 0.19496983510348995,
-    "agreement": "LIMITED",
-    "available": false,
-    "indicative": true,
+    "bear": 215.775,
+    "base": 498.76892708981535,
+    "bull": 833.5666395975938,
+    "dispersion": 0.46551400639653395,
+    "agreement": "LOW",
+    "available": true,
+    "indicative": false,
     "referenceOnly": false,
-    "evidenceLevel": "INDICATIVE"
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,10 +35,9 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "indicativeWeight": 0.5573770491803279
+      "included": true,
+      "normalizedWeight": 0.33442622950819667,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -52,10 +51,49 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": true,
+      "normalizedWeight": 0.2655737704918033,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 186.5786493044919,
+      "base": 239.75,
+      "bull": 335.3057264270218,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.029197080291970802,
+        "sd": 0.008320610108800437
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.4,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 23.117714092229072,
+      "base": 29.63809499003727,
+      "bull": 36.15847588784547,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 3.1119999739539135,
+        "requiredReturn": 0.105
+      },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "indicativeWeight": 0.4426229508196722
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 12.90x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -68,12 +106,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 335.5,
-    "ma50": 313.24,
-    "ma200": 321.69,
-    "rsi14": 78.18181818181819,
-    "return1m": 0.21568627450980382,
-    "return3m": 0.3381294964028776
+    "ma20": 338.7,
+    "ma50": 314.8,
+    "ma200": 321.73,
+    "rsi14": 76.78571428571429,
+    "return1m": 0.20261437908496727,
+    "return3m": 0.2432432432432432
   },
   "quality": {
     "cashConversion": null,
@@ -85,18 +123,17 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.1120 per saham."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 42,
-    "indicativeMethodCount": 2,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 1,
+    "reviewFlags": [
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 39,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -108,12 +145,24 @@
         "base": 757.7878541796307,
         "bull": 991.5340685602189,
         "weight": 0.25
+      },
+      {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 186.5786493044919,
+        "base": 239.75,
+        "bull": 335.3057264270218,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 3.160741831823277,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 3.1119999739539135,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -122,29 +171,33 @@
     "growthNormalized": 0.046080750000000004,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 416640008192.0,
+    "marketCap": 412160000000.0,
     "shares": 1120000000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 3.112
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 3.111999947907827
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.046080750000000004,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "INDIKATIF",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -157,13 +210,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -231,10 +277,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "LIMITED_EVIDENCE",
-    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 1.3553503453527591,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "familySpreadRatio": 3.160741831823277,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

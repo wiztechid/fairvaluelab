@@ -1,8 +1,8 @@
 {
   "ticker": "KOCI.JK",
   "name": "PT Kokoh Exa Nusantara Tbk",
-  "asOf": "2026-09-18T09:41:12.573728+00:00",
-  "price": 119.0,
+  "asOf": "2026-09-21T09:44:37.923478+00:00",
+  "price": 117.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 15.467435899144439,
-    "base": 20.931971690373352,
-    "bull": 26.899317169736634,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 24.91064402771103,
+    "base": 28.132652511853344,
+    "bull": 31.63481195116719,
+    "dispersion": 0.25595456448502585,
+    "agreement": "MEDIUM",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "DCF"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -36,8 +35,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.49549549549549554,
       "qcStatus": "VALID"
     },
     {
@@ -56,6 +55,25 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 34.35385215627762,
+      "base": 35.333333333333336,
+      "bull": 36.37030673259775,
+      "confidence": 0.68,
+      "relevance": 0.7,
+      "rawWeight": 0.476,
+      "bands": {
+        "mean": 0.05660377358490566,
+        "sd": 0.0016138606676342553
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.5045045045045045,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -68,12 +86,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 114.05,
-    "ma50": 108.08,
-    "ma200": 121.325,
-    "rsi14": 66.0,
-    "return1m": 0.09174311926605494,
-    "return3m": 0.3522727272727273
+    "ma20": 114.45,
+    "ma50": 108.46,
+    "ma200": 121.46,
+    "rsi14": 61.22448979591836,
+    "return1m": 0.07339449541284404,
+    "return3m": 0.2857142857142858
   },
   "quality": {
     "cashConversion": null,
@@ -85,17 +103,19 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Extreme Valuation Review: Base FV = 0.24x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
-    "historyYears": 2.951403148528405,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "historyYears": 2.9596167008898013,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 26,
+    "reviewFlags": [
+      "EXTREME_VALUATION",
+      "FORENSIC_EXTREME"
+    ],
+    "valuationConfidence": 10,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -106,9 +126,23 @@
         "base": 20.931971690373352,
         "bull": 26.899317169736634,
         "weight": 0.25
+      },
+      {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 34.35385215627762,
+        "base": 35.333333333333336,
+        "bull": 36.37030673259775,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.6880078884103973,
+    "forensicChecks": [
+      "NON_POSITIVE_EARNINGS"
+    ]
   },
   "raw": {
     "epsTTM": null,
@@ -120,20 +154,21 @@
     "growthNormalized": 0.065675,
     "costOfEquity": 0.192674,
     "terminalGrowth": 0.035,
-    "marketCap": 531641958400.0,
+    "marketCap": 522706780160.0,
     "shares": 4467579405.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.065675,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -155,13 +190,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -229,10 +257,27 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.240450021468832,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": [
+      "NON_POSITIVE_EARNINGS"
+    ]
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

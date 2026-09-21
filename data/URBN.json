@@ -1,8 +1,8 @@
 {
   "ticker": "URBN.JK",
   "name": "PT Urban Jakarta Propertindo Tbk.",
-  "asOf": "2026-09-18T09:41:29.736825+00:00",
-  "price": 230.0,
+  "asOf": "2026-09-21T09:45:05.238981+00:00",
+  "price": 252.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
@@ -35,12 +35,12 @@
       "bands": {
         "mean": 0.43748822812949273,
         "sd": 0.0910833221509304,
-        "current": 0.8209474025972168,
-        "z": 4.209982304250055,
+        "current": 0.8994728063239071,
+        "z": 5.072109440945499,
         "minus1": 97.0502228559453,
         "base": 122.56850091911657,
         "plus1": 148.08677898228785,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
@@ -77,12 +77,12 @@
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 222.0,
-    "ma50": 218.8,
-    "ma200": 200.145,
-    "rsi14": 65.0,
-    "return1m": 0.09523809523809534,
-    "return3m": 0.17948717948717952
+    "ma20": 223.6,
+    "ma50": 219.52,
+    "ma200": 200.49,
+    "rsi14": 75.86206896551724,
+    "return1m": 0.24752475247524752,
+    "return3m": 0.3263157894736841
   },
   "quality": {
     "cashConversion": null,
@@ -98,7 +98,7 @@
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.993839835728953,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 4,
@@ -124,13 +124,13 @@
     "epsTTM": null,
     "bvps": 280.16411194231574,
     "currentPE": null,
-    "currentPBV": 0.8209474025972168,
+    "currentPBV": 0.8994728063239071,
     "roe": null,
     "fcf": null,
-    "growthNormalized": -0.03,
+    "growthNormalized": 0.13000000000000003,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 717507526656.0,
+    "marketCap": 786138726400.0,
     "shares": 3119598140.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -139,7 +139,7 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.13000000000000003
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -164,47 +164,108 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -172046979277.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 7347952171.0,
+        "netDebt": 499548542177.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.13000000000000003,
+    "confidence": 0.75,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": -0.887607307909792
+          },
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.711137285212164
+          }
+        ],
+        "normalGrowth": -0.724091523474776,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": 50.957193618859336
+          },
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 5.469662145569947
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": 48.493969782220624
+          },
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 3.2569722666975363
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": 31.60137771622304
+          },
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 1.7375347651769544
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "operatingCashFlow": {
         "observations": [],
@@ -213,10 +274,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.6009356007454804
+          }
+        ],
+        "normalGrowth": -0.6009356007454804,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [

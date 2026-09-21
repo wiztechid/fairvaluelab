@@ -1,7 +1,7 @@
 {
   "ticker": "ADCP.JK",
   "name": "PT Adhi Commuter Properti Tbk",
-  "asOf": "2026-09-18T09:40:46.499746+00:00",
+  "asOf": "2026-09-21T09:43:59.759835+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -74,7 +74,7 @@
         "minus1": 7.026639307534589,
         "base": 10.85208043482388,
         "plus1": 14.677521562113174,
-        "coverageYears": 4.563997262149213
+        "coverageYears": 4.566735112936345
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
@@ -121,7 +121,7 @@
   "technical": {
     "ma20": 50.0,
     "ma50": 50.0,
-    "ma200": 52.28,
+    "ma200": 52.255,
     "rsi14": null,
     "return1m": 0.0,
     "return3m": 0.0
@@ -136,10 +136,11 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.563997262149213,
+    "historyYears": 4.566735112936345,
     "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 3,
@@ -178,6 +179,7 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
@@ -197,16 +199,33 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -2050840553610.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 197344005737.0,
+        "netDebt": 1107987911619.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -216,10 +235,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2025,
+            "quarter": 4,
+            "growth": 0.5829322320653236
+          }
+        ],
+        "normalGrowth": 0.5829322320653236,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
