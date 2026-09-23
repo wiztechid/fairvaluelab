@@ -5,6 +5,10 @@ from urllib.parse import quote_plus,urlparse,parse_qs
 from urllib.request import Request,urlopen
 from email.utils import parsedate_to_datetime
 from des_universe import TICKERS
+try:
+    ALIASES=json.load(open('data/ticker_aliases.json',encoding='utf-8'))
+except Exception:
+    ALIASES={}
 
 OUT=Path('data/news_raw.json'); HEALTH=Path('data/news_collector_status.json')
 DAYS=7
@@ -46,8 +50,12 @@ def main():
     rows=[]; failures=[]; now=datetime.now(timezone.utc)
     for t in TICKERS:
         seen={}
-        for q in QUERIES:
-            url='https://news.google.com/rss/search?q='+quote_plus(q.format(t=t)+' when:7d')+'&hl=id&gl=ID&ceid=ID:id'
+        queries=[q.format(t=t) for q in QUERIES]
+        # Company/brand aliases catch stories that omit the exchange ticker (e.g. PGN vs PGAS).
+        for alias in (ALIASES.get(t) or [])[:3]:
+            queries.append('"'+alias+'" aksi korporasi OR dividen OR buyback OR akuisisi OR ekspansi OR kontrak OR laba')
+        for query in queries:
+            url='https://news.google.com/rss/search?q='+quote_plus(query+' when:7d')+'&hl=id&gl=ID&ceid=ID:id'
             try:
                 for x in parse_rss(fetch(url),t):seen[x['id']]=x
             except Exception as e:failures.append({'ticker':t,'error':type(e).__name__+': '+str(e)[:160]})
