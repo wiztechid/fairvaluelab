@@ -3,6 +3,8 @@ from pathlib import Path
 from datetime import datetime,timezone,timedelta
 
 DATA=Path('data'); SRC=DATA/'news_raw.json'; OUT=DATA/'catalysts'; OUT.mkdir(parents=True,exist_ok=True); DAYS=7
+try: ALIASES=json.load(open(DATA/'ticker_aliases.json',encoding='utf-8'))
+except Exception: ALIASES={}
 CATEGORIES={
  'EARNINGS':['laporan keuangan','kinerja','laba','rugi bersih','pendapatan','revenue','ebitda'],
  'DIVIDEND':['dividen','dividend'],
@@ -42,10 +44,13 @@ def relevant(r):
  cats=classify(text)
  if not cats:return False,cats,'NO_MATERIAL_CATEGORY'
  if any(norm(x) in text for x in NOISE) and not any(c in cats for c in ('DIVIDEND','BUYBACK','RIGHTS','MNA','EARNINGS')):return False,cats,'MARKET_COMMENTARY'
- # ticker must appear as a token, or the story must still contain a material category.
+ # Require an explicit ticker token OR a safe company/brand alias. This prevents
+ # generic short tickers (MAIN, DATA, CARE, FAST...) from matching ordinary words.
  tokens=set(text.split())
- if t not in tokens:return False,cats,'TICKER_NOT_EXPLICIT'
- return True,cats,'MATERIAL_TICKER_EVENT'
+ ticker_hit=t in tokens
+ alias_hit=any(norm(a) in text for a in (ALIASES.get(r.get('ticker')) or []) if len(norm(a))>=4)
+ if not ticker_hit and not alias_hit:return False,cats,'ENTITY_NOT_EXPLICIT'
+ return True,cats,'MATERIAL_TICKER_EVENT_ALIAS' if alias_hit and not ticker_hit else 'MATERIAL_TICKER_EVENT'
 def fingerprint(r,cats):
  words=[w for w in norm(r.get('title')).split() if len(w)>2 and w not in STOP and w!=norm(r.get('ticker'))]
  # event signature intentionally ignores publisher and headline word order.
