@@ -2,7 +2,7 @@ import json,re,math,hashlib,unicodedata
 from pathlib import Path
 from datetime import datetime,timezone,timedelta
 
-DATA=Path('data'); SRC=DATA/'news_raw.json'; OUT=DATA/'catalysts'; OUT.mkdir(parents=True,exist_ok=True); DAYS=7
+DATA=Path('data'); SRC=DATA/'news_raw.json'; OUT=DATA/'catalysts'; OUT.mkdir(parents=True,exist_ok=True); DAYS=20
 try: ALIASES=json.load(open(DATA/'ticker_aliases.json',encoding='utf-8'))
 except Exception: ALIASES={}
 CATEGORIES={
@@ -87,18 +87,18 @@ def main():
   for g in groups:
    primary=g[0];primary['corroboration']=[{'source':x.get('source'),'sourceUrl':x.get('sourceUrl'),'title':x.get('title')} for x in g[1:4]]
    primary['duplicateCount']=len(g)-1;out.append(primary)
-  out=out[:12];published.add(t)
-  payload={'ticker':t,'historyWindow':'ROLLING_7D','windowDays':DAYS,'updatedAt':datetime.now(timezone.utc).isoformat(),
-           'sourcePolicy':'Public news discovery; material ticker events only; duplicate coverage collapsed into one event.',
+  out=out[:8];published.add(t)
+  payload={'ticker':t,'historyWindow':'ROLLING_20D','windowDays':DAYS,'updatedAt':datetime.now(timezone.utc).isoformat(),
+           'sourcePolicy':'Rolling 20D public-news discovery; material ticker events only; duplicate coverage collapsed into one event.',
            'events':out,'signals':{'eventCount':len(out),'catalystTypes':sorted({c for e in out for c in e['categories']})},
            'policy':'News is context, not an automatic fair-value input. FV changes only after measurable fundamental impact is verified.'}
   json.dump(payload,open(OUT/f'{t}.json','w',encoding='utf-8'),ensure_ascii=False,indent=2)
-  summary.append({'ticker':t,'events7D':len(out),'catalystTypes':payload['signals']['catalystTypes']})
+  summary.append({'ticker':t,'events20D':len(out),'catalystTypes':payload['signals']['catalystTypes']})
  # Remove stale per-ticker catalyst files so an old 3Y cache cannot masquerade as a current 7D result.
  for p in OUT.glob('*.json'):
   if p.name!='summary.json' and p.stem not in published:
    p.unlink()
  json.dump({'updatedAt':datetime.now(timezone.utc).isoformat(),'historyWindow':'ROLLING_7D','windowDays':DAYS,'count':len(summary),'stocks':summary},
            open(OUT/'summary.json','w',encoding='utf-8'),ensure_ascii=False,indent=2)
- print('CATALYST_7D',len(summary),'tickers',sum(x['events7D'] for x in summary),'deduped events')
+ print('CATALYST_20D',len(summary),'tickers',sum(x['events20D'] for x in summary),'deduped events')
 if __name__=='__main__':main()
