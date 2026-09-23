@@ -11,7 +11,7 @@ except Exception:
     ALIASES={}
 
 OUT=Path('data/news_raw.json'); HEALTH=Path('data/news_collector_status.json')
-DAYS=7
+DAYS=20
 UA='Mozilla/5.0 (compatible; WISSFairValue/1.0; +https://wiztechid.github.io/fairvaluelab/)'
 # Broad discovery first; the relevance gate in catalyst_7d.py decides what is publishable.
 QUERIES=[
@@ -55,7 +55,7 @@ def main():
         for alias in (ALIASES.get(t) or [])[:3]:
             queries.append('"'+alias+'" aksi korporasi OR dividen OR buyback OR akuisisi OR ekspansi OR kontrak OR laba')
         for query in queries:
-            url='https://news.google.com/rss/search?q='+quote_plus(query+' when:7d')+'&hl=id&gl=ID&ceid=ID:id'
+            url='https://news.google.com/rss/search?q='+quote_plus(query+' when:20d')+'&hl=id&gl=ID&ceid=ID:id'
             try:
                 for x in parse_rss(fetch(url),t):seen[x['id']]=x
             except Exception as e:failures.append({'ticker':t,'error':type(e).__name__+': '+str(e)[:160]})
@@ -64,5 +64,5 @@ def main():
     json.dump(rows,open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
     json.dump({'checkedAt':now.isoformat(),'windowDays':DAYS,'records':len(rows),'tickers':len(set(x['ticker'] for x in rows)),
                'failures':failures[:100]},open(HEALTH,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
-    print('NEWS_7D_COLLECTED',len(rows),'records',len(set(x['ticker'] for x in rows)),'tickers','failures',len(failures))
+    print('NEWS_20D_COLLECTED',len(rows),'records',len(set(x['ticker'] for x in rows)),'tickers','failures',len(failures))
 if __name__=='__main__':main()
