@@ -1,7 +1,7 @@
 {
   "ticker": "BIKE.JK",
   "name": "PT Sepeda Bersama Indonesia Tbk",
-  "asOf": "2026-09-23T09:39:10.638388+00:00",
+  "asOf": "2026-09-23T14:48:00.742235+00:00",
   "price": 1000.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 183.99782196689716,
-    "base": 238.32692837949259,
-    "bull": 301.3279914496502,
-    "dispersion": 0.0929748005222063,
+    "bear": 200.3613379377055,
+    "base": 250.44510173258288,
+    "bull": 326.70374743786397,
+    "dispersion": 0.009116551733194382,
     "agreement": "HIGH",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3344262295081967,
+      "normalizedWeight": 0.5414012738853503,
       "qcStatus": "VALID"
     },
     {
@@ -51,29 +51,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.2655737704918033,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 544.0507750816934,
-      "base": 692.6501766784453,
-      "bull": 952.9284527740544,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.021655953474135292,
-        "sd": 0.005915002559789366
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.77x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.21x dari median metode."
     },
     {
       "name": "Earnings Power Value",
@@ -91,7 +72,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.4,
+      "normalizedWeight": 0.4585987261146497,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -123,29 +104,26 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 26.0570 per saham.",
-      "Extreme Valuation Review: Base FV = 0.24x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 26.0570 per saham."
     ],
     "historyYears": 4.509240246406571,
-    "validMethodCount": 3,
+    "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1,
     "reviewFlags": [
-      "EXTREME_VALUATION",
-      "FORENSIC_EXTREME"
+      "LARGE_MARKET_GAP"
     ],
-    "valuationConfidence": 17,
+    "valuationConfidence": 43,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF",
-          "FCF Yield"
+          "DCF"
         ],
-        "bear": 174.42935724887045,
-        "base": 228.4919507526725,
-        "bull": 299.898457571599,
+        "bear": 207.15638919048712,
+        "base": 252.7282974588531,
+        "bull": 350.6499695480265,
         "weight": 0.25
       },
       {
@@ -160,7 +138,7 @@
       }
     ],
     "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0860859876632223,
+    "crossFamilySpreadRatio": 1.0184008558204105,
     "forensicChecks": []
   },
   "raw": {
@@ -197,7 +175,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -212,6 +190,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -279,25 +264,14 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "FORENSIC_EXTREME",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.2383269283794926,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.2504451017325829,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

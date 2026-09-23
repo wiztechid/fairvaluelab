@@ -1,7 +1,7 @@
 {
   "ticker": "KUAS.JK",
   "name": "PT Ace Oldfields Tbk",
-  "asOf": "2026-09-23T09:37:59.691944+00:00",
+  "asOf": "2026-09-23T14:46:13.576734+00:00",
   "price": 98.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,36 +12,18 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 33.9252917682677,
-    "base": 50.73898908084264,
-    "bull": 162.24209361522267,
-    "dispersion": 0.020723492917198202,
-    "agreement": "HIGH",
-    "available": true,
+    "bear": 40.39657296611452,
+    "base": 51.79047816168528,
+    "bull": 63.18438335725604,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 27.454010570420877,
-      "base": 49.6875,
-      "bull": 261.2998038731893,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.03018867924528302,
-        "sd": 0.024448146807960713
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.40000000000000013,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
@@ -57,8 +39,8 @@
         "eps": 5.438000206976954,
         "requiredReturn": 0.105
       },
-      "included": true,
-      "normalizedWeight": 0.6,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -83,26 +65,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.4380 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 5.4380 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.91170431211499,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67,
+    "valuationConfidence": 26,
     "familyConsensus": [
-      {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 27.454010570420877,
-        "base": 49.6875,
-        "bull": 261.2998038731893,
-        "weight": 0.25
-      },
       {
         "family": "earnings_power",
         "methods": [
@@ -114,9 +88,7 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0423240887886345,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 5.438000206976954,
@@ -152,7 +124,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -176,6 +148,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -244,13 +223,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.5177447865392106,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "TRJA.JK",
   "name": "PT Transkon Jaya Tbk",
-  "asOf": "2026-09-23T09:42:08.781118+00:00",
+  "asOf": "2026-09-23T14:52:32.628692+00:00",
   "price": 126.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,36 +12,18 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 222.51218566314182,
-    "base": 291.9904712947813,
-    "bull": 399.56597527333,
-    "dispersion": 0.047914136487889246,
-    "agreement": "HIGH",
-    "available": true,
+    "bear": 238.66513521985877,
+    "base": 305.9809425895625,
+    "bull": 373.29674995926626,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 206.35923610642487,
-      "base": 278.0,
-      "bull": 425.8352005873938,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.01079136690647482,
-        "sd": 0.0037463880135560975
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.40000000000000013,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
@@ -57,8 +39,8 @@
         "eps": 32.12799897190406,
         "requiredReturn": 0.105
       },
-      "included": true,
-      "normalizedWeight": 0.6,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -93,28 +75,18 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 32.1280 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 32.1280 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP"
-    ],
-    "valuationConfidence": 43,
+    "reviewFlags": [],
+    "valuationConfidence": 26,
     "familyConsensus": [
-      {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 206.35923610642487,
-        "base": 278.0,
-        "bull": 425.8352005873938,
-        "weight": 0.25
-      },
       {
         "family": "earnings_power",
         "methods": [
@@ -126,9 +98,7 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.1006508726243256,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 32.12799897190406,
@@ -164,7 +134,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -179,6 +149,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -247,13 +224,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 2.3173846928157245,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

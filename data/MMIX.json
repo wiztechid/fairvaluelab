@@ -1,7 +1,7 @@
 {
   "ticker": "MMIX.JK",
   "name": "PT Multi Medika Internasional Tbk",
-  "asOf": "2026-09-23T09:40:17.717163+00:00",
+  "asOf": "2026-09-23T14:49:41.064489+00:00",
   "price": 880.0,
   "companyProfile": {
     "sector": "Kesehatan",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 90.46220257646351,
-    "base": 122.52600147179146,
-    "bull": 156.90090814447706,
-    "dispersion": 0.26094782445392345,
-    "agreement": "MEDIUM",
-    "available": true,
-    "indicative": false,
+    "bear": 116.17826861608484,
+    "base": 159.8375693343795,
+    "bull": 210.14412301802986,
+    "dispersion": 0.05910618834058127,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -35,9 +35,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.5089820359281437,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.8762886597938144
     },
     {
       "name": "FCF Yield",
@@ -68,10 +69,11 @@
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": true,
-      "normalizedWeight": 0.0718562874251497,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": false
+      "countsForIndependence": false,
+      "indicativeWeight": 0.12371134020618557
     },
     {
       "name": "Earnings Power Value",
@@ -92,32 +94,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 6.00x dari median metode."
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
-      "bear": 62.29527397174123,
-      "base": 82.97648362133275,
-      "bull": 103.65769327092426,
-      "confidence": 0.7,
-      "relevance": 1.0,
-      "rawWeight": 0.7,
-      "warning": null,
-      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
-      "bands": {
-        "ebit": 33092867897.0,
-        "netDebt": -1208003155.0,
-        "multipleBand": [
-          9,
-          12,
-          15
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.41916167664670656,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.65x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -148,19 +125,19 @@
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 167.5600 per saham.",
-      "Extreme Valuation Review: Base FV = 0.15x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 3.7973990417522243,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
     "diagnosticCount": 2,
     "outlierMethodCount": 2,
-    "reviewFlags": [
-      "EXTREME_VALUATION",
-      "FORENSIC_EXTREME"
-    ],
-    "valuationConfidence": 15,
+    "reviewFlags": [],
+    "valuationConfidence": 46,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -171,21 +148,9 @@
         "base": 162.07551932225016,
         "bull": 210.14412301802986,
         "weight": 0.25
-      },
-      {
-        "family": "enterprise_earnings",
-        "methods": [
-          "EV / EBIT"
-        ],
-        "bear": 62.29527397174123,
-        "base": 82.97648362133275,
-        "bull": 103.65769327092426,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.953270520137847,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 167.56000133286366,
@@ -229,21 +194,21 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "Riwayat EV/EBITDA valid belum cukup.",
+      "reason": "EBITDA tidak tersedia.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -311,25 +276,10 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "FORENSIC_EXTREME",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.1392340925815812,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    "required": false,
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

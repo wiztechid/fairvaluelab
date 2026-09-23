@@ -1,7 +1,7 @@
 {
   "ticker": "ZYRX.JK",
   "name": "PT Zyrexindo Mandiri Buana Tbk",
-  "asOf": "2026-09-23T09:41:26.154576+00:00",
+  "asOf": "2026-09-23T14:51:26.242922+00:00",
   "price": 129.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,36 +12,18 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 252.68541438894837,
-    "base": 346.6621634309994,
-    "bull": 597.3494233957101,
-    "dispersion": 0.43078782417049016,
-    "agreement": "LOW",
-    "available": true,
+    "bear": 386.8800019793861,
+    "base": 496.0000025376745,
+    "bull": 605.1200030959628,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 118.49082679851061,
-      "base": 197.32432432432432,
-      "bull": 589.5788436954573,
-      "confidence": 0.68,
-      "relevance": 0.25,
-      "rawWeight": 0.17,
-      "bands": {
-        "mean": 0.024832214765100672,
-        "sd": 0.016521197413651982
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
@@ -57,8 +39,8 @@
         "eps": 52.08000026645582,
         "requiredReturn": 0.105
       },
-      "included": true,
-      "normalizedWeight": 0.6,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -83,28 +65,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 52.0800 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 52.0800 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP"
-    ],
-    "valuationConfidence": 30,
+    "reviewFlags": [],
+    "valuationConfidence": 26,
     "familyConsensus": [
-      {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 118.49082679851061,
-        "base": 197.32432432432432,
-        "bull": 589.5788436954573,
-        "weight": 0.25
-      },
       {
         "family": "earnings_power",
         "methods": [
@@ -116,9 +88,7 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 2.5136282829604104,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 52.08000026645582,
@@ -154,7 +124,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -178,6 +148,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -246,13 +223,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 2.6873035924883673,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

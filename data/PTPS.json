@@ -1,7 +1,7 @@
 {
   "ticker": "PTPS.JK",
   "name": "PT Pulau Subur Tbk",
-  "asOf": "2026-09-23T09:38:51.810149+00:00",
+  "asOf": "2026-09-23T14:47:31.820214+00:00",
   "price": 157.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 81.65454547481522,
-    "base": 128.05272969614535,
-    "bull": 234.84689867041448,
-    "dispersion": 0.3588120340060969,
-    "agreement": "LOW",
-    "available": true,
-    "indicative": false,
+    "bear": 58.99365796572456,
+    "base": 89.98228759264703,
+    "bull": 147.95757108791193,
+    "dispersion": 0.22011845986673054,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -35,9 +35,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.33442622950819667,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
@@ -51,28 +52,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.26557377049180325,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 110.1429471363349,
-      "base": 168.34008097165992,
-      "bull": 356.93873020999376,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.02673160173160173,
-        "sd": 0.014124396014943958
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.40000000000000013,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -102,15 +85,19 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 2.9568788501026693,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 54,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -122,21 +109,9 @@
         "base": 87.76537842063078,
         "bull": 112.7550671308352,
         "weight": 0.25
-      },
-      {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 110.1429471363349,
-        "base": 168.34008097165992,
-        "bull": 356.93873020999376,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.91806933441181,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -162,7 +137,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -184,6 +159,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -252,13 +234,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.8156224821410532,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

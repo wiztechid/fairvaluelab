@@ -1,7 +1,7 @@
 {
   "ticker": "EURO.JK",
   "name": "PT Estee Gold Feet Tbk",
-  "asOf": "2026-09-23T09:38:28.584569+00:00",
+  "asOf": "2026-09-23T14:46:55.175817+00:00",
   "price": 1485.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,15 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 6.50619590308438,
-    "base": 7.1158346304999505,
-    "bull": 7.725473357915522,
-    "dispersion": 0.4056135820421527,
-    "agreement": "LOW",
-    "available": true,
+    "bear": 3.2990532563065487,
+    "base": 4.229555456803268,
+    "bull": 5.160057657299986,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
     {
@@ -38,33 +39,8 @@
         "eps": 0.75,
         "requiredReturn": 0.17732360000000003
       },
-      "included": true,
-      "normalizedWeight": 0.5070422535211268,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
-      "bear": 9.713338549862211,
-      "base": 10.002113804196634,
-      "bull": 10.290889058531059,
-      "confidence": 0.7,
-      "relevance": 1.0,
-      "rawWeight": 0.7,
-      "warning": null,
-      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
-      "bands": {
-        "ebit": 245346000.0,
-        "netDebt": -22549500000.0,
-        "multipleBand": [
-          9,
-          12,
-          15
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.49295774647887325,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -89,18 +65,16 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Extreme Valuation Review: Base FV = 0.00x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.125941136208077,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "EXTREME_VALUATION",
-      "FORENSIC_EXTREME"
-    ],
-    "valuationConfidence": 4,
+    "reviewFlags": [],
+    "valuationConfidence": 30,
     "familyConsensus": [
       {
         "family": "earnings_power",
@@ -111,21 +85,9 @@
         "base": 4.229555456803268,
         "bull": 5.160057657299986,
         "weight": 0.25
-      },
-      {
-        "family": "enterprise_earnings",
-        "methods": [
-          "EV / EBIT"
-        ],
-        "bear": 9.713338549862211,
-        "base": 10.002113804196634,
-        "bull": 10.290889058531059,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 2.3648144364931234,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 0.75,
@@ -165,7 +127,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -180,14 +142,9 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 13.81887242898663,
-        "base": 14.371301278111929,
-        "bull": 14.92373012723723,
-        "price": 1485.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Graham Number",
@@ -204,8 +161,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     },
     {
@@ -285,25 +242,10 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "FORENSIC_EXTREME",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.004791807831986498,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    "required": false,
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

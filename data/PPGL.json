@@ -1,7 +1,7 @@
 {
   "ticker": "PPGL.JK",
   "name": "PT Prima Globalindo Logistik Tbk",
-  "asOf": "2026-09-23T09:42:03.776021+00:00",
+  "asOf": "2026-09-23T14:52:24.886294+00:00",
   "price": 468.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 239.26242263409893,
-    "base": 289.04988490410864,
-    "bull": 349.85542675133837,
-    "dispersion": 0.2795840983861227,
-    "agreement": "MEDIUM",
+    "bear": 187.41252010012278,
+    "base": 946.7554472409348,
+    "bull": 1853.8022371410177,
+    "dispersion": 0.78005288054964,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
@@ -35,28 +35,8 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.56x dari median metode."
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 316.10066118142475,
-      "base": 369.8636363636364,
-      "bull": 445.6627707002881,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.10679611650485436,
-        "sd": 0.01816407766990291
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.40000000000000013,
+      "normalizedWeight": 0.49606299212598426,
       "qcStatus": "VALID"
     },
     {
@@ -75,7 +55,7 @@
         "requiredReturn": 0.11488880000000001
       },
       "included": true,
-      "normalizedWeight": 0.6,
+      "normalizedWeight": 0.5039370078740157,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -113,19 +93,22 @@
     "historyYears": 4.996577686516085,
     "validMethodCount": 2,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 60,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP",
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 15,
     "familyConsensus": [
       {
-        "family": "income",
+        "family": "cashflow",
         "methods": [
-          "Historical Dividend Yield"
+          "FCF Yield"
         ],
-        "bear": 316.10066118142475,
-        "base": 369.8636363636364,
-        "bull": 445.6627707002881,
+        "bear": 1080.7314160743326,
+        "base": 1685.2747610372887,
+        "bull": 2093.3086347578915,
         "weight": 0.25
       },
       {
@@ -140,7 +123,7 @@
       }
     ],
     "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.7761741454062794,
+    "crossFamilySpreadRatio": 8.09309476294997,
     "forensicChecks": []
   },
   "raw": {
@@ -177,7 +160,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -192,6 +175,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -259,14 +249,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.6176279591968133,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 2.0229817248737922,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 8.09309476294997,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "SBMA.JK",
   "name": "PT Surya Biru Murni Acetylene Tbk",
-  "asOf": "2026-09-23T09:37:31.264592+00:00",
+  "asOf": "2026-09-23T14:45:28.913231+00:00",
   "price": 117.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,36 +12,61 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 97.01372584043881,
-    "base": 109.95461422087746,
-    "bull": 126.87934797003341,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 73.94233175947949,
+    "base": 98.34273112215104,
+    "bull": 122.74313048482257,
+    "dispersion": 0.14429742003846865,
+    "agreement": "HIGH",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical Dividend Yield"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 97.01372584043881,
-      "base": 109.95461422087746,
-      "bull": 126.87934797003341,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 60.10866338691987,
+      "base": 84.15212874168782,
+      "bull": 108.19559409645578,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
       "bands": {
-        "mean": 0.009094661529994497,
-        "sd": 0.001213158227848101
+        "normalizedEPS": 12.021732677383975,
+        "growthAdjustment": 0.0174113625,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
       },
+      "included": true,
+      "normalizedWeight": 0.4904458598726115,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 87.77600013203912,
+      "base": 112.53333350261424,
+      "bull": 137.29066687318937,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 11.816000017774495,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.5095541401273885,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -64,32 +89,43 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical Dividend Yield); belum cukup bukti untuk FV gabungan."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 11.8160 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 67,
     "familyConsensus": [
       {
-        "family": "income",
+        "family": "earnings_midcycle",
         "methods": [
-          "Historical Dividend Yield"
+          "Mid-Cycle Earnings"
         ],
-        "bear": 97.01372584043881,
-        "base": 109.95461422087746,
-        "bull": 126.87934797003341,
+        "bear": 60.10866338691987,
+        "base": 84.15212874168782,
+        "bull": 108.19559409645578,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 87.77600013203912,
+        "base": 112.53333350261424,
+        "bull": 137.29066687318937,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.3372606871068582,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 11.816000017774495,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -105,22 +141,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 11.816
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 11.816000035548992
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.04974675,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -142,6 +182,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -210,9 +257,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.8405361634371884,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

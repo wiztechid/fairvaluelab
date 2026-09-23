@@ -1,7 +1,7 @@
 {
   "ticker": "INCI.JK",
   "name": "PT Intanwijaya Internasional Tbk",
-  "asOf": "2026-09-23T09:37:15.288245+00:00",
+  "asOf": "2026-09-23T14:45:04.219752+00:00",
   "price": 805.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 365.47612732627294,
-    "base": 820.1700861965247,
-    "bull": 1357.6811451224653,
-    "dispersion": 0.4679745725443598,
+    "bear": 601.6047049977695,
+    "base": 879.8149339285561,
+    "bull": 1113.7197925321475,
+    "dispersion": 0.34565953000163546,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.302882096069869,
+      "normalizedWeight": 0.25402127098532123,
       "qcStatus": "VALID"
     },
     {
@@ -52,27 +52,53 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.29711790393013104,
+      "normalizedWeight": 0.24918695613957986,
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 309.42940669811486,
-      "base": 406.084585918081,
-      "bull": 590.5532544010098,
-      "confidence": 0.68,
-      "relevance": 0.55,
-      "rawWeight": 0.37400000000000005,
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 431.1827903228652,
+      "base": 603.6559064520112,
+      "bull": 776.1290225811573,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
       "bands": {
-        "mean": 0.0492508228422011,
-        "sd": 0.01538427507372638
+        "normalizedEPS": 86.23655806457303,
+        "growthAdjustment": 0.0246617875,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
       },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4000000000000001,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.243649468225367,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 625.1959809097774,
+      "base": 801.5333088586889,
+      "bull": 977.8706368076004,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 84.16099743016233,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.2531423046497319,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -101,17 +127,16 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 84.1610 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "CROSS_FAMILY_CONFLICT"
-    ],
-    "valuationConfidence": 39,
+    "reviewFlags": [],
+    "valuationConfidence": 59,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -125,22 +150,32 @@
         "weight": 0.25
       },
       {
-        "family": "income",
+        "family": "earnings_midcycle",
         "methods": [
-          "Historical Dividend Yield"
+          "Mid-Cycle Earnings"
         ],
-        "bear": 309.42940669811486,
-        "base": 406.084585918081,
-        "bull": 590.5532544010098,
+        "bear": 431.1827903228652,
+        "base": 603.6559064520112,
+        "bull": 776.1290225811573,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 625.1959809097774,
+        "base": 801.5333088586889,
+        "bull": 977.8706368076004,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 3.0394051615737845,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 2.0446343244271525,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 84.16099743016233,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -156,22 +191,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 84.161
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 84.16099486032464
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07046225,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -184,6 +223,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -251,16 +297,14 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 1.0188448275733226,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.09293780612243,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "familySpreadRatio": 3.0394051615737845,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

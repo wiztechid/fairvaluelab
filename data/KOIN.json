@@ -1,7 +1,7 @@
 {
   "ticker": "KOIN.JK",
   "name": "PT Kokoh Inti Arebama Tbk",
-  "asOf": "2026-09-23T09:37:58.569668+00:00",
+  "asOf": "2026-09-23T14:46:11.517079+00:00",
   "price": 78.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,36 +12,18 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 47.46908579395715,
-    "base": 54.92857153071429,
-    "bull": 62.38805726747143,
-    "dispersion": 0.2561768507199832,
-    "agreement": "MEDIUM",
-    "available": true,
+    "bear": 31.86857158791429,
+    "base": 40.85714306142857,
+    "bull": 49.84571453494286,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Earnings Power Value"
   },
   "methods": [
-    {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "bear": 63.0696,
-      "base": 69.0,
-      "bull": 74.9304,
-      "confidence": 0.82,
-      "relevance": 1.0,
-      "rawWeight": 0.82,
-      "bands": {
-        "mean": 1.5951751745442493,
-        "sd": 0.38560130382849206
-      },
-      "warning": null,
-      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
-      "included": true,
-      "normalizedWeight": 0.5324675324675324,
-      "qcStatus": "VALID"
-    },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
@@ -57,8 +39,8 @@
         "eps": 4.29000002145,
         "requiredReturn": 0.105
       },
-      "included": true,
-      "normalizedWeight": 0.4675324675324675,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -93,26 +75,18 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 4.2900 per saham."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 4.2900 per saham.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.996577686516085,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 2,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 55,
+    "valuationConfidence": 22,
     "familyConsensus": [
-      {
-        "family": "enterprise",
-        "methods": [
-          "Historical EV/EBITDA"
-        ],
-        "bear": 63.0696,
-        "base": 69.0,
-        "bull": 74.9304,
-        "weight": 0.25
-      },
       {
         "family": "earnings_power",
         "methods": [
@@ -124,9 +98,7 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.6888111803671328,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": 4.29000002145,
@@ -162,7 +134,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -173,10 +145,17 @@
       "inputs": {}
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -187,16 +166,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 0.15746737461704807
-          }
-        ],
-        "normalGrowth": 0.15746737461704807,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -223,16 +196,10 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.9720191868433075
-          }
-        ],
-        "normalGrowth": -0.75,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       }
     },
     "notes": [
@@ -257,13 +224,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.7042124555219781,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "LPIN.JK",
   "name": "PT Multi Prima Sejahtera Tbk",
-  "asOf": "2026-09-23T09:39:40.040993+00:00",
+  "asOf": "2026-09-23T14:48:42.367868+00:00",
   "price": 432.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 182.57524285630075,
-    "base": 416.4306904757226,
-    "bull": 1113.3767693363945,
-    "dispersion": 0.5925849023850989,
+    "bear": 288.760784307758,
+    "base": 392.76402563663316,
+    "bull": 485.8874541465826,
+    "dispersion": 0.55443630339828,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.33442622950819667,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -52,27 +52,28 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.26557377049180325,
+      "normalizedWeight": 0.2655737704918033,
       "qcStatus": "VALID"
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 375.10605677200397,
-      "base": 630.0,
-      "bull": 1965.8319681722455,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.07142857142857142,
-        "sd": 0.04853750000000001
-      },
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 454.4800028510204,
+      "base": 582.666670321821,
+      "bull": 710.8533377926216,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
       "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 61.18000038379121,
+        "requiredReturn": 0.105
+      },
       "included": true,
-      "normalizedWeight": 0.40000000000000013,
-      "qcStatus": "VALID"
+      "normalizedWeight": 0.4,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -101,17 +102,16 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 61.1800 per saham."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "CROSS_FAMILY_CONFLICT"
-    ],
-    "valuationConfidence": 39,
+    "reviewFlags": [],
+    "valuationConfidence": 54,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -125,22 +125,22 @@
         "weight": 0.25
       },
       {
-        "family": "income",
+        "family": "earnings_power",
         "methods": [
-          "Historical Dividend Yield"
+          "Earnings Power Value"
         ],
-        "bear": 375.10605677200397,
-        "base": 630.0,
-        "bull": 1965.8319681722455,
+        "bear": 454.4800028510204,
+        "base": 582.666670321821,
+        "bull": 710.8533377926216,
         "weight": 0.25
       }
     ],
     "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 3.1055689212270035,
+    "crossFamilySpreadRatio": 2.872240480613123,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 61.18000038379121,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -156,22 +156,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 61.18
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 61.18000076758242
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07015025,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -184,6 +188,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -251,16 +262,14 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 0.9639599316567653,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.9091759852699842,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "familySpreadRatio": 3.1055689212270035,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

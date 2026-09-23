@@ -1,7 +1,7 @@
 {
   "ticker": "IDEA.JK",
   "name": "PT Idea Indonesia Akademi Tbk",
-  "asOf": "2026-09-23T09:39:29.486477+00:00",
+  "asOf": "2026-09-23T14:48:28.437763+00:00",
   "price": 148.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 19.919100186957092,
-    "base": 30.7296872602316,
-    "bull": 53.80532968732094,
-    "dispersion": 0.41495982712783425,
+    "bear": 22.904964482198324,
+    "base": 34.373851878001716,
+    "bull": 44.000487910319,
+    "dispersion": 0.3832127829242129,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3010981225646475,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
@@ -52,26 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.23910733262486716,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 13.947371596474627,
-      "base": 23.441358024691358,
-      "bull": 73.41501324132481,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.021329822251481237,
-        "sd": 0.014519226190476192
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.20474672334396032,
+      "normalizedWeight": 0.2655737704918033,
       "qcStatus": "VALID"
     },
     {
@@ -90,7 +71,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.25504782146652494,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -122,19 +103,18 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.1900 per saham.",
-      "Extreme Valuation Review: Base FV = 0.25x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 2.1900 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "EXTREME_VALUATION",
+      "LARGE_MARKET_GAP",
       "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 9,
+    "valuationConfidence": 17,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -148,16 +128,6 @@
         "weight": 0.25
       },
       {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 13.947371596474627,
-        "base": 23.441358024691358,
-        "bull": 73.41501324132481,
-        "weight": 0.25
-      },
-      {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
@@ -168,7 +138,7 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 3,
+    "familyConsensusCount": 2,
     "crossFamilySpreadRatio": 2.2961228151151776,
     "forensicChecks": []
   },
@@ -221,6 +191,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -291,22 +268,13 @@
     "required": true,
     "status": "REVIEW",
     "reason": "FORENSIC_EXTREME",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.20763302202859188,
+    "baseToPrice": 0.23225575593244402,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    "forensicChecks": [],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
