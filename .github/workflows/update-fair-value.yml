@@ -19,6 +19,8 @@ on:
       - 'validate_engine.py'
       - 'snapshot_backtest.py'
       - 'catalyst_snapshot.py'
+      - 'collect_news_7d.py'
+      - 'catalyst_7d.py'
       - 'fv_timeline.py'
       - 'des_universe.py'
       - 'requirements.txt'
@@ -64,6 +66,10 @@ jobs:
         run: python family_consensus.py
       - name: Validate all DES valuations before publication
         run: python validate_engine.py
+      - name: Collect rolling 7D public ticker news
+        run: python collect_news_7d.py
+      - name: Build deduplicated material 7D catalysts
+        run: python catalyst_7d.py
       - name: Lock quarterly valuation snapshots and update target progress
         run: python snapshot_backtest.py
       - name: Bind cached point-in-time catalysts to locked snapshots
