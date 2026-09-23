@@ -23,6 +23,7 @@ on:
       - 'build_ticker_aliases.py'
       - 'catalyst_7d.py'
       - 'fv_timeline.py'
+      - 'sector_mos.py'
       - 'des_universe.py'
       - 'requirements.txt'
       - '.github/workflows/update-fair-value.yml'
@@ -73,6 +74,8 @@ jobs:
         run: python collect_news_7d.py
       - name: Build deduplicated material 20D catalysts
         run: python catalyst_7d.py
+      - name: Build top-10 margin of safety by DES sector
+        run: python sector_mos.py
       - name: Lock quarterly valuation snapshots and update target progress
         run: python snapshot_backtest.py
       - name: Bind cached point-in-time catalysts to locked snapshots
