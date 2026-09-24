@@ -42,6 +42,8 @@ def capped_weights(keep,cap=.60):
 def process(path):
     try:d=json.load(open(path,encoding='utf-8'))
     except:return None
+    # data/ also contains collector caches (e.g. news_raw.json) that are not ticker objects.
+    if not isinstance(d,dict) or not d.get('ticker'):return None
     upstream=d.get('engineGeneration') or d.get('engineVersion') or 'unknown';price=d.get('price');methods=d.get('methods') or [];q=d.setdefault('quality',{});guards=q.setdefault('guards',[]);keep=robust_keep(methods,price)
     independent=[m for m in keep if m.get('countsForIndependence',True)];ifam={family(m) for m in independent};suf=len(keep)>=2 and len(ifam)>=2
     if suf:
