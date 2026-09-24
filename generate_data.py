@@ -6,7 +6,8 @@ import yfinance as yf
 from des_universe import TICKERS as DES_TICKERS, SECTOR_BY_TICKER, DES_SOURCE
 
 TICKERS=[x.strip().upper() for x in os.getenv('TICKERS','').split(',') if x.strip()] or DES_TICKERS
-OUT='data'; os.makedirs(OUT,exist_ok=True)\nOHLC_OUT=os.path.join(OUT,'ohlc_cache'); os.makedirs(OHLC_OUT,exist_ok=True)
+OUT='data'; os.makedirs(OUT,exist_ok=True)
+OHLC_OUT=os.path.join(OUT,'ohlc_cache'); os.makedirs(OHLC_OUT,exist_ok=True)
 FX_CACHE={}
 def n(x):
     try:v=float(x);return v if math.isfinite(v) else None
@@ -81,7 +82,10 @@ def hist_multiple(h,annual,shares,ps,years,kind,price):
     return {'mean':med,'sd':sig,'current':cur,'z':sd(cur-med,sig) if sig>1e-12 else 0,'minus1':bear,'base':base,'plus1':bull,'coverageYears':cov}
 def analyze(sym):
     tk=sym if '.' in sym else sym+'.JK';t=yf.Ticker(tk);info=t.info or {};h=t.history(period='5y',auto_adjust=False)
-    if h.empty:raise ValueError('price unavailable')\n    # Shared market-data cache: downstream technical engines must reuse this instead of refetching Yahoo.\n    cache=h.tail(140)[['Open','High','Low','Close','Volume']].copy()\n    cache.to_csv(os.path.join(OHLC_OUT,f\"{sym.replace('.JK','')}.csv\"))
+    if h.empty:raise ValueError('price unavailable')
+    # Shared market-data cache: downstream technical engines must reuse this instead of refetching Yahoo.
+    cache=h.tail(140)[['Open','High','Low','Close','Volume']].copy()
+    cache.to_csv(os.path.join(OHLC_OUT,f\"{sym.replace('.JK','')}.csv\"))
     price=n(h.Close.dropna().iloc[-1]);ys=info.get('sector') or info.get('sectorDisp');ind=info.get('industry') or info.get('industryDisp');ds=SECTOR_BY_TICKER.get(sym.replace('.JK',''));sector,sw,note=profile(ds,ys,ind)
     inc=t.income_stmt;bs=t.balance_sheet;cf=t.cashflow;mcap=n(info.get('marketCap'));shares=n(info.get('sharesOutstanding') or info.get('impliedSharesOutstanding'));guards=[]
     qc=(info.get('currency') or 'IDR').upper();fc=(info.get('financialCurrency') or qc).upper();fx=fx_bundle(fc,qc)
