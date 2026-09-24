@@ -85,7 +85,7 @@ def analyze(sym):
     if h.empty:raise ValueError('price unavailable')
     # Shared market-data cache: downstream technical engines must reuse this instead of refetching Yahoo.
     cache=h.tail(140)[['Open','High','Low','Close','Volume']].copy()
-    cache.to_csv(os.path.join(OHLC_OUT,f\"{sym.replace('.JK','')}.csv\"))
+    cache.to_csv(os.path.join(OHLC_OUT,f"{sym.replace('.JK','')}.csv"))
     price=n(h.Close.dropna().iloc[-1]);ys=info.get('sector') or info.get('sectorDisp');ind=info.get('industry') or info.get('industryDisp');ds=SECTOR_BY_TICKER.get(sym.replace('.JK',''));sector,sw,note=profile(ds,ys,ind)
     inc=t.income_stmt;bs=t.balance_sheet;cf=t.cashflow;mcap=n(info.get('marketCap'));shares=n(info.get('sharesOutstanding') or info.get('impliedSharesOutstanding'));guards=[]
     qc=(info.get('currency') or 'IDR').upper();fc=(info.get('financialCurrency') or qc).upper();fx=fx_bundle(fc,qc)
