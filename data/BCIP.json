@@ -1,7 +1,7 @@
 {
   "ticker": "BCIP.JK",
   "name": "PT Bumi Citra Permai Tbk",
-  "asOf": "2026-09-24T10:29:30.462411+00:00",
+  "asOf": "2026-09-24T11:00:00.706081+00:00",
   "price": 60.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 66.99669846490404,
-    "base": 75.39482388169148,
-    "bull": 83.7929492984789,
-    "dispersion": 0.02452223559512068,
+    "bear": 63.5488641999656,
+    "base": 73.86966911423777,
+    "bull": 84.19047402850994,
+    "dispersion": 0.03303253397754665,
     "agreement": "HIGH",
     "available": true,
     "indicative": false,
@@ -72,6 +72,25 @@
       "qcStatus": "VALID"
     },
     {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 56.65319567008872,
+      "base": 70.81935957933038,
+      "bull": 84.98552348857203,
+      "confidence": 0.82,
+      "relevance": 0.65,
+      "rawWeight": 0.533,
+      "bands": {
+        "mean": 4.290645988081381,
+        "sd": 0.8760708961165299
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.21192842942345924,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Forward Earnings Power",
       "family": "forward_earnings",
       "bear": 67.12484938277707,
@@ -88,7 +107,7 @@
         "historicalPE": 5.360533228595159
       },
       "included": true,
-      "normalizedWeight": 0.39999999999999997,
+      "normalizedWeight": 0.18807157057654075,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
@@ -112,6 +131,32 @@
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
       "qcReason": "Ditolak cross-method outlier: deviasi 1.73x dari median metode."
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 110.09668435273475,
+      "base": 156.66420492846947,
+      "bull": 203.23172550420418,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 22195873544.0,
+        "netDebt": -2057843399.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.05x dari median metode."
     },
     {
       "name": "Adjusted Asset Floor",
@@ -169,12 +214,12 @@
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 2,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 3,
     "reviewFlags": [],
-    "valuationConfidence": 72,
+    "valuationConfidence": 77,
     "familyConsensus": [
       {
         "family": "earnings",
@@ -188,6 +233,16 @@
         "weight": 0.25
       },
       {
+        "family": "enterprise",
+        "methods": [
+          "Historical EV/EBITDA"
+        ],
+        "bear": 56.65319567008872,
+        "base": 70.81935957933038,
+        "bull": 84.98552348857203,
+        "weight": 0.25
+      },
+      {
         "family": "forward_earnings",
         "methods": [
           "Forward Earnings Power"
@@ -198,8 +253,8 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0237121819414468,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 1.0770817243769149,
     "forensicChecks": []
   },
   "raw": {
@@ -248,13 +303,6 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Graham Number",
       "family": "fundamental",
       "status": "OUTLIER",
@@ -269,8 +317,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -281,10 +329,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.44658317016751403
+          }
+        ],
+        "normalGrowth": -0.44658317016751403,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -311,10 +365,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 1.584908782391266
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -341,7 +401,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.2565803980281913,
+    "baseToPrice": 1.2311611519039627,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
