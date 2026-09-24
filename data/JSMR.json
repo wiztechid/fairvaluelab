@@ -45,7 +45,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.0557445043550394,
+      "normalizedWeight": 0.055744504355039415,
       "qcStatus": "VALID"
     },
     {
@@ -69,7 +69,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.1493156366652841,
+      "normalizedWeight": 0.14931563666528413,
       "qcStatus": "VALID"
     },
     {
@@ -93,7 +93,7 @@
       "warning": null,
       "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
       "included": true,
-      "normalizedWeight": 0.1493156366652841,
+      "normalizedWeight": 0.14931563666528413,
       "qcStatus": "VALID"
     },
     {
@@ -112,7 +112,7 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.13604313562836995,
+      "normalizedWeight": 0.13604313562836998,
       "qcStatus": "VALID"
     },
     {
@@ -132,6 +132,75 @@
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
       "qcReason": "Ditolak cross-method outlier: deviasi 1.83x dari median metode."
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 3781.440107043847,
+      "base": 4848.000137235701,
+      "bull": 5914.560167427555,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 509.04001440974855,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.1194525093322273,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 109.73961622655133,
+      "base": 4197.591575364081,
+      "bull": 8285.44353450161,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 9889701000000.0,
+        "netDebt": 68431431000000.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.11613438407299877,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Adjusted Asset Floor",
+      "family": "asset_floor",
+      "bear": 2755.0210181127245,
+      "base": 3756.8468428809874,
+      "bull": 4758.672667649251,
+      "confidence": 0.45,
+      "relevance": 0.45,
+      "rawWeight": 0.2025,
+      "warning": null,
+      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
+      "bands": {
+        "bvps": 5009.129123841317,
+        "haircut": [
+          0.55,
+          0.75,
+          0.95
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.03359601824968893,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     },
     {
       "name": "Forward Earnings Power",
@@ -175,75 +244,6 @@
       "normalizedWeight": 0.09058481957693902,
       "qcStatus": "VALID",
       "countsForIndependence": true
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 3781.440107043847,
-      "base": 4848.000137235701,
-      "bull": 5914.560167427555,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 509.04001440974855,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.11945250933222729,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
-    {
-      "name": "EV / EBIT",
-      "family": "enterprise_earnings",
-      "bear": 109.73961622655133,
-      "base": 4197.591575364081,
-      "bull": 8285.44353450161,
-      "confidence": 0.7,
-      "relevance": 1.0,
-      "rawWeight": 0.7,
-      "warning": null,
-      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
-      "bands": {
-        "ebit": 9889701000000.0,
-        "netDebt": 68431431000000.0,
-        "multipleBand": [
-          7,
-          10,
-          13
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.11613438407299874,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
-    {
-      "name": "Adjusted Asset Floor",
-      "family": "asset_floor",
-      "bear": 2755.0210181127245,
-      "base": 3756.8468428809874,
-      "bull": 4758.672667649251,
-      "confidence": 0.45,
-      "relevance": 0.45,
-      "rawWeight": 0.2025,
-      "warning": null,
-      "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
-      "bands": {
-        "bvps": 5009.129123841317,
-        "haircut": [
-          0.55,
-          0.75,
-          0.95
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.03359601824968893,
-      "qcStatus": "VALID",
-      "countsForIndependence": false
     }
   ],
   "dcfDiagnostics": null,
@@ -262,7 +262,9 @@
     "dataLabel": "BAIK",
     "availableInputs": 7,
     "totalInputs": 7,
-    "guards": [],
+    "guards": [
+      "Current run gagal: Too Many Requests. Rate limited. Try after a while.; data sebelumnya dipertahankan dan ditandai STALE."
+    ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 9,
     "independentFamilies": 7,
@@ -303,26 +305,6 @@
         "weight": 0.25
       },
       {
-        "family": "forward_earnings",
-        "methods": [
-          "Forward Earnings Power"
-        ],
-        "bear": 3587.8567962528427,
-        "base": 4077.109995741867,
-        "bull": 4566.363195230891,
-        "weight": 0.25
-      },
-      {
-        "family": "book_profitability",
-        "methods": [
-          "Justified PBV / ROE"
-        ],
-        "bear": 2514.3854209965502,
-        "base": 3142.981776245688,
-        "bull": 3771.5781314948254,
-        "weight": 0.25
-      },
-      {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
@@ -340,6 +322,26 @@
         "bear": 109.73961622655133,
         "base": 4197.591575364081,
         "bull": 8285.44353450161,
+        "weight": 0.25
+      },
+      {
+        "family": "forward_earnings",
+        "methods": [
+          "Forward Earnings Power"
+        ],
+        "bear": 3587.8567962528427,
+        "base": 4077.109995741867,
+        "bull": 4566.363195230891,
+        "weight": 0.25
+      },
+      {
+        "family": "book_profitability",
+        "methods": [
+          "Justified PBV / ROE"
+        ],
+        "bear": 2514.3854209965502,
+        "base": 3142.981776245688,
+        "bull": 3771.5781314948254,
         "weight": 0.25
       }
     ],
@@ -383,14 +385,14 @@
       }
     ],
     "epsSource": "Yahoo TTM cross-check",
-    "growthNormalizedLegacy": 0.107908756873626,
+    "growthNormalizedLegacy": 0.044471091664784315,
     "growthNormalizedQuarterly": 0.044471091664784315
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
-  "freshnessStatus": "FRESH",
+  "freshnessStatus": "STALE",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",

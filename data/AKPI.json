@@ -1,7 +1,7 @@
 {
   "ticker": "AKPI.JK",
   "name": "PT Argha Karya Prima Industry Tbk",
-  "asOf": "2026-09-24T12:53:17.572368+00:00",
+  "asOf": "2026-09-24T20:44:14.721068+00:00",
   "price": 515.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 346.21619993520466,
-    "base": 819.7781772606883,
-    "bull": 1487.4094718714975,
-    "dispersion": 0.5941784977222034,
+    "bear": 177.27981378227688,
+    "base": 490.13394449573264,
+    "bull": 811.7815359364944,
+    "dispersion": 0.725755528696883,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -23,6 +23,56 @@
     "familyConsensus": true
   },
   "methods": [
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 554.1486140872695,
+      "base": 679.6485410541454,
+      "bull": 805.1484680210214,
+      "confidence": 0.9,
+      "relevance": 0.85,
+      "rawWeight": 0.765,
+      "bands": {
+        "mean": 32.86081364275239,
+        "sd": 6.067885772021392,
+        "current": 24.900103514927217,
+        "z": -1.31194132963601,
+        "minus1": 554.1486140872695,
+        "base": 679.6485410541454,
+        "plus1": 805.1484680210214,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS tervalidasi dikalikan median P/E historis 3 tahun.",
+      "included": true,
+      "normalizedWeight": 0.157911033130354,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 360.4293355989564,
+      "base": 590.0,
+      "bull": 819.5706644010436,
+      "confidence": 0.9,
+      "relevance": 0.85,
+      "rawWeight": 0.765,
+      "bands": {
+        "mean": 28.526332182149627,
+        "sd": 11.099676325391462,
+        "current": 24.900103514927217,
+        "z": -0.3266967937548864,
+        "minus1": 360.4293355989564,
+        "base": 590.0,
+        "plus1": 819.5706644010436,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "EPS tervalidasi dikalikan median P/E historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.157911033130354,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -39,8 +89,25 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.34002322109802613,
+      "normalizedWeight": 0.21158014242955928,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Graham Number",
+      "family": "fundamental",
+      "bear": 929.7374187567108,
+      "base": 1162.1717734458884,
+      "bull": 1394.606128135066,
+      "confidence": 0.6,
+      "relevance": 0.15,
+      "rawWeight": 0.09,
+      "bands": null,
+      "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
+      "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
+      "included": true,
+      "normalizedWeight": 0.01857776860357106,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     },
     {
       "name": "Historical Dividend Yield",
@@ -58,51 +125,47 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.1240670094543042,
+      "normalizedWeight": 0.0772009495303953,
       "qcStatus": "VALID"
     },
     {
-      "name": "Mid-Cycle Earnings",
-      "family": "earnings_midcycle",
-      "bear": 747.1697239099947,
-      "base": 1046.0376134739927,
-      "bull": 1344.9055030379905,
-      "confidence": 0.66,
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 649.4252287491955,
+      "base": 737.9832144877221,
+      "bull": 826.5412002262487,
+      "confidence": 0.86,
       "relevance": 1.05,
-      "rawWeight": 0.6930000000000001,
-      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
-      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
       "bands": {
-        "normalizedEPS": 149.43394478199895,
-        "growthAdjustment": 0.0525,
-        "peBand": [
-          5.0,
-          7.0,
-          9.0
-        ]
+        "forwardEPS": 24.0435747442213,
+        "growthUsed": 0.1625,
+        "historicalPE": 30.69357291245101
       },
       "included": true,
-      "normalizedWeight": 0.229888870459446,
+      "normalizedWeight": 0.18639694498916298,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 1054.7085345997891,
-      "base": 1352.1904289740885,
-      "bull": 1649.6723233483879,
+      "bear": 153.64250527797327,
+      "base": 196.9775708691965,
+      "bull": 240.31263646041975,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 141.97999504227928,
+        "eps": 20.682644941265632,
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.2388455796981257,
+      "normalizedWeight": 0.14862214882856847,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
@@ -126,7 +189,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.06717531929009786,
+      "normalizedWeight": 0.04179997935803489,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -149,19 +212,29 @@
     "totalInputs": 7,
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 141.9800 per saham."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 5,
-    "independentFamilies": 4,
-    "diagnosticCount": 2,
+    "validMethodCount": 8,
+    "independentFamilies": 5,
+    "diagnosticCount": 1,
     "outlierMethodCount": 0,
     "reviewFlags": [
       "CROSS_FAMILY_CONFLICT"
     ],
     "valuationConfidence": 49,
     "familyConsensus": [
+      {
+        "family": "earnings",
+        "methods": [
+          "Historical P/E 3Y",
+          "Historical P/E 5Y"
+        ],
+        "bear": 457.28897484311295,
+        "base": 634.8242705270727,
+        "bull": 812.3595662110324,
+        "weight": 0.25
+      },
       {
         "family": "enterprise",
         "methods": [
@@ -183,13 +256,13 @@
         "weight": 0.25
       },
       {
-        "family": "earnings_midcycle",
+        "family": "forward_earnings",
         "methods": [
-          "Mid-Cycle Earnings"
+          "Forward Earnings Power"
         ],
-        "bear": 747.1697239099947,
-        "base": 1046.0376134739927,
-        "bull": 1344.9055030379905,
+        "bear": 649.4252287491955,
+        "base": 737.9832144877221,
+        "bull": 826.5412002262487,
         "weight": 0.25
       },
       {
@@ -197,18 +270,18 @@
         "methods": [
           "Earnings Power Value"
         ],
-        "bear": 1054.7085345997891,
-        "base": 1352.1904289740885,
-        "bull": 1649.6723233483879,
+        "bear": 153.64250527797327,
+        "base": 196.9775708691965,
+        "bull": 240.31263646041975,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 4,
-    "crossFamilySpreadRatio": 3.5150619361671676,
+    "familyConsensusCount": 5,
+    "crossFamilySpreadRatio": 3.7465342436260514,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 141.97999504227928,
+    "epsTTM": 20.682644941265632,
     "bvps": 2902.3651575832014,
     "currentPE": 24.900103514927217,
     "currentPBV": 0.17744149065958342,
@@ -224,25 +297,6 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 141.98
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 141.97999008455858
-      },
-      {
-        "source": "WISS reconciled EPS",
-        "value": 20.682644941265632
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 20.682644941265632
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": 0.25
   },
@@ -259,18 +313,6 @@
       "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
         "fcf": -411142520832.0
-      }
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 2435.9639130860455,
-        "base": 3044.954891357557,
-        "bull": 3653.945869629068,
-        "price": 515.0
       }
     },
     {
@@ -380,12 +422,12 @@
     "required": true,
     "status": "REVIEW",
     "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 1.591802285943084,
+    "baseToPrice": 0.9517163970790925,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     },
-    "familySpreadRatio": 3.5150619361671676,
+    "familySpreadRatio": 3.7465342436260514,
     "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",

@@ -1,7 +1,7 @@
 {
   "ticker": "KMDS.JK",
   "name": "PT Kurniamitra Duta Sentosa, Tbk",
-  "asOf": "2026-09-24T12:57:46.599032+00:00",
+  "asOf": "2026-09-24T20:45:59.898312+00:00",
   "price": 520.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 488.3544235568922,
-    "base": 685.0895511425418,
-    "bull": 893.1697166345117,
-    "dispersion": 0.30046162972282936,
-    "agreement": "MEDIUM",
+    "bear": 318.98140449362023,
+    "base": 488.71722629985675,
+    "bull": 632.7849705195266,
+    "dispersion": 0.056985304433034484,
+    "agreement": "HIGH",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
@@ -35,9 +35,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.3010981225646475,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 1.81x dari median metode."
     },
     {
       "name": "FCF Yield",
@@ -52,7 +53,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.23910733262486716,
+      "normalizedWeight": 0.538707102952913,
       "qcStatus": "VALID"
     },
     {
@@ -71,28 +72,8 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.20474672334396032,
+      "normalizedWeight": 0.461292897047087,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 677.2702869333723,
-      "base": 868.2952396581696,
-      "bull": 1059.320192382967,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 91.17100016410781,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.25504782146652494,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -121,26 +102,24 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 91.1710 per saham."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 0,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 65,
+    "valuationConfidence": 67,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF",
           "FCF Yield"
         ],
-        "bear": 440.39907075006363,
-        "base": 726.1058873919644,
-        "bull": 935.7568084815152,
+        "bear": 290.568896,
+        "base": 516.5669262222223,
+        "bull": 581.137792,
         "weight": 0.25
       },
       {
@@ -152,24 +131,14 @@
         "base": 460.8675263774912,
         "bull": 684.4321490390532,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 677.2702869333723,
-        "base": 868.2952396581696,
-        "bull": 1059.320192382967,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 3,
-    "crossFamilySpreadRatio": 1.8840451755912158,
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.1208577230045675,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 91.17100016410781,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -185,17 +154,6 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 91.171
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 91.17100032821561
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.10918925000000002,
     "growthNormalizedQuarterly": null
   },
@@ -205,6 +163,13 @@
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -287,7 +252,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.3174799060433497,
+    "baseToPrice": 0.9398408198074168,
     "thresholds": {
       "low": 0.25,
       "high": 3.0

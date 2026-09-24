@@ -1,7 +1,7 @@
 {
   "ticker": "MFMI.JK",
   "name": "PT Multifiling Mitra Indonesia Tbk",
-  "asOf": "2026-09-24T12:56:08.629046+00:00",
+  "asOf": "2026-09-24T20:45:20.124918+00:00",
   "price": 1300.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 294.4800020187737,
-    "base": 562.1359826587034,
-    "bull": 1085.2934782608697,
-    "dispersion": 0.5513880995836158,
+    "bear": 476.45224494438935,
+    "base": 679.6039728665141,
+    "bull": 1007.8444047692254,
+    "dispersion": 0.5247978311845518,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3163379233345739,
+      "normalizedWeight": 0.33442622950819667,
       "qcStatus": "VALID"
     },
     {
@@ -52,7 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2512095273539264,
+      "normalizedWeight": 0.2655737704918033,
       "qcStatus": "VALID"
     },
     {
@@ -71,28 +71,8 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.16449572013397845,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 255.2160017496039,
-      "base": 327.2000022430819,
-      "bull": 399.1840027365599,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 34.356000235523595,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.2679568291775214,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -121,19 +101,17 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 34.3560 per saham."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
     ],
-    "historyYears": 4.996577686516085,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "LARGE_MARKET_GAP",
-      "CROSS_FAMILY_CONFLICT"
+      "LARGE_MARKET_GAP"
     ],
-    "valuationConfidence": 20,
+    "valuationConfidence": 42,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -155,24 +133,14 @@
         "base": 986.6304347826087,
         "bull": 1535.3390016701485,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 255.2160017496039,
-        "base": 327.2000022430819,
-        "bull": 399.1840027365599,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 3,
-    "crossFamilySpreadRatio": 3.0153741687618507,
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.64812127888713,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 34.356000235523595,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -188,26 +156,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 34.356
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 34.356000471047196
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.11197125,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -287,16 +251,14 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 0.4324122943528487,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.5227722868203954,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "familySpreadRatio": 3.0153741687618507,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

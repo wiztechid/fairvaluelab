@@ -108,49 +108,6 @@
       "countsForIndependence": false
     },
     {
-      "name": "Forward Earnings Power",
-      "family": "forward_earnings",
-      "bear": 1331.7092626139151,
-      "base": 1513.3059802430855,
-      "bull": 1694.9026978722559,
-      "confidence": 0.86,
-      "relevance": 1.05,
-      "rawWeight": 0.903,
-      "warning": null,
-      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
-      "bands": {
-        "forwardEPS": 106.92675334466895,
-        "growthUsed": 0.1625,
-        "historicalPE": 14.152734773168294
-      },
-      "included": true,
-      "normalizedWeight": 0.16099126403993583,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
-    {
-      "name": "Justified PBV / ROE",
-      "family": "book_profitability",
-      "bear": 1622.7503183361177,
-      "base": 2028.437897920147,
-      "bull": 2434.1254775041766,
-      "confidence": 0.78,
-      "relevance": 0.7,
-      "rawWeight": 0.5459999999999999,
-      "warning": null,
-      "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity.",
-      "bands": {
-        "justifiedPBV": 7.8434285714285705,
-        "roe": 0.34452,
-        "growth": 0.06999999999999999,
-        "costOfEquity": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.09734355500089141,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
-    {
       "name": "Earnings Power Value",
       "family": "earnings_power",
       "bear": 683.2800213729997,
@@ -219,6 +176,49 @@
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
       "qcReason": "Ditolak cross-method outlier: deviasi 4.52x dari median metode."
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 1331.7092626139151,
+      "base": 1513.3059802430855,
+      "bull": 1694.9026978722559,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
+      "bands": {
+        "forwardEPS": 106.92675334466895,
+        "growthUsed": 0.1625,
+        "historicalPE": 14.152734773168294
+      },
+      "included": true,
+      "normalizedWeight": 0.16099126403993583,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Justified PBV / ROE",
+      "family": "book_profitability",
+      "bear": 1622.7503183361177,
+      "base": 2028.437897920147,
+      "bull": 2434.1254775041766,
+      "confidence": 0.78,
+      "relevance": 0.7,
+      "rawWeight": 0.5459999999999999,
+      "warning": null,
+      "explanation": "PBV wajar diturunkan dari ROE, normalized growth dan cost of equity.",
+      "bands": {
+        "justifiedPBV": 7.8434285714285705,
+        "roe": 0.34452,
+        "growth": 0.06999999999999999,
+        "costOfEquity": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.09734355500089141,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": null,
@@ -238,7 +238,8 @@
     "availableInputs": 7,
     "totalInputs": 7,
     "guards": [
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Current run gagal: Too Many Requests. Rate limited. Try after a while.; data sebelumnya dipertahankan dan ditandai STALE."
     ],
     "historyYears": 2.3819301848049284,
     "validMethodCount": 8,
@@ -270,26 +271,6 @@
         "weight": 0.25
       },
       {
-        "family": "forward_earnings",
-        "methods": [
-          "Forward Earnings Power"
-        ],
-        "bear": 1331.7092626139151,
-        "base": 1513.3059802430855,
-        "bull": 1694.9026978722559,
-        "weight": 0.25
-      },
-      {
-        "family": "book_profitability",
-        "methods": [
-          "Justified PBV / ROE"
-        ],
-        "bear": 1622.7503183361177,
-        "base": 2028.437897920147,
-        "bull": 2434.1254775041766,
-        "weight": 0.25
-      },
-      {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
@@ -307,6 +288,26 @@
         "bear": 485.2143870981818,
         "base": 820.469326944,
         "bull": 1155.724266789818,
+        "weight": 0.25
+      },
+      {
+        "family": "forward_earnings",
+        "methods": [
+          "Forward Earnings Power"
+        ],
+        "bear": 1331.7092626139151,
+        "base": 1513.3059802430855,
+        "bull": 1694.9026978722559,
+        "weight": 0.25
+      },
+      {
+        "family": "book_profitability",
+        "methods": [
+          "Justified PBV / ROE"
+        ],
+        "bear": 1622.7503183361177,
+        "base": 2028.437897920147,
+        "bull": 2434.1254775041766,
         "weight": 0.25
       }
     ],
@@ -350,14 +351,14 @@
       }
     ],
     "epsSource": "Yahoo TTM cross-check",
-    "growthNormalizedLegacy": 0.18,
+    "growthNormalizedLegacy": 0.35,
     "growthNormalizedQuarterly": 0.35
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
   "analysisStatus": "SIAP",
-  "freshnessStatus": "FRESH",
+  "freshnessStatus": "STALE",
   "methodDiagnostics": [
     {
       "name": "DCF & FCF Yield",

@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-24T12:58:44.820346+00:00",
+  "asOf": "2026-09-24T20:46:23.576882+00:00",
   "price": 492.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -13,9 +13,9 @@
   },
   "fairValue": {
     "bear": 342.0696345443813,
-    "base": 1380.9503894400088,
-    "bull": 3425.609488759691,
-    "dispersion": 0.7011972494775525,
+    "base": 1239.0037764931906,
+    "bull": 2801.0443917936905,
+    "dispersion": 0.5951664637165587,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2739284563325814,
+      "normalizedWeight": 0.3123851525174568,
       "qcStatus": "VALID"
     },
     {
@@ -52,7 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.21753142120528524,
+      "normalizedWeight": 0.24807056229327454,
       "qcStatus": "VALID"
     },
     {
@@ -77,7 +77,7 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.09023525620367386,
+      "normalizedWeight": 0.10290334435869164,
       "qcStatus": "VALID"
     },
     {
@@ -96,26 +96,31 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.18627135030615538,
+      "normalizedWeight": 0.21242190371187064,
       "qcStatus": "VALID"
     },
     {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 2429.0685465750535,
-      "base": 3114.1904443269914,
-      "bull": 3799.3123420789293,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 1778.0417532975428,
+      "base": 2546.4039925397183,
+      "bull": 3506.8567915924377,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
       "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
       "bands": {
-        "eps": 326.9899966543341,
-        "requiredReturn": 0.105
+        "revenue": 7984383000000.0,
+        "netDebt": -1801491000000.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
       },
       "included": true,
-      "normalizedWeight": 0.23203351595230423,
+      "normalizedWeight": 0.12421903711870637,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -145,8 +150,7 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 326.9900 per saham."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 5,
@@ -191,22 +195,22 @@
         "weight": 0.25
       },
       {
-        "family": "earnings_power",
+        "family": "revenue",
         "methods": [
-          "Earnings Power Value"
+          "EV / Sales"
         ],
-        "bear": 2429.0685465750535,
-        "base": 3114.1904443269914,
-        "bull": 3799.3123420789293,
+        "bear": 1778.0417532975428,
+        "base": 2546.4039925397183,
+        "bull": 3506.8567915924377,
         "weight": 0.25
       }
     ],
     "familyConsensusCount": 4,
-    "crossFamilySpreadRatio": 8.193569720467693,
+    "crossFamilySpreadRatio": 6.699699014027523,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 326.9899966543341,
+    "epsTTM": null,
     "bvps": 1112.2996705723126,
     "currentPE": null,
     "currentPBV": 0.44232684142291506,
@@ -222,17 +226,6 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 326.99
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 326.9899933086682
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.006136286067138189,
     "growthNormalizedQuarterly": 0.35
   },
@@ -243,24 +236,19 @@
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
+    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NEGATIVE",
       "reason": "EBITDA negatif/nol.",
       "inputs": {
         "ebitda": -736105000000.0
-      }
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 2288.5446170110877,
-        "base": 2860.6807712638597,
-        "bull": 3432.8169255166317,
-        "price": 492.0
       }
     }
   ],
@@ -376,12 +364,12 @@
     "required": true,
     "status": "REVIEW",
     "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 2.8068097346341645,
+    "baseToPrice": 2.518300358725997,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     },
-    "familySpreadRatio": 8.193569720467693,
+    "familySpreadRatio": 6.699699014027523,
     "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",

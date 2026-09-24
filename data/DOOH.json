@@ -1,7 +1,7 @@
 {
   "ticker": "DOOH.JK",
   "name": "PT Era Media Sejahtera Tbk",
-  "asOf": "2026-09-24T12:59:28.273180+00:00",
+  "asOf": "2026-09-24T20:46:39.759973+00:00",
   "price": 392.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 51.66086502854335,
-    "base": 109.57886868980663,
+    "bear": 21.386595298078205,
+    "base": 90.68625639899005,
     "bull": 201.93929886746326,
-    "dispersion": 0.4027454504539316,
+    "dispersion": 0.7030403028617871,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -45,9 +45,9 @@
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 68.40622128624419,
-      "base": 85.50777660780523,
-      "bull": 102.60933192936626,
+      "bear": 33.45782215205782,
+      "base": 41.822277690072276,
+      "bull": 50.18673322808673,
       "confidence": 0.6,
       "relevance": 0.2,
       "rawWeight": 0.12,
@@ -84,16 +84,16 @@
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 77.47999960568215,
-      "base": 99.33333282779762,
-      "bull": 121.18666604991309,
+      "bear": 18.535049258334443,
+      "base": 23.762883664531337,
+      "bull": 28.99071807072823,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 10.42999994691875,
+        "eps": 2.4951027847757903,
         "requiredReturn": 0.105
       },
       "included": true,
@@ -158,7 +158,7 @@
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 10.4300 per saham."
+      "Extreme Valuation Review: Base FV = 0.20x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 3.381245722108145,
     "validMethodCount": 5,
@@ -166,10 +166,11 @@
     "diagnosticCount": 1,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "LARGE_MARKET_GAP",
-      "CROSS_FAMILY_CONFLICT"
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 38,
+    "valuationConfidence": 12,
     "familyConsensus": [
       {
         "family": "enterprise",
@@ -196,9 +197,9 @@
         "methods": [
           "Earnings Power Value"
         ],
-        "bear": 77.47999960568215,
-        "base": 99.33333282779762,
-        "bull": 121.18666604991309,
+        "bear": 18.535049258334443,
+        "base": 23.762883664531337,
+        "bull": 28.99071807072823,
         "weight": 0.25
       },
       {
@@ -213,11 +214,11 @@
       }
     ],
     "familyConsensusCount": 4,
-    "crossFamilySpreadRatio": 3.1982248578000894,
+    "crossFamilySpreadRatio": 7.725543051941025,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 10.42999994691875,
+    "epsTTM": 2.4951027847757903,
     "bvps": 31.15619430114431,
     "currentPE": 157.1077561981981,
     "currentPBV": 12.581767728467483,
@@ -233,25 +234,6 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 10.43
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 10.4299998938375
-      },
-      {
-        "source": "WISS reconciled EPS",
-        "value": 2.4951027847757903
-      },
-      {
-        "source": "Latest annual NI / shares",
-        "value": 2.4951027847757903
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.18,
     "growthNormalizedQuarterly": 0.35
   },
@@ -359,14 +341,23 @@
   "valuationReview": {
     "required": true,
     "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 0.27953793033113933,
+    "reason": "FORENSIC_EXTREME",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.23134249081375013,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     },
-    "familySpreadRatio": 3.1982248578000894,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

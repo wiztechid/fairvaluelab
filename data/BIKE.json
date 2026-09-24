@@ -1,7 +1,7 @@
 {
   "ticker": "BIKE.JK",
   "name": "PT Sepeda Bersama Indonesia Tbk",
-  "asOf": "2026-09-24T12:59:09.416573+00:00",
+  "asOf": "2026-09-24T20:46:32.771616+00:00",
   "price": 1100.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 183.997820018173,
-    "base": 238.3269258811283,
-    "bull": 301.3279884016458,
-    "dispersion": 0.09297479692900776,
-    "agreement": "HIGH",
+    "bear": 205.64275567740526,
+    "base": 460.5710637155589,
+    "bull": 761.9151943462899,
+    "dispersion": 0.573311084061934,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
@@ -36,7 +36,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3344262295081967,
+      "normalizedWeight": 0.33442622950819667,
       "qcStatus": "VALID"
     },
     {
@@ -52,7 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2655737704918033,
+      "normalizedWeight": 0.26557377049180325,
       "qcStatus": "VALID"
     },
     {
@@ -70,30 +70,9 @@
       },
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.77x dari median metode."
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 193.5662827874756,
-      "base": 248.16190100958408,
-      "bull": 302.7575192316926,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 26.05699960600633,
-        "requiredReturn": 0.105
-      },
       "included": true,
-      "normalizedWeight": 0.4,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "normalizedWeight": 0.40000000000000013,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -122,20 +101,18 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 26.0570 per saham.",
-      "Extreme Valuation Review: Base FV = 0.22x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
     ],
     "historyYears": 4.511978097193703,
     "validMethodCount": 3,
     "independentFamilies": 2,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
     "reviewFlags": [
-      "EXTREME_VALUATION",
-      "FORENSIC_EXTREME"
+      "LARGE_MARKET_GAP",
+      "CROSS_FAMILY_CONFLICT"
     ],
-    "valuationConfidence": 17,
+    "valuationConfidence": 15,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -149,22 +126,22 @@
         "weight": 0.25
       },
       {
-        "family": "earnings_power",
+        "family": "income",
         "methods": [
-          "Earnings Power Value"
+          "Historical Dividend Yield"
         ],
-        "bear": 193.5662827874756,
-        "base": 248.16190100958408,
-        "bull": 302.7575192316926,
+        "bear": 544.0507750816934,
+        "base": 692.6501766784453,
+        "bull": 952.9284527740544,
         "weight": 0.25
       }
     ],
     "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0860859657949309,
+    "crossFamilySpreadRatio": 3.031398587113441,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 26.05699960600633,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -180,17 +157,6 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 26.057
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 26.056999212012656
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
@@ -200,6 +166,13 @@
   "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -281,23 +254,14 @@
   "valuationReview": {
     "required": true,
     "status": "REVIEW",
-    "reason": "FORENSIC_EXTREME",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.21666084171011663,
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 0.4187009670141445,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
     },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    "familySpreadRatio": 3.031398587113441,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
