@@ -11,7 +11,7 @@ from des_universe import TICKERS
 
 OUT=Path("data/golden_zone"); OUT.mkdir(parents=True,exist_ok=True)
 OHLC=Path("data/ohlc_cache"); OHLC.mkdir(parents=True,exist_ok=True)
-WINDOWS=(20,35,50,60,90,120)
+WINDOWS=(20,35,50,60,90,120,140)
 PIVOTS=(2,3,5)
 LEVELS=(0,.382,.5,.618,1,1.5,1.618)
 
@@ -83,11 +83,19 @@ def choose_swing(h):
         key=(c["liGlobal"],c["hiGlobal"])
         if key not in uniq or c["score"]>uniq[key]["score"]:uniq[key]=c
     ranked=sorted(uniq.values(),key=lambda x:(x["score"],x["hiGlobal"]),reverse=True)
-    # Prefer the highest still-usable structural tier. A recent minor swing must not silently replace a valid major swing.
+    # v2.1 dominant-major selection: within a structural tier, prefer the dominant
+    # completed leg, while retaining recency/quality so an ancient large range cannot win forever.
+    max_age=max(20,len(base)*.55)
+    for x in ranked:
+        dominance=min(1.6,x["impulseATR"]/10.0)
+        duration=min(1.25,x["bars"]/20.0)
+        rec=max(0.0,1.0-x["age"]/max_age)
+        x["dominanceScore"]=100*(.42*dominance+.20*duration+.23*(x["score"]/100)+.15*rec)
     for tier in ("MAJOR","INTERMEDIATE","MINOR"):
         pool=[x for x in ranked if x.get("tier")==tier and x["retracement"]<=1.0]
-        if pool:return pool[0],a
-    return ranked[0],a
+        if pool:
+            return max(pool,key=lambda x:(x["dominanceScore"],x["score"],x["hiGlobal"])),a
+    return max(ranked,key=lambda x:(x["dominanceScore"],x["score"])),a
 
 def round_idx(v):
     if v>=5000:return round(v/25)*25
@@ -136,10 +144,10 @@ def analyze(sym):
     quality="HIGH" if c["score"]>=72 else "MEDIUM" if c["score"]>=58 else "LOW"
     return {
       "ticker":sym.replace(".JK",""),"status":"VALID" if quality!="LOW" else "LOW_CONFIDENCE",
-      "engine":"WISS Golden Zone v1","currentPrice":now,"position":pos,
+      "engine":"WISS Golden Zone v2.1","currentPrice":now,"position":pos,
       "swing":{"low":round_idx(lo),"high":round_idx(hi),"lowDate":str(h.index[c["liGlobal"]].date()),"highDate":str(h.index[c["hiGlobal"]].date()),
                "searchWindow":c["window"],"pivotWidth":c["k"],"barsInImpulse":c["bars"],"highAgeBars":c["age"],
-               "impulseATR":round(c["impulseATR"],2),"score":round(c["score"],1),"quality":quality,"tier":c.get("tier","MINOR")},
+               "impulseATR":round(c["impulseATR"],2),"score":round(c["score"],1),"dominanceScore":round(c.get("dominanceScore",c["score"]),1),"quality":quality,"tier":c.get("tier","MINOR")},
       "fib":{k:round_idx(v) for k,v in lv.items()},
       "earlyZone":[round_idx(early[0]),round_idx(early[1])],
       "goldenZone":[round_idx(golden[0]),round_idx(golden[1])],
@@ -152,13 +160,13 @@ def analyze(sym):
 
 def main():
     ok=0
-    summary={"updatedAt":datetime.now(timezone.utc).isoformat(),"engine":"WISS Golden Zone v1","tickers":{}}
+    summary={"updatedAt":datetime.now(timezone.utc).isoformat(),"engine":"WISS Golden Zone v2.1","tickers":{}}
     for i,sym in enumerate(TICKERS,1):
         s=sym.replace(".JK","")
         try:d=analyze(s)
         except Exception as e:d={"ticker":s,"status":"ERROR","reason":str(e)[:180]}
         if d.get("status")=="VALID":ok+=1
-        summary["tickers"][s]={"status":d.get("status"),"position":d.get("position"),"quality":(d.get("swing") or {}).get("quality")}
+        summary["tickers"][s]={"status":d.get("status"),"position":d.get("position"),"quality":(d.get("swing") or {}).get("quality"),"tier":(d.get("swing") or {}).get("tier"),"swingScore":(d.get("swing") or {}).get("score"),"dominanceScore":(d.get("swing") or {}).get("dominanceScore")}
         (OUT/f"{s}.json").write_text(json.dumps(d,ensure_ascii=False,indent=2),encoding="utf-8")
         if i%50==0:print("GOLDEN_ZONE",i,"/",len(TICKERS))
     summary["validCount"]=ok
