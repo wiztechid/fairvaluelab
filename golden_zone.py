@@ -11,7 +11,7 @@ from des_universe import TICKERS
 
 OUT=Path("data/golden_zone"); OUT.mkdir(parents=True,exist_ok=True)
 OHLC=Path("data/ohlc_cache"); OHLC.mkdir(parents=True,exist_ok=True)
-WINDOWS=(20,35,50,60)
+WINDOWS=(20,35,50,60,90,120)
 PIVOTS=(2,3,5)
 LEVELS=(0,.382,.5,.618,1,1.5,1.618)
 
@@ -31,6 +31,13 @@ def pivots(df,k):
         if lo[i] <= np.min(lo[i-k:i+k+1]) and lo[i] < np.min(lo[i-k:i]): lows.append(i)
         if hi[i] >= np.max(hi[i-k:i+k+1]) and hi[i] > np.max(hi[i-k:i]): highs.append(i)
     return lows,highs
+
+def swing_tier(c):
+    """Structural hierarchy: magnitude + duration + pivot confirmation, not range alone."""
+    ia=c["impulseATR"]; bars=c["bars"]; k=c["k"]
+    if ia>=8 and bars>=8 and k>=3:return "MAJOR"
+    if ia>=5 and bars>=4:return "INTERMEDIATE"
+    return "MINOR"
 
 def candidate_score(df,li,hi,a,k):
     low=float(df.Low.iloc[li]); high=float(df.High.iloc[hi]); rng=high-low
@@ -67,6 +74,7 @@ def choose_swing(h):
                     c=candidate_score(d,li,hi,a,k)
                     if c:
                         c["window"]=w;c["liGlobal"]=offset+li;c["hiGlobal"]=offset+hi
+                        c["tier"]=swing_tier(c)
                         cands.append(c)
     if not cands:return None,a
     # Deduplicate same anchors found by different windows/pivot widths, keep strongest score.
@@ -75,6 +83,10 @@ def choose_swing(h):
         key=(c["liGlobal"],c["hiGlobal"])
         if key not in uniq or c["score"]>uniq[key]["score"]:uniq[key]=c
     ranked=sorted(uniq.values(),key=lambda x:(x["score"],x["hiGlobal"]),reverse=True)
+    # Prefer the highest still-usable structural tier. A recent minor swing must not silently replace a valid major swing.
+    for tier in ("MAJOR","INTERMEDIATE","MINOR"):
+        pool=[x for x in ranked if x.get("tier")==tier and x["retracement"]<=1.0]
+        if pool:return pool[0],a
     return ranked[0],a
 
 def round_idx(v):
@@ -127,7 +139,7 @@ def analyze(sym):
       "engine":"WISS Golden Zone v1","currentPrice":now,"position":pos,
       "swing":{"low":round_idx(lo),"high":round_idx(hi),"lowDate":str(h.index[c["liGlobal"]].date()),"highDate":str(h.index[c["hiGlobal"]].date()),
                "searchWindow":c["window"],"pivotWidth":c["k"],"barsInImpulse":c["bars"],"highAgeBars":c["age"],
-               "impulseATR":round(c["impulseATR"],2),"score":round(c["score"],1),"quality":quality},
+               "impulseATR":round(c["impulseATR"],2),"score":round(c["score"],1),"quality":quality,"tier":c.get("tier","MINOR")},
       "fib":{k:round_idx(v) for k,v in lv.items()},
       "earlyZone":[round_idx(early[0]),round_idx(early[1])],
       "goldenZone":[round_idx(golden[0]),round_idx(golden[1])],
