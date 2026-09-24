@@ -1,7 +1,7 @@
 {
   "ticker": "SMKM.JK",
   "name": "PT Sumber Mas Konstruksi Tbk",
-  "asOf": "2026-09-24T01:02:23.145063+00:00",
+  "asOf": "2026-09-24T03:02:30.527850+00:00",
   "price": 91.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 97.25136167146033,
-    "base": 137.61673928029444,
-    "bull": 179.1278620719495,
-    "dispersion": 0.006452893556654121,
-    "agreement": "HIGH",
-    "available": true,
-    "indicative": false,
+    "bear": 77.5108922260747,
+    "base": 120.11856879823344,
+    "bull": 189.27991029430848,
+    "dispersion": 0.17747944252682968,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -35,9 +35,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.5414012738853503,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5970149253731343
     },
     {
       "name": "FCF Yield",
@@ -53,28 +54,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.43x dari median metode."
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 108.03371705137752,
-      "base": 138.504765450484,
-      "bull": 168.97581384959048,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 14.543000372300819,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.4585987261146497,
       "qcStatus": "VALID",
-      "countsForIndependence": true
+      "indicativeWeight": 0.4029850746268656
     }
   ],
   "dcfDiagnostics": {
@@ -87,11 +68,11 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 104.6,
-    "ma50": 89.62,
-    "ma200": 105.455,
-    "rsi14": 20.0,
-    "return1m": -0.08999999999999997,
+    "ma20": 103.45,
+    "ma50": 90.14,
+    "ma200": 105.27,
+    "rsi14": 11.111111111111114,
+    "return1m": -0.17272727272727273,
     "return3m": 0.3787878787878789
   },
   "quality": {
@@ -104,43 +85,35 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 14.5430 per saham."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.542094455852156,
+    "historyYears": 4.544832306639288,
     "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 86.46900629154312,
-        "base": 136.72871311010488,
-        "bull": 189.27991029430848,
-        "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 108.03371705137752,
-        "base": 138.504765450484,
-        "bull": 168.97581384959048,
+        "bear": 72.80843834130229,
+        "base": 116.11983035278293,
+        "bull": 153.78782553821569,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0129896076689386,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 14.543000372300819,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -156,26 +129,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 14.543
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 14.543000744601638
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.02957725,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -263,13 +232,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 1.5122718602230159,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

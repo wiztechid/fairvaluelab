@@ -1,7 +1,7 @@
 {
   "ticker": "ZONE.JK",
   "name": "PT Mega Perintis Tbk",
-  "asOf": "2026-09-24T01:00:01.966711+00:00",
+  "asOf": "2026-09-24T03:00:20.129658+00:00",
   "price": 695.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 840.1926159563263,
-    "base": 1284.1184159431632,
-    "bull": 2102.4610306067257,
-    "dispersion": 0.21363211037431676,
-    "agreement": "LIMITED",
-    "available": false,
-    "indicative": true,
+    "bear": 591.2440515780312,
+    "base": 895.4147071148843,
+    "bull": 1136.8848468513702,
+    "dispersion": 0.3962870621985787,
+    "agreement": "LOW",
+    "available": true,
+    "indicative": false,
     "referenceOnly": false,
-    "evidenceLevel": "INDICATIVE"
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -35,10 +35,9 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "indicativeWeight": 0.5573770491803279
+      "included": true,
+      "normalizedWeight": 0.3344262295081967,
+      "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
@@ -52,10 +51,29 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.2655737704918033,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 419.2017082220672,
+      "base": 537.4380874641887,
+      "bull": 655.6744667063102,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 56.430999183739814,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.4,
       "qcStatus": "VALID",
-      "indicativeWeight": 0.4426229508196722
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -68,12 +86,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 720.25,
-    "ma50": 686.5,
-    "ma200": 510.82,
+    "ma20": 714.75,
+    "ma50": 689.9,
+    "ma200": 511.52,
     "rsi14": 35.294117647058826,
     "return1m": -0.021126760563380254,
-    "return3m": 0.022058823529411686
+    "return3m": 0.17796610169491522
   },
   "quality": {
     "cashConversion": null,
@@ -85,18 +103,15 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 56.4310 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 42,
-    "indicativeMethodCount": 2,
+    "valuationConfidence": 54,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -108,12 +123,24 @@
         "base": 1253.39132676558,
         "bull": 1618.09522699643,
         "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 419.2017082220672,
+        "base": 537.4380874641887,
+        "bull": 655.6744667063102,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.332159472879,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 56.430999183739814,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -129,22 +156,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 56.431
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 56.43099836747964
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.06489500000000001,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "INDIKATIF",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -232,9 +263,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "LIMITED_EVIDENCE",
-    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.2883664850573875,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
