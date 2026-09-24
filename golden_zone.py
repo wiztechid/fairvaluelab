@@ -7,10 +7,10 @@ from pathlib import Path
 from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
-import yfinance as yf
 from des_universe import TICKERS
 
-OUT=Path("data/golden_zone"); OUT.mkdir(parents=True,exist_ok=True)\nOHLC=Path("data/ohlc_cache"); OHLC.mkdir(parents=True,exist_ok=True)
+OUT=Path("data/golden_zone"); OUT.mkdir(parents=True,exist_ok=True)
+OHLC=Path("data/ohlc_cache"); OHLC.mkdir(parents=True,exist_ok=True)
 WINDOWS=(20,35,50,60)
 PIVOTS=(2,3,5)
 LEVELS=(0,.382,.5,.618,1,1.5,1.618)
