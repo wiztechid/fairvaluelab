@@ -1,8 +1,8 @@
 {
   "ticker": "UANG.JK",
   "name": "PT Pakuan Tbk",
-  "asOf": "2026-09-24T03:01:32.473604+00:00",
-  "price": 4030.0,
+  "asOf": "2026-09-24T04:18:58.091624+00:00",
+  "price": 3960.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
@@ -12,55 +12,78 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 203.37854767184038,
-    "base": 264.0190032251562,
-    "bull": 327.070909090909,
-    "dispersion": 0.035835868918337996,
-    "agreement": "LIMITED",
-    "available": false,
-    "indicative": true,
+    "bear": 240.09545454545454,
+    "base": 597.4024698044097,
+    "bull": 1020.8354335697014,
+    "dispersion": 0.5402398227974681,
+    "agreement": "LOW",
+    "available": true,
+    "indicative": false,
     "referenceOnly": false,
-    "evidenceLevel": "INDICATIVE"
+    "familyConsensus": true
   },
   "methods": [
     {
+      "name": "Historical PBV 5Y",
+      "family": "book",
+      "bear": 529.9060936715151,
+      "base": 928.0322123360921,
+      "bull": 1326.158331000669,
+      "confidence": 0.8,
+      "relevance": 0.945,
+      "rawWeight": 0.756,
+      "bands": {
+        "mean": 2.7892163473450147,
+        "sd": 1.196574713380854,
+        "current": 11.901846281480305,
+        "z": 7.615596278470628,
+        "minus1": 529.9060936715151,
+        "base": 928.0322123360921,
+        "plus1": 1326.158331000669,
+        "coverageYears": 4.999315537303217
+      },
+      "warning": null,
+      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.42035029190992496,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 531.5866364755033,
-      "base": 664.4832955943791,
-      "bull": 797.379954713255,
+      "bear": 530.2781413061521,
+      "base": 662.8476766326901,
+      "bull": 795.4172119592281,
       "confidence": 0.6,
       "relevance": 0.2,
       "rawWeight": 0.12,
       "bands": null,
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 2.48x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.06672226855713094,
+      "qcStatus": "VALID",
+      "countsForIndependence": false
     },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 209.11090909090908,
-      "base": 268.09090909090907,
-      "bull": 327.070909090909,
+      "bear": 208.08272727272725,
+      "base": 266.77272727272725,
+      "bull": 325.46272727272725,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 58.98,
+        "eps": 58.69,
         "requiredReturn": 0.22
       },
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.40033361134278567,
       "qcStatus": "VALID",
-      "countsForIndependence": true,
-      "indicativeWeight": 0.7804878048780488
+      "countsForIndependence": true
     },
     {
       "name": "Adjusted Asset Floor",
@@ -81,21 +104,20 @@
           0.95
         ]
       },
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.11259382819015848,
       "qcStatus": "VALID",
-      "countsForIndependence": false,
-      "indicativeWeight": 0.21951219512195125
+      "countsForIndependence": false
     }
   ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 3657.0,
-    "ma50": 2909.2,
-    "ma200": 3555.4,
-    "rsi14": 50.342465753424655,
-    "return1m": 0.651639344262295,
-    "return3m": 0.8486238532110091
+    "ma20": 3653.5,
+    "ma50": 2907.8,
+    "ma200": 3555.05,
+    "rsi14": 49.15824915824916,
+    "return1m": 0.6229508196721312,
+    "return3m": 0.8165137614678899
   },
   "quality": {
     "cashConversion": -3.6963935716193936,
@@ -106,44 +128,56 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
+      "Extreme Valuation Review: Base FV = 0.14x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
+    "validMethodCount": 4,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 46,
-    "indicativeMethodCount": 2,
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
+    ],
+    "valuationConfidence": 0,
     "familyConsensus": [
+      {
+        "family": "book",
+        "methods": [
+          "Historical PBV 5Y"
+        ],
+        "bear": 529.9060936715151,
+        "base": 928.0322123360921,
+        "bull": 1326.158331000669,
+        "weight": 0.25
+      },
       {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
         ],
-        "bear": 209.11090909090908,
-        "base": 268.09090909090907,
-        "bull": 327.070909090909,
+        "bear": 208.08272727272725,
+        "base": 266.77272727272725,
+        "bull": 325.46272727272725,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 3.478737207598233,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 58.98,
+    "epsTTM": 58.69,
     "bvps": 332.7214876033058,
-    "currentPE": 68.32824686334351,
-    "currentPBV": 12.112232453122633,
+    "currentPE": 67.4731640824672,
+    "currentPBV": 11.901846281480305,
     "roe": 0.104899995,
     "fcf": -307166609408.0,
     "growthNormalized": 0.09244999749999999,
     "costOfEquity": 0.22,
     "terminalGrowth": 0.035,
-    "marketCap": 4876299927552.0,
+    "marketCap": 4791600152576.0,
     "shares": 1210000000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -156,7 +190,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "INDIKATIF",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -247,10 +281,25 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "LIMITED_EVIDENCE",
-    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.15085920954656812,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

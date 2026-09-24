@@ -1,7 +1,7 @@
 {
   "ticker": "BOBA.JK",
   "name": "PT Formosa Ingredient Factory Tbk",
-  "asOf": "2026-09-24T02:57:54.359610+00:00",
+  "asOf": "2026-09-24T04:15:41.113142+00:00",
   "price": 204.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,15 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 69.92134761313645,
-    "base": 91.29919242943339,
-    "bull": 113.61494567854409,
-    "dispersion": 0.3263118832411716,
-    "agreement": "LOW",
-    "available": true,
-    "indicative": false,
+    "bear": 47.36532357450121,
+    "base": 65.99988336278456,
+    "bull": 104.05473213769517,
+    "dispersion": 0.1817593085655076,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -35,9 +35,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.3344262295081967,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
@@ -51,29 +52,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.2655737704918033,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 91.99864156639643,
-      "base": 117.94697636717491,
-      "bull": 143.8953111679534,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 17.049990294523887,
-        "requiredReturn": 0.14455640000000003
-      },
-      "included": true,
-      "normalizedWeight": 0.4,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": true
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -103,17 +85,18 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 17.0500 per saham."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.895277207392197,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP"
-    ],
-    "valuationConfidence": 30,
+    "reviewFlags": [],
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -125,24 +108,12 @@
         "base": 64.65140849169188,
         "bull": 83.33458018913478,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 91.99864156639643,
-        "base": 117.94697636717491,
-        "bull": 143.8953111679534,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.8243527731082896,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 17.049990294523887,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -158,26 +129,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 16.966
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 17.133980589047777
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07820375,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -265,13 +232,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.44754506092859503,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
