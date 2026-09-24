@@ -1,7 +1,7 @@
 {
   "ticker": "UCID.JK",
   "name": "PT Uni-Charm Indonesia Tbk",
-  "asOf": "2026-09-23T14:47:47.548968+00:00",
+  "asOf": "2026-09-24T00:58:24.903955+00:00",
   "price": 498.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 759.2436242131948,
-    "base": 1714.543003982505,
-    "bull": 3425.504797253496,
-    "dispersion": 0.5714161373634067,
-    "agreement": "LOW",
+    "bear": 709.7929261471259,
+    "base": 1014.7668708585326,
+    "bull": 1320.4508018476354,
+    "dispersion": 0.20310489366611828,
+    "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3344262295081967,
+      "normalizedWeight": 0.33442622950819667,
       "qcStatus": "VALID"
     },
     {
@@ -52,7 +52,7 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2655737704918033,
+      "normalizedWeight": 0.26557377049180325,
       "qcStatus": "VALID"
     },
     {
@@ -77,28 +77,8 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.11200000000000003,
+      "normalizedWeight": 0.4000000000000001,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 2428.9943107797512,
-      "base": 3114.0952702304503,
-      "bull": 3799.1962296811494,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 326.9800033741973,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.2880000000000001,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -126,21 +106,17 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 326.9800 per saham.",
-      "Extreme Valuation Review: Base FV = 3.44x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "EXTREME_VALUATION",
-      "CROSS_FAMILY_CONFLICT",
-      "FORENSIC_EXTREME"
+      "LARGE_MARKET_GAP"
     ],
-    "valuationConfidence": 0,
+    "valuationConfidence": 41,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -162,24 +138,14 @@
         "base": 843.6040269035498,
         "bull": 1071.569106808114,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 2428.9943107797512,
-        "base": 3114.0952702304503,
-        "bull": 3799.1962296811494,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 3,
-    "crossFamilySpreadRatio": 3.6914182138991714,
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.4057895374995693,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 326.9800033741973,
+    "epsTTM": null,
     "bvps": 1112.2996705723126,
     "currentPE": null,
     "currentPBV": 0.4477210711963653,
@@ -195,44 +161,28 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 326.98
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 326.9800067483946
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.006136286067138189,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
       "inputs": {}
-    },
-    {
-      "name": "Graham Number",
-      "family": "fundamental",
-      "status": "OUTLIER",
-      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
-      "inputs": {
-        "bear": 2288.5096461519856,
-        "base": 2860.637057689982,
-        "bull": 3432.7644692279787,
-        "price": 498.0
-      }
     },
     {
       "name": "Historical Dividend Yield",
@@ -306,25 +256,14 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "FORENSIC_EXTREME",
-    "direction": "ABOVE_MARKET",
-    "baseToPrice": 3.442857437715874,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 2.0376844796356077,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

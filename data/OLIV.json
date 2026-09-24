@@ -1,7 +1,7 @@
 {
   "ticker": "OLIV.JK",
   "name": "PT Atlas Nexus Group Tbk",
-  "asOf": "2026-09-23T14:48:56.957541+00:00",
+  "asOf": "2026-09-24T00:59:32.680070+00:00",
   "price": 54.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,46 +12,59 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 6.782285576881636,
-    "base": 8.69523791907902,
-    "bull": 10.608190261276404,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "bear": 22.97505621406775,
+    "base": 26.89175600593011,
+    "bull": 38.617943422527844,
+    "dispersion": 0.050493332664149834,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Earnings Power Value"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 6.782285576881636,
-      "base": 8.69523791907902,
-      "bull": 10.608190261276404,
-      "confidence": 0.72,
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 24.726904018501788,
+      "base": 28.086866185490486,
+      "bull": 38.617943422527844,
+      "confidence": 0.85,
       "relevance": 1.0,
-      "rawWeight": 0.72,
+      "rawWeight": 0.85,
+      "bands": null,
       "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 0.912999981503297,
-        "requiredReturn": 0.105
-      },
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": true
+      "indicativeWeight": 0.5573770491803279
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "bear": 22.97505621406775,
+      "base": 25.3868024464837,
+      "bull": 29.45520027444583,
+      "confidence": 0.75,
+      "relevance": 0.9,
+      "rawWeight": 0.675,
+      "bands": null,
+      "warning": null,
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
-    "terminalValueShare": 0.6938561007609284,
-    "bearTerminalValueShare": 0.631341348752999,
-    "bullTerminalValueShare": 0.7466501490758323,
+    "terminalValueShare": 0.5851101816015056,
+    "bearTerminalValueShare": 0.5376683510128314,
+    "bullTerminalValueShare": 0.650543792998734,
     "warning": false,
-    "growth": -0.025032500000000006,
-    "costOfEquity": 0.105,
+    "growth": -0.03,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035
   },
   "technical": {
@@ -64,7 +77,7 @@
   },
   "quality": {
     "cashConversion": null,
-    "roe": -0.2001,
+    "roe": -0.21802,
     "dataScore": 71,
     "dataLabel": "CUKUP",
     "availableInputs": 5,
@@ -72,43 +85,42 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 0.9130 per saham.",
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.353182751540041,
-    "validMethodCount": 1,
+    "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 3,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
-        "family": "earnings_power",
+        "family": "cashflow",
         "methods": [
-          "Earnings Power Value"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 6.782285576881636,
-        "base": 8.69523791907902,
-        "bull": 10.608190261276404,
+        "bear": 23.850980116284767,
+        "base": 26.736834315987092,
+        "bull": 34.03657184848684,
         "weight": 0.25
       }
     ],
     "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 0.912999981503297,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
-    "roe": -0.2001,
-    "fcf": 24303720.0,
-    "growthNormalized": -0.025032500000000006,
-    "costOfEquity": 0.105,
+    "roe": -0.21802,
+    "fcf": 6984686592.0,
+    "growthNormalized": -0.03,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
     "marketCap": 102603964416.0,
     "shares": 1900073314.0,
@@ -117,26 +129,22 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 0.913
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 0.912999963006594
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
-    "growthNormalizedLegacy": -0.025032500000000006,
+    "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -224,9 +232,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
