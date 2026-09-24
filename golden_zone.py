@@ -74,6 +74,7 @@ def choose_swing(h):
                     c=candidate_score(d,li,hi,a,k)
                     if c:
                         c["window"]=w;c["liGlobal"]=offset+li;c["hiGlobal"]=offset+hi
+                        c["lowTimestamp"]=str(d.index[li]);c["highTimestamp"]=str(d.index[hi])
                         c["tier"]=swing_tier(c)
                         cands.append(c)
     if not cands:return None,a
@@ -145,7 +146,7 @@ def analyze(sym):
     return {
       "ticker":sym.replace(".JK",""),"status":"VALID" if quality!="LOW" else "LOW_CONFIDENCE",
       "engine":"WISS Golden Zone v2.1","currentPrice":now,"position":pos,
-      "swing":{"low":round_idx(lo),"high":round_idx(hi),"lowDate":str(h.index[c["liGlobal"]].date()),"highDate":str(h.index[c["hiGlobal"]].date()),
+      "swing":{"low":round_idx(lo),"high":round_idx(hi),"lowDate":str(pd.Timestamp(c["lowTimestamp"]).date()),"highDate":str(pd.Timestamp(c["highTimestamp"]).date()),
                "searchWindow":c["window"],"pivotWidth":c["k"],"barsInImpulse":c["bars"],"highAgeBars":c["age"],
                "impulseATR":round(c["impulseATR"],2),"score":round(c["score"],1),"dominanceScore":round(c.get("dominanceScore",c["score"]),1),"quality":quality,"tier":c.get("tier","MINOR")},
       "fib":{k:round_idx(v) for k,v in lv.items()},
