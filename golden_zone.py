@@ -84,10 +84,19 @@ def round_idx(v):
     if v>=200:return round(v/2)*2
     return round(v)
 
+def load_cached_ohlc(sym):
+    p=OHLC/f"{sym.replace('.JK','')}.csv"
+    if not p.exists(): return None
+    try:
+        h=pd.read_csv(p,index_col=0,parse_dates=True)
+        need={"Open","High","Low","Close"}
+        return h if need.issubset(h.columns) and len(h)>=20 else None
+    except Exception:return None
+
 def analyze(sym):
     tk=sym if "." in sym else sym+".JK"
-    h=yf.Ticker(tk).history(period="6mo",auto_adjust=False)
-    if h.empty or len(h)<20:return {"ticker":sym,"status":"UNAVAILABLE","reason":"OHLC history insufficient"}
+    h=load_cached_ohlc(sym)
+    if h is None or h.empty or len(h)<20:return {"ticker":sym,"status":"CACHE_MISSING","reason":"Shared OHLC cache unavailable; Golden Zone does not refetch Yahoo"}
     h=h.dropna(subset=["Open","High","Low","Close"])
     c,a=choose_swing(h)
     now=float(h.Close.iloc[-1])
