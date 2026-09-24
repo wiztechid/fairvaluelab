@@ -2,6 +2,7 @@ import json,math,statistics,re
 from pathlib import Path
 DATA=Path('data'); OUT=DATA/'sector_mos.json'
 ELIGIBLE={'SIAP','REVIEW'}
+MIN_MOS=10.0
 
 def f(x):
  try:
@@ -34,7 +35,10 @@ def main():
   if not t or not price or not base or price<=0 or base<=0 or not fv.get('available'):continue
   status=d.get('analysisStatus')
   if status not in ELIGIBLE:continue
-  group=peer_group(prof);mos=(base-price)/base*100;q=d.get('quality') or {}
+  group=peer_group(prof);mos=(base-price)/base*100
+  # Leaderboard is an opportunity shortlist: hide negative/thin discounts.
+  if mos < MIN_MOS:continue
+  q=d.get('quality') or {}
   row={'ticker':t,'name':d.get('name') or t,'peerGroup':group,'desSector':prof.get('sector'),'valuationProfile':prof.get('valuationProfile'),
        'sourceSector':prof.get('sourceSector'),'industry':prof.get('industry'),'price':price,'fairValueBase':base,'mos':round(mos,2),
        'analysisStatus':status,'confidence':q.get('valuationConfidence'),'dataScore':q.get('dataScore'),
@@ -45,7 +49,7 @@ def main():
   rows.sort(key=lambda x:(x['mos'],x.get('confidence') or 0),reverse=True);top=rows[:10];vals=[x['mos'] for x in rows]
   out[group]={'peerGroup':group,'eligibleCount':len(rows),'medianMos':round(statistics.median(vals),2) if vals else None,'top10':top}
  json.dump({'method':'MoS=(FV Base-Price)/FV Base','grouping':'Valuation Peer Group: valuation profile / industry / economic sector; DES sector retained only as metadata/fallback.',
-            'tickerPolicy':'Canonical IDX ticker without .JK suffix','eligibility':'Full FV only: SIAP or REVIEW. INDIKATIF/REFERENSI/BELUM_DINILAI excluded.',
+            'tickerPolicy':'Canonical IDX ticker without .JK suffix','eligibility':f'Full FV only: SIAP or REVIEW, MoS >= {MIN_MOS:.0f}%. INDIKATIF/REFERENSI/BELUM_DINILAI excluded.',
             'peerGroups':out},open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
  print('PEER_MOS',len(out),'groups',sum(len(v['top10']) for v in out.values()),'ranked rows')
 if __name__=='__main__':main()
