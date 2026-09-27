@@ -30,7 +30,7 @@ def main():
         mf=pr.get("marketAndFinancials") or {}; un=pr.get("universe") or {}; val=pr.get("valuation") or {}
         if mf.get("classification")!="THIRD_PARTY" or not mf.get("provider"): fail(errors,f"{t}: market provenance invalid")
         if not mf.get("observedAt"): fail(errors,f"{t}: observedAt missing")
-        if mf.get("freshnessStatus") not in ("FRESH","STALE"): fail(errors,f"{t}: freshness invalid")
+        if mf.get("runFreshnessStatus") not in ("FRESH","STALE"): fail(errors,f"{t}: run freshness invalid")
         if un.get("classification")!="OFFICIAL" or not un.get("source"): fail(errors,f"{t}: universe provenance invalid")
         if val.get("classification")!="DERIVED" or val.get("engineVersion")!=C["engineVersion"] or val.get("qcVersion")!=C["qcVersion"]: fail(errors,f"{t}: valuation lineage invalid")
     if represented!=len(TICKERS): fail(errors,f"atomic canonical universe failed {represented}/{len(TICKERS)}")
