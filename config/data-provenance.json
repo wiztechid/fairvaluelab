@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "sources": {
+    "market_and_financials": {
+      "provider": "Yahoo Finance via yfinance",
+      "classification": "THIRD_PARTY",
+      "fields": [
+        "price",
+        "OHLC",
+        "marketCap",
+        "shares",
+        "financial statements",
+        "beta",
+        "dividends",
+        "FX"
+      ],
+      "freshnessPolicy": "RUN_OBSERVED",
+      "limitations": [
+        "rate limits",
+        "missing fields",
+        "restatements",
+        "currency/unit inconsistencies",
+        "corporate-action/share-count risk"
+      ]
+    },
+    "universe": {
+      "provider": "OJK DES",
+      "classification": "OFFICIAL",
+      "sourceField": "universeSource",
+      "freshnessPolicy": "EFFECTIVE_PERIOD"
+    },
+    "valuation": {
+      "provider": "FairValueLab pipeline",
+      "classification": "DERIVED",
+      "engineVersion": "3.20-family-consensus",
+      "qcVersion": "3.20-family-consensus-qc"
+    },
+    "assumptions": {
+      "classification": "ESTIMATED",
+      "fields": [
+        "growthNormalized",
+        "costOfEquity",
+        "terminalGrowth"
+      ]
+    }
+  },
+  "pointInTime": {
+    "verifiedTimestampKeys": [
+      "reportPublishedAt",
+      "filingDate",
+      "acceptedAt"
+    ],
+    "fallback": "engineAsOfFallback",
+    "fallbackQuality": "PROVISIONAL"
+  }
+}
