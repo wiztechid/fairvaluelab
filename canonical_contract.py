@@ -26,7 +26,8 @@ def provenance_for(d):
         "classification":"THIRD_PARTY",
         "provider":d.get("source") or "Yahoo Finance via yfinance",
         "observedAt":d.get("asOf"),
-        "freshnessStatus":d.get("freshnessStatus") or "UNKNOWN"
+        "runFreshnessStatus":d.get("freshnessStatus") or "UNKNOWN",
+        "financialSourceFreshness":"UNKNOWN"
       },
       "universe":{
         "classification":"OFFICIAL",
