@@ -1,0 +1,40 @@
+name: Fair Value Browser Interaction Gate
+on:
+  push:
+    branches: [feature/cekvaluasi-homepage]
+    paths:
+      - fair-value/index.html
+      - data/**
+      - assets/**
+      - universe.html
+      - methodology.html
+      - scripts/fair-value-browser-gate.js
+      - .github/workflows/fair-value-browser-gate.yml
+  pull_request:
+    paths:
+      - fair-value/index.html
+      - data/**
+      - assets/**
+      - universe.html
+      - methodology.html
+      - scripts/fair-value-browser-gate.js
+      - .github/workflows/fair-value-browser-gate.yml
+jobs:
+  browser-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/fv-http.log 2>&1 &
+          echo $! > /tmp/fv-http.pid
+          for i in {1..20}; do curl -fsS http://127.0.0.1:4173/fair-value/ >/dev/null && break; sleep 1; done
+      - name: Run browser interaction gate
+        run: node scripts/fair-value-browser-gate.js
