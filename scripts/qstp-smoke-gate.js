@@ -23,7 +23,7 @@ else {
   catch (e) { fail('JavaScript syntax error: ' + e.message); }
 }
 
-const requiredIds = ['capital','count','riskPct','maxPct','deploy','heatLim','stopPct','rewardR','tickers','result','warnings','kpis','rows','education','generate','pdf'];
+const requiredIds = ['capital','count','riskPct','maxPos','deployPct','heatPct','stopPct','rewardR','tickers','result','warnings','kpis','rows','education','generate','pdf'];
 for (const id of requiredIds) if (!new RegExp(`id=["']${id}["']`).test(html)) fail('missing critical DOM id #' + id);
 if (!process.exitCode) pass('critical DOM contracts present');
 
