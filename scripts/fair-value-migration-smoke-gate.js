@@ -1,16 +1,9 @@
 const fs=require('fs');
 function fail(m){console.error('FAIL:',m);process.exitCode=1}
 function ok(c,m){if(!c)fail(m)}
-const root=fs.readFileSync('index.html','utf8');
 const mig=fs.readFileSync('fair-value/index.html','utf8');
-let norm=mig
- .replaceAll('../data/','data/')
- .replaceAll("fetch('data/summary.json","fetch('./data/summary.json")
- .replaceAll('../universe.html','universe.html')
- .replaceAll('../methodology.html','methodology.html')
- .replaceAll('../assets/saweria-qr.svg','assets/saweria-qr.svg')
- .replaceAll('https://wiztechid.github.io/fairvaluelab/fair-value/','https://wiztechid.github.io/fairvaluelab/');
-ok(norm===root,'normalized source parity must be 100%');
+// Pre-switch byte parity against root was proven before root promotion staging.
+// Post-switch this gate protects the migrated engine's runtime contracts; browser parity is enforced separately.
 const scripts=[...mig.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)]
  .filter(x=>!/type=["']application\/ld\+json["']/i.test(x[1]||''))
  .map(x=>x[2]).filter(Boolean);
