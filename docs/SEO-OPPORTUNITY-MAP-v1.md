@@ -73,3 +73,16 @@ Exact opportunity scoring weights, proprietary Scanner gates, ranking heuristics
 
 ## Freshness gate invariant
 No page may move from opportunity registry to drafting solely because it appears in the first-10 list. The owner must first re-run a current SERP check and record the date. If intent, competition, or product fit materially changed, the candidate returns to HOLD/MERGE/REJECT review before drafting.
+
+
+## Pre-draft SERP recheck — 2026-09-29
+Publication Gate recheck completed for the first-10 query families.
+- Generic harga-wajar / calculator intent remains high churn with fresh 2026 educational pages and multi-method calculators. /harga-wajar-saham/ must lead with tool-to-explanation workflow, uncertainty, evidence quality, and the canonical Fair Value engine rather than a second calculator.
+- Nilai intrinsik / valuation-method intent remains crowded and overlapping. /nilai-intrinsik-saham/ remains concept/interpretation only; /metode-valuasi-saham/ remains method-selection owner.
+- Generic undervalued discovery is especially fresh in Sep 2026. /cara-mencari-saham-undervalued/ must remain methodology and value-trap guard, not duplicate the DES-specific owner.
+- Syariah screening already exists in generic IDX screeners. /screener-saham-syariah/ must focus on research prioritization + explainability and must clearly mark Opportunity Scanner as not yet live.
+- Syariah × intrinsic valuation remains differentiated enough to retain /valuasi-saham-syariah/ and /saham-syariah-undervalued/ as separate owners, provided DES/current-status claims are verified against official sources at publication time.
+- Margin of Safety formula content is already well-covered. CekValuasi must connect MoS to valuation uncertainty/evidence quality and avoid presenting a universal safe threshold.
+- Position sizing and general risk are high-churn with fresh IDX-specific calculators/articles. /position-sizing-saham/ owns the lot-sizing calculation task; /manajemen-risiko-saham/ owns the broader framework and must not become a duplicate calculator.
+
+Decision: first-10 registry remains valid, but publication will use controlled batches with corpus/cannibalization QC between batches rather than mass-publishing all 10 at once.
