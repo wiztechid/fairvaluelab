@@ -5,9 +5,10 @@ const states={SIAP:'ACES',INDIKATIF:'ADCP',REVIEW:'AADI',REFERENSI:'AKSI',BELUM_
 (async()=>{
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1440,height:1000}});
- const consoleErrors=[],failed=[];
+ const consoleErrors=[],failed=[],httpErrors=[];
  page.on('console',m=>{if(m.type()==='error') consoleErrors.push(m.text())});
  page.on('requestfailed',r=>failed.push(r.url()+' :: '+(r.failure()?.errorText||'')));
+ page.on('response',r=>{if(r.status()>=400)httpErrors.push({status:r.status(),url:r.url()})});
  let r=await page.goto(base,{waitUntil:'networkidle'}); assert(r&&r.ok(),'initial /fair-value/ must load');
  assert(await page.locator('#ticker').count()===1,'ticker input missing');
  for(const [st,t] of Object.entries(states)){
@@ -42,7 +43,15 @@ const states={SIAP:'ACES',INDIKATIF:'ADCP',REVIEW:'AADI',REFERENSI:'AKSI',BELUM_
  // Ignore browser noise from external optional resources only; local migration-caused failures are fatal.
  const localFailed=failed.filter(x=>x.includes('127.0.0.1:4173'));
  assert.deepStrictEqual(localFailed,[],'local request failures: '+localFailed.join('\n'));
- const fatalConsole=consoleErrors.filter(x=>!/favicon|third-party|net::ERR/i.test(x));
+ const allowed404=u=>/\/data\/(golden_zone|market_actors|catalysts)\//.test(u)||/\/favicon(?:\.ico)?(?:\?|$)/.test(u);
+ const fatalHttp=httpErrors.filter(x=>!(x.status===404&&allowed404(x.url)));
+ assert.deepStrictEqual(fatalHttp,[],'unexpected HTTP errors: '+JSON.stringify(fatalHttp));
+ // Chromium emits generic console errors for expected 404 responses without the URL.
+ // Pair generic 404 console noise with observed allowed HTTP 404s; all other console errors remain fatal.
+ const allowed404Count=httpErrors.filter(x=>x.status===404&&allowed404(x.url)).length;
+ const generic404=consoleErrors.filter(x=>/Failed to load resource: the server responded with a status of 404/i.test(x)).length;
+ assert(generic404<=allowed404Count,'unattributed console 404 errors: '+generic404+' > allowed observed 404s '+allowed404Count);
+ const fatalConsole=consoleErrors.filter(x=>!/Failed to load resource: the server responded with a status of 404/i.test(x)&&!/third-party|net::ERR/i.test(x));
  assert.deepStrictEqual(fatalConsole,[],'console errors: '+fatalConsole.join('\n'));
  await browser.close();
  console.log('Fair Value browser interaction gate PASS');
