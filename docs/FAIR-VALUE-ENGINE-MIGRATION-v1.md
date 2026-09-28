@@ -128,3 +128,13 @@ Before promotion, use a deployed/previewable branch build to click-test:
 12. console/network: no migration-caused P0 errors
 
 Root switch remains prohibited until this interaction gate passes after branch synchronization.
+
+
+## Post-sync parity checkpoint — 2026-09-28
+- Latest main synchronized into this migration branch via PR #7 (main → feature only).
+- Sync merge commit: 6b6018c66810fe77b7b235711b49867298338d23.
+- Branch state immediately after sync: behind main = 0.
+- The incoming main change was a canonical data refresh; production root index.html was not changed by the migration work.
+- Fair Value Migration Smoke Gate run 36414750958 completed SUCCESS after synchronization.
+- Therefore structural/source parity and runtime-contract CI are revalidated against the latest main baseline/data at this checkpoint.
+- Root promotion is still prohibited until the deployed browser interaction gate passes.
