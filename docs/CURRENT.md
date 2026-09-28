@@ -1,9 +1,9 @@
-# Current State — FairValueLab / CekValuasi Preparation
+# Current State — CekValuasi
 
 Updated: 2026-09-28
 
 ## Production baseline
-- FairValueLab remains the current production baseline while the CekValuasi migration is prepared incrementally.
+- CekValuasi homepage is now the production root. The validated Fair Value engine lives at `/fair-value/`; QSTP remains at `/qstp.html`.
 - Universe configuration: OJK DES Period I 2026 as encoded in the existing repository.
 - Public architecture currently uses static HTML plus generated JSON, with a separate Flask application also present.
 - Existing valuation pipeline includes sector-aware models, QC, indicative/reference states, family consensus, validation, technical/catalyst layers, and snapshot/backtest support.
@@ -25,8 +25,8 @@ Product surfaces:
 - **Product #2 — QSTP:** risk-first sharia trading-plan builder.
 - **Product #3 — Syariah Opportunity Scanner:** next planned product after the CekValuasi homepage.
 
-## CekValuasi homepage direction
-The future homepage should operate as a product gateway rather than replacing the valuation engine prematurely.
+## CekValuasi homepage — production
+The homepage now operates as the product gateway. Fair Value remains a separate validated engine at `/fair-value/`.
 
 Proposed public positioning:
 > **Valuasi dulu. Atur risiko. Baru ambil keputusan.**
@@ -34,7 +34,7 @@ Proposed public positioning:
 Reader journey:
 **Pilih saham → Cek valuasi → Pahami harga → Atur risiko → Simpan trading plan**
 
-Homepage implementation remains pending. Until separately approved, do not replace the current production `index.html`.
+Homepage v1.2 was promoted to production on 2026-09-28 after root-switch, migration, browser-interaction, QSTP, and Pages deployment gates passed.
 
 ## Product #3 — Syariah Opportunity Scanner
 
@@ -108,7 +108,7 @@ This public repository may document product behavior and public-safe contracts o
 Do **not** commit exact proprietary scanner recipes, gate hierarchy, weights, thresholds beyond public product requirements, confidence weighting, evidence penalties, cyclicality treatment, state-transition rules, ranking heuristics, or other reusable research IP. Those belong in genuinely private storage/repository and must not enter public Git history.
 
 ## Current governance decision
-CekValuasi migration remains incremental. Existing production behavior stays authoritative until an explicit migration gate promotes a replacement.
+Production architecture is now `/` = CekValuasi homepage, `/fair-value/` = Fair Value engine, and `/qstp.html` = QSTP. Future visual redesigns must preserve product routes, SEO contracts, engine/data semantics, and permanent gates unless separately approved.
 
 ## Open P0 items
 - Establish one canonical public valuation engine/output.
@@ -118,4 +118,4 @@ CekValuasi migration remains incremental. Existing production behavior stays aut
 - Preserve PIT PROVISIONAL vs VERIFIED distinction.
 
 ## Freeze rule
-No formula rewrite, URL migration, workflow replacement, production deletion, homepage replacement, or private-moat disclosure is implied by this document.
+Fair Value formulas/engine semantics, canonical data, QSTP calculations, product routes, SEO canonical contracts, permanent gates, and private-moat boundaries are frozen unless separately approved. Homepage theme/presentation may be iterated only as an isolated visual layer with regression gates.
