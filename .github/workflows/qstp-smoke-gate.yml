@@ -1,0 +1,41 @@
+name: QSTP Syntax & Smoke Gate
+
+on:
+  pull_request:
+    paths:
+      - 'qstp.html'
+      - 'data/summary.json'
+      - 'scripts/qstp-smoke-gate.js'
+      - '.github/workflows/qstp-smoke-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'qstp.html'
+      - 'data/summary.json'
+      - 'scripts/qstp-smoke-gate.js'
+      - '.github/workflows/qstp-smoke-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qstp-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qstp-gate:
+    name: QSTP syntax + structural smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate DES JSON
+        run: node -e "const d=require('./data/summary.json'); if(!Array.isArray(d.stocks)||!d.stocks.length) throw Error('data/summary.json stocks missing'); console.log('DES stocks:',d.stocks.length)"
+      - name: Run QSTP syntax and smoke gate
+        run: node scripts/qstp-smoke-gate.js
