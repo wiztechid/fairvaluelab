@@ -11,8 +11,12 @@ let norm=mig
  .replaceAll('../assets/saweria-qr.svg','assets/saweria-qr.svg')
  .replaceAll('https://wiztechid.github.io/fairvaluelab/fair-value/','https://wiztechid.github.io/fairvaluelab/');
 ok(norm===root,'normalized source parity must be 100%');
-const scripts=[...mig.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(x=>x[1]).filter(Boolean);
-for(const [i,s] of scripts.entries()){try{new Function(s)}catch(e){fail('inline JS '+i+' parse: '+e.message)}}
+const scripts=[...mig.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)]
+ .filter(x=>!/type=["']application\/ld\+json["']/i.test(x[1]||''))
+ .map(x=>x[2]).filter(Boolean);
+for(const [i,s] of scripts.entries()){try{new Function(s)}catch(e){fail('executable inline JS '+i+' parse: '+e.message)}}
+const jsonLd=[...mig.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map(x=>x[1]);
+for(const [i,s] of jsonLd.entries()){try{JSON.parse(s)}catch(e){fail('JSON-LD '+i+' parse: '+e.message)}}
 const fetches=[...mig.matchAll(/fetch\(([^)]{1,180})\)/g)].map(x=>x[0]);
 ok(fetches.length===7,'expected 7 fetch contracts');
 ok(fetches.every(x=>x.includes('../data/')),'all fetches must resolve through ../data/');
