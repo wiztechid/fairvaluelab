@@ -197,3 +197,29 @@ Before any production promotion, perform Deep Reader-First + Visual QC of v1.1 c
 
 ### Freeze boundary
 Theme work may change homepage presentation and reader-first microcopy only. Do not change Fair Value formulas/engine, canonical data, QSTP calculations, DES universe, Scanner proprietary logic, product routes, SEO canonical contracts, sitemap semantics, or permanent gates without separate explicit approval.
+
+
+## Editorial Research Theme v1.2 — Content & Micro-Detail Polish — 2026-09-29
+Status: built on editorial branch and published to isolated noindex preview; NOT promoted to production.
+
+Scope was polish only, not redesign:
+- retained editorial research visual DNA and layout
+- retained Scanner → Fair Value → QSTP → Monitor journey
+- retained Fair Value as primary usable hero CTA while Scanner is still in development
+- clarified Scanner availability and purpose
+- replaced avoidable mixed-language/generic SaaS copy with clearer Indonesian
+- strengthened evidence/data-quality wording
+- clarified Fair Value as an estimate, not certainty
+- clarified QSTP as risk-to-position-size workflow
+- changed “BUY score” wording to “skor beli”
+- improved mobile tap-target/readability details without changing layout
+- strengthened footer disclaimer
+- preserved canonical, product routes, engine/data/QSTP/Scanner logic and SEO architecture
+
+Intentional investment terms retained where clearer for users: Margin of Safety, stop loss, QSTP, Fair Value.
+
+Theme commits:
+- a28b26bba8151a6b0d85980fa25ef36cfb906cd5 — v1.2 content/micro-detail polish
+- 14fc5140b8c968bb92a05f629879e629b8d17a0f — residual copy cleanup
+
+Preview remains /preview/editorial-v1/ with noindex,nofollow.
