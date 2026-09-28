@@ -119,3 +119,30 @@ Production architecture is now `/` = CekValuasi homepage, `/fair-value/` = Fair 
 
 ## Freeze rule
 Fair Value formulas/engine semantics, canonical data, QSTP calculations, product routes, SEO canonical contracts, permanent gates, and private-moat boundaries are frozen unless separately approved. Homepage theme/presentation may be iterated only as an isolated visual layer with regression gates.
+
+
+## Production checkpoint — Editorial v1.2.1 — 2026-09-29
+Status: Editorial Research Theme v1.2 is now the production homepage on main.
+
+Production state:
+- Homepage: Editorial Research Theme v1.2
+- Product journey: Scanner → Fair Value → QSTP → Monitor
+- Scanner remains IN DEVELOPMENT; Fair Value remains the primary usable CTA
+- Homepage semantic schema is active
+- Trust/readiness pages are present: About, Privacy, Terms, Disclaimer, Contact
+- Sitemap includes trust pages
+- ads.txt exists as a safe readiness placeholder; no publisher ID is fabricated or active
+- Fair Value Engine, QSTP calculations, canonical data, routes, and permanent gates remain unchanged
+
+Footer v1.2.1:
+- commit: 1fd5c74c2c627cbb24d2e8809f42fec9c962f542
+- editorial closing statement: “Riset lebih jernih. Keputusan tetap milik Anda.”
+- navigation grouped into Produk / CekValuasi / Kepercayaan
+- Scanner marked as coming soon
+- mobile-responsive footer hierarchy
+- compact investment disclaimer retained
+
+Freeze:
+- Homepage visual direction is considered production-ready and should remain visually frozen unless a regression or material usability issue is found.
+- Future custom-domain work must migrate canonical/schema/OG/sitemap references deliberately from GitHub Pages to cekvaluasi.com.
+- Future Scanner work must not expose private ranking weights, gates, penalties, or state-transition logic in the public repository.
