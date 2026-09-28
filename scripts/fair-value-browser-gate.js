@@ -1,6 +1,7 @@
 const { chromium } = require('playwright');
 const assert = require('assert');
 const base='http://127.0.0.1:4173/fair-value/';
+ // Root homepage contract is exercised in the same browser run after staged switch.
 const states={SIAP:'ACES',INDIKATIF:'ADCP',REVIEW:'AADI',REFERENSI:'AKSI',BELUM_DINILAI:'AEGS'};
 (async()=>{
  const browser=await chromium.launch({headless:true});
@@ -9,7 +10,12 @@ const states={SIAP:'ACES',INDIKATIF:'ADCP',REVIEW:'AADI',REFERENSI:'AKSI',BELUM_
  page.on('console',m=>{if(m.type()==='error') consoleErrors.push(m.text())});
  page.on('requestfailed',r=>failed.push(r.url()+' :: '+(r.failure()?.errorText||'')));
  page.on('response',r=>{if(r.status()>=400)httpErrors.push({status:r.status(),url:r.url()})});
- let r=await page.goto(base,{waitUntil:'networkidle'}); assert(r&&r.ok(),'initial /fair-value/ must load');
+ let r=await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
+ assert(r&&r.ok(),'root homepage must load');
+ assert((await page.title()).startsWith('CekValuasi'),'root title must be CekValuasi');
+ assert(await page.locator('a[href="fair-value/"]').count()>0,'root Fair Value CTA missing');
+ assert(await page.locator('a[href="qstp.html"]').count()>0,'root QSTP CTA missing');
+ r=await page.goto(base,{waitUntil:'networkidle'}); assert(r&&r.ok(),'initial /fair-value/ must load');
  assert(await page.locator('#ticker').count()===1,'ticker input missing');
  for(const [st,t] of Object.entries(states)){
    r=await page.goto(base+'?ticker='+t,{waitUntil:'networkidle'}); assert(r&&r.ok(),st+' direct ticker page failed');
