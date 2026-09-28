@@ -45,7 +45,7 @@ function makePdf(){
  const txt=(x,y,t,size=9,bold=false,c=C.ink)=>{rgb(c);cmd.push('BT /'+(bold?'F2':'F1')+' '+size+' Tf 1 0 0 1 '+x+' '+y+' Tm ('+escPdfText(t)+') Tj ET')};
  const money=n=>'Rp '+Math.round(n||0).toLocaleString('id-ID'), nfmt=n=>Number(n||0).toLocaleString('id-ID');
  const bindLabel=b=>b.split(' + ').map(v=>({RISK_BUDGET:'Risk Budget / Posisi',MAX_POSITION:'Maks. Posisi / Ticker',REMAINING_CAPITAL:'Sisa Deployable Capital',PORTFOLIO_HEAT:'Portfolio Heat Limit',MINIMUM_LOT_NOT_FEASIBLE:'Minimum 1 Lot Tidak Feasible'}[v]||v)).join(' + ');
- const heatRatio=p.heatLim>0?p.heat/p.heatLim:0,heatState=remainingHeat=Math.max(0,p.heatLim-p.heat),heatState=remainingHeat<=0?'AT LIMIT':heatRatio>=.95?'EFFECTIVELY FULL':heatRatio>=.80?'NEAR LIMIT':'PASS';
+ const heatRatio=p.heatLim>0?p.heat/p.heatLim:0,remainingHeat=Math.max(0,p.heatLim-p.heat),heatState=remainingHeat<=0?'AT LIMIT':heatRatio>=.95?'EFFECTIVELY FULL':heatRatio>=.80?'NEAR LIMIT':'PASS';
  rect(0,493,W,102,C.navy);rect(0,493,8,102,C.teal);txt(34,563,'CEKVALUASI.COM',11,true,C.teal);txt(34,535,'RENCANA TRADING SAHAM SYARIAH',23,true,C.white);txt(34,513,'Atur modal, jumlah lot, Stop Loss, Target, dan batas risiko sebelum beli.',9,false,[.76,.84,.87]);txt(650,560,'TRADING TOOLS',9,true,C.white);txt(650,541,new Date().toLocaleDateString('id-ID'),9,false,[.76,.84,.87]);
  const kpis=[['MODAL',money(p.cap),C.blue],['CAPITAL USED',money(p.used),C.mint],['RESERVED CASH',money(p.cap-p.deployCap),C.blue],['UNUSED DEPLOYABLE',money(p.deployCap-p.used),C.amber],['PORTFOLIO HEAT',(p.heat/p.cap*100).toFixed(2)+'%',C.rose],['PLANNED LOSS',money(p.heat),C.rose]];
  kpis.forEach((k,i)=>{let x=28+i*134;rect(x,431,126,48,k[2]);txt(x+10,461,k[0],6.5,true,C.muted);txt(x+10,442,k[1],10.5,true,C.ink)});
