@@ -1,0 +1,95 @@
+# Fair Value Engine Migration Plan v1
+
+Status: REHEARSAL on feature/cekvaluasi-homepage. Production root remains unchanged.
+
+## Objective
+Move the existing Fair Value engine from root `/index.html` to `/fair-value/index.html` without changing valuation semantics or runtime behavior. Only after parity passes may a separate approved change promote the CekValuasi homepage to root.
+
+## Migration invariant
+Migration and redesign are separate changes. Do not rewrite formulas, UI behavior, ticker state, valuation logic, or dynamic ticker SEO semantics during parity migration.
+
+## Current dependency inventory
+### Data/runtime
+The root engine performs seven fetch families:
+- data/{ticker}.json
+- data/golden_zone/{ticker}.json
+- data/market_actors/{ticker}.json
+- data/sector_mos.json
+- data/{ticker}.json (additional runtime path)
+- data/catalysts/{ticker}.json
+- ./data/summary.json
+
+At /fair-value/ these resolve through ../data/.
+
+### Static dependencies
+- universe.html → ../universe.html
+- methodology.html → ../methodology.html
+- assets/saweria-qr.svg → ../assets/saweria-qr.svg
+
+### URL state
+Preserve:
+- ?ticker= query contract
+- URLSearchParams(location.search)
+- localStorage key wiss:lastTicker
+- history.replaceState
+- popstate handling
+- internal ?ticker= links
+
+### SEO/meta
+Static tool canonical/OG base for the rehearsal is /fair-value/.
+Dynamic ticker metadata currently points to /harga-wajar-saham/{ticker}/. Preserve this behavior during parity; review its long-term SEO ownership separately after migration.
+
+### Structured data
+SoftwareApplication JSON-LD remains behavior-equivalent during migration. Brand/schema redesign is outside parity scope.
+
+### QSTP bridge
+The current Fair Value root has no direct QSTP link. Do not add one during parity migration. Product-journey changes require a separate UX change gate.
+
+### Responsive/mobile
+All existing CSS/media-query behavior must remain unchanged except for URL/path adjustments.
+
+## Expected source deltas
+Only:
+1. data paths gain ../
+2. root static links/assets gain ../
+3. static Fair Value canonical/OG URL becomes /fair-value/
+
+After reversing those expected deltas, fair-value/index.html must normalize exactly to the source root index.html.
+
+## Smoke / parity gate
+Required before root switch:
+- source normalization parity = 100%
+- all seven fetch contracts resolve to existing root data
+- summary search loads
+- ticker direct query works
+- ticker switch updates query without navigation loss
+- browser back/popstate works
+- sector MOS ticker links remain local to /fair-value/?ticker=
+- universe/methodology links resolve
+- QR asset resolves
+- canonical/OG static tool URL is /fair-value/
+- dynamic ticker metadata behavior matches baseline
+- mobile breakpoints remain present
+- no valuation formula/DOM/JS behavior change
+- production root index.html remains unchanged during rehearsal
+
+## Switch sequence (separate explicit approval)
+1. Freeze a known-good Fair Value baseline.
+2. Verify /fair-value/ on branch/deployment.
+3. Run runtime parity on representative tickers and error/review states.
+4. Promote CekValuasi homepage to root.
+5. Promote /fair-value/ as the Fair Value tool canonical.
+6. Update homepage/product navigation, sitemap, canonical and internal links in one controlled migration.
+7. Re-run SEO, runtime, mobile and QSTP journey regression.
+8. Roll back root switch if any P0 engine or routing contract fails.
+
+## Rollback
+The current root index.html remains the known-good baseline until the switch is explicitly approved. Do not delete it as part of rehearsal.
+
+## Out of scope
+- formula changes
+- valuation model changes
+- ticker-page SEO redesign
+- Scanner implementation
+- QSTP redesign
+- content-page publication
