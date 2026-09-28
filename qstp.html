@@ -21,50 +21,29 @@ function makePdf(){
  const rect=(x,y,w,h,c)=>{rgb(c);cmd.push(x+' '+y+' '+w+' '+h+' re f')};
  const line=(x1,y1,x2,y2,c,w=.6)=>{rgb(c,true);cmd.push(w+' w '+x1+' '+y1+' m '+x2+' '+y2+' l S')};
  const txt=(x,y,t,size=9,bold=false,c=C.ink)=>{rgb(c);cmd.push('BT /'+(bold?'F2':'F1')+' '+size+' Tf 1 0 0 1 '+x+' '+y+' Tm ('+esc(t)+') Tj ET')};
- const money=n=>'Rp '+Math.round(n||0).toLocaleString('id-ID');
- const nfmt=n=>Number(n||0).toLocaleString('id-ID');
- // Header
- rect(0,493,W,102,C.navy);rect(0,493,8,102,C.teal);
- txt(34,563,'CEKVALUASI.COM',11,true,C.teal);txt(34,535,'QUICK SYARIAH TRADING PLAN',24,true,C.white);
- txt(34,513,'Risk-first portfolio plan  |  DES universe  |  IDX lot sizing  |  Explain every lot',9,false,[.76,.84,.87]);
- txt(650,560,'TRADING TOOLS',9,true,C.white);txt(650,541,new Date().toLocaleDateString('id-ID'),9,false,[.76,.84,.87]);
- // KPI strip
+ const money=n=>'Rp '+Math.round(n||0).toLocaleString('id-ID'), nfmt=n=>Number(n||0).toLocaleString('id-ID');
+ rect(0,493,W,102,C.navy);rect(0,493,8,102,C.teal);txt(34,563,'CEKVALUASI.COM',11,true,C.teal);txt(34,535,'QUICK SYARIAH TRADING PLAN',24,true,C.white);txt(34,513,'Risk-first portfolio plan | DES universe | IDX lot sizing | Explain every lot',9,false,[.76,.84,.87]);txt(650,560,'TRADING TOOLS',9,true,C.white);txt(650,541,new Date().toLocaleDateString('id-ID'),9,false,[.76,.84,.87]);
  const kpis=[['MODAL',money(p.cap),C.blue],['CAPITAL USED',money(p.used),C.mint],['RESERVED CASH',money(p.cap-p.deployCap),C.blue],['UNUSED DEPLOYABLE',money(p.deployCap-p.used),C.amber],['PORTFOLIO HEAT',(p.heat/p.cap*100).toFixed(2)+'%',C.rose],['PLANNED LOSS',money(p.heat),C.rose]];
- let kx=28,kw=126;
- kpis.forEach((k,i)=>{let x=kx+i*(kw+8);rect(x,431,kw,48,k[2]);txt(x+10,461,k[0],6.5,true,C.muted);txt(x+10,442,k[1],10.5,true,C.ink)});
- // Table
- txt(28,405,'PORTFOLIO PLAN',10,true,C.ink);txt(690,405,'1 lot = 100 saham',7.5,false,C.muted);
- rect(28,373,786,24,C.navy2);
- const cols=[28,102,160,215,270,320,414,515,588,650,814];
- const heads=['TICKER','ENTRY','SL','TP','LOT','ALLOCATION','RISK RP','RR','STATUS','BINDING CONSTRAINT'];
- heads.forEach((h,i)=>txt(cols[i]+6,382,h,6.3,true,C.white));
- let y=345;
- p.out.forEach((x,i)=>{
-   if(i%2===0)rect(28,y-5,786,28,[.97,.985,.99]);
-   txt(34,y,x.sym,8.5,true,C.ink);txt(108,y,nfmt(x.e),8,false,C.ink);txt(166,y,nfmt(x.sl),8,false,C.ink);txt(221,y,nfmt(x.tp),8,false,C.ink);
-   txt(278,y,String(x.lots),8.5,true,x.lots?C.green:[.75,.16,.16]);txt(326,y,money(x.alloc),7.5,false,C.ink);txt(420,y,money(x.risk),7.5,false,C.ink);txt(521,y,x.rr.toFixed(2)+'R',8,true,C.ink);
-   txt(594,y,x.lots?'ACTIVE':'EXCLUDED',6.5,true,x.lots?C.green:[.75,.16,.16]);txt(656,y,x.bind.replaceAll('_',' '),5.8,false,C.muted);
-   line(28,y-10,814,y-10,C.line,.35);y-=31;
- });
- // Audit and risk envelope
- const boxY=106;
- rect(28,boxY,382,105,C.mint);rect(424,boxY,390,105,C.blue);
- txt(42,190,'QSTP DISCIPLINE AUDIT',10,true,C.green);
- const checks=[['Deployable Capital',p.used<=p.deployCap],['Portfolio Heat',p.heat<=p.heatLim],['Entry - SL - TP structure',true],['Final Lots = single source of truth',true]];
- checks.forEach((a,i)=>txt(42,169-i*18,(a[1]?'PASS  ':'CHECK  ')+a[0],8,a[1],a[1]?C.green:[.75,.16,.16]));
- txt(438,190,'RISK ENVELOPE',10,true,C.ink);
- txt(438,169,'Deployable cap: '+money(p.deployCap),8,false,C.ink);txt(438,151,'Heat limit: '+money(p.heatLim)+' ('+(p.heatLim/p.cap*100).toFixed(2)+'%)',8,false,C.ink);
- txt(438,133,'Heat terpakai: '+money(p.heat)+' ('+(p.heat/p.cap*100).toFixed(2)+'%)',8,false,C.ink);txt(438,115,'Urutan ticker memakai modal & heat dari #1 ke #N.',7.5,false,C.muted);
- // Footer warning
- rect(0,0,W,82,C.navy);txt(28,57,'PLAN DULU. TRADE DISIPLIN.',11,true,C.teal);
- txt(28,39,'Dokumen edukasi/perencanaan, bukan rekomendasi beli atau jual.',7.5,false,C.white);
- txt(28,25,'Portfolio heat = planned loss bila seluruh stop tersentuh; bukan probabilitas rugi.',7.2,false,[.76,.84,.87]);
- txt(438,39,'Gap, fee, slippage, korelasi, likuiditas dan perubahan harga',7.2,false,[.76,.84,.87]);
- txt(438,25,'dapat membuat realisasi berbeda dari rencana.',7.2,false,[.76,.84,.87]);txt(720,57,'cekvaluasi.com',8,true,C.white);
+ kpis.forEach((k,i)=>{let x=28+i*134;rect(x,431,126,48,k[2]);txt(x+10,461,k[0],6.5,true,C.muted);txt(x+10,442,k[1],10.5,true,C.ink)});
+ txt(28,405,'PORTFOLIO PLAN',10,true,C.ink);txt(690,405,'1 lot = 100 saham',7.5,false,C.muted);rect(28,373,786,24,C.navy2);
+ const cols=[28,102,160,215,270,320,414,515,588,650],heads=['TICKER','ENTRY','SL','TP','LOT','ALLOCATION','RISK RP','RR','STATUS','BINDING CONSTRAINT'];heads.forEach((h,i)=>txt(cols[i]+6,382,h,6.3,true,C.white));
+ let y=345;p.out.forEach((x,i)=>{if(i%2===0)rect(28,y-5,786,28,[.97,.985,.99]);txt(34,y,x.sym,8.5,true,C.ink);txt(108,y,nfmt(x.e),8);txt(166,y,nfmt(x.sl),8);txt(221,y,nfmt(x.tp),8);txt(278,y,String(x.lots),8.5,true,x.lots?C.green:[.75,.16,.16]);txt(326,y,money(x.alloc),7.5);txt(420,y,money(x.risk),7.5);txt(521,y,x.rr.toFixed(2)+'R',8,true);txt(594,y,x.lots?'ACTIVE':'EXCLUDED',6.5,true,x.lots?C.green:[.75,.16,.16]);txt(656,y,x.bind.replaceAll('_',' '),5.8,false,C.muted);line(28,y-10,814,y-10,C.line,.35);y-=31});
+ rect(28,106,382,105,C.mint);rect(424,106,390,105,C.blue);txt(42,190,'QSTP DISCIPLINE AUDIT',10,true,C.green);[['Deployable Capital',p.used<=p.deployCap],['Portfolio Heat',p.heat<=p.heatLim],['Entry - SL - TP structure',true],['Final Lots = single source of truth',true]].forEach((q,i)=>txt(42,169-i*18,(q[1]?'PASS  ':'CHECK  ')+q[0],8,q[1],q[1]?C.green:[.75,.16,.16]));txt(438,190,'RISK ENVELOPE',10,true);txt(438,169,'Deployable cap: '+money(p.deployCap),8);txt(438,151,'Heat limit: '+money(p.heatLim)+' ('+(p.heatLim/p.cap*100).toFixed(2)+'%)',8);txt(438,133,'Heat terpakai: '+money(p.heat)+' ('+(p.heat/p.cap*100).toFixed(2)+'%)',8);txt(438,115,'Urutan ticker memakai modal & heat dari #1 ke #N.',7.5,false,C.muted);
+ rect(0,0,W,82,C.navy);txt(28,57,'PLAN DULU. TRADE DISIPLIN.',11,true,C.teal);txt(28,39,'Dokumen edukasi/perencanaan, bukan rekomendasi beli atau jual.',7.5,false,C.white);txt(28,25,'Portfolio heat = planned loss bila seluruh stop tersentuh; bukan probabilitas rugi.',7.2,false,[.76,.84,.87]);txt(438,39,'Gap, fee, slippage, korelasi, likuiditas dan perubahan harga',7.2,false,[.76,.84,.87]);txt(438,25,'dapat membuat realisasi berbeda dari rencana.',7.2,false,[.76,.84,.87]);txt(720,57,'cekvaluasi.com',8,true,C.white);
  const stream=cmd.join('\n')+'\n';
- const objs=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>','<< /Length '+stream.length+' >>\nstream\n'+stream+'endstream'];
- let out='%PDF-1.4\n',off=[0];objs.forEach((o,i)=>{off.push(out.length);out+=(i+1)+' 0 obj\n'+o+'\nendobj\n'});let xref=out.length;out+='xref\n0 7\n0000000000 65535 f \n';for(let i=1;i<off.length;i++)out+=String(off[i]).padStart(10,'0')+' 00000 n \n';out+='trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF';
- return new Blob([out],{type:'application/pdf'});
+ const enc=new TextEncoder();
+ const objects=[
+  '<< /Type /Catalog /Pages 2 0 R >>',
+  '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+  '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>',
+  '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
+  '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>',
+  '<< /Length '+enc.encode(stream).length+' >>\nstream\n'+stream+'endstream'
+ ];
+ let chunks=[enc.encode('%PDF-1.4\n%QSTP\n')],offset=chunks[0].length,offs=[0];
+ objects.forEach((o,i)=>{offs.push(offset);const z=enc.encode((i+1)+' 0 obj\n'+o+'\nendobj\n');chunks.push(z);offset+=z.length});
+ const xref=offset;let x='xref\n0 7\n0000000000 65535 f \n';for(let i=1;i<offs.length;i++)x+=String(offs[i]).padStart(10,'0')+' 00000 n \n';x+='trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF\n';chunks.push(enc.encode(x));
+ return new Blob(chunks,{type:'application/pdf'});
 }
 function downloadPdf(){try{const blob=makePdf(),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='QSTP-Trading-Plan.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),15000)}catch(e){alert(e.message)}}
 async function loadDES(){try{const r=await fetch('data/summary.json',{cache:'no-store'});if(!r.ok)throw Error('DES dataset gagal dimuat');const j=await r.json();DES=(j.stocks||[]).filter(x=>x.ticker&&Number(x.price)>0).sort((a,b)=>a.ticker.localeCompare(b.ticker));}catch(e){console.warn(e);DES=[]}renderTickers()}function invalidate(){if(!snapshot)return;dirty=true;$('pdf').disabled=true;$('warnings').innerHTML='<div class="warn">⚠ Input berubah setelah Generate. Generate Trading Plan ulang agar recap dan PDF sinkron.</div>'}$('capital').addEventListener('input',e=>{const raw=parseNum(e.target.value);e.target.value=raw?raw.toLocaleString('id-ID'):'';invalidate()});document.addEventListener('input',e=>{if(e.target.id!=='capital'&&e.target.matches('input,select'))invalidate();if(e.target.matches('.entry')||e.target.id==='stopPct'||e.target.id==='rewardR'){applyQuick();invalidate()}});document.addEventListener('change',e=>{if(e.target.matches('.sym')){const card=e.target.closest('.ticker'),st=stockOf(e.target.value);card.querySelector('.tickerTitle').textContent='#'+([...document.querySelectorAll('.ticker')].indexOf(card)+1)+' '+st.ticker;if(st.price>0)card.querySelector('.entry').value=Math.round(st.price);applyQuick();invalidate()}if(e.target.matches('.entry,.stop'))normalizeManual(e.target,'down');if(e.target.matches('.target'))normalizeManual(e.target,'up')});$('count').onchange=()=>{renderTickers();invalidate()};$('refresh').onclick=()=>{applyQuick();invalidate()};$('generate').onclick=generate;$('pdf').onclick=downloadPdf;loadDES();
