@@ -119,3 +119,81 @@ Production architecture is now `/` = CekValuasi homepage, `/fair-value/` = Fair 
 
 ## Freeze rule
 Fair Value formulas/engine semantics, canonical data, QSTP calculations, product routes, SEO canonical contracts, permanent gates, and private-moat boundaries are frozen unless separately approved. Homepage theme/presentation may be iterated only as an isolated visual layer with regression gates.
+
+
+## Editorial Research Theme — checkpoint 2026-09-29
+
+Status: v1.1 built and visually previewed; NOT promoted to production.
+
+Branch:
+- feature/cekvaluasi-editorial-theme
+- Theme implementation commit: 138378d3ce75c1bafe5d1d965f8d1db6aa9526cf
+
+Preview:
+- /preview/editorial-v1/ is an isolated noindex,nofollow snapshot published only for visual review.
+- Production root remains the previously promoted CekValuasi homepage until a separate approval promotes the editorial theme.
+
+### Product journey — locked direction
+Public journey:
+1. Scanner / Discover — identify DES candidates worth researching.
+2. Fair Value / Verify — test reasonable value, Margin of Safety, evidence/data quality and price context.
+3. QSTP / Plan — translate a chosen setup into position size and portfolio-risk consequences.
+4. Monitor — revisit when price, evidence or conditions change.
+
+Scanner remains IN DEVELOPMENT. Therefore the homepage may show Scanner as Step 01 conceptually, but the primary usable hero CTA remains Fair Value until Scanner is live. Do not imply Scanner is currently operational.
+
+### Editorial visual DNA
+Direction: financial research desk / editorial investment research, not generic SaaS landing page.
+Preserve:
+- strong typography and editorial rules
+- numbered research instruments 01/02/03
+- limited emerald as signal rather than decorative gradient
+- distinct visual grammar per instrument:
+  - Scanner = evidence/state rails
+  - Fair Value = valuation range rail
+  - QSTP = risk allocation strip
+- dark signature decision-sequence section
+- manifesto: “Angka tanpa penjelasan tidak cukup.”
+- brand discipline:
+  - Bukti sebelum kesimpulan.
+  - Valuasi sebelum euforia.
+  - Risiko sebelum posisi.
+
+Avoid returning to:
+- excessive rounded white cards
+- pill overload
+- generic gradients/shadows
+- emoji/icon-led product identity
+- visually identical product cards
+- generic AI/SaaS landing-page grammar
+
+### v1.1 polish already applied
+- product order corrected to Scanner → Fair Value → QSTP
+- section headline: “Scan. Nilai. Rencanakan. Satu disiplin keputusan.”
+- signature sequence: “Scan peluang. Uji nilai. Batasi risiko.”
+- mobile micro typography increased
+- instrument numbers strengthened
+- Scanner rail/readability improved
+- QSTP risk strip readability improved
+- product body copy increased
+- principle hierarchy strengthened
+- manifesto differentiated
+- footer strengthened
+- rule density reduced relative to v1
+
+### Next QC
+Before any production promotion, perform Deep Reader-First + Visual QC of v1.1 content and details, especially:
+- first-screen comprehension
+- Indonesian terminology consistency vs unnecessary English
+- Scanner explanation clarity while still unavailable
+- microcopy hierarchy and legibility on mobile
+- instrument visualization semantics
+- section transitions/rule density
+- manifesto/scanner-preview duplication
+- footer/disclaimer readability
+- accessibility/tap targets
+- desktop balance
+- regression against canonical/routes/SEO contracts
+
+### Freeze boundary
+Theme work may change homepage presentation and reader-first microcopy only. Do not change Fair Value formulas/engine, canonical data, QSTP calculations, DES universe, Scanner proprietary logic, product routes, SEO canonical contracts, sitemap semantics, or permanent gates without separate explicit approval.
