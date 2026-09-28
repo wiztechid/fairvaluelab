@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QSTP PDF Live Test</title>
+<style>body{font-family:system-ui;background:#f3f7f6;color:#17343d;margin:0;padding:24px}.card{max-width:720px;margin:auto;background:#fff;border:1px solid #dce8e5;border-radius:18px;padding:22px}button{width:100%;padding:14px;border:0;border-radius:12px;background:#087d68;color:#fff;font-weight:800;font-size:16px}.log{margin-top:14px;padding:12px;background:#10222a;color:#dff7ee;border-radius:10px;white-space:pre-wrap;font:12px monospace}</style></head>
+<body><div class="card"><h1>QSTP PDF Live Test</h1><p>Tes ini dijalankan dari HTTPS GitHub Pages, bukan attachment <code>content://</code>.</p>
+<button id="pdf">Generate PDF</button><div class="log" id="log">Ready.</div></div>
+<script>
+const log=x=>document.getElementById('log').textContent+='\n'+x;
+function makePdf(){
+ const stream='BT /F1 20 Tf 60 760 Td (QSTP LIVE PDF TEST) Tj 0 -32 Td /F1 11 Tf (HTTPS browser PDF generation works.) Tj ET';
+ const objs=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>','<< /Length '+stream.length+' >>\nstream\n'+stream+'\nendstream'];
+ let out='%PDF-1.4\n',off=[0];objs.forEach((o,i)=>{off.push(out.length);out+=(i+1)+' 0 obj\n'+o+'\nendobj\n'});let x=out.length;out+='xref\n0 6\n0000000000 65535 f \n';for(let i=1;i<off.length;i++)out+=String(off[i]).padStart(10,'0')+' 00000 n \n';out+='trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+x+'\n%%EOF';return new Blob([out],{type:'application/pdf'});
+}
+document.getElementById('pdf').onclick=()=>{try{const blob=makePdf(),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='QSTP-live-test.pdf';document.body.appendChild(a);a.click();a.remove();log('PDF dibuat: '+blob.size+' bytes. Download requested.');setTimeout(()=>URL.revokeObjectURL(url),15000)}catch(e){log('ERROR: '+e.name+' — '+e.message)}};
+window.onerror=(m,s,l,c)=>log('JS ERROR: '+m+' @ '+l+':'+c);
+</script></body></html>
