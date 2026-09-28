@@ -1,0 +1,32 @@
+name: Fair Value Migration Smoke Gate
+on:
+  push:
+    branches: [feature/cekvaluasi-homepage]
+    paths:
+      - index.html
+      - fair-value/index.html
+      - data/**
+      - assets/saweria-qr.svg
+      - universe.html
+      - methodology.html
+      - scripts/fair-value-migration-smoke-gate.js
+      - .github/workflows/fair-value-migration-smoke-gate.yml
+  pull_request:
+    paths:
+      - index.html
+      - fair-value/index.html
+      - data/**
+      - assets/saweria-qr.svg
+      - universe.html
+      - methodology.html
+      - scripts/fair-value-migration-smoke-gate.js
+      - .github/workflows/fair-value-migration-smoke-gate.yml
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/fair-value-migration-smoke-gate.js

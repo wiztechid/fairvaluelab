@@ -1,0 +1,28 @@
+name: CekValuasi Root Switch Gate
+on:
+  push:
+    branches: [feature/cekvaluasi-homepage]
+    paths:
+      - index.html
+      - fair-value/index.html
+      - qstp.html
+      - sitemap.xml
+      - scripts/cekvaluasi-root-switch-gate.js
+      - .github/workflows/cekvaluasi-root-switch-gate.yml
+  pull_request:
+    paths:
+      - index.html
+      - fair-value/index.html
+      - qstp.html
+      - sitemap.xml
+      - scripts/cekvaluasi-root-switch-gate.js
+      - .github/workflows/cekvaluasi-root-switch-gate.yml
+jobs:
+  root-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/cekvaluasi-root-switch-gate.js

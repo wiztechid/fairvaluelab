@@ -1,0 +1,15 @@
+const fs=require('fs'),assert=require('assert');
+const home=fs.readFileSync('index.html','utf8');
+const fv=fs.readFileSync('fair-value/index.html','utf8');
+const sm=fs.readFileSync('sitemap.xml','utf8');
+assert(home.includes('<title>CekValuasi — Riset Saham Syariah dari Peluang hingga Risiko</title>'),'root is not CekValuasi homepage');
+assert(/meta name="robots" content="index,follow,max-image-preview:large"/.test(home),'homepage robots not indexable');
+assert(home.includes('rel="canonical" href="https://wiztechid.github.io/fairvaluelab/"'),'homepage canonical wrong');
+assert(home.includes('href="fair-value/"'),'Fair Value CTA route missing');
+assert(home.includes('href="qstp.html"'),'QSTP CTA route missing');
+assert(!home.includes('../index.html'),'prototype Fair Value route leaked into root');
+assert(!home.includes('../qstp.html'),'prototype QSTP route leaked into root');
+assert(home.includes('Saham mana yang layak saya cek?')&&home.includes('Segera hadir'),'Scanner teaser contract missing');
+assert(fv.includes('canonicalLink" href="https://wiztechid.github.io/fairvaluelab/fair-value/"'),'Fair Value canonical wrong');
+for(const u of ['https://wiztechid.github.io/fairvaluelab/','https://wiztechid.github.io/fairvaluelab/fair-value/','https://wiztechid.github.io/fairvaluelab/qstp.html','https://wiztechid.github.io/fairvaluelab/universe.html']) assert(sm.includes('<loc>'+u+'</loc>'),'sitemap missing '+u);
+console.log('CekValuasi root switch smoke gate PASS');
