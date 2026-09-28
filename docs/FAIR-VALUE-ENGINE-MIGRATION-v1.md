@@ -93,3 +93,38 @@ The current root index.html remains the known-good baseline until the switch is 
 - Scanner implementation
 - QSTP redesign
 - content-page publication
+
+
+## Runtime Parity Gate v1 — 2026-09-28
+
+Status: CONDITIONAL PASS — CI GREEN; final browser-preview interaction gate remains before root switch.
+
+Evidence:
+- GitHub Actions run 36414113816 completed successfully on commit 387147ac1c11848a2ac6a8e237988a592f622811.
+- checkout, Node setup, and fair-value-migration-smoke-gate.js all passed.
+- normalized source parity remains enforced at 100%.
+- executable inline JavaScript is syntax-checked separately from JSON-LD; JSON-LD is parsed as JSON.
+- seven migrated fetch contracts are enforced.
+- representative SIAP, INDIKATIF, REVIEW, REFERENSI, and BELUM_DINILAI records are required by the gate.
+- URL-state, fallback, canonical, dependency, and responsive contracts are enforced.
+- production root index.html remains untouched by this branch.
+
+### Pre-switch synchronization requirement
+At this checkpoint the feature branch is one commit behind main. Before any root promotion, synchronize/reconcile the latest main into the migration branch, rerun the full migration smoke gate, and confirm normalized parity against the then-current production Fair Value baseline. Do not assume today's parity remains valid after main changes.
+
+### Remaining final interaction gate
+Before promotion, use a deployed/previewable branch build to click-test:
+1. initial /fair-value/ load
+2. direct /fair-value/?ticker=<SIAP>
+3. representative INDIKATIF, REVIEW, REFERENSI, BELUM_DINILAI states
+4. ticker search/change and URL replacement
+5. browser back/popstate
+6. Golden Zone available/fallback
+7. Market Actor available/fallback
+8. Catalyst available/404
+9. sector MoS links
+10. universe/methodology/QR links/assets
+11. mobile viewport behavior
+12. console/network: no migration-caused P0 errors
+
+Root switch remains prohibited until this interaction gate passes after branch synchronization.
