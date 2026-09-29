@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+const crypto=require('crypto'),{resolveLifecycle,assertionPayload}=require('./catalyst-pit-lifecycle');
+const H=s=>crypto.createHash('sha256').update(s).digest('hex'),A=(x,m)=>{if(!x)throw Error(m)},reject=(f,m)=>{let y=false;try{f()}catch(e){y=true}A(y,m)};
+const events=[{eventAnchorId:'evt_event00001'},{eventAnchorId:'evt_event00002'}];
+const mk=x=>{const a={materialUntil:null,supersededByEventAnchorId:null,...x};a.assertionHash=H(JSON.stringify(Object.keys(assertionPayload(a)).sort().reduce((o,k)=>(o[k]=assertionPayload(a)[k],o),{})));return a};
+const active=mk({eventAnchorId:'evt_event00001',lifecycleAssertionId:'life_active0001',lifecycleStatus:'ACTIVE',assertedAt:'2026-09-01T01:00:00Z',effectiveAt:'2026-09-01T01:00:00Z',materialUntil:'2026-09-10T00:00:00Z'});
+let x=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-05T00:00:00Z',events,assertions:[active]});A(x.events.find(e=>e.eventAnchorId==='evt_event00001').pitState==='CURRENT','current failed');
+x=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-11T00:00:00Z',events,assertions:[active]});A(x.events.find(e=>e.eventAnchorId==='evt_event00001').pitState==='STALE'&&x.contextStatus==='NO_MATERIAL_EVENT','stale/no material failed');
+const sup=mk({eventAnchorId:'evt_event00001',lifecycleAssertionId:'life_super0001',lifecycleStatus:'SUPERSEDED',assertedAt:'2026-09-12T01:00:00Z',effectiveAt:'2026-09-12T00:00:00Z',supersededByEventAnchorId:'evt_event00002'});
+x=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-13T00:00:00Z',events,assertions:[active,sup]});A(x.events[0].pitState==='SUPERSEDED','superseded failed');
+const wd=mk({eventAnchorId:'evt_event00002',lifecycleAssertionId:'life_withdraw01',lifecycleStatus:'WITHDRAWN',assertedAt:'2026-09-15T01:00:00Z',effectiveAt:'2026-09-15T00:00:00Z'});
+x=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-16T00:00:00Z',events,assertions:[active,sup,wd]});A(x.events.find(e=>e.eventAnchorId==='evt_event00002').pitState==='WITHDRAWN','withdrawn failed');
+x=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-11T00:00:00Z',events,assertions:[active,sup,wd]});A(x.events.find(e=>e.eventAnchorId==='evt_event00001').pitState==='STALE','future assertion rewrote PIT');
+reject(()=>resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-20T00:00:00Z',events,assertions:[{...active,assertionHash:H('tamper')}]}),'tampered assertion accepted');
+reject(()=>resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-20T00:00:00Z',events,assertions:[mk({...sup,supersededByEventAnchorId:'evt_event00001'})]}),'self supersession accepted');
+const a1=mk({...active,lifecycleAssertionId:'life_same00001',materialUntil:null}),a2=mk({...active,lifecycleAssertionId:'life_same00002',lifecycleStatus:'WITHDRAWN',materialUntil:null});
+reject(()=>resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-20T00:00:00Z',events,assertions:[a1,a2]}),'same-time ambiguity accepted');
+const order1=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-13T00:00:00Z',events,assertions:[active,sup]}),order2=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-13T00:00:00Z',events,assertions:[sup,active]});A(JSON.stringify(order1)===JSON.stringify(order2),'ordering changed lifecycle');
+x=resolveLifecycle({ticker:'TEST.JK',asOf:'2026-09-05T00:00:00Z',events,assertions:[active],sourceAvailable:false});A(x.contextStatus==='SOURCE_UNAVAILABLE','source failure collapsed into no event');
+console.log('CATALYST_PIT_LIFECYCLE_TEST_PASS');
