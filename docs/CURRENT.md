@@ -319,3 +319,19 @@ The first Scanner implementation phase is PUBLIC CONTRACT ONLY:
 4. permanent Scanner contract/smoke gate.
 
 No Opportunity Engine, private scoring logic, proprietary threshold, ranking recipe, or candidate-generation implementation is authorized in this phase.
+
+
+### Contract Hardening Patch v1.0.1 — 2026-09-29
+Deep QC of PR #10 hardened the pre-engine public contract before merge:
+- split the ambiguous combined output schema into strict scanner-summary-v1 and scanner-ticker-v1 contracts;
+- introduced generationStatus so NOT_GENERATED/unknown is not represented as numeric zero;
+- retained an honest non-candidate ticker fixture rather than fabricating a real candidate;
+- validator now uses strict public-field allowlists plus forbidden-field defense-in-depth;
+- state and reader-facing stateLabel are bound to an approved mapping;
+- whyWatching / whatToVerify use public semantic reason-code allowlists;
+- ticker freshness is domain-aware and catalyst freshness distinguishes NO_MATERIAL_EVENT from SOURCE_UNAVAILABLE;
+- generated summary invariants require evaluated <= eligible, watchlist <= evaluated, state totals = watchlist count, item totals = watchlist count, and unique tickers;
+- Scanner detail and Fair Value links are canonical ticker-bound routes; QSTP remains an optional secondary action and cannot replace Fair Value as the primary action;
+- workflow path coverage now protects contracts/scanner-**, data/scanner/**, and scripts/scanner-**;
+- the empty Scanner is protected by an explicit PRE_ENGINE_LOCK until a separately reviewed Opportunity Engine implementation is authorized;
+- exact internal ranking/scoring/thresholds and private decision logic remain absent from the public repository.
