@@ -396,3 +396,25 @@ CI evidence at freeze:
 - Scanner Public Contract & Smoke Gate: PASS, including Scanner publication-boundary adversarial attack.
 
 Part 1 is frozen as the public Catalyst evidence-integrity contract. Part 2 may implement resolver/adapters against this frozen boundary; any semantic contract change requires explicit versioning rather than silent mutation.
+
+
+## Final Catalyst Part 2 Freeze Audit — 2026-09-30
+Status: FROZE pending merge of PR #13.
+
+Closed freeze attacks:
+- eventAnchorId remains stable across later PIT snapshots for the same canonical economic event;
+- prior revisionId remains stable when a later exact correction is appended;
+- recursive anchor canonicalization and NFKC/whitespace normalization prevent key-order and Unicode compatibility aliases from splitting identity;
+- same-timestamp/conflicting authoritative content cannot silently become a revision; exact correction lineage is required;
+- correction forks, cross-event correction references, duplicate observation replay, invalid/future timestamps and cross-ticker observations fail closed;
+- malformed originFactIds/domainEvidenceRefs are rejected before shared-origin intersection;
+- FUNDAMENTALS/PRICE shared origin remains exact opaque-ID intersection; private fact-ID construction is outside the public resolver;
+- resolver and frozen validator now share recursive canonical hash semantics;
+- nested-anchor resolver output is explicitly regression-tested against the frozen validator.
+
+Final SHA gate evidence:
+- Catalyst Context Resolver Gate: PASS.
+- Frozen Part 1 adversarial regression inside Resolver Gate: PASS.
+- Catalyst Context Integrity Gate: PASS.
+
+Part 2 is frozen. Future resolver semantic changes require explicit versioning or a separately reviewed contract change.

@@ -1,0 +1,28 @@
+name: Catalyst Context Resolver Gate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/catalyst-context-resolver**'
+      - 'scripts/catalyst-context-validator.js'
+      - 'docs/CATALYST-CONTEXT-RESOLVER-v1.md'
+      - '.github/workflows/catalyst-context-resolver-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/catalyst-context-resolver**'
+      - 'scripts/catalyst-context-validator.js'
+      - 'docs/CATALYST-CONTEXT-RESOLVER-v1.md'
+      - '.github/workflows/catalyst-context-resolver-gate.yml'
+jobs:
+  resolver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Resolver adversarial tests
+        run: node scripts/catalyst-context-resolver-test.js
+      - name: Frozen Part 1 adversarial regression
+        run: node scripts/catalyst-context-adversarial-test.js
