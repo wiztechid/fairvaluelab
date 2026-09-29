@@ -46,4 +46,11 @@ run('fake-fv-identity',x=>{x.t.name='Private Alias';x.s.items[0].name='Private A
 run('history-future',x=>{x.t.stateHistory[0].date='2026-09-30';x.t.scanner.stateChangedDate='2026-09-30'});
 run('history-state-mismatch',x=>{x.t.stateHistory[0].state='EXTENDED'});
 run('path-trick',(_x,root)=>fs.writeFileSync(path.join(root,'data/scanner/tickers/private-score.txt'),'secret'));
+run('action-label-mismatch',x=>{x.t.actions.primary.label='Buka QSTP'});
+run('action-url-mismatch',x=>{x.t.actions.primary.url='/fair-value/?ticker=ZZZZ'});
+run('registry-key-drift',x=>{delete x.r.whyWatching.QUALITY_SUPPORT});
+run('uncontrolled-reason-copy',x=>{x.t.whyWatching[0].text='Copy bebas yang tidak berasal dari registry'});
+run('history-adjacent-duplicate',x=>{x.t.stateHistory=[{state:'WATCHLIST',date:'2026-09-28',reason:'VALUATION_OPPORTUNITY'},{state:'WATCHLIST',date:today,reason:'VALUATION_OPPORTUNITY'}]});
+run('history-chronology-reversed',x=>{x.t.stateHistory=[{state:'WAITING_CONFIRMATION',date:today,reason:'PRICE_CONFIRMATION_PENDING'},{state:'WATCHLIST',date:'2026-09-28',reason:'VALUATION_OPPORTUNITY'}];x.t.scanner.state='WATCHLIST';x.t.scanner.stateLabel='Daftar Pantau';x.t.scanner.stateChangedDate='2026-09-28';x.s.items[0].state='WATCHLIST';x.s.items[0].stateLabel='Daftar Pantau'});
+run('filename-ticker-mismatch',(x,root)=>{fs.writeFileSync(path.join(root,'data/scanner/tickers/AADI.json'),JSON.stringify({...x.t,ticker:'AALI'}))});
 console.log('SCANNER_ADVERSARIAL_SUITE_PASS');
