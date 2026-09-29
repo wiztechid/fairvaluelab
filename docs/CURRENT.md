@@ -1,6 +1,6 @@
 # Current State — CekValuasi
 
-Updated: 2026-09-28
+Updated: 2026-09-29
 
 ## Production baseline
 - CekValuasi homepage is now the production root. The validated Fair Value engine lives at `/fair-value/`; QSTP remains at `/qstp.html`.
@@ -156,3 +156,68 @@ Freeze:
 - Canonical, Open Graph URL, homepage schema IDs/URLs, sitemap, robots sitemap reference, Fair Value OG image URL, and trust-page canonicals migrated from the GitHub Pages project URL to the custom domain.
 - Fair Value engine semantics, QSTP calculations, DES data, routes, permanent gates, and private-moat boundaries remain unchanged.
 - Post-merge requirement: production smoke-check /, /fair-value/, /qstp.html, sitemap.xml, robots.txt, canonical/OG/schema output, apex/www redirect behavior, and HTTPS.
+
+
+## Scanner Architecture v1 checkpoint — 2026-09-29
+Status: architecture/evidence contract agreed for the next product-planning phase. No Scanner engine implementation is authorized by this checkpoint.
+
+### Repository/data audit baseline
+- Canonical DES universe remains the OJK KEP-21/D.04/2026 Period I 2026 dataset; source universe contains 618 tickers and the current generated valuation summary contains 612 stocks.
+- Existing reusable evidence layers include canonical Fair Value output, DES metadata, OHLC cache, Golden Zone/price-structure output, sector Margin of Safety context, valuation timeline, snapshots/backtest support, catalyst pipelines, and verified market-actor pipelines.
+- Scanner must consume validated Fair Value output and must not calculate a competing fair value.
+- Catalyst and market-actor evidence is additive/conditional in v1 because ingestion coverage may be incomplete; missing catalyst evidence must not be interpreted as negative evidence.
+
+### Scanner Architecture v1
+Canonical DES Universe
+→ Eligibility & Data Gate
+→ Evidence Features
+→ Private Opportunity Engine
+→ Confidence / Evidence Gate
+→ Public Scanner Output
+→ Fair Value Detail
+→ QSTP
+
+Product separation is explicit:
+- Scanner answers: which DES candidates merit deeper research?
+- Fair Value answers: what does the validated valuation evidence indicate?
+- QSTP answers: how does the user structure risk for a user-selected setup?
+
+### Evidence/scoring contract
+Public-safe evidence pillars:
+- Quality / fundamental evidence
+- Valuation context
+- Price / trend evidence
+- Catalyst evidence when verified and available
+- Risk / evidence-quality penalties
+
+Rules:
+- Do not use a simplistic public weighted master score as the product explanation.
+- Not every evidence pillar is automatically substitutable for another.
+- Missing evidence degrades confidence/status; it is not fabricated, silently imputed as favorable, or automatically treated as negative.
+- Fair Value states such as SIAP, REVIEW, INDIKATIF, REFERENSI, and BELUM_DINILAI describe valuation evidence state and must not be directly converted into stock attractiveness rankings.
+- A minimum evidence floor must be satisfied before promotion to the strongest public candidate state.
+
+### Public UI/output contract
+Preferred reader-facing states:
+- Kandidat Riset
+- Pantau
+- Evidence Terbatas
+
+Every surfaced candidate should expose public-safe reasons for surfacing plus material caveats / items to verify. Avoid BUY, SELL, STRONG BUY, “best stock”, or equivalent recommendation language.
+
+The public UI should prioritize interpretable evidence and research lenses over a pseudo-precise proprietary score. Internal ranking may exist, but exact ranking logic is private.
+
+### Anti-cannibalization contract
+- /scanner/ owns discovery intent: finding DES stocks worth researching.
+- /fair-value/ owns valuation / fair-value intent.
+- /qstp.html owns position-sizing / trading-plan / risk-management intent.
+- Homepage orchestrates the journey: Discover → Value → Plan.
+- Scanner must not duplicate deep Fair Value analysis or QSTP calculations.
+
+### Private-moat boundary
+The public repository may contain schemas, public evidence categories, status definitions, freshness/explainability contracts, provenance, generic validation, UI, disclaimers, and public-safe generated output.
+
+Do NOT commit exact proprietary weights, thresholds, feature interactions, ranking equations, penalty coefficients, normalization formulas, sector/regime adjustments, anti-gaming rules, tie-break logic, confidence calibration, promotion/demotion logic, backtest optimization criteria, or other reusable scanner research IP.
+
+### Next authorized design step
+Before writing the Scanner engine, build Scanner Data Feature Matrix v1 from the actual available data fields and classify each candidate feature as USE / CONDITIONAL / REJECT with evidence-quality rationale. Engine implementation begins only after that feature contract is reviewed and accepted.
