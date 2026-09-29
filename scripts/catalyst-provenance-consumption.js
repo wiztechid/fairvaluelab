@@ -39,7 +39,7 @@ function resolveProvenance(observations,{trustedOriginClasses=['PRIMARY','CORREC
 }
 function receiptPayload(r){return {receiptId:r.receiptId,ticker:String(r.ticker||'').normalize('NFKC').trim().toUpperCase(),eventAnchorId:r.eventAnchorId,factId:r.factId,domain:r.domain,consumerArtifactId:r.consumerArtifactId,consumerRevisionId:r.consumerRevisionId,consumerSnapshotHash:r.consumerSnapshotHash,consumedAt:new Date(r.consumedAt).toISOString()}}
 function verifyConsumption({ticker,events,receipts,asOf}){
- const cutoff=iso(asOf,'asOf'),facts=new Map(),normTicker=String(ticker||'').normalize('NFKC').trim().toUpperCase();if(!/^[A-Z0-9]{1,12}(\\.JK)?$/.test(normTicker))throw Error('invalid consumption ticker');
+ const cutoff=iso(asOf,'asOf'),facts=new Map(),normTicker=String(ticker||'').normalize('NFKC').trim().toUpperCase();if(!/^[A-Z0-9]{1,12}(\.JK)?$/.test(normTicker))throw Error('invalid consumption ticker');
  for(const e of events||[]){if(!/^evt_[A-Za-z0-9_-]{8,64}$/.test(e.eventAnchorId||''))throw Error('invalid event anchor');for(const id of e.originFactIds||[]){if(!fact(id))throw Error('invalid event fact '+id);const t=iso(e.firstObservedAt,'event firstObservedAt'),prior=facts.get(id);if(prior&&prior.eventAnchorId!==e.eventAnchorId)throw Error('fact bound to multiple event anchors '+id);facts.set(id,{firstObservedAt:prior&&prior.firstObservedAt<t?prior.firstObservedAt:t,eventAnchorId:e.eventAnchorId})}}
  const seen=new Set(),valid=[];
  for(const r of receipts||[]){
