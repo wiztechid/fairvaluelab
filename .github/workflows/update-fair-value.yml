@@ -17,6 +17,10 @@ on:
       - 'postprocess_qc.py'
       - 'indicative_fv.py'
       - 'validate_engine.py'
+      - 'canonical_contract.py'
+      - 'validate_canonical_contract.py'
+      - 'config/canonical-engine.json'
+      - 'config/data-provenance.json'
       - 'snapshot_backtest.py'
       - 'catalyst_snapshot.py'
       - 'collect_news_7d.py'
@@ -68,8 +72,12 @@ jobs:
         run: python indicative_fv.py
       - name: Build family consensus and forensic review gate
         run: python family_consensus.py
-      - name: Validate all DES valuations before publication
+      - name: Validate all DES valuations before canonicalization
         run: python validate_engine.py
+      - name: Stamp canonical artifact and provenance metadata
+        run: python canonical_contract.py
+      - name: Validate canonical engine and provenance contract
+        run: python validate_canonical_contract.py
       - name: Build ticker and company alias map
         run: python build_ticker_aliases.py
       - name: Collect rolling 20D public ticker news
