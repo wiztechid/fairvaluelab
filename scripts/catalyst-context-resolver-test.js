@@ -25,4 +25,18 @@ let badCorrection={...c,correctionOfObservationId:'obs_other0001'};rejects(()=>r
 let branch=obs('obs_correct002','CORRECTION','issuer://3',H('v3'),{observedAt:'2026-09-03T01:00:00Z',publishedAt:'2026-09-03T00:00:00Z',correctionOfObservationId:'obs_primary001'});rejects(()=>resolve(input([p,c,branch])),'correction fork accepted');
 rejects(()=>resolve(input([{...p,observedAt:'bad-time'}])),'invalid timestamp accepted');
 rejects(()=>resolve(input([p,{...p}])),'duplicate observation replay accepted');
+
+let snap1=resolve(input([p])),snap2=resolve({...input([p,c]),asOf:'2026-09-02T02:00:00Z'});
+A(snap1.events[0].eventAnchorId===snap2.events[0].eventAnchorId,'eventAnchorId drift across snapshots');
+A(snap1.events[0].revisions[0].revisionId===snap2.events[0].revisions[0].revisionId,'revision identity drift after later correction');
+const uni1=obs('obs_unicode001','PRIMARY','issuer://u1',H('v1'),{economicSubject:'Q2　earnings',anchorFacts:{issuer:'ＴＥＳＴ.JK',period:'２０２６Q2',subject:'earnings'}});
+const uni2=obs('obs_unicode002','PRIMARY','issuer://u2',H('v1'),{economicSubject:'Q2 earnings',anchorFacts:{issuer:'TEST.JK',period:'2026Q2',subject:'earnings'}});
+A(eventKey(uni1)===eventKey(uni2),'Unicode compatibility alias split identity');
+const nested=resolve(input([a]));A(valid(nested),'resolver-validator nested canonical parity failed');
+let sameA=obs('obs_same00001','PRIMARY','issuer://same1',H('a'));
+let sameB=obs('obs_same00002','PRIMARY','issuer://same2',H('b'));
+rejects(()=>resolve(input([sameA,sameB])),'same-timestamp authoritative ambiguity accepted');
+rejects(()=>resolve({...input([p]),domainEvidenceRefs:{FUNDAMENTALS:['fact_bad!'],PRICE:[]}}),'poisoned domain fact ID accepted');
+rejects(()=>resolve(input([{...p,originFactIds:['fact_bad!']}])),'poisoned origin fact ID accepted');
+rejects(()=>resolve(input([{...p,ticker:'OTHER.JK'}])),'cross-ticker observation accepted');
 console.log('CATALYST_CONTEXT_RESOLVER_TEST_PASS');
