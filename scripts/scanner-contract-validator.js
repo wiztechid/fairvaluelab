@@ -1,5 +1,5 @@
 const fs=require('fs'),path=require('path');
-const ROOT=path.resolve(__dirname,'..');
+const ROOT=path.resolve(process.env.SCANNER_VALIDATION_ROOT||path.resolve(__dirname,'..'));
 const read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
 const fail=m=>{throw new Error('[scanner-contract] '+m)};
 const summarySchema=read('contracts/scanner-summary-v1.schema.json');
