@@ -335,3 +335,18 @@ Deep QC of PR #10 hardened the pre-engine public contract before merge:
 - workflow path coverage now protects contracts/scanner-**, data/scanner/**, and scripts/scanner-**;
 - the empty Scanner is protected by an explicit PRE_ENGINE_LOCK until a separately reviewed Opportunity Engine implementation is authorized;
 - exact internal ranking/scoring/thresholds and private decision logic remain absent from the public repository.
+
+
+## Scanner publication boundary checkpoint — 2026-09-29
+Public-repo phase after Scanner Contract v1 is restricted to the Private/Public Adapter Contract, Public Reason Registry, and Scanner Publication Gate. Opportunity Engine implementation remains prohibited from this public repository.
+
+### Frozen trust boundary
+Private Engine → Private Sanitizer → Sanitized Public Artifact → strict public validator → Scanner Publication Gate → production.
+
+- Private engine/scoring source, exact weights/thresholds, dependency-map details, ranking/tie-break logic, persistence parameters, calibration, private feature vectors, and raw decision traces must never enter public Git history.
+- Public artifacts carry only frozen schema fields and allowlisted categorical semantics.
+- Reader-facing whyWatching/whatToVerify text is controlled by the public Reason Registry; private raw explanation text is not accepted.
+- Publication is a complete summary + referenced ticker-artifact set. Missing, orphaned, mismatched, or uncontrolled artifacts fail closed.
+- PRE_ENGINE_LOCK remains active while generationStatus=NOT_GENERATED; ticker artifacts are forbidden in that state.
+- Fair Value remains canonical valuation provenance and primary Scanner action. QSTP remains optional secondary navigation and never an automatic trade instruction.
+- Frontend remains presentation-only and must not recreate proprietary research intelligence.

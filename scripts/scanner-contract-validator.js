@@ -1,5 +1,5 @@
 const fs=require('fs'),path=require('path');
-const ROOT=path.resolve(__dirname,'..');
+const ROOT=path.resolve(process.env.SCANNER_VALIDATION_ROOT||path.resolve(__dirname,'..'));
 const read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
 const fail=m=>{throw new Error('[scanner-contract] '+m)};
 const summarySchema=read('contracts/scanner-summary-v1.schema.json');
@@ -53,9 +53,11 @@ function validateTicker(t){
  if(!Array.isArray(t.whyWatching)||!t.whyWatching.length||t.whyWatching.some(r=>!reasons.has(r.code)))fail('whyWatching');
  if(!Array.isArray(t.whatToVerify)||t.whatToVerify.some(r=>!caveats.has(r.code)))fail('whatToVerify');
  if(t.provenance?.valuation!=='CANONICAL_FAIR_VALUE')fail('noncanonical valuation provenance');
- if(t.actions?.primary?.type!=='FAIR_VALUE'||t.actions.primary.url!=='/fair-value/?ticker='+t.ticker)fail('primary action must be canonical Fair Value');
- if(t.actions.secondary&&t.actions.secondary.type==='QSTP'&&t.actions.secondary.url!=='/qstp.html?ticker='+t.ticker)fail('noncanonical QSTP link');
- if(!['CURRENT','NO_MATERIAL_EVENT','SOURCE_UNAVAILABLE','STALE'].includes(t.freshness?.catalyst))fail('catalyst freshness semantics');
+ if(t.actions?.primary?.type!=='FAIR_VALUE'||t.actions.primary.label!=='Cek Fair Value'||t.actions.primary.url!=='/fair-value/?ticker='+t.ticker)fail('primary action must be canonical Fair Value');
+ if(t.actions.secondary){
+  if(t.actions.secondary.type!=='QSTP'||t.actions.secondary.label!=='Buka QSTP'||t.actions.secondary.url!=='/qstp.html?ticker='+t.ticker)fail('secondary action must be canonical QSTP');
+ }
+  if(!['CURRENT','NO_MATERIAL_EVENT','SOURCE_UNAVAILABLE','STALE'].includes(t.freshness?.catalyst))fail('catalyst freshness semantics');
 }
 const tickerDir=path.join(ROOT,'data/scanner/tickers');
 if(fs.existsSync(tickerDir))for(const f of fs.readdirSync(tickerDir).filter(f=>f.endsWith('.json'))){const t=read('data/scanner/tickers/'+f);validateTicker(t);if(f!==t.ticker+'.json')fail('ticker filename mismatch '+f)}
