@@ -6,7 +6,8 @@ const x=JSON.parse(fs.readFileSync(file,'utf8'));
 const fail=m=>{throw new Error('CATALYST_CONTEXT_INVALID: '+m)};
 const iso=s=>typeof s==='string'&&!Number.isNaN(Date.parse(s));
 const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
-function canonical(v){if(Array.isArray(v))return v.map(canonical);if(v&&typeof v==='object')return Object.keys(v).sort().reduce((o,k)=>(o[k]=canonical(v[k]),o),{});return v}\nconst stable=o=>JSON.stringify(canonical(o));
+function canonical(v){if(Array.isArray(v))return v.map(canonical);if(v&&typeof v==='object')return Object.keys(v).sort().reduce((o,k)=>(o[k]=canonical(v[k]),o),{});return v}
+const stable=o=>JSON.stringify(canonical(o));
 const enums=(v,a,n)=>{if(!a.includes(v))fail(n+' enum')};
 if(x.schemaVersion!=='catalyst-context-v1')fail('schemaVersion');
 if(!/^[A-Z0-9]{1,12}(\.JK)?$/.test(x.ticker||''))fail('ticker');
