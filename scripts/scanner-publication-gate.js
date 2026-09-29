@@ -4,6 +4,10 @@ const fail=m=>{throw new Error('[scanner-publication] '+m)};
 const read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
 cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-contract-validator.js')],{stdio:'inherit'});
 const summary=read('data/scanner/summary.json');
+const canonicalSummary=read('data/summary.json');
+const canonicalByTicker=new Map((canonicalSummary.stocks||[]).map(x=>[x.ticker,x]));
+const desSource=String(canonicalSummary.universeSource||'');
+if(!desSource.startsWith('OJK ')||!desSource.includes('DES'))fail('canonical DES universe source unavailable');
 const registry=read('data/scanner/reason-registry.json');
 const allowedWhy=new Set(Object.keys(registry.whyWatching||{}));
 const allowedVerify=new Set(Object.keys(registry.whatToVerify||{}));
@@ -40,6 +44,20 @@ for(const f of files)if(!expected.has(f))fail('orphan ticker artifact '+f);
 for(const item of summary.items){
  const file=item.ticker+'.json'; if(!files.includes(file))fail('missing ticker artifact '+file);
  const t=read('data/scanner/tickers/'+file);
+ const canonical=canonicalByTicker.get(t.ticker);
+ if(!canonical)fail('ticker is not present in canonical DES/Fair Value universe '+item.ticker);
+ if(t.name!==canonical.name||t.sector!==canonical.sector)fail('canonical identity mismatch '+item.ticker);
+ if(t.des.eligible!==true||t.des.universe!==desSource)fail('canonical DES binding mismatch '+item.ticker);
+ const canonicalDetailPath='data/'+t.ticker+'.json';
+ if(!fs.existsSync(path.join(ROOT,canonicalDetailPath)))fail('canonical Fair Value record missing '+item.ticker);
+ const fv=read(canonicalDetailPath);
+ if(String(fv.ticker||'').replace(/\.JK$/,'')!==t.ticker)fail('canonical Fair Value ticker mismatch '+item.ticker);
+ if(fv.name!==t.name)fail('canonical Fair Value name mismatch '+item.ticker);
+ const fvSector=fv.companyProfile&&fv.companyProfile.sector;
+ const fvIndustry=fv.companyProfile&&fv.companyProfile.industry;
+ if(fvSector!==t.sector)fail('canonical Fair Value sector mismatch '+item.ticker);
+ if((t.industry??null)!==(fvIndustry??null))fail('canonical Fair Value industry mismatch '+item.ticker);
+ if(t.provenance.valuation!=='CANONICAL_FAIR_VALUE'||t.provenance.des!=='OJK_DES')fail('canonical provenance binding mismatch '+item.ticker);
  const sameArray=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>v===b[i]);
  if(t.ticker!==item.ticker||
     t.name!==item.name||
