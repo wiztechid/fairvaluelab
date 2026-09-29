@@ -18,6 +18,10 @@ Raw source observation → provenance resolver → immutable origin lineage → 
 10. DOMAIN_AUTHORITY — only FUNDAMENTALS and PRICE receipts are accepted here.
 11. FAIL_CLOSED — malformed, conflicting, duplicate or unverifiable lineage/receipt data is rejected.
 12. NO_PRIVATE_SCORING — no Scanner weights, thresholds, ranks, tie-breaks or promotion logic enter this layer.
+13. RECEIPT_LIFECYCLE — consumption proof is an exact-parent immutable ledger; only the ACTIVE tip proves current consumption.
+14. REVOCATION — a REVOKED tip contributes no shared-origin proof.
+15. NO_ROLLBACK_OR_FORK — receipt lineage cannot fork, move backward in time, mutate its economic key, or leave an ancestor ACTIVE.
+16. EVENT_BINDING — fact IDs cannot bind to multiple event anchors inside one proof artifact.
 
 ## Provenance record
 Part 3 consumes observations with provenance metadata:
@@ -39,9 +43,11 @@ A cross-domain receipt contains:
 - consumerRevisionId
 - consumerSnapshotHash
 - consumedAt
+- parentReceiptId
+- receiptStatus (ACTIVE / SUPERSEDED / REVOKED)
 - receiptHash
 
-receiptHash is SHA-256 over canonical receipt payload excluding receiptHash. A receipt is valid only when its factId is present in the Catalyst event originFactIds and all bindings validate.
+receiptHash is SHA-256 over canonical receipt payload excluding receiptHash. A receipt is valid only when its factId is present in the Catalyst event originFactIds and all bindings validate. Receipt identity is additionally bound to ticker and eventAnchorId. Successors bind to the exact parent receipt; only the unique ACTIVE chain tip proves current consumption. A REVOKED tip removes current proof without rewriting history.
 
 Bare domainEvidenceRefs remain a Part 1/2 compatibility field, but Part 3 must derive effective shared-domain consumption from verified receipts. A bare intersection without a receipt is not sufficient proof for Part 3.
 
