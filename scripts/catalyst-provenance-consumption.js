@@ -7,7 +7,8 @@ const iso=(s,n)=>{const d=new Date(s);if(Number.isNaN(+d))throw Error('invalid '
 const fact=id=>typeof id==='string'&&/^fact_[A-Za-z0-9_-]{8,64}$/.test(id);
 const hex=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
 function originBinding(o){return stable({ticker:String(o.ticker||'').normalize('NFKC').trim().toUpperCase(),observationId:o.observationId,sourceLocator:o.sourceLocator,contentHash:o.contentHash,observedAt:new Date(o.observedAt).toISOString()})}
-function resolveProvenance(observations,{trustedOriginClasses=['PRIMARY','CORRECTION']}={}){
+function resolveProvenance(observations){
+ const trustedOriginClasses=['PRIMARY','CORRECTION'];
  const map=new Map();
  for(const o of observations){
   if(map.has(o.observationId))throw Error('duplicate provenance observation '+o.observationId);
