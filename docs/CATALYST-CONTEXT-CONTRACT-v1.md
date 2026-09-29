@@ -30,7 +30,7 @@ CORRECTION = explicit correction/amendment linked to a prior revision.
 Only VERIFIED observations may carry SUPPORT. RUMOR and DERIVATIVE observations cannot self-promote to SUPPORT.
 
 ## Shared origin
-sharedOriginDomains may contain FUNDAMENTALS and/or PRICE. Any non-empty sharedOriginDomains forces independenceStatus=DEPENDENT_SHARED_ORIGIN. Earnings/dividend/corporate-action facts already consumed elsewhere remain useful context but are not another independent vote.
+Each event carries opaque originFactIds. The artifact also carries domainEvidenceRefs for FUNDAMENTALS and PRICE. The validator computes shared origin by exact opaque fact-ID intersection; sharedOriginDomains must equal that computed result. Any non-empty result forces independenceStatus=DEPENDENT_SHARED_ORIGIN. The public contract exposes identity linkage, not the private recipe used to construct fact IDs. Earnings/dividend/corporate-action facts already consumed elsewhere remain useful context but are not another independent vote.
 
 ## Revisions
 Each revision has revisionId, revisionNumber, parentRevisionId, revisionStatus and contentHash. Revision 1 has no parent; later revisions bind to the immediately preceding revision; only the highest non-withdrawn revision may be ACTIVE; SUPERSEDED revisions cannot provide active SUPPORT.
