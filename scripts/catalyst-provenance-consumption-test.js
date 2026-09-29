@@ -11,6 +11,7 @@ reject(()=>resolveProvenance([{...media,observedAt:'2026-08-31T00:00:00Z'},prima
 reject(()=>resolveProvenance([{...primary,originObservationId:'obs_media00001'},media]),'non-derivative origin claim accepted');
 reject(()=>resolveProvenance([{...media,sourceClass:'CORROBORATION',originObservationId:undefined}]),'corroboration laundered as root');
 reject(()=>resolveProvenance([{...media,sourceClass:'RUMOR',originObservationId:undefined}]),'rumor laundered as root');
+reject(()=>resolveProvenance([{...media,sourceClass:'RUMOR',originObservationId:undefined}],{trustedOriginClasses:['RUMOR']}),'caller overrode trusted origin boundary');
 const events=[{eventAnchorId:'evt_earnings001',originFactIds:['fact_earnings001'],firstObservedAt:'2026-09-01T01:00:00Z'}];
 const base={receiptId:'rcpt_fund00001',parentReceiptId:null,receiptStatus:'ACTIVE',ticker:'TEST.JK',eventAnchorId:'evt_earnings001',factId:'fact_earnings001',domain:'FUNDAMENTALS',consumerArtifactId:'fund_snapshot_20260901',consumerRevisionId:'fund_rev_7',consumerSnapshotHash:H('snapshot'),consumedAt:'2026-09-01T04:00:00Z'};base.receiptHash=H(JSON.stringify(Object.keys(receiptPayload(base)).sort().reduce((o,k)=>(o[k]=receiptPayload(base)[k],o),{})));
 let v=verifyConsumption({ticker:'TEST.JK',events,receipts:[base],asOf:'2026-09-30T00:00:00Z'});A(v.sharedOriginDomains[0]==='FUNDAMENTALS','receipt did not prove domain consumption');
