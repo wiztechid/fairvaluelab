@@ -1,8 +1,9 @@
 const fs=require('fs'),path=require('path'),cp=require('child_process');
-const ROOT=path.resolve(__dirname,'..');
+const ROOT=path.resolve(process.env.SCANNER_PUBLICATION_ROOT||path.resolve(__dirname,'..'));
 const fail=m=>{throw new Error('[scanner-publication] '+m)};
 const read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
-cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-contract-validator.js')],{stdio:'inherit'});
+const VALIDATOR_ROOT=path.resolve(__dirname,'..');
+cp.execFileSync(process.execPath,[path.join(VALIDATOR_ROOT,'scripts/scanner-contract-validator.js')],{stdio:'inherit',env:{...process.env,SCANNER_VALIDATION_ROOT:ROOT}});
 const summary=read('data/scanner/summary.json');
 const canonicalSummary=read('data/summary.json');
 const canonicalByTicker=new Map((canonicalSummary.stocks||[]).map(x=>[x.ticker,x]));
@@ -31,7 +32,9 @@ for(const [group,entries] of Object.entries({whyWatching:registry.whyWatching,wh
   if(unsafeCopy.test(copy))fail('possible moat/active-content leakage in registry '+group+'.'+code);
  }
 const tickerDir=path.join(ROOT,'data/scanner/tickers');
-const files=fs.existsSync(tickerDir)?fs.readdirSync(tickerDir).filter(f=>f.endsWith('.json')).sort():[];
+const entries=fs.existsSync(tickerDir)?fs.readdirSync(tickerDir,{withFileTypes:true}):[];
+for(const e of entries)if(!e.isFile()||!e.name.endsWith('.json'))fail('unexpected ticker-directory entry '+e.name);
+const files=entries.map(e=>e.name).sort();
 if(summary.generationStatus==='NOT_GENERATED'){
  if(files.length)fail('PRE_ENGINE_LOCK: ticker artifacts exist while Scanner is NOT_GENERATED');
  console.log('SCANNER_PUBLICATION_PASS PRE_ENGINE_LOCK');
