@@ -418,3 +418,29 @@ Final SHA gate evidence:
 - Catalyst Context Integrity Gate: PASS.
 
 Part 2 is frozen. Future resolver semantic changes require explicit versioning or a separately reviewed contract change.
+
+
+## Final Catalyst Part 3 Freeze Audit — 2026-09-30
+Status: FROZE pending merge of PR #14.
+
+Closed freeze attacks:
+- provenanceFamilyId remains stable when later derivative observations are appended to a snapshot;
+- origin binding is immutable across ticker, observation identity, source locator, content hash and observedAt;
+- 20-source syndication fan-out collapses to one provenance family;
+- trusted root classes are locked to PRIMARY/CORRECTION and cannot be overridden by caller input;
+- CORROBORATION/RUMOR cannot launder themselves into independent roots;
+- derivative lineage rejects unknown, future, self/cyclic and unproven origins;
+- consumption receipts bind ticker + eventAnchorId + factId + domain + consumer artifact + consumer revision + consumer snapshot hash + consumedAt;
+- one fact cannot bind to multiple Catalyst event anchors inside a proof artifact;
+- receipt lifecycle is an immutable exact-parent chain with ACTIVE/SUPERSEDED/REVOKED semantics;
+- only the unique ACTIVE tip proves current shared-origin consumption; a REVOKED tip proves none;
+- receipt forks, time rollback, lineage-key mutation, duplicate IDs and stale ACTIVE ancestors fail closed;
+- bare fact-ID intersection remains insufficient Part 3 consumption proof;
+- the same economic fact may have FUNDAMENTALS and PRICE receipts, but remains one fact with domain-specific consumption evidence rather than multiple Catalyst confirmations.
+
+Final gate evidence on executable head:
+- Catalyst Part 3 provenance/consumption adversarial suite: PASS.
+- Frozen Part 2 resolver regression: PASS.
+- Frozen Part 1 integrity regression: PASS.
+
+Part 3 is frozen. Future provenance/receipt semantic changes require explicit versioning or a separately reviewed contract change.
