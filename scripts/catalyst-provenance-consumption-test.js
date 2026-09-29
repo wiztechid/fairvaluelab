@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+const crypto=require('crypto'),{resolveProvenance,verifyConsumption,receiptPayload}=require('./catalyst-provenance-consumption');
+const H=s=>crypto.createHash('sha256').update(s).digest('hex'),A=(x,m)=>{if(!x)throw Error(m)},reject=(f,m)=>{let y=false;try{f()}catch(e){y=true}A(y,m)};
+const primary={observationId:'obs_origin0001',ticker:'TEST.JK',sourceClass:'PRIMARY',sourceLocator:'idx://disclosure/1',contentHash:H('official'),observedAt:'2026-09-01T01:00:00Z'};
+const media={observationId:'obs_media00001',ticker:'TEST.JK',sourceClass:'DERIVATIVE',sourceLocator:'media://1',contentHash:H('rewrite'),observedAt:'2026-09-01T02:00:00Z',originObservationId:'obs_origin0001'};
+const broker={observationId:'obs_broker0001',ticker:'TEST.JK',sourceClass:'DERIVATIVE',sourceLocator:'broker://1',contentHash:H('note'),observedAt:'2026-09-01T03:00:00Z',originObservationId:'obs_media00001'};
+let p=resolveProvenance([broker,media,primary]);A(new Set(p.map(x=>x.provenanceFamilyId)).size===1,'syndication did not collapse');
+let p2=resolveProvenance([primary,broker,media]);A(JSON.stringify(p)===JSON.stringify(p2),'provenance order nondeterminism');
+reject(()=>resolveProvenance([{...media,originObservationId:'obs_missing000'}]),'unknown origin accepted');
+reject(()=>resolveProvenance([{...media,observedAt:'2026-08-31T00:00:00Z'},primary]),'future origin accepted');
+reject(()=>resolveProvenance([{...primary,originObservationId:'obs_media00001'},media]),'non-derivative origin claim accepted');
+const events=[{originFactIds:['fact_earnings001'],firstObservedAt:'2026-09-01T01:00:00Z'}];
+const base={receiptId:'rcpt_fund00001',factId:'fact_earnings001',domain:'FUNDAMENTALS',consumerArtifactId:'fund_snapshot_20260901',consumerRevisionId:'fund_rev_7',consumerSnapshotHash:H('snapshot'),consumedAt:'2026-09-01T04:00:00Z'};base.receiptHash=H(JSON.stringify(Object.keys(receiptPayload(base)).sort().reduce((o,k)=>(o[k]=receiptPayload(base)[k],o),{})));
+let v=verifyConsumption({events,receipts:[base],asOf:'2026-09-30T00:00:00Z'});A(v.sharedOriginDomains[0]==='FUNDAMENTALS','receipt did not prove domain consumption');
+reject(()=>verifyConsumption({events,receipts:[{...base,receiptHash:H('spoof')}],asOf:'2026-09-30T00:00:00Z'}),'receipt mutation accepted');
+reject(()=>verifyConsumption({events,receipts:[{...base,factId:'fact_other0001'}],asOf:'2026-09-30T00:00:00Z'}),'unbound fact receipt accepted');
+reject(()=>verifyConsumption({events,receipts:[{...base,consumedAt:'2026-08-01T00:00:00Z'}],asOf:'2026-09-30T00:00:00Z'}),'pre-fact consumption accepted');
+reject(()=>verifyConsumption({events,receipts:[{...base,consumedAt:'2026-10-01T00:00:00Z'}],asOf:'2026-09-30T00:00:00Z'}),'future receipt accepted');
+reject(()=>verifyConsumption({events,receipts:[base,{...base}],asOf:'2026-09-30T00:00:00Z'}),'duplicate receipt accepted');
+const bare=verifyConsumption({events,receipts:[],asOf:'2026-09-30T00:00:00Z'});A(bare.sharedOriginDomains.length===0,'bare fact intersection became proof');
+console.log('CATALYST_PROVENANCE_CONSUMPTION_TEST_PASS');
