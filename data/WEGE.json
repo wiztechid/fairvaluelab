@@ -1,8 +1,8 @@
 {
   "ticker": "WEGE.JK",
   "name": "PT Wijaya Karya Bangunan Gedung Tbk",
-  "asOf": "2026-09-28T09:47:56.874710+00:00",
-  "price": 43.0,
+  "asOf": "2026-09-29T09:47:01.747773+00:00",
+  "price": 39.0,
   "companyProfile": {
     "sector": "Infrastruktur",
     "valuationProfile": "Infrastruktur · Konstruksi",
@@ -12,86 +12,18 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 40.211214953271025,
-    "base": 89.07293055683766,
-    "bull": 167.79363033912193,
-    "dispersion": 0.46374728877017346,
-    "agreement": "LOW",
-    "available": true,
+    "bear": 113.14482431145008,
+    "base": 154.288396788341,
+    "bull": 195.4319692652319,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
+    "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "familyConsensus": true
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Adjusted Asset Floor"
   },
   "methods": [
-    {
-      "name": "Historical PBV 5Y",
-      "family": "book",
-      "bear": 51.42523100673429,
-      "base": 70.0,
-      "bull": 88.5747689932657,
-      "confidence": 0.8,
-      "relevance": 0.315,
-      "rawWeight": 0.252,
-      "bands": {
-        "mean": 0.34027186161005746,
-        "sd": 0.09029244606164707,
-        "current": 0.20902414356046387,
-        "z": -1.4535846992115415,
-        "minus1": 51.42523100673429,
-        "base": 70.0,
-        "plus1": 88.5747689932657,
-        "coverageYears": 4.999315537303217
-      },
-      "warning": null,
-      "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.20413122721749694,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 31.593388242764608,
-      "base": 44.679127725856695,
-      "bull": 76.26927909215605,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.01589108910891089,
-        "sd": 0.006581967422548706
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.3580396921830701,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "bear": 101.65515285145737,
-      "base": 152.5396639446563,
-      "bull": 211.9049268867217,
-      "confidence": 0.52,
-      "relevance": 0.65,
-      "rawWeight": 0.338,
-      "warning": null,
-      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
-      "bands": {
-        "revenue": 1623555133947.0,
-        "netDebt": -242443312818.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      },
-      "included": true,
-      "normalizedWeight": 0.27379505872823,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
-    },
     {
       "name": "Adjusted Asset Floor",
       "family": "asset_floor",
@@ -111,8 +43,8 @@
           0.95
         ]
       },
-      "included": true,
-      "normalizedWeight": 0.16403402187120292,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -127,12 +59,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 50.9,
-    "ma50": 51.96,
-    "ma200": 57.44,
+    "ma20": 50.15,
+    "ma50": 51.74,
+    "ma200": 57.3,
     "rsi14": 0.0,
-    "return1m": -0.20370370370370372,
-    "return3m": -0.14
+    "return1m": -0.2777777777777778,
+    "return3m": -0.21999999999999997
   },
   "quality": {
     "cashConversion": null,
@@ -143,67 +75,35 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "Referensi Nilai dari satu metode valid (Adjusted Asset Floor); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 4,
-    "independentFamilies": 3,
-    "diagnosticCount": 2,
+    "validMethodCount": 1,
+    "independentFamilies": 0,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "LARGE_MARKET_GAP",
-      "CROSS_FAMILY_CONFLICT"
-    ],
-    "valuationConfidence": 25,
-    "familyConsensus": [
-      {
-        "family": "book",
-        "methods": [
-          "Historical PBV 5Y"
-        ],
-        "bear": 51.42523100673429,
-        "base": 70.0,
-        "bull": 88.5747689932657,
-        "weight": 0.25
-      },
-      {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 31.593388242764608,
-        "base": 44.679127725856695,
-        "bull": 76.26927909215605,
-        "weight": 0.25
-      },
-      {
-        "family": "revenue",
-        "methods": [
-          "EV / Sales"
-        ],
-        "bear": 101.65515285145737,
-        "base": 152.5396639446563,
-        "bull": 211.9049268867217,
-        "weight": 0.25
-      }
-    ],
-    "familyConsensusCount": 3,
-    "crossFamilySpreadRatio": 3.4141146371659934,
-    "forensicChecks": []
+    "reviewFlags": [],
+    "valuationConfidence": 26,
+    "familyConsensus": [],
+    "familyConsensusCount": 0
   },
   "raw": {
     "epsTTM": null,
     "bvps": 205.71786238445466,
     "currentPE": null,
-    "currentPBV": 0.20902414356046387,
+    "currentPBV": 0.1895800371827463,
     "roe": -0.32127,
     "fcf": 637680156672.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 411595997184.0,
+    "marketCap": 373307998208.0,
     "shares": 9572000000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -217,7 +117,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REVIEW",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -230,11 +130,16 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -612725322137.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
@@ -307,16 +212,10 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 2.071463501321806,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    },
-    "familySpreadRatio": 3.4141146371659934,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    "required": false,
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

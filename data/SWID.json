@@ -1,7 +1,7 @@
 {
   "ticker": "SWID.JK",
   "name": "PT Saraswanti Indoland Development Tbk",
-  "asOf": "2026-09-28T09:45:02.630597+00:00",
+  "asOf": "2026-09-29T09:44:28.121670+00:00",
   "price": 95.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,15 +12,16 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
+    "bear": 5.300763989732273,
+    "base": 8.402578924935275,
+    "bull": 11.607438863186097,
     "dispersion": null,
-    "agreement": "INSUFFICIENT",
+    "agreement": "SINGLE_METHOD",
     "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "evidenceLevel": "UNVALUED"
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "DCF"
   },
   "methods": [
     {
@@ -37,28 +38,7 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.29x dari median metode."
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 144.4288324915088,
-      "base": 154.4863310878247,
-      "bull": 166.04940792144225,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.014499664690247393,
-        "sd": 0.0010097039126712331
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.29x dari median metode."
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -71,10 +51,10 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 119.4,
-    "ma50": 111.98,
-    "ma200": 110.53,
-    "rsi14": 26.92307692307692,
+    "ma20": 118.1,
+    "ma50": 112.06,
+    "ma200": 110.34,
+    "rsi14": 25.490196078431367,
     "return1m": -0.18103448275862066,
     "return3m": 0.0674157303370786
   },
@@ -92,17 +72,28 @@
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
+      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
     ],
-    "historyYears": 4.227241615331964,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 2,
+    "historyYears": 4.229979466119096,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0,
-    "familyConsensus": [],
-    "familyConsensusCount": 0
+    "valuationConfidence": 26,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF"
+        ],
+        "bear": 5.300763989732273,
+        "base": 8.402578924935275,
+        "bull": 11.607438863186097,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -128,7 +119,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "BELUM_DINILAI",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -150,6 +141,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -218,9 +216,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "NO_DEFENSIBLE_METHOD",
-    "reason": "NO_VALID_METHOD",
-    "policy": "No value is fabricated or anchored to market price."
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
