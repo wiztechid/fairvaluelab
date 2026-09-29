@@ -350,3 +350,25 @@ Private Engine → Private Sanitizer → Sanitized Public Artifact → strict pu
 - PRE_ENGINE_LOCK remains active while generationStatus=NOT_GENERATED; ticker artifacts are forbidden in that state.
 - Fair Value remains canonical valuation provenance and primary Scanner action. QSTP remains optional secondary navigation and never an automatic trade instruction.
 - Frontend remains presentation-only and must not recreate proprietary research intelligence.
+
+
+## Catalyst Context Engine v1 — Part 1 checkpoint — 2026-09-30
+Status: CONTRACT HARDENING IMPLEMENTED on branch `catalyst-context-contract-v1`; Opportunity Engine/scoring remains out of scope.
+
+### Frozen Catalyst integrity rules
+- One economic event must resolve to one stable `eventAnchorId`; publisher/headline duplication is not independent confirmation.
+- Observation provenance distinguishes PRIMARY, CORROBORATION, DERIVATIVE, RUMOR, and CORRECTION.
+- SUPPORT requires VERIFIED evidence. RUMOR and DERIVATIVE observations cannot be laundered into SUPPORT.
+- Revision lineage is exact-parent bound. Only the highest non-withdrawn revision may be ACTIVE/canonical; superseded revisions cannot provide active SUPPORT.
+- Shared economic origin with FUNDAMENTALS and/or PRICE must be declared and forces `DEPENDENT_SHARED_ORIGIN`; Catalyst cannot double-count the same earnings/dividend/corporate-action fact as an independent confirmation.
+- Related-event graphs reject self-links, unknown targets, duplicates, and cycles.
+- PIT semantics bind evidence use to `observedAt`; later revisions must not rewrite what was knowable historically.
+- NO_MATERIAL_EVENT, SOURCE_UNAVAILABLE, STALE_EVIDENCE, and NOT_EVALUATED remain distinct missingness states.
+
+### Permanent gate
+`scripts/catalyst-context-validator.js` enforces the fail-closed integrity invariants.
+`scripts/catalyst-context-adversarial-test.js` attacks rumor SUPPORT laundering, syndication SUPPORT laundering, hidden shared-origin independence, exact-parent revision spoofing, superseded SUPPORT, and graph cycles.
+`.github/workflows/catalyst-context-gate.yml` makes the adversarial suite permanent for changes to the Catalyst context contract surface.
+
+### Next authorized step
+Catalyst Context Engine v1 Part 2 may implement the canonical event resolver / revision resolver / shared-origin adapter against this contract. It must not expose private Scanner weights, thresholds, ranking logic, or promotion/demotion rules.
