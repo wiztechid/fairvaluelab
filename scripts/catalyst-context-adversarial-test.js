@@ -20,5 +20,9 @@ x=base();x.events[0].observations[0].observedAt='2026-10-01T00:00:00Z';x.events[
 x=base();x.events[0].firstObservedAt='2026-09-02T00:00:00Z';add('firstObservedAt spoof',x);
 x=base();x.contextStatus='NO_MATERIAL_EVENT';add('missingness with hidden events',x);
 x=base();x.events[0].revisions[0].contentHash='not-a-hash';add('revision hash alias',x);
+x=base();x.events.push(JSON.parse(JSON.stringify(x.events[0])));add('eventAnchorId collision',x);
+x=base();x.events[0].observations[0].sourceLocator='';add('source completeness',x);
+x=base();x.domainEvidenceRefs.PRICE=['fact_earnings001'];add('automatic PRICE shared-origin independence',x);
+x=base();const e2=JSON.parse(JSON.stringify(x.events[0]));e2.eventAnchorId='evt_abcdef123456';e2.relatedEventIds=['evt_123456789abc'];e2.observations[0].observationId='obs_00000002';x.events[0].relatedEventIds=['evt_abcdef123456'];x.events.push(e2);add('multi-event related cycle',x);
 for(const [name,a] of attacks){if(valid(a))throw Error('FALSE PASS: '+name);console.log('REJECTED',name)}
 console.log('CATALYST_CONTEXT_ADVERSARIAL_PASS',attacks.length);
