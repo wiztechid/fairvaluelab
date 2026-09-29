@@ -40,9 +40,28 @@ for(const f of files)if(!expected.has(f))fail('orphan ticker artifact '+f);
 for(const item of summary.items){
  const file=item.ticker+'.json'; if(!files.includes(file))fail('missing ticker artifact '+file);
  const t=read('data/scanner/tickers/'+file);
- if(t.ticker!==item.ticker||t.scanner.state!==item.state||t.scanner.stateLabel!==item.stateLabel)fail('summary/ticker parity '+item.ticker);
+ const sameArray=(a,b)=>Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>v===b[i]);
+ if(t.ticker!==item.ticker||
+    t.name!==item.name||
+    t.sector!==item.sector||
+    t.scanner.state!==item.state||
+    t.scanner.stateLabel!==item.stateLabel||
+    !sameArray(t.researchLens,item.researchLens)||
+    t.evidenceStrength.overall!==item.evidenceStrength||
+    t.freshness.overall!==item.freshness)
+   fail('summary/ticker parity '+item.ticker);
  for(const r of t.whyWatching)if(!allowedWhy.has(r.code)||r.text!==registry.whyWatching[r.code])fail('uncontrolled whyWatching copy '+item.ticker);
  for(const r of t.whatToVerify)if(!allowedVerify.has(r.code)||r.text!==registry.whatToVerify[r.code])fail('uncontrolled whatToVerify copy '+item.ticker);
  if(item.primaryReason!==t.whyWatching[0].code)fail('primaryReason parity '+item.ticker);
+ const bindAction=(a,label)=>{
+  if(a===null)return;
+  if(!a||!['FAIR_VALUE','QSTP'].includes(a.type))fail('invalid '+label+' action '+item.ticker);
+  const expectedLabel=a.type==='FAIR_VALUE'?'Cek Fair Value':'Buka QSTP';
+  if(a.label!==expectedLabel)fail('action type/label mismatch '+label+' '+item.ticker);
+ };
+ bindAction(t.actions.primary,'primary');
+ bindAction(t.actions.secondary,'secondary');
+ if(t.actions.primary.type!=='FAIR_VALUE')fail('primary action must remain Fair Value '+item.ticker);
+ if(t.actions.secondary&&t.actions.secondary.type!=='QSTP')fail('secondary action must remain QSTP '+item.ticker);
 }
 console.log('SCANNER_PUBLICATION_PASS',files.length,'ticker artifacts');
