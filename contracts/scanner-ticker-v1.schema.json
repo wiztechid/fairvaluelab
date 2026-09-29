@@ -1,0 +1,433 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cekvaluasi.com/contracts/scanner-ticker-v1.schema.json",
+  "title": "CekValuasi Scanner Ticker v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "ticker",
+    "name",
+    "sector",
+    "des",
+    "scanner",
+    "researchLens",
+    "evidenceStrength",
+    "whyWatching",
+    "whatToVerify",
+    "freshness",
+    "valuationContext",
+    "provenance",
+    "actions",
+    "stateHistory"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "scanner-ticker-v1"
+    },
+    "ticker": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{4,6}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sector": {
+      "type": "string",
+      "minLength": 1
+    },
+    "industry": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "des": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligible",
+        "universe",
+        "asOf"
+      ],
+      "properties": {
+        "eligible": {
+          "const": true
+        },
+        "universe": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asOf": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "scanner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "stateLabel",
+        "stateChangedDate"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "WATCHLIST",
+            "RESEARCH_CONFIRMED",
+            "WAITING_CONFIRMATION",
+            "EXTENDED",
+            "LIMITED_EVIDENCE"
+          ]
+        },
+        "stateLabel": {
+          "enum": [
+            "Daftar Pantau",
+            "Terkonfirmasi Riset",
+            "Tunggu Konfirmasi",
+            "Extended",
+            "Evidence Terbatas"
+          ]
+        },
+        "stateChangedDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "researchLens": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "UNDERVALUED",
+          "QUALITY_VALUE",
+          "DIVIDEND_QUALITY",
+          "QUALITY_GROWTH",
+          "VALUE_MOMENTUM",
+          "HIDDEN_OPPORTUNITY"
+        ]
+      }
+    },
+    "evidenceStrength": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overall",
+        "quality",
+        "valuation",
+        "price",
+        "catalyst"
+      ],
+      "properties": {
+        "overall": {
+          "enum": [
+            "STRONG",
+            "ADEQUATE",
+            "LIMITED"
+          ]
+        },
+        "quality": {
+          "enum": [
+            "SUPPORTIVE",
+            "MIXED",
+            "WEAK",
+            "LIMITED",
+            "NOT_AVAILABLE"
+          ]
+        },
+        "valuation": {
+          "enum": [
+            "SUPPORTIVE",
+            "MIXED",
+            "WEAK",
+            "LIMITED",
+            "NOT_AVAILABLE"
+          ]
+        },
+        "price": {
+          "enum": [
+            "SUPPORTIVE",
+            "MIXED",
+            "WEAK",
+            "LIMITED",
+            "NOT_AVAILABLE"
+          ]
+        },
+        "catalyst": {
+          "enum": [
+            "SUPPORTIVE",
+            "MIXED",
+            "WEAK",
+            "LIMITED",
+            "NOT_AVAILABLE"
+          ]
+        }
+      }
+    },
+    "whyWatching": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/reason"
+      }
+    },
+    "whatToVerify": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/caveat"
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overall",
+        "valuation",
+        "fundamentals",
+        "price",
+        "catalyst",
+        "lastEvaluatedAt"
+      ],
+      "properties": {
+        "overall": {
+          "$ref": "#/$defs/fresh"
+        },
+        "valuation": {
+          "$ref": "#/$defs/fresh"
+        },
+        "fundamentals": {
+          "$ref": "#/$defs/fresh"
+        },
+        "price": {
+          "$ref": "#/$defs/fresh"
+        },
+        "catalyst": {
+          "enum": [
+            "CURRENT",
+            "NO_MATERIAL_EVENT",
+            "SOURCE_UNAVAILABLE",
+            "STALE"
+          ]
+        },
+        "lastEvaluatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "valuationContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "SIAP",
+            "REVIEW",
+            "INDIKATIF",
+            "REFERENSI",
+            "BELUM_DINILAI"
+          ]
+        },
+        "evidence": {
+          "enum": [
+            "STRONG",
+            "ADEQUATE",
+            "LIMITED"
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "valuation",
+        "price",
+        "des",
+        "catalyst"
+      ],
+      "properties": {
+        "valuation": {
+          "const": "CANONICAL_FAIR_VALUE"
+        },
+        "price": {
+          "const": "MARKET_DATA"
+        },
+        "des": {
+          "const": "OJK_DES"
+        },
+        "catalyst": {
+          "const": "PUBLIC_MATERIAL_EVENTS"
+        }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary",
+        "secondary"
+      ],
+      "properties": {
+        "primary": {
+          "$ref": "#/$defs/action"
+        },
+        "secondary": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/action"
+            }
+          ]
+        }
+      }
+    },
+    "stateHistory": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "date",
+          "reason"
+        ],
+        "properties": {
+          "state": {
+            "enum": [
+              "WATCHLIST",
+              "RESEARCH_CONFIRMED",
+              "WAITING_CONFIRMATION",
+              "EXTENDED",
+              "LIMITED_EVIDENCE"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "reason": {
+            "enum": [
+              "VALUATION_OPPORTUNITY",
+              "QUALITY_SUPPORT",
+              "PRICE_STRUCTURE_SUPPORT",
+              "MULTI_DOMAIN_CONFIRMATION",
+              "PRICE_CONFIRMATION_PENDING",
+              "PRICE_EXTENDED",
+              "EVIDENCE_LIMITED",
+              "MATERIAL_EVENT_REVIEW"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "fresh": {
+      "enum": [
+        "CURRENT",
+        "AGING",
+        "STALE",
+        "UNAVAILABLE"
+      ]
+    },
+    "reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "text"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "VALUATION_OPPORTUNITY",
+            "PEER_RELATIVE_VALUE",
+            "QUALITY_SUPPORT",
+            "CASHFLOW_SUPPORT",
+            "SUSTAINABLE_GROWTH",
+            "PRICE_STRUCTURE_SUPPORT",
+            "MOMENTUM_CONFIRMATION",
+            "MATERIAL_CATALYST",
+            "MULTI_DOMAIN_CONFIRMATION"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        }
+      }
+    },
+    "caveat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "text"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "PRICE_CONFIRMATION_PENDING",
+            "VALUATION_DISAGREEMENT",
+            "LIMITED_VALUATION_EVIDENCE",
+            "FUNDAMENTAL_EVIDENCE_MIXED",
+            "PRICE_EXTENDED",
+            "CATALYST_UNVERIFIED",
+            "CATALYST_UNAVAILABLE",
+            "DATA_STALE",
+            "LIQUIDITY_CAUTION",
+            "MATERIAL_EVENT_REVIEW"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "label",
+        "url"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "FAIR_VALUE",
+            "QSTP"
+          ]
+        },
+        "label": {
+          "enum": [
+            "Cek Fair Value",
+            "Buka QSTP"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
