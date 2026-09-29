@@ -53,6 +53,20 @@ for(const item of summary.items){
  for(const r of t.whyWatching)if(!allowedWhy.has(r.code)||r.text!==registry.whyWatching[r.code])fail('uncontrolled whyWatching copy '+item.ticker);
  for(const r of t.whatToVerify)if(!allowedVerify.has(r.code)||r.text!==registry.whatToVerify[r.code])fail('uncontrolled whatToVerify copy '+item.ticker);
  if(item.primaryReason!==t.whyWatching[0].code)fail('primaryReason parity '+item.ticker);
+ const history=t.stateHistory;
+ if(!Array.isArray(history)||history.length<1||history.length>3)fail('stateHistory must contain 1..3 public transitions '+item.ticker);
+ const evalDate=String(t.freshness.lastEvaluatedAt||'').slice(0,10);
+ for(let i=0;i<history.length;i++){
+  const h=history[i];
+  if(h.date>evalDate)fail('stateHistory future/evaluation-date violation '+item.ticker);
+  if(i>0){
+   if(history[i-1].date>h.date)fail('stateHistory chronology violation '+item.ticker);
+   if(history[i-1].state===h.state)fail('stateHistory adjacent duplicate state '+item.ticker);
+  }
+ }
+ const latestHistory=history[history.length-1];
+ if(latestHistory.state!==t.scanner.state)fail('stateHistory current-state mismatch '+item.ticker);
+ if(latestHistory.date!==t.scanner.stateChangedDate)fail('stateHistory stateChangedDate mismatch '+item.ticker);
  const bindAction=(a,label)=>{
   if(a===null)return;
   if(!a||!['FAIR_VALUE','QSTP'].includes(a.type))fail('invalid '+label+' action '+item.ticker);
