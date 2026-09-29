@@ -1,0 +1,10 @@
+const fs=require('fs');
+const path=require('path');
+const cp=require('child_process');
+const ROOT=path.resolve(__dirname,'..');
+const must=['contracts/scanner-output-v1.schema.json','data/scanner/summary.json','scripts/scanner-contract-validator.js'];
+for(const p of must)if(!fs.existsSync(path.join(ROOT,p)))throw new Error('Missing Scanner contract artifact: '+p);
+cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-contract-validator.js')],{stdio:'inherit'});
+const fixture=JSON.parse(fs.readFileSync(path.join(ROOT,'data/scanner/summary.json'),'utf8'));
+if(fixture.watchlist.count!==0||fixture.items.length!==0)throw new Error('Pre-engine fixture must remain honest empty state');
+console.log('SCANNER_SMOKE_PASS');
