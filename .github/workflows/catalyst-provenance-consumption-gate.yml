@@ -1,0 +1,32 @@
+name: Catalyst Provenance Consumption Gate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/catalyst-provenance-consumption**'
+      - 'scripts/catalyst-context-resolver**'
+      - 'scripts/catalyst-context-validator.js'
+      - 'docs/CATALYST-CONTEXT-PROVENANCE-CONSUMPTION-v1.md'
+      - '.github/workflows/catalyst-provenance-consumption-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/catalyst-provenance-consumption**'
+      - 'scripts/catalyst-context-resolver**'
+      - 'scripts/catalyst-context-validator.js'
+      - 'docs/CATALYST-CONTEXT-PROVENANCE-CONSUMPTION-v1.md'
+      - '.github/workflows/catalyst-provenance-consumption-gate.yml'
+jobs:
+  provenance-consumption:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Part 3 provenance and consumption adversarial tests
+        run: node scripts/catalyst-provenance-consumption-test.js
+      - name: Frozen Part 2 resolver regression
+        run: node scripts/catalyst-context-resolver-test.js
+      - name: Frozen Part 1 integrity regression
+        run: node scripts/catalyst-context-adversarial-test.js
