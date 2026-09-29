@@ -37,13 +37,14 @@ function resolveProvenance(observations,{trustedOriginClasses=['PRIMARY','CORREC
   return {observationId:o.observationId,originObservationId:rid,provenanceFamilyId:'prov_'+H(originBinding(ro)).slice(0,20),originBindingHash:H(originBinding(ro))};
  });
 }
-function receiptPayload(r){return {receiptId:r.receiptId,ticker:String(r.ticker||'').normalize('NFKC').trim().toUpperCase(),eventAnchorId:r.eventAnchorId,factId:r.factId,domain:r.domain,consumerArtifactId:r.consumerArtifactId,consumerRevisionId:r.consumerRevisionId,consumerSnapshotHash:r.consumerSnapshotHash,consumedAt:new Date(r.consumedAt).toISOString()}}
+function receiptPayload(r){return {receiptId:r.receiptId,parentReceiptId:r.parentReceiptId||null,receiptStatus:r.receiptStatus||'ACTIVE',ticker:String(r.ticker||'').normalize('NFKC').trim().toUpperCase(),eventAnchorId:r.eventAnchorId,factId:r.factId,domain:r.domain,consumerArtifactId:r.consumerArtifactId,consumerRevisionId:r.consumerRevisionId,consumerSnapshotHash:r.consumerSnapshotHash,consumedAt:new Date(r.consumedAt).toISOString()}}
 function verifyConsumption({ticker,events,receipts,asOf}){
  const cutoff=iso(asOf,'asOf'),facts=new Map(),normTicker=String(ticker||'').normalize('NFKC').trim().toUpperCase();if(!/^[A-Z0-9]{1,12}(\.JK)?$/.test(normTicker))throw Error('invalid consumption ticker');
  for(const e of events||[]){if(!/^evt_[A-Za-z0-9_-]{8,64}$/.test(e.eventAnchorId||''))throw Error('invalid event anchor');for(const id of e.originFactIds||[]){if(!fact(id))throw Error('invalid event fact '+id);const t=iso(e.firstObservedAt,'event firstObservedAt'),prior=facts.get(id);if(prior&&prior.eventAnchorId!==e.eventAnchorId)throw Error('fact bound to multiple event anchors '+id);facts.set(id,{firstObservedAt:prior&&prior.firstObservedAt<t?prior.firstObservedAt:t,eventAnchorId:e.eventAnchorId})}}
- const seen=new Set(),valid=[];
+ const seen=new Set(),all=[];
  for(const r of receipts||[]){
   if(seen.has(r.receiptId))throw Error('duplicate receipt '+r.receiptId);seen.add(r.receiptId);
+  if(!['ACTIVE','SUPERSEDED','REVOKED'].includes(r.receiptStatus||'ACTIVE'))throw Error('invalid receipt status '+r.receiptId);
   if(!/^rcpt_[A-Za-z0-9_-]{8,64}$/.test(r.receiptId||'')||!fact(r.factId)||!['FUNDAMENTALS','PRICE'].includes(r.domain))throw Error('invalid receipt identity');
   if(String(r.ticker||'').normalize('NFKC').trim().toUpperCase()!==normTicker)throw Error('receipt ticker mismatch '+r.receiptId);
   if(!r.eventAnchorId||!r.consumerArtifactId||!r.consumerRevisionId||!hex(r.consumerSnapshotHash))throw Error('incomplete receipt binding '+r.receiptId);
@@ -52,10 +53,28 @@ function verifyConsumption({ticker,events,receipts,asOf}){
   if(r.eventAnchorId!==facts.get(r.factId).eventAnchorId)throw Error('receipt event mismatch '+r.receiptId);
   if(t<facts.get(r.factId).firstObservedAt)throw Error('consumption predates fact '+r.receiptId);
   const expected=H(stable(receiptPayload(r)));if(r.receiptHash!==expected)throw Error('receipt hash mismatch '+r.receiptId);
-  valid.push({...receiptPayload(r),receiptHash:r.receiptHash});
+  all.push({...receiptPayload(r),receiptHash:r.receiptHash});
  }
- const byFact={};for(const r of valid){if(!byFact[r.factId])byFact[r.factId]=[];byFact[r.factId].push(r)}
- const domains=[...new Set(valid.map(r=>r.domain))].sort();
- return {schemaVersion:'catalyst-consumption-proof-v1',asOf:new Date(cutoff).toISOString(),sharedOriginDomains:domains,receipts:valid.sort((a,b)=>a.receiptId.localeCompare(b.receiptId)),byFact};
+ const byId=new Map(all.map(r=>[r.receiptId,r])),children=new Map();
+ for(const r of all){
+  if(r.parentReceiptId){
+   const p=byId.get(r.parentReceiptId);if(!p)throw Error('unknown receipt parent '+r.receiptId);
+   if(p.ticker!==r.ticker||p.eventAnchorId!==r.eventAnchorId||p.factId!==r.factId||p.domain!==r.domain||p.consumerArtifactId!==r.consumerArtifactId)throw Error('receipt lineage key mutation '+r.receiptId);
+   if(new Date(p.consumedAt)>=new Date(r.consumedAt))throw Error('receipt lineage time rollback '+r.receiptId);
+   if(!children.has(p.receiptId))children.set(p.receiptId,[]);children.get(p.receiptId).push(r.receiptId);
+  }
+ }
+ for(const [id,kids] of children)if(kids.length>1)throw Error('receipt lineage fork '+id);
+ const keys=new Map();for(const r of all){const k=[r.ticker,r.eventAnchorId,r.factId,r.domain,r.consumerArtifactId].join('|');if(!keys.has(k))keys.set(k,[]);keys.get(k).push(r)}
+ const active=[];
+ for(const chain of keys.values()){
+  const roots=chain.filter(r=>!r.parentReceiptId);if(roots.length!==1)throw Error('receipt lineage requires one root');
+  const tips=chain.filter(r=>!(children.get(r.receiptId)||[]).length);if(tips.length!==1)throw Error('receipt lineage requires one tip');
+  const tip=tips[0];if(tip.receiptStatus==='ACTIVE')active.push(tip);
+  for(const r of chain)if(r!==tip&&r.receiptStatus==='ACTIVE')throw Error('superseded receipt remains ACTIVE '+r.receiptId);
+ }
+ const byFact={};for(const r of active){if(!byFact[r.factId])byFact[r.factId]=[];byFact[r.factId].push(r)}
+ const domains=[...new Set(active.map(r=>r.domain))].sort();
+ return {schemaVersion:'catalyst-consumption-proof-v1',asOf:new Date(cutoff).toISOString(),sharedOriginDomains:domains,receipts:all.sort((a,b)=>a.receiptId.localeCompare(b.receiptId)),activeReceipts:active.sort((a,b)=>a.receiptId.localeCompare(b.receiptId)),byFact};
 }
 module.exports={resolveProvenance,verifyConsumption,receiptPayload,canonical};
