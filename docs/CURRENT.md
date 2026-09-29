@@ -399,7 +399,7 @@ Part 1 is frozen as the public Catalyst evidence-integrity contract. Part 2 may 
 
 
 ## Final Catalyst Part 2 Freeze Audit — 2026-09-30
-Status: FROZE pending merge of PR #13.
+Status: FROZE & MERGED via PR #13 (merge 7b36e62d).
 
 Closed freeze attacks:
 - eventAnchorId remains stable across later PIT snapshots for the same canonical economic event;
@@ -421,7 +421,7 @@ Part 2 is frozen. Future resolver semantic changes require explicit versioning o
 
 
 ## Final Catalyst Part 3 Freeze Audit — 2026-09-30
-Status: FROZE pending merge of PR #14.
+Status: FROZE & MERGED via PR #14 (merge 9672194c).
 
 Closed freeze attacks:
 - provenanceFamilyId remains stable when later derivative observations are appended to a snapshot;
@@ -444,3 +444,28 @@ Final gate evidence on executable head:
 - Frozen Part 1 integrity regression: PASS.
 
 Part 3 is frozen. Future provenance/receipt semantic changes require explicit versioning or a separately reviewed contract change.
+
+
+## Final Catalyst Part 4 Freeze Audit — 2026-09-30
+Status: FROZE pending merge of PR #15.
+
+Part 4 is the PIT temporal-truth layer only. No Scanner score, rank, weight, attractiveness threshold, trade signal, or promotion/demotion rule enters this layer.
+
+Closed freeze attacks:
+- knowledge-time assertedAt and effective-time are distinct; future-known backdated assertions cannot rewrite historical snapshots;
+- lifecycle assertions are immutable-hash bound directly to ticker, eventAnchorId and exact payload;
+- assertion replay across ticker fails even when a foreign event object is supplied;
+- lifecycle mutations require exact-parent lineage; gaps, cross-event parents and time rollback fail closed;
+- materialUntil extension cannot silently resurrect stale evidence without explicit lineage;
+- same-time contradictory assertions fail closed;
+- self-supersession and supersession cycles fail closed;
+- A→B→C remains auditable; a withdrawn terminal successor does not leak CURRENT materiality;
+- source failure remains SOURCE_UNAVAILABLE, never NO_MATERIAL_EVENT;
+- no hidden stale-after-N-days rule exists; materialUntil is upstream assertion data;
+- output is deterministic under input reordering;
+- every PIT result carries deterministic snapshotHash over canonical lifecycle body;
+- later knowledge creates a new snapshot identity rather than mutating an earlier asOf snapshot.
+
+Final gate evidence: Part 4 PASS; frozen Part 3 PASS; frozen Part 2 PASS; frozen Part 1 PASS; overall gate SUCCESS.
+
+Part 4 is frozen. Future lifecycle semantic changes require explicit versioning or separately reviewed contract change.

@@ -1,0 +1,22 @@
+name: Catalyst PIT Lifecycle Gate
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  pit-lifecycle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Part 4 PIT lifecycle adversarial tests
+        run: node scripts/catalyst-pit-lifecycle-test.js
+      - name: Frozen Part 3 provenance regression
+        run: node scripts/catalyst-provenance-consumption-test.js
+      - name: Frozen Part 2 resolver regression
+        run: node scripts/catalyst-context-resolver-test.js
+      - name: Frozen Part 1 integrity regression
+        run: node scripts/catalyst-context-adversarial-test.js
