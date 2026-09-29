@@ -12,11 +12,13 @@ if(x.schemaVersion!=='catalyst-context-v1')fail('schemaVersion');
 if(!/^[A-Z0-9]{1,12}(\.JK)?$/.test(x.ticker||''))fail('ticker');
 if(!iso(x.asOf))fail('asOf');
 enums(x.contextStatus,['CURRENT_MATERIAL_EVIDENCE','NO_MATERIAL_EVENT','SOURCE_UNAVAILABLE','STALE_EVIDENCE','NOT_EVALUATED'],'contextStatus');
+if(!x.domainEvidenceRefs||typeof x.domainEvidenceRefs!=='object')fail('domainEvidenceRefs');
+for(const d of ['FUNDAMENTALS','PRICE'])if(!Array.isArray(x.domainEvidenceRefs[d])||new Set(x.domainEvidenceRefs[d]).size!==x.domainEvidenceRefs[d].length)fail('domainEvidenceRefs '+d);
 if(!Array.isArray(x.events))fail('events');
 if(x.contextStatus!=='CURRENT_MATERIAL_EVIDENCE'&&x.events.length)fail('non-current status cannot publish active events');
 const asOf=new Date(x.asOf),events=new Map(),globalObs=new Set();
 for(const e of x.events){
- const required=['eventAnchorId','eventType','economicSubject','anchorFacts','anchorFactsHash','firstObservedAt','canonicalRevisionId','independenceStatus','sharedOriginDomains','relatedEventIds','revisions','observations'];
+ const required=['eventAnchorId','eventType','economicSubject','anchorFacts','anchorFactsHash','firstObservedAt','canonicalRevisionId','independenceStatus','originFactIds','sharedOriginDomains','relatedEventIds','revisions','observations'];
  for(const k of required)if(!(k in e))fail('missing '+k);
  if(!/^evt_[A-Za-z0-9_-]{12,64}$/.test(e.eventAnchorId))fail('eventAnchorId');
  if(events.has(e.eventAnchorId))fail('duplicate eventAnchorId '+e.eventAnchorId);events.set(e.eventAnchorId,e);
@@ -26,8 +28,11 @@ for(const e of x.events){
  enums(e.independenceStatus,['INDEPENDENT_EVENT','DEPENDENT_SHARED_ORIGIN','CONTEXT_ONLY','UNRESOLVED'],'independenceStatus');
  const rel=e.relatedEventIds;
  if(!Array.isArray(rel)||new Set(rel).size!==rel.length||rel.includes(e.eventAnchorId))fail('related-event identity '+e.eventAnchorId);
+ if(!Array.isArray(e.originFactIds)||!e.originFactIds.length||new Set(e.originFactIds).size!==e.originFactIds.length||e.originFactIds.some(v=>typeof v!=='string'||!/^fact_[A-Za-z0-9_-]{8,64}$/.test(v)))fail('originFactIds');
+ const expectedShared=['FUNDAMENTALS','PRICE'].filter(d=>e.originFactIds.some(id=>x.domainEvidenceRefs[d].includes(id)));
  const shared=e.sharedOriginDomains;
  if(!Array.isArray(shared)||new Set(shared).size!==shared.length||shared.some(d=>!['FUNDAMENTALS','PRICE'].includes(d)))fail('sharedOriginDomains');
+ if(JSON.stringify([...shared].sort())!==JSON.stringify([...expectedShared].sort()))fail('automatic shared-origin mismatch '+e.eventAnchorId);
  if(shared.length&&e.independenceStatus!=='DEPENDENT_SHARED_ORIGIN')fail('hidden shared-origin '+e.eventAnchorId);
  if(!shared.length&&e.independenceStatus==='DEPENDENT_SHARED_ORIGIN')fail('missing shared-origin domain '+e.eventAnchorId);
  const revs=[...e.revisions].sort((a,b)=>a.revisionNumber-b.revisionNumber);if(!revs.length)fail('no revisions '+e.eventAnchorId);
