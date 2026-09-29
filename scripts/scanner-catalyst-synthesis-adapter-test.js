@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+const crypto=require('crypto'),{adapt,canonical}=require('./scanner-catalyst-synthesis-adapter');
+const H=s=>crypto.createHash('sha256').update(s).digest('hex'),stable=v=>JSON.stringify(canonical(v)),A=(x,m)=>{if(!x)throw Error(m)},reject=(f,m)=>{let ok=false;try{f()}catch(e){ok=true}A(ok,m)};
+const mkLife=(events,status='CURRENT_MATERIAL_EVIDENCE',asOf='2026-09-30T00:00:00.000Z')=>{const b={schemaVersion:'catalyst-lifecycle-v1',ticker:'TEST.JK',asOf,contextStatus:status,events};return {...b,snapshotHash:H(stable(b))}};
+const ctx={ticker:'TEST.JK',asOf:'2026-09-30T00:00:00.000Z',contextStatus:'CURRENT_MATERIAL_EVIDENCE'};
+let x=adapt({context:ctx,lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}])});A(x.catalystEvidence==='SUPPORTIVE'&&x.catalystFreshness==='CURRENT'&&x.reasonCodes[0]==='MATERIAL_CATALYST','current mapping');
+A(!('scanner' in x)&&!('score' in x)&&!('rank' in x),'state/scoring leaked');
+x=adapt({context:{...ctx,contextStatus:'NO_MATERIAL_EVENT'},lifecycle:mkLife([], 'NO_MATERIAL_EVENT')});A(x.catalystEvidence==='LIMITED'&&x.reasonCodes.length===0,'no-event became positive');
+x=adapt({context:{...ctx,contextStatus:'SOURCE_UNAVAILABLE'},lifecycle:mkLife([], 'SOURCE_UNAVAILABLE')});A(x.catalystEvidence==='NOT_AVAILABLE'&&x.caveatCodes.includes('CATALYST_UNAVAILABLE'),'source missingness collapsed');
+x=adapt({context:{...ctx,contextStatus:'STALE_EVIDENCE'},lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'STALE'}],'NO_MATERIAL_EVENT')});A(x.catalystFreshness==='STALE'&&x.caveatCodes.includes('DATA_STALE'),'stale mapping');
+x=adapt({context:{...ctx,contextStatus:'NO_MATERIAL_EVENT'},lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'WITHDRAWN'}],'NO_MATERIAL_EVENT')});A(!x.reasonCodes.includes('MATERIAL_CATALYST')&&x.caveatCodes.includes('MATERIAL_EVENT_REVIEW'),'withdrawn promoted');
+reject(()=>adapt({context:{...ctx,ticker:'OTHER.JK'},lifecycle:mkLife([],'NO_MATERIAL_EVENT')}),'cross ticker accepted');
+reject(()=>adapt({context:{...ctx,asOf:'2026-09-29T00:00:00.000Z'},lifecycle:mkLife([],'NO_MATERIAL_EVENT')}),'PIT mismatch accepted');
+const bad=mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}]);bad.events[0].pitState='STALE';reject(()=>adapt({context:ctx,lifecycle:bad}),'tampered lifecycle snapshot accepted');
+const keys=Object.keys(adapt({context:ctx,lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}])})).sort();A(JSON.stringify(keys)===JSON.stringify(['asOf','catalystEvidence','catalystFreshness','caveatCodes','reasonCodes','schemaVersion','sourceBinding','ticker'].sort()),'adapter output field drift');
+console.log('SCANNER_CATALYST_SYNTHESIS_ADAPTER_PASS');
