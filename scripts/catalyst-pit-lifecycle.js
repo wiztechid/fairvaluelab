@@ -5,11 +5,12 @@ function canonical(v){if(Array.isArray(v))return v.map(canonical);if(v&&typeof v
 const stable=v=>JSON.stringify(canonical(v));
 const time=(s,n)=>{const d=new Date(s);if(Number.isNaN(+d))throw Error('invalid '+n);return d};
 const hex=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
-function assertionPayload(a){return {eventAnchorId:a.eventAnchorId,lifecycleAssertionId:a.lifecycleAssertionId,parentAssertionId:a.parentAssertionId||null,lifecycleStatus:a.lifecycleStatus,assertedAt:new Date(a.assertedAt).toISOString(),effectiveAt:new Date(a.effectiveAt).toISOString(),materialUntil:a.materialUntil===null?null:new Date(a.materialUntil).toISOString(),supersededByEventAnchorId:a.supersededByEventAnchorId||null}}
+function assertionPayload(a){return {ticker:String(a.ticker||'').normalize('NFKC').trim().toUpperCase(),eventAnchorId:a.eventAnchorId,lifecycleAssertionId:a.lifecycleAssertionId,parentAssertionId:a.parentAssertionId||null,lifecycleStatus:a.lifecycleStatus,assertedAt:new Date(a.assertedAt).toISOString(),effectiveAt:new Date(a.effectiveAt).toISOString(),materialUntil:a.materialUntil===null?null:new Date(a.materialUntil).toISOString(),supersededByEventAnchorId:a.supersededByEventAnchorId||null}}
 function resolveLifecycle({ticker,asOf,events,assertions,sourceAvailable=true}){
  const cutoff=time(asOf,'asOf'),normTicker=String(ticker||'').normalize('NFKC').trim().toUpperCase();if(!/^[A-Z0-9]{1,12}(\.JK)?$/.test(normTicker))throw Error('invalid lifecycle ticker');const eventMap=new Map(),seen=new Set(),allAssertions=new Map(),byEvent=new Map();
  for(const e of events||[]){if(String(e.ticker||'').normalize('NFKC').trim().toUpperCase()!==normTicker)throw Error('event ticker mismatch '+e.eventAnchorId);if(!/^evt_[A-Za-z0-9_-]{8,64}$/.test(e.eventAnchorId||'')||eventMap.has(e.eventAnchorId))throw Error('invalid/duplicate eventAnchorId');eventMap.set(e.eventAnchorId,e)}
  for(const a of assertions||[]){
+  if(String(a.ticker||'').normalize('NFKC').trim().toUpperCase()!==normTicker)throw Error('assertion ticker mismatch '+a.lifecycleAssertionId);
   if(seen.has(a.lifecycleAssertionId))throw Error('duplicate lifecycle assertion '+a.lifecycleAssertionId);seen.add(a.lifecycleAssertionId);
   if(!/^life_[A-Za-z0-9_-]{8,64}$/.test(a.lifecycleAssertionId||'')||!eventMap.has(a.eventAnchorId))throw Error('invalid lifecycle identity');
   if(!['ACTIVE','SUPERSEDED','WITHDRAWN'].includes(a.lifecycleStatus))throw Error('invalid lifecycle status');
