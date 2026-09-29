@@ -221,3 +221,101 @@ Do NOT commit exact proprietary weights, thresholds, feature interactions, ranki
 
 ### Next authorized design step
 Before writing the Scanner engine, build Scanner Data Feature Matrix v1 from the actual available data fields and classify each candidate feature as USE / CONDITIONAL / REJECT with evidence-quality rationale. Engine implementation begins only after that feature contract is reviewed and accepted.
+
+
+## Scanner contracts freeze — Pre-Implementation Deep QC v1 — 2026-09-29
+Status: PASS after contract patches. Scanner implementation may begin only at the public contract layer; Opportunity Engine logic remains out of scope for this checkpoint.
+
+### Frozen public product flow
+SCAN → PANTAU → CEK FAIR VALUE → ATUR RISIKO → MONITOR.
+
+The Scanner discovers DES research candidates and manages a research watchlist. It is not a BUY/SELL signal, does not calculate an alternative fair value, and must not convert Scanner state into an automatic QSTP trade setup.
+
+### Frozen evidence architecture
+DES Eligibility
+→ Reliability + lens-aware Freshness
+→ Evidence Dependency / Independence Control
+→ Quality Evidence Family + Valuation Evidence Family + Price Evidence Family
+→ Opportunity Synthesis
+→ Catalyst / Material Event Context
+→ Internal State
+→ Public Candidate State
+→ Watchlist.
+
+Hard anti-double-counting rules:
+- Canonical FV, price/FV relationship, MoS, peer-relative MoS, dispersion, and valuation-family agreement belong to one VALUATION_EVIDENCE_FAMILY; they are not independent confirmations merely because they exist in separate fields/files.
+- OHLC trend/momentum/extension/liquidity and Golden Zone structural context belong to one PRICE_EVIDENCE_FAMILY. Golden Zone score/dominanceScore must not become an additional Scanner vote.
+- Quality and valuation evidence may share economic inputs. Cross-domain labels do not by themselves prove evidence independence. The private engine must maintain an Evidence Dependency Map.
+- Repeated reporting of one catalyst does not create multiple confirmations.
+
+### Engine invariants
+1. CANONICALITY — Scanner never calculates Fair Value independently; valuation context comes only from canonical validated Fair Value output.
+2. INDEPENDENCE — one economic fact cannot become multiple independent confirmations.
+3. MISSINGNESS — missing/unavailable evidence is not automatically negative evidence.
+4. INTEGRITY FIRST — unreliable, stale, conflicting, or materially incomplete required evidence can cap public state; attractiveness cannot override evidence integrity.
+5. POINT-IN-TIME — historical evaluation may use only evidence available at the evaluation timestamp.
+
+### Freshness and catalyst patch
+- Freshness is evaluated by evidence domain and research-lens requirement; overall freshness is not simply the worst status across all optional domains.
+- Catalyst states must distinguish at least: current material evidence, no material event, unavailable/source failure, and stale evidence.
+- No catalyst is not a negative catalyst.
+- Catalyst expiry alone must not demote a candidate unless the research thesis materially depended on that event.
+- Material events may trigger review/re-evaluation, not an automatic positive/negative score.
+
+### State-model patch
+Public state is a synthesis of evidenceIntegrity + opportunityState + priceCondition rather than one public score crossing one threshold.
+- WATCHLIST / Daftar Pantau
+- RESEARCH_CONFIRMED / Terkonfirmasi Riset
+- WAITING_CONFIRMATION / Tunggu Konfirmasi
+- EXTENDED
+- LIMITED_EVIDENCE / Evidence Terbatas
+
+Internally, opportunity maturity and price condition remain separable axes so EXTENDED and WAITING_CONFIRMATION do not destroy an otherwise valid research thesis. DETECTED, REVIEW_HOLD, OUT, and INELIGIBLE remain lifecycle/internal states unless disclosure is useful.
+State changes require evidence persistence to reduce daily oscillation; material integrity events may override normal persistence. Exact persistence, promotion, demotion, and override boundaries remain private.
+Re-entry is evidence-driven using current evidence; previous state does not grant automatic re-entry.
+
+### Research-lens patch
+Initial v1 lenses are frozen:
+- UNDERVALUED
+- QUALITY_VALUE
+- DIVIDEND_QUALITY
+- QUALITY_GROWTH
+- VALUE_MOMENTUM
+- HIDDEN_OPPORTUNITY
+
+Qualification is lens-specific. Evidence from different lenses must not be mixed merely to manufacture confirmation. Public output may expose primary and secondary qualifying lenses without exposing qualification recipes.
+
+### Public Scanner Output Schema v1
+Public per-ticker output may contain:
+- schemaVersion / public engine version
+- ticker, name, sector, industry
+- DES eligibility/universe metadata
+- public candidate state and reader-facing label
+- primary/secondary research lenses
+- categorical evidence strength
+- whyWatching[] public-safe reason codes + text
+- whatToVerify[] public-safe caveat codes + text
+- domain freshness and last evaluation date/time as appropriate
+- minimal canonical valuation context
+- public provenance
+- Fair Value deep-link and state-appropriate actions
+- limited public lifecycle history
+
+Public output MUST NOT contain raw/internal rank, opportunity score, component scores, sort score, weights, thresholds, raw feature vectors, penalties, normalization coefficients, feature contribution, promotion/demotion margin, sector/regime adjustments, anti-gaming logic, tie-break rules, confidence calibration, private reason combinations, or full private backtest/state history.
+Public reason codes must remain semantic (for example VALUATION_OPPORTUNITY, QUALITY_SUPPORT, PRICE_CONFIRMATION_PENDING), never encode hidden thresholds.
+Public transition history should be coarse enough to avoid becoming a threshold-reconstruction side channel. Presentation order must not be documented or guaranteed as exact internal-score order.
+
+### Cross-product boundary
+- Scanner owns discovery/watchlist intent.
+- Fair Value owns valuation and remains the single canonical valuation destination.
+- QSTP owns user-selected risk/position planning. Scanner may deep-link to QSTP only when contextually appropriate; Scanner state must never auto-create a BUY setup or trade instruction.
+- Homepage continues to orchestrate Discover → Value → Plan.
+
+### Implementation authorization
+The first Scanner implementation phase is PUBLIC CONTRACT ONLY:
+1. public JSON schema/contract,
+2. validator,
+3. honest empty-state fixture,
+4. permanent Scanner contract/smoke gate.
+
+No Opportunity Engine, private scoring logic, proprietary threshold, ranking recipe, or candidate-generation implementation is authorized in this phase.
