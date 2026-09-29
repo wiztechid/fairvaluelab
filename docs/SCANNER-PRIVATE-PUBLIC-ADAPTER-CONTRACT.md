@@ -17,7 +17,7 @@ The projection is intentionally lossy. Public artifacts must not contain enough 
 2. Private numeric scores, rank/order metadata, thresholds, feature contributions, penalties, calibration, and raw decision traces MUST be discarded before ingress.
 3. Private explanation text MUST NOT cross the boundary. The artifact carries allowlisted semantic reason/caveat codes; reader-facing copy is resolved from the public Reason Registry.
 4. Public state and evidence strength are categorical projections only.
-5. Public state history is limited/coarsened and never copies the private transition log.
+5. Public state history is limited/coarsened and never copies the private transition log. A GENERATED ticker exposes 1–3 date-only public transitions; dates are chronological and no later than evaluation date, adjacent duplicate states are forbidden, and the latest public transition must equal the current state and `stateChangedDate`.
 6. Fair Value context must originate from canonical validated Fair Value output.
 7. QSTP is never a private-engine execution instruction; it remains an optional public secondary navigation action.
 8. Unknown fields/codes/states fail closed.
