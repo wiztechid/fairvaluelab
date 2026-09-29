@@ -372,3 +372,27 @@ Status: CONTRACT HARDENING IMPLEMENTED on branch `catalyst-context-contract-v1`;
 
 ### Next authorized step
 Catalyst Context Engine v1 Part 2 may implement the canonical event resolver / revision resolver / shared-origin adapter against this contract. It must not expose private Scanner weights, thresholds, ranking logic, or promotion/demotion rules.
+
+
+## Final Catalyst Part 1 Freeze Audit — 2026-09-30
+Status: FROZE on PR #12 after adversarial hardening.
+
+Freeze audit closed additional false-pass surfaces found during final review:
+- anchorFacts is now hash-bound; silent canonical-thesis mutation fails;
+- sourceClass / verificationStatus / evidenceStatus are strict enums;
+- observation identity is globally unique within an artifact;
+- source locator completeness is enforced;
+- observedAt cannot predate publishedAt or exceed artifact asOf;
+- firstObservedAt must equal the earliest observation time;
+- revision content hashes and exact-parent lineage are validated;
+- eventAnchorId collisions and multi-event related cycles fail closed;
+- non-current missingness states cannot smuggle active events;
+- shared-origin is no longer trusted as self-declaration: originFactIds are intersected automatically with FUNDAMENTALS/PRICE domainEvidenceRefs, and sharedOriginDomains must equal the computed result.
+
+Final adversarial matrix covers rumor laundering, derivative/syndication laundering, automatic FUNDAMENTALS/PRICE shared-origin detection, spoofed shared-origin declarations, exact-parent revision spoofing, superseded SUPPORT, canonical-thesis mutation, source semantic aliases/completeness, duplicate observation identity, future PIT evidence, first-observed spoofing, missingness smuggling, revision hash aliases, event-anchor collisions, and related-event cycles.
+
+CI evidence at freeze:
+- Catalyst Context Integrity Gate / adversarial: PASS.
+- Scanner Public Contract & Smoke Gate: PASS, including Scanner publication-boundary adversarial attack.
+
+Part 1 is frozen as the public Catalyst evidence-integrity contract. Part 2 may implement resolver/adapters against this frozen boundary; any semantic contract change requires explicit versioning rather than silent mutation.
