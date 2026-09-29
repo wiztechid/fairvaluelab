@@ -7,10 +7,11 @@ const iso=(s,n)=>{const d=new Date(s);if(Number.isNaN(+d))throw Error('invalid '
 const fact=id=>typeof id==='string'&&/^fact_[A-Za-z0-9_-]{8,64}$/.test(id);
 const hex=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
 function originBinding(o){return stable({ticker:String(o.ticker||'').normalize('NFKC').trim().toUpperCase(),observationId:o.observationId,sourceLocator:o.sourceLocator,contentHash:o.contentHash,observedAt:new Date(o.observedAt).toISOString()})}
-function resolveProvenance(observations){
+function resolveProvenance(observations,{trustedOriginClasses=['PRIMARY','CORRECTION']}={}){
  const map=new Map();
  for(const o of observations){
   if(map.has(o.observationId))throw Error('duplicate provenance observation '+o.observationId);
+  if(!['PRIMARY','CORRECTION','CORROBORATION','DERIVATIVE','RUMOR'].includes(o.sourceClass))throw Error('invalid sourceClass '+o.observationId);
   if(!hex(o.contentHash)||typeof o.sourceLocator!=='string'||!o.sourceLocator.trim())throw Error('invalid provenance source '+o.observationId);
   iso(o.observedAt,'observedAt'); map.set(o.observationId,o);
  }
@@ -26,6 +27,7 @@ function resolveProvenance(observations){
    r=root(o.originObservationId);
   } else {
    if(o.originObservationId)throw Error('non-derivative cannot claim origin '+id);
+   if(!trustedOriginClasses.includes(o.sourceClass))throw Error('unproven origin class '+id);
    r=id;
   }
   visiting.delete(id);memo.set(id,r);return r;
@@ -35,18 +37,20 @@ function resolveProvenance(observations){
   return {observationId:o.observationId,originObservationId:rid,provenanceFamilyId:'prov_'+H(originBinding(ro)).slice(0,20),originBindingHash:H(originBinding(ro))};
  });
 }
-function receiptPayload(r){return {receiptId:r.receiptId,factId:r.factId,domain:r.domain,consumerArtifactId:r.consumerArtifactId,consumerRevisionId:r.consumerRevisionId,consumerSnapshotHash:r.consumerSnapshotHash,consumedAt:new Date(r.consumedAt).toISOString()}}
-function verifyConsumption({events,receipts,asOf}){
- const cutoff=iso(asOf,'asOf'),facts=new Map();
- for(const e of events||[])for(const id of e.originFactIds||[]){if(!fact(id))throw Error('invalid event fact '+id);const t=iso(e.firstObservedAt,'event firstObservedAt');if(!facts.has(id)||t<facts.get(id))facts.set(id,t)}
+function receiptPayload(r){return {receiptId:r.receiptId,ticker:String(r.ticker||'').normalize('NFKC').trim().toUpperCase(),eventAnchorId:r.eventAnchorId,factId:r.factId,domain:r.domain,consumerArtifactId:r.consumerArtifactId,consumerRevisionId:r.consumerRevisionId,consumerSnapshotHash:r.consumerSnapshotHash,consumedAt:new Date(r.consumedAt).toISOString()}}
+function verifyConsumption({ticker,events,receipts,asOf}){
+ const cutoff=iso(asOf,'asOf'),facts=new Map(),normTicker=String(ticker||'').normalize('NFKC').trim().toUpperCase();if(!/^[A-Z0-9]{1,12}(\\.JK)?$/.test(normTicker))throw Error('invalid consumption ticker');
+ for(const e of events||[]){if(!/^evt_[A-Za-z0-9_-]{8,64}$/.test(e.eventAnchorId||''))throw Error('invalid event anchor');for(const id of e.originFactIds||[]){if(!fact(id))throw Error('invalid event fact '+id);const t=iso(e.firstObservedAt,'event firstObservedAt'),prior=facts.get(id);if(prior&&prior.eventAnchorId!==e.eventAnchorId)throw Error('fact bound to multiple event anchors '+id);facts.set(id,{firstObservedAt:prior&&prior.firstObservedAt<t?prior.firstObservedAt:t,eventAnchorId:e.eventAnchorId})}}
  const seen=new Set(),valid=[];
  for(const r of receipts||[]){
   if(seen.has(r.receiptId))throw Error('duplicate receipt '+r.receiptId);seen.add(r.receiptId);
   if(!/^rcpt_[A-Za-z0-9_-]{8,64}$/.test(r.receiptId||'')||!fact(r.factId)||!['FUNDAMENTALS','PRICE'].includes(r.domain))throw Error('invalid receipt identity');
-  if(!r.consumerArtifactId||!r.consumerRevisionId||!hex(r.consumerSnapshotHash))throw Error('incomplete receipt binding '+r.receiptId);
+  if(String(r.ticker||'').normalize('NFKC').trim().toUpperCase()!==normTicker)throw Error('receipt ticker mismatch '+r.receiptId);
+  if(!r.eventAnchorId||!r.consumerArtifactId||!r.consumerRevisionId||!hex(r.consumerSnapshotHash))throw Error('incomplete receipt binding '+r.receiptId);
   const t=iso(r.consumedAt,'consumedAt');if(t>cutoff)throw Error('future consumption '+r.receiptId);
   if(!facts.has(r.factId))throw Error('receipt fact not in Catalyst '+r.receiptId);
-  if(t<facts.get(r.factId))throw Error('consumption predates fact '+r.receiptId);
+  if(r.eventAnchorId!==facts.get(r.factId).eventAnchorId)throw Error('receipt event mismatch '+r.receiptId);
+  if(t<facts.get(r.factId).firstObservedAt)throw Error('consumption predates fact '+r.receiptId);
   const expected=H(stable(receiptPayload(r)));if(r.receiptHash!==expected)throw Error('receipt hash mismatch '+r.receiptId);
   valid.push({...receiptPayload(r),receiptHash:r.receiptHash});
  }
