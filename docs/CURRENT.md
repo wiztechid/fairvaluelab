@@ -146,3 +146,13 @@ Freeze:
 - Homepage visual direction is considered production-ready and should remain visually frozen unless a regression or material usability issue is found.
 - Future custom-domain work must migrate canonical/schema/OG/sitemap references deliberately from GitHub Pages to cekvaluasi.com.
 - Future Scanner work must not expose private ranking weights, gates, penalties, or state-transition logic in the public repository.
+
+
+## Custom-domain checkpoint — 2026-09-29
+- Primary production domain: https://cekvaluasi.com
+- GitHub Pages DNS check: successful.
+- HTTPS enforcement: enabled.
+- Repository CNAME: cekvaluasi.com.
+- Canonical, Open Graph URL, homepage schema IDs/URLs, sitemap, robots sitemap reference, Fair Value OG image URL, and trust-page canonicals migrated from the GitHub Pages project URL to the custom domain.
+- Fair Value engine semantics, QSTP calculations, DES data, routes, permanent gates, and private-moat boundaries remain unchanged.
+- Post-merge requirement: production smoke-check /, /fair-value/, /qstp.html, sitemap.xml, robots.txt, canonical/OG/schema output, apex/www redirect behavior, and HTTPS.

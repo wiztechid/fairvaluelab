@@ -20,8 +20,8 @@ for(const st of ['SIAP','INDIKATIF','REVIEW','REFERENSI','BELUM_DINILAI']){
  if(r){const t=String(r.ticker).replace(/\.JK$/i,'');ok(fs.existsSync('data/'+t+'.json'),'missing representative data '+st+' '+t)}
 }
 for(const s of ["URLSearchParams(location.search).get('ticker')",'history.replaceState',"addEventListener('popstate'",'href="?ticker=']) ok(mig.includes(s),'missing URL-state contract '+s);
-ok(mig.includes('canonicalLink" href="https://wiztechid.github.io/fairvaluelab/fair-value/"'),'static canonical must be /fair-value/');
-ok(mig.includes("base='https://wiztechid.github.io/fairvaluelab/'"),'dynamic ticker metadata baseline must remain preserved');
+ok(mig.includes('canonicalLink" href="https://cekvaluasi.com/fair-value/"'),'static canonical must be /fair-value/');
+ok(mig.includes("base='https://cekvaluasi.com/'"),'dynamic ticker metadata baseline must remain preserved');
 ok(mig.includes("ACTOR_CACHE_NOT_READY")&&mig.includes('Data terverifikasi sedang disinkronkan'),'market actor graceful fallback missing');
 ok(mig.includes("GZ_CACHE")&&mig.includes('Golden Zone belum valid'),'golden-zone fallback missing');
 ok(mig.includes("x.status===404")&&mig.includes('Belum ada katalis material terdeteksi'),'catalyst 404 fallback missing');
