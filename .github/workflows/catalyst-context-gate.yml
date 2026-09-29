@@ -1,0 +1,22 @@
+name: Catalyst Context Integrity Gate
+on:
+  pull_request:
+    paths:
+      - 'docs/CATALYST-CONTEXT-CONTRACT-v1.md'
+      - 'scripts/catalyst-context-**'
+      - '.github/workflows/catalyst-context-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/CATALYST-CONTEXT-CONTRACT-v1.md'
+      - 'scripts/catalyst-context-**'
+jobs:
+  adversarial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Catalyst context adversarial gate
+        run: node scripts/catalyst-context-adversarial-test.js
