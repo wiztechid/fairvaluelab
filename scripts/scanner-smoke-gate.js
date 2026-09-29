@@ -1,0 +1,9 @@
+const fs=require('fs'),path=require('path'),cp=require('child_process');
+const ROOT=path.resolve(__dirname,'..');
+const must=['contracts/scanner-summary-v1.schema.json','contracts/scanner-ticker-v1.schema.json','data/scanner/summary.json','data/scanner/ticker-fixture.json','scripts/scanner-contract-validator.js'];
+for(const p of must)if(!fs.existsSync(path.join(ROOT,p)))throw new Error('Missing Scanner contract artifact: '+p);
+cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-contract-validator.js')],{stdio:'inherit'});
+const fixture=JSON.parse(fs.readFileSync(path.join(ROOT,'data/scanner/summary.json'),'utf8'));
+// PRE_ENGINE_LOCK: removal/change requires separately reviewed Opportunity Engine authorization.
+if(fixture.generationStatus!=='NOT_GENERATED'||fixture.items.length!==0||fixture.watchlist.count!==null)throw new Error('PRE_ENGINE_LOCK: Scanner must remain honest NOT_GENERATED state');
+console.log('SCANNER_SMOKE_PASS PRE_ENGINE_LOCK');

@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cekvaluasi.com/contracts/scanner-summary-v1.schema.json",
+  "title": "CekValuasi Scanner Summary v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generationStatus",
+    "generatedAt",
+    "universe",
+    "watchlist",
+    "items"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "scanner-summary-v1"
+    },
+    "generationStatus": {
+      "enum": [
+        "NOT_GENERATED",
+        "GENERATED"
+      ]
+    },
+    "generatedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "universe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "eligible",
+        "evaluated"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eligible": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "evaluated": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "watchlist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "states"
+      ],
+      "properties": {
+        "count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "states": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "WATCHLIST",
+            "RESEARCH_CONFIRMED",
+            "WAITING_CONFIRMATION",
+            "EXTENDED",
+            "LIMITED_EVIDENCE"
+          ],
+          "properties": {
+            "WATCHLIST": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "RESEARCH_CONFIRMED": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "WAITING_CONFIRMATION": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "EXTENDED": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "LIMITED_EVIDENCE": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ticker",
+          "name",
+          "sector",
+          "state",
+          "stateLabel",
+          "researchLens",
+          "evidenceStrength",
+          "primaryReason",
+          "freshness",
+          "detail",
+          "fairValue"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "pattern": "^[A-Z0-9]{4,6}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sector": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "WATCHLIST",
+              "RESEARCH_CONFIRMED",
+              "WAITING_CONFIRMATION",
+              "EXTENDED",
+              "LIMITED_EVIDENCE"
+            ]
+          },
+          "stateLabel": {
+            "enum": [
+              "Daftar Pantau",
+              "Terkonfirmasi Riset",
+              "Tunggu Konfirmasi",
+              "Extended",
+              "Evidence Terbatas"
+            ]
+          },
+          "researchLens": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "UNDERVALUED",
+                "QUALITY_VALUE",
+                "DIVIDEND_QUALITY",
+                "QUALITY_GROWTH",
+                "VALUE_MOMENTUM",
+                "HIDDEN_OPPORTUNITY"
+              ]
+            }
+          },
+          "evidenceStrength": {
+            "enum": [
+              "STRONG",
+              "ADEQUATE",
+              "LIMITED"
+            ]
+          },
+          "primaryReason": {
+            "enum": [
+              "VALUATION_OPPORTUNITY",
+              "PEER_RELATIVE_VALUE",
+              "QUALITY_SUPPORT",
+              "CASHFLOW_SUPPORT",
+              "SUSTAINABLE_GROWTH",
+              "PRICE_STRUCTURE_SUPPORT",
+              "MOMENTUM_CONFIRMATION",
+              "MATERIAL_CATALYST",
+              "MULTI_DOMAIN_CONFIRMATION"
+            ]
+          },
+          "freshness": {
+            "enum": [
+              "CURRENT",
+              "AGING",
+              "STALE",
+              "UNAVAILABLE"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "pattern": "^/scanner/[A-Z0-9]{4,6}\\.json$"
+          },
+          "fairValue": {
+            "type": "string",
+            "pattern": "^/fair-value/\\?ticker=[A-Z0-9]{4,6}$"
+          }
+        }
+      }
+    }
+  }
+}

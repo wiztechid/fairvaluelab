@@ -1,0 +1,30 @@
+name: Scanner Public Contract & Smoke Gate
+
+on:
+  pull_request:
+    paths:
+      - 'contracts/scanner-**'
+      - 'data/scanner/**'
+      - 'scripts/scanner-**'
+      - '.github/workflows/scanner-smoke-gate.yml'
+      - 'docs/CURRENT.md'
+  push:
+    branches: [main]
+    paths:
+      - 'contracts/scanner-**'
+      - 'data/scanner/**'
+      - 'scripts/scanner-**'
+      - '.github/workflows/scanner-smoke-gate.yml'
+
+jobs:
+  scanner-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate Scanner public contract
+        run: node scripts/scanner-contract-validator.js
+      - name: Run Scanner pre-engine smoke gate
+        run: node scripts/scanner-smoke-gate.js
