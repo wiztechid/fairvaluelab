@@ -447,7 +447,7 @@ Part 3 is frozen. Future provenance/receipt semantic changes require explicit ve
 
 
 ## Final Catalyst Part 4 Freeze Audit — 2026-09-30
-Status: FROZE pending merge of PR #15.
+Status: FROZE & MERGED via PR #15 (merge 105f696b).
 
 Part 4 is the PIT temporal-truth layer only. No Scanner score, rank, weight, attractiveness threshold, trade signal, or promotion/demotion rule enters this layer.
 
@@ -469,3 +469,17 @@ Closed freeze attacks:
 Final gate evidence: Part 4 PASS; frozen Part 3 PASS; frozen Part 2 PASS; frozen Part 1 PASS; overall gate SUCCESS.
 
 Part 4 is frozen. Future lifecycle semantic changes require explicit versioning or separately reviewed contract change.
+
+
+## Scanner ↔ Catalyst Synthesis Boundary Final Freeze — 2026-09-30
+Status: FROZE pending merge of PR #16.
+
+This is a boundary adapter, not Catalyst Part 5 and not an Opportunity Engine. Frozen Catalyst Parts 1–4 project one lossy categorical Catalyst evidence family into private Scanner synthesis.
+
+Final Deep QC closed: MATERIAL_CATALYST laundering via mismatched event identity; CURRENT context/lifecycle disagreement; NO_MATERIAL_EVENT with hidden CURRENT event; shared-origin FUNDAMENTALS/PRICE double-confirmation; raw fact/provenance/receipt/event identity leakage; dynamic reason/caveat code misuse; lifecycle snapshot substitution; frozen-context substitution via contextBindingHash; output/sourceBinding field drift; and mini-Opportunity-Engine semantics such as score/rank/weight/threshold/confidence/promotion/trade signals.
+
+Final allowed projection remains categorical only: SUPPORTIVE, LIMITED, NOT_AVAILABLE plus CURRENT/STALE/NO_MATERIAL_EVENT/SOURCE_UNAVAILABLE and hard-allowlisted semantic reason/caveat codes. No counts or numeric evidence strength cross the boundary.
+
+Final gates: synthesis boundary PASS; Catalyst Parts 1–4 regressions PASS; Scanner publication boundary PASS; Scanner Public Contract & Smoke Gate PASS; Catalyst PIT Lifecycle Gate PASS.
+
+Boundary v1 is frozen. Future semantic expansion requires explicit versioning. No Catalyst Part 5 is authorized or needed.
