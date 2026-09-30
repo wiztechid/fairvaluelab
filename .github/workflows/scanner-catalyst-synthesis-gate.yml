@@ -1,0 +1,26 @@
+name: Scanner Catalyst Synthesis Boundary Gate
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Scanner Catalyst synthesis boundary
+        run: node scripts/scanner-catalyst-synthesis-adapter-test.js
+      - name: Frozen Catalyst Part 4
+        run: node scripts/catalyst-pit-lifecycle-test.js
+      - name: Frozen Catalyst Part 3
+        run: node scripts/catalyst-provenance-consumption-test.js
+      - name: Frozen Catalyst Part 2
+        run: node scripts/catalyst-context-resolver-test.js
+      - name: Frozen Catalyst Part 1
+        run: node scripts/catalyst-context-adversarial-test.js
+      - name: Frozen Scanner publication boundary
+        run: node scripts/scanner-smoke-gate.js
