@@ -2,7 +2,7 @@
 const crypto=require('crypto'),{adapt,canonical}=require('./scanner-catalyst-synthesis-adapter');
 const H=s=>crypto.createHash('sha256').update(s).digest('hex'),stable=v=>JSON.stringify(canonical(v)),A=(x,m)=>{if(!x)throw Error(m)},reject=(f,m)=>{let ok=false;try{f()}catch(e){ok=true}A(ok,m)};
 const mkLife=(events,status='CURRENT_MATERIAL_EVIDENCE',asOf='2026-09-30T00:00:00.000Z')=>{const b={schemaVersion:'catalyst-lifecycle-v1',ticker:'TEST.JK',asOf,contextStatus:status,events};return {...b,snapshotHash:H(stable(b))}};
-const ctx={ticker:'TEST.JK',asOf:'2026-09-30T00:00:00.000Z',contextStatus:'CURRENT_MATERIAL_EVIDENCE'};
+const ctx={ticker:'TEST.JK',asOf:'2026-09-30T00:00:00.000Z',contextStatus:'CURRENT_MATERIAL_EVIDENCE',events:[{eventAnchorId:'evt_event00001'}]};
 let x=adapt({context:ctx,lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}])});A(x.catalystEvidence==='SUPPORTIVE'&&x.catalystFreshness==='CURRENT'&&x.reasonCodes[0]==='MATERIAL_CATALYST','current mapping');
 A(!('scanner' in x)&&!('score' in x)&&!('rank' in x),'state/scoring leaked');
 x=adapt({context:{...ctx,contextStatus:'NO_MATERIAL_EVENT'},lifecycle:mkLife([], 'NO_MATERIAL_EVENT')});A(x.catalystEvidence==='LIMITED'&&x.reasonCodes.length===0,'no-event became positive');
@@ -13,4 +13,10 @@ reject(()=>adapt({context:{...ctx,ticker:'OTHER.JK'},lifecycle:mkLife([],'NO_MAT
 reject(()=>adapt({context:{...ctx,asOf:'2026-09-29T00:00:00.000Z'},lifecycle:mkLife([],'NO_MATERIAL_EVENT')}),'PIT mismatch accepted');
 const bad=mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}]);bad.events[0].pitState='STALE';reject(()=>adapt({context:ctx,lifecycle:bad}),'tampered lifecycle snapshot accepted');
 const keys=Object.keys(adapt({context:ctx,lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}])})).sort();A(JSON.stringify(keys)===JSON.stringify(['asOf','catalystEvidence','catalystFreshness','caveatCodes','reasonCodes','schemaVersion','sourceBinding','ticker'].sort()),'adapter output field drift');
+
+reject(()=>adapt({context:{...ctx,events:[{eventAnchorId:'evt_other00001'}]},lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}])}),'MATERIAL_CATALYST laundered across mismatched event identity');
+reject(()=>adapt({context:{...ctx,contextStatus:'NO_MATERIAL_EVENT',events:[]},lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}],'NO_MATERIAL_EVENT')}),'NO_MATERIAL_EVENT accepted with CURRENT lifecycle event');
+const clean=adapt({context:ctx,lifecycle:mkLife([{eventAnchorId:'evt_event00001',pitState:'CURRENT'}])});A(/^[a-f0-9]{64}$/.test(clean.sourceBinding.contextBindingHash),'context snapshot binding missing');
+const leak=JSON.stringify(clean);for(const forbidden of ['originFactIds','provenanceFamilyId','receiptId','observationId','revisionId','eventAnchorId'])A(!leak.includes(forbidden),'raw Catalyst identity leaked '+forbidden);
+for(const forbidden of ['score','rank','weight','threshold','percentile','contribution','penalty','confidence','promotion','demotion','BUY','SELL'])A(!leak.toLowerCase().includes(forbidden.toLowerCase()),'mini Opportunity Engine semantic leaked '+forbidden);
 console.log('SCANNER_CATALYST_SYNTHESIS_ADAPTER_PASS');
