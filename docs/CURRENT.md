@@ -472,7 +472,7 @@ Part 4 is frozen. Future lifecycle semantic changes require explicit versioning 
 
 
 ## Scanner ↔ Catalyst Synthesis Boundary Final Freeze — 2026-09-30
-Status: FROZE pending merge of PR #16.
+Status: FROZE & MERGED via PR #16 (merge 5c0e874f6e800e5030de055cbde3c5fafddafe7a).
 
 This is a boundary adapter, not Catalyst Part 5 and not an Opportunity Engine. Frozen Catalyst Parts 1–4 project one lossy categorical Catalyst evidence family into private Scanner synthesis.
 
@@ -482,4 +482,6 @@ Final allowed projection remains categorical only: SUPPORTIVE, LIMITED, NOT_AVAI
 
 Final gates: synthesis boundary PASS; Catalyst Parts 1–4 regressions PASS; Scanner publication boundary PASS; Scanner Public Contract & Smoke Gate PASS; Catalyst PIT Lifecycle Gate PASS.
 
-Boundary v1 is frozen. Future semantic expansion requires explicit versioning. No Catalyst Part 5 is authorized or needed.
+Boundary v1 is FROZEN & MERGED. Future semantic expansion requires explicit versioning. No Catalyst Part 5 is authorized or needed.
+
+Next continuation point: return to Scanner product completion. Consume the frozen Quality + Valuation + Price + Catalyst evidence boundaries through PRIVATE Scanner synthesis; do not reopen Catalyst Parts 1–4 or the Synthesis Boundary unless a demonstrated regression requires an explicitly reviewed/versioned change.
