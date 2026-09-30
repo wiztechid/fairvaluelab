@@ -11,8 +11,14 @@ function adapt({context,lifecycle}){
  if(typeof lifecycle.snapshotHash!=='string'||!/^[a-f0-9]{64}$/.test(lifecycle.snapshotHash))throw Error('invalid lifecycle snapshotHash');
  const body={schemaVersion:lifecycle.schemaVersion,ticker:lifecycle.ticker,asOf:lifecycle.asOf,contextStatus:lifecycle.contextStatus,events:lifecycle.events};
  if(H(stable(body))!==lifecycle.snapshotHash)throw Error('lifecycle snapshotHash mismatch');
- const states=new Set((lifecycle.events||[]).map(x=>x.pitState));
- const current=states.has('CURRENT'),review=states.has('SUPERSEDED')||states.has('WITHDRAWN');
+ const contextEvents=Array.isArray(context.events)?context.events:[];const contextIds=new Set(contextEvents.map(e=>e.eventAnchorId));if(contextIds.size!==contextEvents.length)throw Error('duplicate Catalyst context event identity');
+ const lifeEvents=Array.isArray(lifecycle.events)?lifecycle.events:[];const lifeIds=new Set(lifeEvents.map(e=>e.eventAnchorId));if(lifeIds.size!==lifeEvents.length)throw Error('duplicate lifecycle event identity');
+ const currentIds=lifeEvents.filter(e=>e.pitState==='CURRENT').map(e=>e.eventAnchorId),current=currentIds.some(id=>contextIds.has(id));
+ const states=new Set(lifeEvents.map(x=>x.pitState)),review=states.has('SUPERSEDED')||states.has('WITHDRAWN');
+ if(lifecycle.contextStatus==='CURRENT_MATERIAL_EVIDENCE'&&!current)throw Error('CURRENT lifecycle context without matching frozen Catalyst event');
+ if(context.contextStatus==='CURRENT_MATERIAL_EVIDENCE'&&!current)throw Error('CURRENT Catalyst context without matching CURRENT lifecycle event');
+ if(lifecycle.contextStatus==='NO_MATERIAL_EVENT'&&currentIds.length)throw Error('NO_MATERIAL_EVENT with CURRENT lifecycle event');
+ const contextBindingHash=H(stable(context));
  let catalystEvidence,catalystFreshness,reasonCodes=[],caveatCodes=[];
  if(context.contextStatus==='SOURCE_UNAVAILABLE'||lifecycle.contextStatus==='SOURCE_UNAVAILABLE'){catalystEvidence='NOT_AVAILABLE';catalystFreshness='SOURCE_UNAVAILABLE';caveatCodes=['CATALYST_UNAVAILABLE']}
  else if(context.contextStatus==='CURRENT_MATERIAL_EVIDENCE'&&current&&lifecycle.contextStatus==='CURRENT_MATERIAL_EVIDENCE'){catalystEvidence='SUPPORTIVE';catalystFreshness='CURRENT';reasonCodes=['MATERIAL_CATALYST']}
@@ -21,6 +27,6 @@ function adapt({context,lifecycle}){
  else {catalystEvidence='LIMITED';catalystFreshness='NO_MATERIAL_EVENT';caveatCodes=['CATALYST_UNVERIFIED']}
  if(review&&!caveatCodes.includes('MATERIAL_EVENT_REVIEW'))caveatCodes.push('MATERIAL_EVENT_REVIEW');
  if(reasonCodes.includes('MATERIAL_CATALYST')&&!current)throw Error('positive Catalyst reason without CURRENT lifecycle');
- return {schemaVersion:'scanner-catalyst-evidence-v1',ticker,asOf:ca.toISOString(),catalystEvidence,catalystFreshness,reasonCodes,caveatCodes,sourceBinding:{contextAsOf:ca.toISOString(),lifecycleSnapshotHash:lifecycle.snapshotHash}};
+ return {schemaVersion:'scanner-catalyst-evidence-v1',ticker,asOf:ca.toISOString(),catalystEvidence,catalystFreshness,reasonCodes,caveatCodes,sourceBinding:{contextAsOf:ca.toISOString(),contextBindingHash,lifecycleSnapshotHash:lifecycle.snapshotHash}};
 }
 module.exports={adapt,canonical};
