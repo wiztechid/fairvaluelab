@@ -597,3 +597,24 @@ Status: FROZEN after production-formula audit, Deep SERP and contextual-link gat
 - Added sitemap, methodology-hub child link, and per-method Fair Value “ⓘ Cara hitung” link only after article publication.
 
 Next SEO owner: /riset/valuasi-saham/graham-number/. Audit Graham augmentation implementation + Deep SERP and explicitly separate Graham Number from the different Graham growth/yield formula before Article #5.
+
+
+## CekValuasi SEO adoption — Private Moat v3.0 Gate — 2026-10-03
+Status: ACTIVE for all indexable /riset/ assets from Article #1 onward.
+Source policy: owner-only Private Moat SOP remains outside the public repository. This repository records only the site-specific public-safe application and release state.
+
+Required sequence for each SEO asset:
+Opportunity/Deep SERP -> canonical intent ownership -> one-sentence content moat -> cannibalization decision -> AQS >=80 -> 10-layer Deep QC -> corpus graph -> technical/deployment validation -> public live QC -> GO/FROZEN.
+
+Operational correction: prior Article #1-#4 “FROZEN” labels recorded before adoption are provisional source freezes, not final publication freezes. Final GO/FROZEN requires live-production QC in addition to source/validator/deployment checks.
+
+Public-safe CekValuasi adaptation:
+- Formula documentation must be code-grounded to the canonical production valuation pipeline.
+- One meaningful formula/search intent has one canonical owner URL; wording variants do not justify new pages.
+- Every article must have a page-specific moat based on actual engine behavior, validation/guard logic, worked interpretation, or product workflow—not word count or generic completeness.
+- Article formulas may explain public Fair Value behavior, but must not disclose private Scanner weights, thresholds, feature interactions, calibration, ranking logic, persistence, anti-gaming, decision traces, or other reusable private research IP.
+- Parent hub for valuation-formula articles: /riset/valuasi-saham/cara-cekvaluasi-menghitung-harga-wajar/ until a broader /riset/ hub is deliberately introduced.
+- Formula articles must link to /fair-value/ and receive inbound discovery from the methodology hub and, when the documented method is published, its Fair Value method row.
+- No per-method “Cara hitung” link may point to an unpublished child page.
+
+Article #1-#4 are now under retrospective Private Moat v3.0 re-gate. Final status will be recorded only after AQS, Deep QC, corpus and live-production checks pass.
