@@ -485,3 +485,33 @@ Final gates: synthesis boundary PASS; Catalyst Parts 1–4 regressions PASS; Sca
 Boundary v1 is FROZEN & MERGED. Future semantic expansion requires explicit versioning. No Catalyst Part 5 is authorized or needed.
 
 Next continuation point: return to Scanner product completion. Consume the frozen Quality + Valuation + Price + Catalyst evidence boundaries through PRIVATE Scanner synthesis; do not reopen Catalyst Parts 1–4 or the Synthesis Boundary unless a demonstrated regression requires an explicitly reviewed/versioned change.
+
+
+## SEO Formula Documentation checkpoint — 2026-10-03
+Status: AUTHORIZED — editorial/SEO layer only; frozen Fair Value semantics remain unchanged.
+
+### Strategy
+CekValuasi will build a two-way documentation/SEO bridge between the canonical Fair Value product and reader-facing research articles:
+Google/Search → SEO formula/article → Fair Value Analyzer → “how this is calculated” contextual link → canonical explanatory article.
+
+### Governance
+- Article formulas must be derived from the actual production engine implementation, not generic internet formulas presented as CekValuasi behavior.
+- Editorial work must not modify Fair Value formulas, weights, QC, model inclusion, canonical data, Scanner private moat, or QSTP calculations.
+- Formula inventory must classify methods as ACTIVE/OUTPUT-CAPABLE, CANDIDATE/FALLBACK, or DIAGNOSTIC/NOT-ACTIVE before publication claims are made.
+- Each method article should explain: purpose, formula, variables, source/input meaning, worked example, applicability, limitations, interpretation, and how CekValuasi uses the method where public-safe.
+- Pillar articles may summarize several methods but must link to dedicated method articles rather than duplicating their full territory.
+- Product intent boundaries remain: /scanner/ = discovery; /fair-value/ = valuation; /qstp.html = risk/position planning; /riset/ = educational/research documentation.
+
+### Initial code-grounded formula inventory
+Verified from current public engine code:
+- Historical P/E 3Y and 5Y: EPS TTM × adaptive historical P/E band; output-capable candidate method.
+- Historical EV/EBITDA: historical EV/EBITDA band converted back to equity value per share using EBITDA, net debt/cash and shares; output-capable candidate method for non-financial sectors when evidence is sufficient.
+- Graham Number: sqrt(22.5 × EPS × BVPS), with bear/base/bull cross-check bands; output-capable candidate method when EPS and BVPS are positive/validated.
+- Historical Dividend Yield: latest DPS divided by historical yield band; output-capable candidate method when dividend history is sufficient.
+- Composite Fair Value: combines QC-passing methods across at least two independent method families using normalized method weights; this is a product methodology article, not a generic single-formula article.
+- PBV, DCF and FCF Yield appear in diagnostics/input readiness in the inspected augmentation layer; do not describe them as active production Fair Value methods until the canonical implementation path is separately verified.
+
+### SEO architecture direction
+Preferred editorial namespace: /riset/ with clusters such as /riset/valuasi-saham/, /riset/fundamental/, /riset/saham-syariah/, /riset/risiko-trading/, and /riset/metode-riset/.
+
+Next continuation point: complete the canonical Formula Inventory across the remaining valuation pipeline, map each verified method to one primary SEO URL/search intent, then run Deep SERP analysis before drafting the first article.
