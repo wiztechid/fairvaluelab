@@ -571,3 +571,16 @@ Status: FROZEN after Deep SERP, adaptive-P/E formula parity and contextual-link 
 - No links were added for unpublished formula articles.
 
 Next SEO owner: /riset/valuasi-saham/dcf-harga-wajar-saham/. Audit DCF production implementation + Deep SERP before drafting Article #3.
+
+
+## SEO Article #3 freeze — 2026-10-03
+URL: /riset/valuasi-saham/dcf-harga-wajar-saham/
+Status: FROZEN after production-formula audit, Deep SERP and contextual-link gate.
+- Documentation explicitly follows CekValuasi production implementation rather than presenting a generic FCFF/WACC template as engine behavior.
+- Production DCF documented: positive FCF/share prerequisite; historical growth from median available CAGR of NI/revenue/FCF with 8% fallback; sustainable-growth proxy from ROE and normalized payout; final growth clamp -3%..18%; cost of equity clamp(6.5% + beta*7.38%, 10.5%, 22%) with beta fallback 1; terminal growth 3.5%; five-year explicit projection; perpetuity terminal value; k-terminal guard >1 percentage point.
+- Scenario parity: Bear max(-2%, growth-5pp), min(24%, ke+2pp); Base growth/ke; Bull min(22%, growth+4pp), max(9.5%, ke-1.5pp).
+- Documents >70% terminal-value-share warning and DCF relevance reduction before sector adjustment.
+- Documents common economic sanity 0.05x..5x market price and cashflow family relationship with FCF Yield.
+- Added sitemap, methodology-hub child link, and Fair Value per-method “ⓘ Cara hitung” link for DCF only after article publication.
+
+Next SEO owner: /riset/valuasi-saham/pbv-historis-harga-wajar-saham/. Audit Historical PBV 5Y production formula + Deep SERP before Article #4.
