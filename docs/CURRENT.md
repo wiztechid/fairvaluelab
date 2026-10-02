@@ -584,3 +584,16 @@ Status: FROZEN after production-formula audit, Deep SERP and contextual-link gat
 - Added sitemap, methodology-hub child link, and Fair Value per-method “ⓘ Cara hitung” link for DCF only after article publication.
 
 Next SEO owner: /riset/valuasi-saham/pbv-historis-harga-wajar-saham/. Audit Historical PBV 5Y production formula + Deep SERP before Article #4.
+
+
+## SEO Article #4 freeze — 2026-10-03
+URL: /riset/valuasi-saham/pbv-historis-harga-wajar-saham/
+Status: FROZEN after production-formula audit, Deep SERP and contextual-link gate.
+- Historical PBV 5Y documented separately from adaptive P/E; no false reuse of P/E minimum-dispersion logic.
+- Production parity: BVPS from positive equity/shares after FX normalization where applicable; current P/BV guard 0.2x..12x; >=4.5 years history; >=30 initial observations; P5/P95 trim; >=10 post-trim; base=median; robust sigma=1.4826*MAD; Bear floor 0.2x; Bull cap 12x; all scenario FV outputs subject to 0.05x..5x market-price sanity.
+- Explicitly documents that core PBV currently has no adaptive-P/E 8% minimum dispersion.
+- Sector relevance documented as engine policy, not universal investing truth: Finance PBV multiplier 1.55; lower multipliers in several other profiles including Technology 0.25 and Healthcare 0.45.
+- Rejects simplistic “PBV <1 means cheap” interpretation.
+- Added sitemap, methodology-hub child link, and per-method Fair Value “ⓘ Cara hitung” link only after article publication.
+
+Next SEO owner: /riset/valuasi-saham/graham-number/. Audit Graham augmentation implementation + Deep SERP and explicitly separate Graham Number from the different Graham growth/yield formula before Article #5.
