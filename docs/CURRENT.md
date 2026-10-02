@@ -604,7 +604,9 @@ Status: ACTIVE for all indexable /riset/ assets from Article #1 onward.
 Source policy: owner-only Private Moat SOP remains outside the public repository. This repository records only the site-specific public-safe application and release state.
 
 Required sequence for each SEO asset:
-Opportunity/Deep SERP -> canonical intent ownership -> one-sentence content moat -> cannibalization decision -> AQS >=80 -> 10-layer Deep QC -> corpus graph -> technical/deployment validation -> public live QC -> GO/FROZEN.
+Opportunity/Deep SERP -> canonical intent ownership -> owner editorial quality gate -> cannibalization decision -> corpus graph -> technical/deployment validation -> public live QC -> GO/FROZEN.
+
+Detailed scoring mechanics and private editorial playbooks remain owner-only and are intentionally not documented in this public repository.
 
 Operational correction: prior Article #1-#4 “FROZEN” labels recorded before adoption are provisional source freezes, not final publication freezes. Final GO/FROZEN requires live-production QC in addition to source/validator/deployment checks.
 
@@ -618,3 +620,23 @@ Public-safe CekValuasi adaptation:
 - No per-method “Cara hitung” link may point to an unpublished child page.
 
 Article #1-#4 are now under retrospective Private Moat v3.0 re-gate. Final status will be recorded only after AQS, Deep QC, corpus and live-production checks pass.
+
+
+## SEO Article #1-#4 — Private Moat v3 retrospective release gate — 2026-10-03
+Final state: GO / FROZEN for current production semantics.
+
+Owner-only editorial gate: PASS for all four assets. Detailed AQS scoring and Deep-QC mechanics are retained outside public Git history.
+
+Public-safe release evidence:
+- Article #1 methodology hub: canonical intent owner for how CekValuasi forms multi-model Fair Value; distinct moat is first-party production methodology + QC/failure-state explanation + direct product bridge.
+- Article #2 Historical P/E: canonical owner for CekValuasi Historical P/E 3Y/5Y; distinct moat is adaptive production band, multi-source EPS validation, robust outlier handling and HIGH MULTIPLE behavior. Cannibalization decision: one URL owns both 3Y and 5Y.
+- Article #3 DCF: canonical owner for CekValuasi DCF implementation; distinct moat is explicit documentation of the actual FCF/share + cost-of-equity production model rather than substituting a generic FCFF/WACC article.
+- Article #4 Historical PBV: canonical owner for Historical PBV 5Y; distinct moat is robust 5Y P/BV reconstruction, data/observation guards and transparent sector-relevance policy. It remains separate from Historical P/E because user input, evidence family and decision path differ.
+- Parent/inbound graph: methodology hub -> published child formula pages; each child -> methodology hub + /fair-value/; /fair-value/ exposes contextual documentation links only for published method pages.
+- Sitemap/indexability: PASS. Canonicals and robots directives verified live.
+- Live-production QC: PASS across methodology hub, Historical P/E, DCF, Historical PBV and Fair Value integration. Public render, navigation/TOC, CTAs, method documentation links, tables and responsive presentation showed no blocking defects.
+- Private-moat boundary: PASS. No Scanner private weights, thresholds, feature interactions, calibration, persistence, ranking equations or decision traces were added.
+
+Corpus P2 (non-blocking): /riset/ and /riset/valuasi-saham/ are not yet dedicated editorial hub pages. The methodology article remains the canonical parent for this formula cluster until a broader research hub is deliberately built. Do not create an empty/thin hub merely to satisfy hierarchy.
+
+Release rule going forward: Article #5+ cannot receive final GO/FROZEN until the same owner editorial gate, corpus graph, technical validation, deployment and live-production QC pass. Formula/source parity remains mandatory before drafting.
