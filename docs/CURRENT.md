@@ -543,3 +543,17 @@ Purpose: methodology hub and trust bridge from Fair Value results. It explains m
 Planned child sequence after hub: Historical P/E -> DCF -> Historical PBV -> Graham Number -> Historical EV/EBITDA -> Historical Dividend Yield -> FCF Yield, followed by supporting-input articles according to internal-link demand and SERP validation.
 
 Next: draft only the first URL, then formula-parity, worked-example arithmetic, title/H1/meta, canonical/schema/sitemap, internal-link, responsive and publication gates before moving to article #2.
+
+
+## SEO Article #1 freeze — 2026-10-03
+URL: /riset/valuasi-saham/cara-cekvaluasi-menghitung-harga-wajar/
+Status: FROZEN after formula-parity and integration gate.
+- Published methodology hub with canonical, Article schema, Breadcrumb schema, disclaimer and Fair Value CTA.
+- Added to sitemap.xml.
+- Added contextual link from /fair-value/ results: “Bagaimana harga wajar ini dihitung?”
+- Two-way product/documentation loop verified.
+- Wording aligned with current UI behavior: full Composite FV requires >=2 methods from >=2 independent families; an indicative estimate may still be shown with lower confidence when valid methods exist but independence evidence is insufficient.
+- No links to unpublished child formula articles.
+- No Scanner/private-engine logic exposed.
+
+Next: Article #2 owner URL /riset/valuasi-saham/per-historis-harga-wajar-saham/. Run Deep SERP specifically for historical P/E intent, then draft from adaptive_pe.py + generate_data.py parity. Do not split 3Y and 5Y into separate URLs.
