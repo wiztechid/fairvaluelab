@@ -515,3 +515,31 @@ Verified from current public engine code:
 Preferred editorial namespace: /riset/ with clusters such as /riset/valuasi-saham/, /riset/fundamental/, /riset/saham-syariah/, /riset/risiko-trading/, and /riset/metode-riset/.
 
 Next continuation point: complete the canonical Formula Inventory across the remaining valuation pipeline, map each verified method to one primary SEO URL/search intent, then run Deep SERP analysis before drafting the first article.
+
+
+## Valuation SEO audit v1 — 2026-10-03
+Status: audited for editorial SEO; valuation semantics unchanged.
+
+Canonical documentation source: production generated-data pipeline (generate_data.py plus production post-processing). Do not mix reader-facing formula claims with the older/alternate app.py Flask path.
+
+Verified output-capable methods and primary URLs:
+- DCF -> /riset/valuasi-saham/dcf-harga-wajar-saham/
+- FCF Yield -> /riset/valuasi-saham/fcf-yield-saham/
+- Historical P/E 3Y + 5Y -> one owner URL: /riset/valuasi-saham/per-historis-harga-wajar-saham/
+- Historical PBV 5Y -> /riset/valuasi-saham/pbv-historis-harga-wajar-saham/
+- Historical EV/EBITDA -> /riset/valuasi-saham/ev-ebitda-harga-wajar-saham/
+- Graham Number -> /riset/valuasi-saham/graham-number/
+- Historical Dividend Yield -> /riset/valuasi-saham/dividend-yield-historis-harga-wajar/
+- Composite Fair Value methodology -> /riset/valuasi-saham/cara-cekvaluasi-menghitung-harga-wajar/
+
+Supporting documentation planned for EPS, BVPS, FCF, EBITDA, Enterprise Value, Cost of Equity, Terminal Value, and Margin of Safety.
+
+SERP/content-gap decision: do not compete primarily with generic multi-method list articles. CekValuasi should own code-grounded worked documentation: actual production formula, validated inputs, applicability/failure conditions, robust historical bands, QC, and the path from method output to the displayed Fair Value. Historical P/E 3Y and 5Y must share one page. Graham Number must not be conflated with the separate Benjamin Graham growth/yield formula. Historical Dividend Yield must distinguish ordinary dividend-yield calculation from reverse historical-yield fair-value reconstruction.
+
+FIRST SEO URL authorized for drafting:
+/riset/valuasi-saham/cara-cekvaluasi-menghitung-harga-wajar/
+Purpose: methodology hub and trust bridge from Fair Value results. It explains model families, QC and publication conditions, then links to dedicated formula pages. It must not imply every method is used for every ticker.
+
+Planned child sequence after hub: Historical P/E -> DCF -> Historical PBV -> Graham Number -> Historical EV/EBITDA -> Historical Dividend Yield -> FCF Yield, followed by supporting-input articles according to internal-link demand and SERP validation.
+
+Next: draft only the first URL, then formula-parity, worked-example arithmetic, title/H1/meta, canonical/schema/sitemap, internal-link, responsive and publication gates before moving to article #2.
