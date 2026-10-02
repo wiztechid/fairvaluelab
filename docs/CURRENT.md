@@ -557,3 +557,17 @@ Status: FROZEN after formula-parity and integration gate.
 - No Scanner/private-engine logic exposed.
 
 Next: Article #2 owner URL /riset/valuasi-saham/per-historis-harga-wajar-saham/. Run Deep SERP specifically for historical P/E intent, then draft from adaptive_pe.py + generate_data.py parity. Do not split 3Y and 5Y into separate URLs.
+
+
+## SEO Article #2 freeze — 2026-10-03
+URL: /riset/valuasi-saham/per-historis-harga-wajar-saham/
+Status: FROZEN after Deep SERP, adaptive-P/E formula parity and contextual-link gate.
+- One owner page covers Historical P/E 3Y + 5Y; no split URLs.
+- Documents production adaptive pipeline: EPS multi-source validation, 0.5x–500x observation guard, minimum 20 initial observations, 5th/95th percentile trim, minimum 12 post-trim, log-MAD robust filter, minimum 10 final observations, median base, robust sigma=max(1.4826*MAD, 8% of median), Bear/Base/Bull, and 0.05x–5x market-price economic sanity.
+- Documents HIGH MULTIPLE behavior: >60x may survive adaptive distribution but confidence is reduced and warning exposed.
+- Explicitly states P/E 3Y and 5Y share the earnings family and do not count as two independent valuation families.
+- Added sitemap entry; methodology hub now links to Article #2.
+- Fair Value method table now renders “ⓘ Cara hitung” only for Historical P/E rows whose documentation is published.
+- No links were added for unpublished formula articles.
+
+Next SEO owner: /riset/valuasi-saham/dcf-harga-wajar-saham/. Audit DCF production implementation + Deep SERP before drafting Article #3.
