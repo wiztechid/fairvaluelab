@@ -856,3 +856,17 @@ Deep SERP boundary:
 - CekValuasi owner must clearly say its production output is a reverse valuation from FCF/share and an engine-defined required cash yield; it is not a universal market benchmark, bond-like promised yield, or discounted multi-period DCF.
 - Avoid importing generic web claims such as '8% is cheap' into production semantics; 8/9/16/18% values are engine policy/guards, not universal valuation truths.
 Next: draft -> AQS/10-layer Deep QC -> corpus/tool integration -> live QC -> formula-cluster completion audit.
+
+
+## SEO Article #8 draft gate — FCF Yield — 2026-10-03
+Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
+- Created canonical owner /riset/valuasi-saham/fcf-yield-harga-wajar-saham/ after Deep SERP and exact generate_data.py audit.
+- Truth Layer hardening: production input is described as CekValuasi FCF production, not falsely labeled pure FCFE. Pipeline prefers source freeCashflow; fallback = OCF minus CapEx with source-sign handling; FCFE theory additionally accounts for net borrowing.
+- Exact production formula documented: req=clamp(ke - growth*0.2, .09, .18); Bear=FCF/share/.16; Base=FCF/share/req; Bull=FCF/share/max(.08,req-.02).
+- Explicitly labels 8/9/16/18% as engine policy/guards, not universal market cheap/expensive thresholds.
+- confidence=.75; base relevance=.90 before sector multiplier; family=cashflow; DCF and FCF Yield do not create independent-family evidence by themselves; general 0.05x..5x market sanity retained.
+- Deep SERP boundary: generic FCF-yield definition and FCFF/FCFE claimholder matching are explanatory context only; no external benchmark imported into production semantics.
+- Source QC PASS: 838 extracted words; one H1/canonical; Article+Breadcrumb schema; exact reverse formula; input-definition limitation; policy-vs-theory boundary; DCF cannibalization boundary; limitations/disclaimer.
+- Corpus integration: sitemap + static valuation hub + exact Fair Value methodDoc link committed.
+- AQS provisional 98/100; live readiness withheld pending deployment.
+- Next: deployment -> live route/canonical/corpus/sitemap/tool regression QC -> FINAL GO/FROZEN -> Formula Cluster Completion Audit.
