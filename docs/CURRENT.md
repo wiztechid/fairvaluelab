@@ -1046,3 +1046,14 @@ Article #8 exact-formula parity patch: b9dd711a803bd7295a6cff6dd73b6f5767d894af.
 Regression guard added: tests/test_fair_value_invariants.py commit 2d957196109e4f2c3f63ab5d3817311942bf3852; checks req 9/12/16/17/18% and Bear<=Base<=Bull, plus direct composite scenario-label aggregation in both core and augmentation.
 SEO #1–#10 remain frozen except #8 controlled exact-parity correction; speculative expansion remains paused.
 Next gate: CI/deployment -> live #8 formula parity -> source invariant execution/CI visibility -> re-freeze Formula Cluster.
+
+
+## P0 FCF Yield — Defense-in-Depth Gate — 2026-10-03
+Status: FIXED / RE-FREEZE STILL PENDING FINAL REFRESH.
+Additional audit after CI hardening:
+- update-fair-value workflow now wires tests/test_fair_value_invariants.py before generation and includes the test path in push triggers (commit 7aee70d).
+- Existing validate_engine.py already enforced published Composite Bear<=Base<=Bull, but did not enforce ordering for each included method. This explained how an individual inverted scenario could escape when the weighted composite happened to remain ordered.
+- validate_engine.py now rejects any included method with non-finite/non-positive scenarios or Bear>Base/Bull ordering violation (commit 4b49b046).
+- This is validation-only defense-in-depth; no valuation formula, weight, threshold, family, sector policy, or private Scanner logic changed.
+- Live Article #8 semantic correction is visible with self-canonical/index-follow; extractor may omit the first formula line inside styled formula blocks, but source exact parity was previously verified.
+Concurrency note: long-running refresh from c83d77a still holds fair-value-data-update lock; later 7aee70d run was superseded/cancelled by 4b49b046 and latest run is queued. Do not re-freeze until latest workflow executes invariant test + full DES pipeline + validator successfully and refreshed data is audited for method/composite scenario ordering.
