@@ -741,3 +741,14 @@ Production parity:
 - Candidate confidence=.82, relevance=1, family=enterprise; then 0.05x..5x market-price sanity and composite log-MAD outlier gate apply.
 SERP boundary: generic EV/EBITDA education may explain EV/EBITDA=EV/EBITDA and EV≈market cap+debt-cash; owner must focus on CekValuasi historical reverse-valuation implementation and limitations. External references confirm EV/EBITDA compares enterprise value with EBITDA and that EBITDA is not cash flow and ignores capex; do not convert generic rules-of-thumb into production thresholds.
 Next gate: draft -> source AQS/10-layer QC -> corpus/tool integration -> live QC -> GO/FROZEN.
+
+
+## SEO Article #6 draft gate — Historical EV/EBITDA — 2026-10-03
+Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
+- Created /riset/valuasi-saham/ev-ebitda-harga-wajar-saham/ with exact production reverse-valuation mechanics.
+- Source QC PASS: one H1/canonical; Article+Breadcrumb schema; net-debt/EV/EBITDA definitions; Finance exclusion; FX normalization; positive EBITDA rule; 5Y same-year price sampling; 0.5x..30x multiple guard; >=3 observation band; median/MAD and zero-MAD fallback; enterprise-to-equity reversal; 0.05x..5x sanity; confidence/relevance/family; limitations/disclaimer.
+- Worked example verified: EBITDA 2T, net debt 2T, shares 10B; 6x/8x/10x -> FV/share 1,000/1,400/1,800.
+- Private moat PASS: article documents public method behavior only; no Scanner/private ranking or calibration IP.
+- Corpus integration: sitemap + static valuation hub + exact Fair Value methodDoc link added. Methodology parent already names Historical EV/EBITDA; no competing owner authorized.
+- AQS provisional: 96/100; live readiness withheld pending deployment.
+- Next: deploy -> live route/canonical/corpus/sitemap/tool regression QC -> FINAL GO/FROZEN if green. Then Article #7 Historical Dividend Yield.
