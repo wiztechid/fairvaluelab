@@ -66,8 +66,17 @@ def weighted_growth(obs):
     weights=np.arange(1,len(clean)+1,dtype=float);weights/=weights.sum()
     gs=np.array([np.clip(x['growth'],-.75,1.5) for x in clean],float)
     return float(np.sum(gs*weights)),keep,drop
+def is_valuation_document(d):
+    # Root data/ also contains collector health/caches and other sidecar artifacts.
+    # Only ticker valuation objects produced by the valuation engine may be normalized.
+    if not isinstance(d,dict):return False
+    ticker=d.get('ticker')
+    if not isinstance(ticker,str) or not ticker.strip():return False
+    return isinstance(d.get('raw'),dict) and (isinstance(d.get('methods'),list) or isinstance(d.get('fairValue'),dict))
 def process(path):
-    d=json.load(open(path,encoding='utf-8'));ticker=d.get('ticker') or path.stem+'.JK';raw=d.setdefault('raw',{});factor=n(raw.get('fxFactor')) or 1.0
+    d=json.load(open(path,encoding='utf-8'))
+    if not is_valuation_document(d):return None
+    ticker=d.get('ticker');raw=d['raw'];factor=n(raw.get('fxFactor')) or 1.0
     try:
         t=yf.Ticker(ticker);qi=t.quarterly_income_stmt;qc=t.quarterly_cashflow
     except Exception as e:
@@ -100,6 +109,8 @@ changed=0
 for p in DATA.glob('*.json'):
     if p.name in ('summary.json','errors.json'):continue
     try:
-        d=process(p);json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False);changed+=1
+        d=process(p)
+        if d is None:continue
+        json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False);changed+=1
     except Exception as e:print('QUARTERLY_NORMALIZER_ERR',p.stem,e)
 print('QUARTERLY_NORMALIZER_DONE',changed)
