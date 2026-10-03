@@ -50,3 +50,13 @@ The filing resolver now has a dedicated adversarial gate. VERIFIED promotion req
 Official IDX Financial Data and Ratio may support financial-period identity but is not treated as publication-time evidence. Availability time remains a separate requirement; no FS date or report period is converted into publishedAt.
 
 Workflow run `37115252527` SUCCESS and printed `FILING_PROVENANCE_ADVERSARIAL_V1_PASS`. The live announcement transport still returned HTTP 403 and correctly remained `SOURCE_BLOCKED` with zero normalized filings. Therefore the promotion contract is frozen, while real VERIFIED corpus admission remains closed.
+
+
+## Public Financial Report evidence boundary — 2026-10-03
+Status: **FROZEN — ADAPTER CONTRACT ONLY; REAL VERIFIED ADMISSION REMAINS CLOSED**.
+
+Single-source VERIFIED promotion capability has been removed. The legacy resolver is inert even if an old compatibility flag is supplied. Dual-source promotion remains the only candidate promotion boundary and requires an externally supplied shared document identity.
+
+A sidecar IDX public Financial Report evidence adapter now accepts only already-obtained official records carrying explicit publishedAt, attachmentId, externalDocumentId, and financialQuarter. It performs no network access and never infers document identity from ticker, quarter, title, date, URL, or filename. Numeric-looking attachment filenames alone are rejected.
+
+Workflow run `37127651327` SUCCESS: `FILING_PROVENANCE_NO_SINGLE_SOURCE_PROMOTION_V2_PASS`, `DUAL_SOURCE_FILING_PROVENANCE_V1_PASS`, and `IDX_PUBLIC_FINANCIAL_REPORT_ADAPTER_V1_PASS`. Live legacy announcement transport remains `SOURCE_BLOCKED`; therefore real VERIFIED corpus remains zero and production admission remains disabled.
