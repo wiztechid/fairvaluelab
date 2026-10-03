@@ -1,7 +1,7 @@
 {
   "ticker": "TIRT.JK",
   "name": "PT Tirta Mahakam Resources Tbk",
-  "asOf": "2026-10-03T09:47:32.416887+00:00",
+  "asOf": "2026-10-03T10:07:57.888309+00:00",
   "price": 590.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -124,6 +124,7 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
+  "engineCommit": "d2cfe0e57ef5798ada34ff163e3705c8dc7c416c",
   "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -147,14 +148,14 @@
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
+      "reason": "Riwayat EV/EBITDA valid belum cukup.",
       "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     },
     {
@@ -171,6 +172,21 @@
           9.0
         ]
       }
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "ebit": 3812511957.0,
+        "netDebt": 945031177240.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -180,10 +196,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 797.5001881352324
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],

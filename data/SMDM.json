@@ -1,7 +1,7 @@
 {
   "ticker": "SMDM.JK",
   "name": "PT Suryamas Dutamakmur Tbk",
-  "asOf": "2026-10-03T09:51:54.892824+00:00",
+  "asOf": "2026-10-03T10:13:53.615480+00:00",
   "price": 494.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 132.88458064413737,
-    "base": 155.21351298790074,
-    "bull": 186.56217171585095,
-    "dispersion": 0.4295083434044184,
+    "bear": 32.57142857142857,
+    "base": 109.83041801479112,
+    "bull": 233.54576788656408,
+    "dispersion": 0.6358242288680303,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -45,7 +45,26 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.35467980295566504,
+      "normalizedWeight": 0.18508997429305912,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 57.566308068829,
+      "base": 89.91123052189731,
+      "bull": 122.25615297496562,
+      "confidence": 0.82,
+      "relevance": 0.65,
+      "rawWeight": 0.533,
+      "bands": {
+        "mean": 6.4913122774194365,
+        "sd": 3.252733370086241
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.13049332843677316,
       "qcStatus": "VALID"
     },
     {
@@ -61,7 +80,7 @@
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.05629838142153413,
+      "normalizedWeight": 0.02937936099889827,
       "qcStatus": "VALID",
       "countsForIndependence": false
     },
@@ -83,7 +102,7 @@
         "costOfEquity": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.49401829697396205,
+      "normalizedWeight": 0.2578038927653324,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
@@ -102,11 +121,35 @@
         "eps": 3.8,
         "requiredReturn": 0.105
       },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 5.61x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.17627616599338963,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 86.44499111101504,
+      "base": 112.62335738578061,
+      "bull": 138.80172366054617,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 41642260894.0,
+        "netDebt": -121031621220.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.1713796058269066,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     },
     {
       "name": "Adjusted Asset Floor",
@@ -128,7 +171,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.09500351864883885,
+      "normalizedWeight": 0.04957767168564084,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -153,14 +196,16 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 4,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "validMethodCount": 7,
+    "independentFamilies": 5,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0,
     "reviewFlags": [
-      "LARGE_MARKET_GAP"
+      "LARGE_MARKET_GAP",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 30,
+    "valuationConfidence": 12,
     "familyConsensus": [
       {
         "family": "book",
@@ -173,6 +218,16 @@
         "weight": 0.25
       },
       {
+        "family": "enterprise",
+        "methods": [
+          "Historical EV/EBITDA"
+        ],
+        "bear": 57.566308068829,
+        "base": 89.91123052189731,
+        "bull": 122.25615297496562,
+        "weight": 0.25
+      },
+      {
         "family": "book_profitability",
         "methods": [
           "Justified PBV / ROE"
@@ -181,10 +236,30 @@
         "base": 98.11269153347052,
         "bull": 117.73522984016462,
         "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 28.228571428571428,
+        "base": 36.19047619047619,
+        "bull": 44.15238095238095,
+        "weight": 0.25
+      },
+      {
+        "family": "enterprise_earnings",
+        "methods": [
+          "EV / EBIT"
+        ],
+        "bear": 86.44499111101504,
+        "base": 112.62335738578061,
+        "bull": 138.80172366054617,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 2.163984405319278,
+    "familyConsensusCount": 5,
+    "crossFamilySpreadRatio": 5.86658029380125,
     "forensicChecks": []
   },
   "raw": {
@@ -204,13 +279,33 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 3.8
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 3.8
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 3.8
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 4.63321858754445
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "SIAP",
+  "engineCommit": "d2cfe0e57ef5798ada34ff163e3705c8dc7c416c",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -223,17 +318,10 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -244,10 +332,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.16720725543910353
+          }
+        ],
+        "normalGrowth": -0.16720725543910353,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -301,14 +395,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.3141973947123497,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "baseToPrice": 0.22232878140645976,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "forensicChecks": [],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

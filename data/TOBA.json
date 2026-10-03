@@ -1,7 +1,7 @@
 {
   "ticker": "TOBA.JK",
   "name": "PT TBS Energi Utama Tbk",
-  "asOf": "2026-10-03T09:46:30.381296+00:00",
+  "asOf": "2026-10-03T10:06:38.733963+00:00",
   "price": 462.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 337.9084778489743,
-    "base": 508.57208777792187,
-    "bull": 724.30357667948,
-    "dispersion": 0.30557021576854676,
+    "bear": 409.6867005854936,
+    "base": 529.1268986686107,
+    "bull": 678.9713547100553,
+    "dispersion": 0.2720177333333523,
     "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
@@ -36,7 +36,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.2959044368600682,
+      "normalizedWeight": 0.29590443686006823,
       "qcStatus": "VALID"
     },
     {
@@ -77,7 +77,26 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.2413320274240941,
+      "normalizedWeight": 0.13928773318258905,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 553.2431460585323,
+      "base": 570.2365204499883,
+      "bull": 588.3069107712058,
+      "confidence": 0.68,
+      "relevance": 0.55,
+      "rawWeight": 0.37400000000000005,
+      "bands": {
+        "mean": 0.03255640306122449,
+        "sd": 0.001
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.1691351045788581,
       "qcStatus": "VALID"
     },
     {
@@ -100,7 +119,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.158667972575906,
+      "normalizedWeight": 0.09157716223855286,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -131,15 +150,16 @@
     "totalInputs": 7,
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 4,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 5,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 65,
+    "valuationConfidence": 78,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -161,9 +181,19 @@
         "base": 382.4242797135525,
         "bull": 600.8760995534078,
         "weight": 0.25
+      },
+      {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 553.2431460585323,
+        "base": 570.2365204499883,
+        "bull": 588.3069107712058,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
+    "familyConsensusCount": 3,
     "crossFamilySpreadRatio": 1.659726982600885,
     "forensicChecks": []
   },
@@ -174,7 +204,7 @@
     "currentPBV": 1.1048685021535318,
     "roe": -0.34333,
     "fcf": 589381199600.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": -0.25,
     "costOfEquity": 0.115922,
     "terminalGrowth": 0.035,
     "marketCap": 3839023382528.0,
@@ -184,12 +214,14 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17900.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
+  "engineCommit": "d2cfe0e57ef5798ada34ff163e3705c8dc7c416c",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -203,47 +235,96 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -2373388995600.0
+      }
     },
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
+      "name": "EV / Sales",
+      "family": "revenue",
       "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 6548902090800.0,
+        "netDebt": 5501285240900.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.25,
+    "confidence": 0.75,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.20648158009602002
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.13866950851376292
+          }
+        ],
+        "normalGrowth": -0.02361914564383527,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.9691725705855676
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.9474981052355171
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.9398131758054412
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.8490557171937871
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.8094452728790521
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "operatingCashFlow": {
         "observations": [],
@@ -252,10 +333,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.8827584293985019
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -282,7 +369,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.1008053848006967,
+    "baseToPrice": 1.1452963174645252,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
