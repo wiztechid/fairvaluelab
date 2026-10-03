@@ -53,7 +53,9 @@ def rebuild(d):
     else:bear=base=bull=disp=None;agr='INSUFFICIENT'
     d['fairValue']={'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agr,'available':suf};q=d.setdefault('quality',{});q['validMethodCount']=len(use) if suf else 0;q['independentFamilies']=len(fam) if suf else 0;q['diagnosticCount']=len(d.get('methodDiagnostics') or []);d['analysisStatus']='SIAP' if suf else ('STALE' if d.get('freshnessStatus')=='STALE' else 'TERBATAS')
 def augment(path):
-    d=json.load(open(path,encoding='utf-8'));d['methodDiagnostics']=[];ticker=d.get('ticker') or path.stem+'.JK';p=num(d.get('price'));raw=d.get('raw') or {};shares=num(raw.get('shares'));factor=num(raw.get('fxFactor')) or 1.0
+    d=json.load(open(path,encoding='utf-8'))
+    if not is_valuation_document(d):return None
+    d['methodDiagnostics']=[];ticker=d.get('ticker') or path.stem+'.JK';p=num(d.get('price'));raw=d.get('raw') or {};shares=num(raw.get('shares'));factor=num(raw.get('fxFactor')) or 1.0
     if not p or not shares:diag(d,'Fallback models','data','Harga atau jumlah saham tidak tersedia.',status='INVALID');return d
     t=yf.Ticker(ticker);inc=t.income_stmt;bs=t.balance_sheet;sector=(d.get('companyProfile') or {}).get('sector') or '';existing={m.get('name') for m in d.get('methods') or []};eps=num(raw.get('epsTTM'));bvps=num(raw.get('bvps'));fcf=num(raw.get('fcf'))
     if eps is None:diag(d,'P/E & Graham','earnings','EPS tidak tersedia/tervalidasi.')
