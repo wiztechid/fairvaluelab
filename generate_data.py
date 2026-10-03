@@ -151,7 +151,7 @@ for s in TICKERS:
         err=str(e);oldpath=f'{OUT}/{s}.json';status='GAGAL_FETCH' if any(k in err.lower() for k in ['price unavailable','rate limit','too many requests','timeout','connection']) else 'ERROR_ENGINE'
         if os.path.exists(oldpath):
             try:
-                old=json.load(open(oldpath,encoding='utf-8'));old['freshnessStatus']='STALE';old['analysisStatus']='STALE';old.setdefault('quality',{}).setdefault('guards',[]).append('Current run gagal: '+err[:180]+'; data sebelumnya dipertahankan dan ditandai STALE.');json.dump(old,open(oldpath,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False)
+                old=json.load(open(oldpath,encoding='utf-8'));old['freshnessStatus']='STALE';old['analysisStatus']='STALE';old['lastAttemptCommit']=os.getenv('CEKVALUASI_ENGINE_SHA') or None;old.setdefault('quality',{}).setdefault('guards',[]).append('Current run gagal: '+err[:180]+'; data sebelumnya dipertahankan dan ditandai STALE.');json.dump(old,open(oldpath,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False)
             except:pass
         errors.append({'ticker':s,'sector':SECTOR_BY_TICKER.get(s),'error':err,'status':status});print('ERR',s,err)
 json.dump({'updatedAt':datetime.now(timezone.utc).isoformat(),'universeSource':DES_SOURCE,'count':len(summary),'requested':len(TICKERS),'stocks':summary,'errors':errors},open(f'{OUT}/summary.json','w'),ensure_ascii=False,indent=2,allow_nan=False)
