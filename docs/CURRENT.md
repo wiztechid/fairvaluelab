@@ -1139,3 +1139,11 @@ Correction:
 - regression test now locks both family-consensus STALE restoration and indicative-fv STALE early-return (commit d194072ca4636aa6d29f88f8fdfd833363adcad9).
 This changes only freshness/publication-state preservation. It does not change valuation values, model eligibility, weights, thresholds, family consensus calculations, sector policy, or private Scanner logic.
 Latest closure candidate is Update Fair Value Data run 37116977978 from d194072c. Required final proof remains compile -> invariant/provenance regression gate -> generation -> full pipeline -> first validator -> downstream builders -> final validator -> publication commit.
+
+
+## P0 FCF Yield — Ticker/Summary Publication Parity Gate — 2026-10-03
+Status: FIXED / LATEST FULL RUN PENDING.
+Publication-integrity audit confirmed family_consensus.py rebuilds summary.json after its ticker transformations, including the new STALE restoration. However validate_engine.py previously checked only atomic universe counts in summary.json, not row-level parity between each ticker JSON and its summary projection. A future builder/refactor could therefore leave correct ticker artifacts but stale or inconsistent consumer-facing summary metadata without failing publication.
+Correction commit 7f29b9a647c41ab865d3ce6fa45d03c1734ca31c adds per-ticker summary projection validation for status, Base FV, valuationConfidence, validMethods, and independentFamilies. Commit 05610324b4fa40209e7d3171902886d2cf7a4aab locks the parity gate in the invariant regression test.
+This is publication-integrity validation only; no valuation calculation, scenario, threshold, weight, family/sector policy, freshness policy, or private Scanner logic changed.
+Latest closure candidate: Update Fair Value Data run 37117343216 at 05610324. Final re-freeze requires this revision to pass the complete atomic publication chain and commit refreshed data.
