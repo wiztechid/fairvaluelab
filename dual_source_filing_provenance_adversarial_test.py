@@ -10,6 +10,6 @@ for pe,ae in [(None,a()),(p(),None),(p(ticker='ADRO'),a()),(p(financialQuarter='
 print('DUAL_SOURCE_FILING_PROVENANCE_V1_PASS')
 
 # Public Financial Report evidence must never satisfy the API availability leg merely because it is official IDX evidence.
-public_leg=dict(availability);public_leg['source']='IDX_PUBLIC_FINANCIAL_REPORT';public_leg['verification']='OFFICIAL_IDX_PUBLIC'
-r=resolve(snapshot,period,public_leg);assert r.get('pointInTimeQuality')!='VERIFIED'
+public_leg=a(source='IDX_PUBLIC_FINANCIAL_REPORT',verification='OFFICIAL_IDX_PUBLIC')
+provisional(resolve(base(),p(),public_leg))
 print('DUAL_SOURCE_PUBLIC_CANNOT_MASQUERADE_AS_API_PASS')
