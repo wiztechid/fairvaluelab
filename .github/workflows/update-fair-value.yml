@@ -28,6 +28,7 @@ on:
       - 'generate_data.py'
       - 'des_universe.py'
       - 'requirements.txt'
+      - 'tests/test_fair_value_invariants.py'
       - '.github/workflows/update-fair-value.yml'
 
 permissions:
@@ -50,6 +51,8 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Guard Fair Value scenario invariants
+        run: python tests/test_fair_value_invariants.py
       - name: Generate core valuation data
         run: python generate_data.py
       - name: Add adaptive historical PE valuation
