@@ -640,3 +640,44 @@ Public-safe release evidence:
 Corpus P2 (non-blocking): /riset/ and /riset/valuasi-saham/ are not yet dedicated editorial hub pages. The methodology article remains the canonical parent for this formula cluster until a broader research hub is deliberately built. Do not create an empty/thin hub merely to satisfy hierarchy.
 
 Release rule going forward: Article #5+ cannot receive final GO/FROZEN until the same owner editorial gate, corpus graph, technical validation, deployment and live-production QC pass. Formula/source parity remains mandatory before drafting.
+
+
+## Private Moat v3 retrospective gate — Articles #1-#4 — 2026-10-03
+Audit state: CONDITIONAL PASS / awaiting final live verification after corpus-hub deployment.
+
+Canonical ownership + moat:
+1. #1 /cara-cekvaluasi-menghitung-harga-wajar/ — owns CekValuasi multi-model/composite methodology. Moat: code-grounded path from validated inputs and method eligibility through independent-family evidence, normalized weighting, dispersion/agreement and displayed Fair Value.
+2. #2 /per-historis-harga-wajar-saham/ — owns Historical P/E 3Y+5Y. Moat: documents adaptive EPS validation, robust historical multiple construction, high-multiple handling and same-family treatment instead of generic PER education.
+3. #3 /dcf-harga-wajar-saham/ — owns production DCF. Moat: documents the actual CekValuasi FCF/share + cost-of-equity implementation, scenario parameters, terminal-value diagnostic and production guards rather than substituting a generic FCFF/WACC template.
+4. #4 /pbv-historis-harga-wajar-saham/ — owns Historical PBV 5Y. Moat: documents production BVPS normalization, 5Y robust P/BV band, observation/trim/MAD guards and sector relevance while rejecting simplistic PBV<1 interpretation.
+
+Cannibalization decisions: KEEP all four. #1 remains parent methodology owner; #2-#4 are child formula owners. P/E 3Y and 5Y remain merged into one canonical owner. No competing generic formula pages authorized.
+
+AQS v3 retrospective score (100-point site-specific rubric: intent 15, truth/formula fidelity 20, moat/originality 15, reader utility 15, trust/safety 10, corpus/internal links 10, technical SEO 10, live readiness 5):
+- #1: 93/100
+- #2: 94/100
+- #3: 95/100
+- #4: 94/100
+All exceed AQS>=80. Scores do not by themselves authorize publication.
+
+10-layer Deep QC:
+1 Truth/evidence PASS — production-code-grounded claims audited per article.
+2 Intent PASS — one owner per substantive intent.
+3 Reader-first PASS — direct explanation, worked interpretation and failure conditions.
+4 Moat PASS — page-specific production behavior; not generic word-count expansion.
+5 Safety/trust PASS — educational framing, uncertainty/limitations, no BUY/SELL promise.
+6 Search architecture PASS after corpus patch.
+7 Cannibalization PASS — parent vs child territory explicit; P/E windows merged.
+8 Corpus appearance PASS after source patch; static research hubs added.
+9 Monetization PASS — no ad/affiliate insertion compromises article purpose.
+10 Live reality CONDITIONAL — Articles #1-#4, canonical metadata, robots and sitemap were publicly reachable; audit found /riset/ and /riset/valuasi-saham/ returning 404, so final freeze was withheld. Source patch now adds both static hubs and sitemap entries; production recheck is required after deployment.
+
+Corpus patch:
+- Added /riset/ as static Research Library hub.
+- Added /riset/valuasi-saham/ as static valuation cluster hub linking #1-#4.
+- Added both hubs to sitemap.
+- This also supplies non-JavaScript discovery because Fair Value per-method “Cara hitung” links are runtime-generated after ticker rendering and should not be the sole crawl path.
+
+Private-moat check: PASS. Public pages expose public Fair Value calculation behavior needed for auditability but do not publish Scanner proprietary weights/thresholds/feature interactions/calibration/ranking/persistence/anti-gaming/decision traces.
+
+Release rule: Articles #1-#4 become FINAL GO/FROZEN only when live recheck confirms both new hubs resolve successfully, sitemap includes them, article canonicals remain self-referential, and existing article/tool routes have no regression.
