@@ -51,6 +51,8 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Compile critical Fair Value pipeline scripts
+        run: python -m py_compile generate_data.py adaptive_pe.py augment_models.py quarterly_normalizer.py sector_models.py sector_waterfall.py postprocess_qc.py indicative_fv.py family_consensus.py validate_engine.py build_ticker_aliases.py collect_news_7d.py catalyst_7d.py sector_mos.py golden_zone.py snapshot_backtest.py catalyst_snapshot.py fv_timeline.py
       - name: Guard Fair Value scenario invariants
         run: python tests/test_fair_value_invariants.py
       - name: Generate core valuation data
