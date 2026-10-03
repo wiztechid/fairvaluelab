@@ -992,3 +992,19 @@ Cannibalization boundary:
 - #10 owns sector relevance policy and method-applicability interpretation only.
 Candidate canonical: /riset/valuasi-saham/metode-valuasi-sesuai-sektor/
 AQS pre-draft estimate: 96/100. AUTHORIZE exact-parity draft + adversarial QC. No sector-specific child URLs authorized.
+
+
+## SEO Article #10 draft gate — Sector Valuation Relevance — 2026-10-03
+Status: SOURCE PASS / LIVE QC PENDING; not FINAL FROZEN.
+Canonical: /riset/valuasi-saham/metode-valuasi-sesuai-sektor/
+Intent owner: how CekValuasi changes method relevance by sector/business profile; not individual formulas, composite mechanics, or output interpretation.
+Source truth parity PASS:
+- All 13 production profile rows/defaults reproduced exactly for DCF / FCF Yield / Historical P/E / Historical PBV.
+- Explicitly states multiplier changes relevance/rawWeight context, not method formula or eligibility.
+- Explicit augmentation boundary: Historical EV/EBITDA, Graham Number, Historical Dividend Yield do not consume profile() multipliers; EV/EBITDA is separately skipped for Keuangan.
+- Family independence unchanged: DCF+FCF Yield cashflow; P/E 3Y+5Y earnings.
+- No claim that multiplier is universal finance truth, sector ranking, target price, or buy/sell recommendation.
+External truth boundary: general valuation literature supports sector/method applicability differences and special treatment of financial-service firms; exact numeric multipliers remain solely CekValuasi production policy.
+Source QC: ~746 extracted words; one H1/canonical; Article+Breadcrumb schema; 13-row parity; policy guard; raw-weight explanation; augmentation/Keuangan boundary; family boundary; links to five method/evidence owners + Fair Value tool.
+AQS provisional: 97/100. Sitemap + valuation hub integration committed. Sacred Diff: no production code/formula/threshold/weight/family/private Scanner logic changed.
+Next: deployment -> live canonical/table/hub/sitemap regression -> FINAL GO/FROZEN if green.
