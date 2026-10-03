@@ -702,3 +702,14 @@ Moat sentence: Unlike generic Graham calculators, the CekValuasi owner documents
 SERP separation rule: Graham Number sqrt(22.5*EPS*BVPS) is the owner territory. Do not conflate it with the separate growth/bond-yield Graham formula EPS*(8.5+2g)*4.4/Y, which is not a production CekValuasi method.
 Production parity: requires EPS>0 and BVPS>0; Base=sqrt(22.5*EPS*BVPS); Bear=.8*Base; Bull=1.2*Base; confidence=.60; relevance=.55; family=fundamental; general 0.05x-5x market-price sanity plus composite robust-outlier rules still apply.
 Next gate: draft -> AQS -> 10-layer Deep QC -> corpus/tool integration -> live-production QC -> GO/FROZEN.
+
+
+## SEO Article #5 draft gate — Graham Number — 2026-10-03
+Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
+- Created canonical owner /riset/valuasi-saham/graham-number/ and added Article + Breadcrumb schema, self canonical, educational disclaimer and Fair Value CTA.
+- Deep SERP confirmed generic territory is dominated by formula/22.5 derivation/calculator/basic limitations. CekValuasi differentiation is production-specific validated inputs, 80/100/120 scenario treatment, confidence/relevance role, economic sanity + composite outlier gates, and cross-check role.
+- Explicit anti-cannibalization: Graham Number sqrt(22.5*EPS*BVPS) is kept separate from EPS*(8.5+2g)*4.4/Y, which is not a CekValuasi production method.
+- Source gates PASS: one H1, one canonical, Article schema, Breadcrumb schema, formula parity, positive-input rule, scenario parity, sanity guard, confidence/relevance disclosure, disclaimer, article->tool and article->hub links.
+- Corpus integration: added to sitemap and /valuasi-saham.html; methodology hub links Graham Number; Fair Value methodDoc now maps exact 'Graham Number' to the canonical owner.
+- AQS provisional: 95/100 (intent 15/15; truth/formula 20/20; moat 15/15; utility 14/15; trust 10/10; corpus 10/10; technical 9/10 pending live; live readiness 2/5 pending deployment).
+- Next gate: Pages deployment -> live route/canonical/schema/link check -> no regression on #1-#4/tool -> FINAL GO/FROZEN if green.
