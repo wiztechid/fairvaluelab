@@ -28,7 +28,7 @@ for (const id of requiredIds) if (!new RegExp(`id=["']${id}["']`).test(html)) fa
 if (!process.exitCode) pass('critical DOM contracts present');
 
 const contracts = [
-  ['DES loader', /fetch\(['"]data\/summary\.json/],
+  ['DES loader', /(?:fetch\(['"]data\/summary\.json|new\s+URL\(['"]\/data\/summary\.json['"],\s*location\.origin\))/],
   ['ticker renderer', /function\s+renderTickers\s*\(/],
   ['auto SL\/TP', /function\s+applyQuick\s*\(/],
   ['planning engine', /function\s+plan\s*\(/],
