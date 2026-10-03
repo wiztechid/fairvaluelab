@@ -914,3 +914,27 @@ Canonical candidate #9: /riset/valuasi-saham/cara-membaca-hasil-fair-value/
 Moat sentence: 'This page deserves its own URL because it uniquely helps the user decide how much trust to place in a CekValuasi Fair Value result by interpreting scenario range, model agreement, independent evidence families, data quality, and guards—not merely whether price is above or below one fair-value number.'
 Cannibalization boundary: #1 Composite owns calculation/aggregation mechanics; #9 owns output interpretation and evidence reliability. Formula owners retain method calculations. No generic buy/sell thresholds or universal MoS recommendation.
 Next gate: exact UI/engine parity audit -> draft #9 -> AQS + adversarial QC -> corpus integration -> live QC. No other new URL authorized in Wave 1.
+
+
+## SEO Article #9 draft gate — Reading Fair Value Evidence — 2026-10-03
+Status: SOURCE PASS / LIVE QC PENDING; not FINAL FROZEN.
+Canonical: /riset/valuasi-saham/cara-membaca-hasil-fair-value/
+Intent owner: how to interpret reliability/context of a CekValuasi output, not how formulas/composite are calculated.
+Exact parity documented:
+- Core Composite SIAP requires >=2 surviving methods from >=2 independent valuation families; otherwise analysisStatus TERBATAS and core composite is unavailable.
+- DCF + FCF Yield share cashflow family; Historical P/E 3Y + 5Y share earnings family.
+- Agreement uses dispersion = std(Base values)/mean(Base values): HIGH <18%, MEDIUM 18%-<32%, LOW >=32%; explicitly not presented as probability/certainty.
+- Data score = availability of price, EPS, BVPS, ROE, FCF, shares, market cap / 7; BAIK >=80 only with sufficient composite, CUKUP >=60, otherwise TERBATAS.
+- Important implementation nuance disclosed: current core sets validMethodCount/independentFamilies summary after composite sufficiency; a zero summary under TERBATAS must not be interpreted as proof that no individual method exists. Read displayed methods + guards.
+- MoS is intentionally subordinated to evidence context; no universal MoS threshold or buy/sell rule introduced.
+- Guards treated as interpretation evidence (FX normalization, share reconciliation, EPS inconsistency, eligibility/sufficiency).
+Deep SERP / information gain:
+- Generic Indonesian SERP commonly explains one fair-value estimate, cheap/fair/expensive comparison, and MoS formula.
+- #9 adds product-native evidence interpretation: status, scenario range, model agreement, independent families, data completeness and guards before price discount.
+- External valuation literature supports using multiple models, matching models to available information, recognizing uncertainty, and considering reliability; external material does not override production semantics.
+Cannibalization/Sacred Diff:
+- #1 remains owner of aggregation/calculation mechanics; #9 owns reader interpretation/reliability.
+- Formula pages remain owners of individual method math.
+- No production code, threshold, model weight, family, Fair Value UI contract, or private Scanner moat changed.
+Source QC: ~949 extracted words; one H1/canonical; Article+Breadcrumb schema; status/family/agreement/data/MoS/guards boundaries present; methodology + tool links present; disclaimer present.
+AQS provisional: 98/100. Discovery integration committed to sitemap + valuation hub. Next: deployment -> live canonical/content/hub/sitemap regression -> FINAL GO/FROZEN if green.
