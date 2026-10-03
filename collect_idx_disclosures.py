@@ -91,7 +91,7 @@ def fetch():
 
 def save_health(ok,**kw):
  HEALTH.parent.mkdir(parents=True,exist_ok=True)
- json.dump({'checkedAt':datetime.now(timezone.utc).isoformat(),'ok':ok,'source':API_URL,'historyDays':HISTORY_DAYS,**kw},open(HEALTH,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
+ json.dump({'contractVersion':'IDX_COLLECTOR_STATUS_V1','checkedAt':datetime.now(timezone.utc).isoformat(),'ok':ok,'source':API_URL,'historyDays':HISTORY_DAYS,**kw},open(HEALTH,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
 
 def main():
  old=[]
@@ -99,7 +99,7 @@ def main():
  except:pass
  try:new,transport=fetch()
  except Exception as e:
-  save_health(False,error=str(e),cachedRecords=len(old));print('IDX_COLLECT_ERROR',repr(e),'cache',len(old));return
+  save_health(False,state='SOURCE_BLOCKED' if 'HTTP 403' in str(e) else 'SOURCE_ERROR',error=str(e),cachedRecords=len(old));print('IDX_COLLECT_ERROR',repr(e),'cache',len(old));return
  by={r.get('id') or hashlib.sha256(json.dumps(r,sort_keys=True).encode()).hexdigest()[:20]:r for r in old if isinstance(r,dict)}
  for r in new:by[r['id']]=r
  cutoff=datetime.now(timezone.utc)-timedelta(days=HISTORY_DAYS);kept=[]
@@ -109,6 +109,6 @@ def main():
   except:pass
  OUT.parent.mkdir(parents=True,exist_ok=True)
  json.dump(kept,open(OUT,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False)
- save_health(True,transport=transport,newRecords=len(new),cachedRecords=len(kept),tickers=len({r['ticker'] for r in kept}))
+ save_health(True,state='HEALTHY',transport=transport,newRecords=len(new),cachedRecords=len(kept),tickers=len({r['ticker'] for r in kept}))
  print('IDX_COLLECTED',len(new),'records; cache',len(kept),'tickers',len({r['ticker'] for r in kept}),'via',transport)
 if __name__=='__main__':main()
