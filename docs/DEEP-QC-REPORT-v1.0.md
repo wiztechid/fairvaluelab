@@ -60,3 +60,11 @@ Single-source VERIFIED promotion capability has been removed. The legacy resolve
 A sidecar IDX public Financial Report evidence adapter now accepts only already-obtained official records carrying explicit publishedAt, attachmentId, externalDocumentId, and financialQuarter. It performs no network access and never infers document identity from ticker, quarter, title, date, URL, or filename. Numeric-looking attachment filenames alone are rejected.
 
 Workflow run `37127651327` SUCCESS: `FILING_PROVENANCE_NO_SINGLE_SOURCE_PROMOTION_V2_PASS`, `DUAL_SOURCE_FILING_PROVENANCE_V1_PASS`, and `IDX_PUBLIC_FINANCIAL_REPORT_ADAPTER_V1_PASS`. Live legacy announcement transport remains `SOURCE_BLOCKED`; therefore real VERIFIED corpus remains zero and production admission remains disabled.
+
+
+## FILING IDENTITY FEASIBILITY — CLOSED FAIL-SAFE
+- Public Financial Report adapter preserves OFFICIAL_IDX_PUBLIC provenance; public evidence cannot masquerade as OFFICIAL_IDX_API.
+- Dual-source V1 adversarial contract passes, but its IDX_FINANCIAL_DATA_RATIO leg has no production adapter in this repository and no authentic shared externalDocumentId fixture.
+- Authentic AADI 2026Q1 remains IDENTITY_UNRESOLVED / VERIFIED admission prohibited.
+- Classification: CONTRACT PROVEN; EMPIRICAL BINDING UNPROVEN. No production VERIFIED claim is permitted until authoritative shared identity is demonstrated.
+- Repo-wide valuation artifact isolation gate is green; collector health/provenance sidecars are excluded structurally rather than by filename blacklist.
