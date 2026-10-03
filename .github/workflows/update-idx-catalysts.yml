@@ -53,6 +53,13 @@ jobs:
           print('IDX_DISCLOSURE_RECORDS',len(rows))
           verified_filings=[r for r in rows if isinstance(r,dict) and r.get('documentType')=='FINANCIAL_STATEMENT' and r.get('financialQuarter') and r.get('verification')=='OFFICIAL_IDX_API']
           print('IDX_NORMALIZED_FINANCIAL_FILINGS',len(verified_filings))
+          hp=Path('data/idx_collector_status.json')
+          health=json.loads(hp.read_text()) if hp.exists() else {}
+          allowed={'contractVersion','checkedAt','ok','source','historyDays','state','error','cachedRecords','transport','newRecords','tickers'}
+          extra=set(health)-allowed
+          if health.get('contractVersion')!='IDX_COLLECTOR_STATUS_V1' or extra:
+              raise SystemExit(f'collector health contract violation: extra={sorted(extra)}')
+          print('IDX_COLLECTOR_STATE',health.get('state'))
           if len(rows)==0:
               print('IDX source unavailable/blocked: preserving honest empty state; no fabricated catalyst/controller/broker data.')
           PY
