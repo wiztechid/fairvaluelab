@@ -40,3 +40,13 @@ The GitHub Actions collector currently receives HTTP 403 from the internal IDX a
 Collector health is schema-narrow and CI rejects unrelated valuation payload fields. Filing promotion requires official IDX verification plus explicit normalized `FINANCIAL_STATEMENT` document type and exact `financialQuarter`; publication date alone is never used to infer quarter. Existing historical PROVISIONAL backtest snapshots remain immutable and are not retroactively promoted.
 
 Workflow run `37114665627` SUCCESS with `IDX_DISCLOSURE_RECORDS 0`, `IDX_NORMALIZED_FINANCIAL_FILINGS 0`, and `IDX_COLLECTOR_STATE SOURCE_BLOCKED`. This proves fail-closed behavior, not transport availability.
+
+
+## Filing provenance adversarial closure — 2026-10-03
+Status: **FROZEN — PROMOTION CONTRACT; LIVE AUTHORITATIVE CORPUS STILL BLOCKED**.
+
+The filing resolver now has a dedicated adversarial gate. VERIFIED promotion requires exact ticker, explicit normalized financial quarter, FINANCIAL_STATEMENT document type, OFFICIAL_IDX_API verification, valid publishedAt, and a non-empty disclosure ID. Wrong ticker/quarter/source/verification, missing timestamp, wrong document type, missing ID, or missing disclosure all preserve PROVISIONAL state.
+
+Official IDX Financial Data and Ratio may support financial-period identity but is not treated as publication-time evidence. Availability time remains a separate requirement; no FS date or report period is converted into publishedAt.
+
+Workflow run `37115252527` SUCCESS and printed `FILING_PROVENANCE_ADVERSARIAL_V1_PASS`. The live announcement transport still returned HTTP 403 and correctly remained `SOURCE_BLOCKED` with zero normalized filings. Therefore the promotion contract is frozen, while real VERIFIED corpus admission remains closed.
