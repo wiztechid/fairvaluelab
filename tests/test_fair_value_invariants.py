@@ -29,5 +29,10 @@ assert "expected_commit=os.getenv('CEKVALUASI_ENGINE_SHA')" in v
 assert "not is_stale and engine_commit!=expected_commit" in v
 assert "old['lastAttemptCommit']=os.getenv('CEKVALUASI_ENGINE_SHA') or None" in g
 assert "stale carry-forward missing current attempt provenance" in v
+fc=(ROOT/'family_consensus.py').read_text(encoding='utf-8')
+iv=(ROOT/'indicative_fv.py').read_text(encoding='utf-8')
+assert 'stale=d.get("freshnessStatus")=="STALE"' in fc
+assert 'if stale:d["analysisStatus"]="STALE"' in fc
+assert "if d.get('freshnessStatus')=='STALE': return d" in iv
 
 print('PASS fair-value scenario invariants')
