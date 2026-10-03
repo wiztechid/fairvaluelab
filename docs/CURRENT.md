@@ -1129,3 +1129,13 @@ Corrected provenance model:
 Commits: 06e932911f40fe133c82e987bc1287205297084a (stale lastAttemptCommit), 4db33b11c24905596c83bc8def5066932a426fbc (fresh/stale validation semantics), 8ea502f7dc1fbc7a29b70aba306fc4393a5e15f7 (regression lock).
 This preserves existing fail-soft STALE behavior while making provenance explicit and fail-closed against ambiguous artifacts. No valuation formula, threshold, weight, family, sector policy, or Scanner logic changed.
 Latest closure candidate is Update Fair Value Data run 37115675547 from 8ea502f7. It must pass compile + invariant/provenance tests + full generation + both validators + final publication commit before re-freeze.
+
+
+## P0 FCF Yield — STALE State Preservation Through Downstream Consensus — 2026-10-03
+Status: FIXED / LATEST FULL RUN PENDING.
+Adversarial provenance audit found a downstream state-transition edge case. generate_data.py correctly marks retained failed-refresh artifacts STALE, postprocess_qc.py preserves STALE, and indicative_fv.py already returns early for freshnessStatus=STALE. However family_consensus.py could subsequently assign SIAP/REVIEW when >=2 family votes existed, effectively promoting a stale carry-forward back to a fresh-looking publication state before the final provenance validator.
+Correction:
+- family_consensus.py captures freshnessStatus=STALE at entry and restores analysisStatus=STALE before return (commit 178140996d97070ab0de43c72865041d26ab3a2e);
+- regression test now locks both family-consensus STALE restoration and indicative-fv STALE early-return (commit d194072ca4636aa6d29f88f8fdfd833363adcad9).
+This changes only freshness/publication-state preservation. It does not change valuation values, model eligibility, weights, thresholds, family consensus calculations, sector policy, or private Scanner logic.
+Latest closure candidate is Update Fair Value Data run 37116977978 from d194072c. Required final proof remains compile -> invariant/provenance regression gate -> generation -> full pipeline -> first validator -> downstream builders -> final validator -> publication commit.
