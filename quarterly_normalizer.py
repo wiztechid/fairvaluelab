@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import yfinance as yf
+from valuation_document import is_valuation_document
 
 DATA=Path('data')
 METRICS={
@@ -66,13 +67,6 @@ def weighted_growth(obs):
     weights=np.arange(1,len(clean)+1,dtype=float);weights/=weights.sum()
     gs=np.array([np.clip(x['growth'],-.75,1.5) for x in clean],float)
     return float(np.sum(gs*weights)),keep,drop
-def is_valuation_document(d):
-    # Root data/ also contains collector health/caches and other sidecar artifacts.
-    # Only ticker valuation objects produced by the valuation engine may be normalized.
-    if not isinstance(d,dict):return False
-    ticker=d.get('ticker')
-    if not isinstance(ticker,str) or not ticker.strip():return False
-    return isinstance(d.get('raw'),dict) and (isinstance(d.get('methods'),list) or isinstance(d.get('fairValue'),dict))
 def process(path):
     d=json.load(open(path,encoding='utf-8'))
     if not is_valuation_document(d):return None
