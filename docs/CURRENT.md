@@ -1091,3 +1091,17 @@ Correction commit a3142ce5bc86aeae5c8c831c0a77bbacada89b4d:
 - publication commit now follows the final validator with no intervening data mutation step.
 This closes the workflow TOCTOU gap without changing any valuation formula, output policy, threshold, family, sector profile, or private Scanner logic.
 Latest Update Fair Value Data run 37114372595 queued from a3142ce. Re-freeze requires this exact workflow revision to pass: invariant pre-gate -> full valuation pipeline -> first validator -> downstream builders -> final validator -> publication commit.
+
+
+## P0 FCF Yield — Syntax + Provenance Hardening — 2026-10-03
+Status: FIXED / LATEST PROVENANCE-BOUND FULL RUN PENDING.
+Failure for historical run 37113252120 (4b49b046) was diagnosed from Actions logs: validate_engine.py line 37 contained an accidentally escaped f-string token (f\\\"...), causing SyntaxError before any validation result. It was not a valuation-data failure; the later 310cb023 patch replaced that block with valid Python.
+Permanent prevention:
+- commit 113157b39ea54002619c994d1dc5fa6083969e6a adds an early py_compile gate for all critical Fair Value pipeline scripts before expensive generation.
+Provenance audit then found generated ticker artifacts were version-labeled but not bound to the exact source commit. Because publication safely resets to latest origin/main before restoring generated data, a concurrent main movement could otherwise make artifact->engine revision provenance ambiguous.
+Minimal provenance hardening:
+- generate_data.py now writes engineCommit from CEKVALUASI_ENGINE_SHA (commit 22ff33be620f05a6198af59afac7957dc72c3947);
+- validate_engine.py requires engineCommit and, when CEKVALUASI_ENGINE_SHA is provided, requires exact equality (commit 1a7623f16748b2941bbe5752fc65ac21bccda330);
+- workflow passes GITHUB_SHA as CEKVALUASI_ENGINE_SHA to generation and both validation gates (commit d2cfe0e57ef5798ada34ff163e3705c8dc7c416c).
+This is provenance/CI hardening only; no valuation formula, thresholds, weights, family/sector policy, or private Scanner logic changed.
+Latest exact run 37114859330 queued from d2cfe0e. Re-freeze now requires compile gate -> invariant gate -> generation with engineCommit -> full pipeline -> first provenance-aware validator -> downstream builders -> final provenance-aware validator -> publication commit.
