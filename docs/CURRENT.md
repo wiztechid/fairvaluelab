@@ -1117,3 +1117,15 @@ Regression hardening:
 - tests/test_fair_value_invariants.py now also statically locks the engineCommit generator+validator provenance contract (commit 3afea6c5ee9b434ad044050bfe105d53a9b59c32).
 - follow-up run 37115243901 is queued to prove the regression-lock revision itself.
 Final re-freeze remains gated on a provenance-bound run passing both validators including the final pre-publication validator and committing refreshed data; then the regression-lock run must not reveal a new failure.
+
+
+## P0 FCF Yield — Fresh vs Stale Provenance Semantics — 2026-10-03
+Status: FIXED / LATEST FULL RUN PENDING.
+Deep audit of generate_data.py confirmed an intentional resilience contract: when a ticker refresh fails, the prior ticker JSON is retained and explicitly marked freshnessStatus=STALE / analysisStatus=STALE. The first exact-SHA provenance validator would have rejected every such legitimate stale carry-forward because its engineCommit necessarily belongs to the older successful valuation run. That would turn a transient upstream provider failure into a full-publication outage.
+Corrected provenance model:
+- fresh regenerated ticker: engineCommit must equal the current workflow source SHA;
+- stale carry-forward: engineCommit remains the SHA that actually generated the retained valuation, while lastAttemptCommit records the current workflow SHA that attempted and failed to refresh it;
+- provenance-aware validator requires current lastAttemptCommit for stale artifacts and exact current engineCommit for fresh artifacts.
+Commits: 06e932911f40fe133c82e987bc1287205297084a (stale lastAttemptCommit), 4db33b11c24905596c83bc8def5066932a426fbc (fresh/stale validation semantics), 8ea502f7dc1fbc7a29b70aba306fc4393a5e15f7 (regression lock).
+This preserves existing fail-soft STALE behavior while making provenance explicit and fail-closed against ambiguous artifacts. No valuation formula, threshold, weight, family, sector policy, or Scanner logic changed.
+Latest closure candidate is Update Fair Value Data run 37115675547 from 8ea502f7. It must pass compile + invariant/provenance tests + full generation + both validators + final publication commit before re-freeze.
