@@ -1147,3 +1147,14 @@ Publication-integrity audit confirmed family_consensus.py rebuilds summary.json 
 Correction commit 7f29b9a647c41ab865d3ce6fa45d03c1734ca31c adds per-ticker summary projection validation for status, Base FV, valuationConfidence, validMethods, and independentFamilies. Commit 05610324b4fa40209e7d3171902886d2cf7a4aab locks the parity gate in the invariant regression test.
 This is publication-integrity validation only; no valuation calculation, scenario, threshold, weight, family/sector policy, freshness policy, or private Scanner logic changed.
 Latest closure candidate: Update Fair Value Data run 37117343216 at 05610324. Final re-freeze requires this revision to pass the complete atomic publication chain and commit refreshed data.
+
+
+## P0 FCF Yield — FINAL RE-FREEZE — 2026-10-03
+Status: CLOSED / FINAL RE-FROZEN.
+Closure evidence is complete on exact Update Fair Value Data run 37117343216 at source revision 05610324b4fa40209e7d3171902886d2cf7a4aab.
+Runtime gates all PASS: critical-script py_compile, Fair Value scenario/provenance regression invariants, core generation, all valuation/model/QC stages, publication-state-aware full DES validator, all downstream data builders, final pre-publication validator, and refreshed-data publication commit.
+Both validator passes reported the same atomic universe: requested 618, valuations 612, explicitErrors 6, represented 618, validation errors 0, qcVersion 3.20-family-consensus-qc. Explicit current-run GAGAL_FETCH records were BBMI, SPOT, IIKP, SCPI, META, and GRHA; they were represented as explicit errors rather than silently published as fresh valuations. Status counts for published valuation artifacts: SIAP 229, REVIEW 100, INDIKATIF 126, REFERENSI 45, BELUM_DINILAI 112, STALE 0.
+Post-publication main audit confirmed refreshed artifacts are bound to engineCommit 05610324b4fa40209e7d3171902886d2cf7a4aab. Representative AALI, ABMM, ACES, and ADCP artifacts preserve FCF Yield Bear<=Base<=Bull and composite Bear<=Base<=Bull, and their summary projections match ticker JSON for status, Base FV, valuationConfidence, validMethods, and independentFamilies.
+Publication data commit observed on main: 2970df87b159e72e95edb3ac162f7b002263db44 (data: refresh FV timelines and backtest progress).
+FCF Yield formula correction remains: Bear = FCF/share / max(16%, Required Yield), Base = FCF/share / Required Yield, Bull = FCF/share / max(8%, Required Yield - 2pp). Formula semantics, article parity, scenario invariants, all-publication-state ordering, syntax preflight, atomic pre-publication validation, artifact provenance, stale carry-forward provenance, stale state preservation, and ticker/summary parity are now permanent gates.
+Formula/SEO Cluster #1-#8 is FINAL RE-FROZEN. Do not reopen or add hardening without a concrete regression, new evidence, or separately approved policy change. Next work should move beyond this closed P0 boundary.
