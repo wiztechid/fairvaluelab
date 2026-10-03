@@ -958,3 +958,37 @@ Findings:
 - However, current profile table is engine policy, not a universal finance truth. Before publishing a sector-method owner, require an exact production parity map plus an editorial boundary separating engine relevance multipliers from external/general valuation principles. Do not present multipliers as universal recommendations.
 Decision: HOLD candidate #10 pending sector-profile truth/moat audit. No other Wave 2 URL authorized.
 Next: audit all profile() sector mappings + method coverage including models not adjusted by profile weights; test whether one durable 'metode valuasi sesuai sektor' owner can provide enough unique utility without exposing private Scanner logic or cannibalizing formula owners. If PASS -> authorize #10; if weak -> stop expansion and shift to Search Console demand/data.
+
+
+## Sector-Profile Truth/Moat Audit — candidate #10 — 2026-10-03
+Status: PASS / AUTHORIZE #10 DRAFT.
+Exact production boundary:
+- profile() sector multipliers affect only four core methods through rel(): DCF, FCF Yield, Historical P/E (3Y/5Y), Historical PBV 5Y.
+- Augmentation methods Historical EV/EBITDA, Graham Number, Historical Dividend Yield use their own fixed relevance values and do NOT consume profile() multipliers.
+- Historical EV/EBITDA is explicitly skipped for sector/profile containing Keuangan.
+Production core multiplier map:
+- Infrastruktur · Konstruksi: DCF 1.05; FCF Yield .85; P/E 1.15; PBV .45.
+- Infrastruktur: 1.20; 1.00; .85; .60.
+- Properti & Real Estat: .70; .55; .75; 1.35.
+- Energi: .65; 1.10; .80; .55.
+- Barang Baku: .70; 1.05; .85; .65.
+- Perindustrian: 1.00; 1.00; 1.00; .65.
+- Barang Konsumen Primer: 1.00; 1.00; 1.20; .50.
+- Barang Konsumen Non-Primer: 1.00; 1.00; 1.20; .50.
+- Kesehatan: 1.00; .90; 1.15; .45.
+- Teknologi: 1.15; .85; 1.00; .25.
+- Transportasi & Logistik: 1.10; 1.05; .90; .65.
+- Keuangan / bank / financial / insurance: .15; .10; .85; 1.55; production note says PBV/ROE primary and conventional FCF less representative.
+- Default/other: .90; .90; 1.00; .65.
+Truth boundary:
+- These multipliers are CekValuasi engine policy/relevance adjustments, not universal finance truths, recommendations, or claims that a method is inherently correct/incorrect for every issuer in a sector.
+- External valuation literature may support general applicability concepts (e.g. model suitability differs by valuation problem; financial firms have unusual debt/reinvestment/cash-flow characteristics; P/B is linked to ROE and required return), but must not be used to reverse-justify the exact numeric multipliers.
+- Sector relevance changes raw model weight only; method still must pass its own eligibility, economic sanity, cross-model QC and independent-family composite gate.
+Moat sentence: 'This page deserves its own URL because it uniquely explains how CekValuasi changes the relevance—not the formula—of four core valuation methods by sector, which methods are not sector-multiplied, and why a sector preference never bypasses data eligibility or QC.'
+Cannibalization boundary:
+- Formula owners own calculations.
+- #1 owns composite aggregation.
+- #9 owns output/evidence interpretation.
+- #10 owns sector relevance policy and method-applicability interpretation only.
+Candidate canonical: /riset/valuasi-saham/metode-valuasi-sesuai-sektor/
+AQS pre-draft estimate: 96/100. AUTHORIZE exact-parity draft + adversarial QC. No sector-specific child URLs authorized.
