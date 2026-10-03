@@ -19,9 +19,10 @@ def main():
   seen.add(ticker);versions.add(d.get('qcVersion'));s=d.get('analysisStatus','BELUM_DINILAI');status[s if s in status else 'BELUM_DINILAI']+=1
   if d.get('qcVersion')!=EXPECTED_QC:fail(f"{ticker}: stale QC version {d.get('qcVersion')}",errors)
   if not d.get('engineGeneration'):fail(f'{ticker}: missing upstream engine generation',errors)
-  engine_commit=d.get('engineCommit');expected_commit=os.getenv('CEKVALUASI_ENGINE_SHA')
+  engine_commit=d.get('engineCommit');expected_commit=os.getenv('CEKVALUASI_ENGINE_SHA');is_stale=d.get('freshnessStatus')=='STALE' or d.get('analysisStatus')=='STALE'
   if not engine_commit:fail(f'{ticker}: missing engine commit provenance',errors)
-  elif expected_commit and engine_commit!=expected_commit:fail(f'{ticker}: engine commit provenance mismatch {engine_commit} != {expected_commit}',errors)
+  elif expected_commit and not is_stale and engine_commit!=expected_commit:fail(f'{ticker}: fresh engine commit provenance mismatch {engine_commit} != {expected_commit}',errors)
+  if expected_commit and is_stale and d.get('lastAttemptCommit')!=expected_commit:fail(f'{ticker}: stale carry-forward missing current attempt provenance',errors)
   q=d.get('quality') or {};score=q.get('dataScore');label=q.get('dataLabel');expected='BAIK' if n(score) and score>=80 else ('CUKUP' if n(score) and score>=60 else 'TERBATAS')
   if n(score) and label!=expected:fail(f'{ticker}: dataScore/dataLabel mismatch {score}/{label}',errors)
   conf=q.get('valuationConfidence')
