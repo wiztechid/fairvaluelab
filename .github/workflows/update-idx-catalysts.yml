@@ -116,5 +116,8 @@ jobs:
           git add -f data/market_actors/
           if git diff --cached --quiet; then echo "No IDX catalyst/actor data changes to commit."; exit 0; fi
           git commit -m "data: refresh verified IDX catalysts and market actors"
+          # Generated-but-unpublished working-tree files must not block rebasing the verified staged payload.
+          git status --porcelain
+          git stash push --include-untracked --keep-index -m "ci-generated-unpublished" || true
           git pull --rebase origin main
           git push origin HEAD:main
