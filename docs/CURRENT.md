@@ -713,3 +713,31 @@ Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
 - Corpus integration: added to sitemap and /valuasi-saham.html; methodology hub links Graham Number; Fair Value methodDoc now maps exact 'Graham Number' to the canonical owner.
 - AQS provisional: 95/100 (intent 15/15; truth/formula 20/20; moat 15/15; utility 14/15; trust 10/10; corpus 10/10; technical 9/10 pending live; live readiness 2/5 pending deployment).
 - Next gate: Pages deployment -> live route/canonical/schema/link check -> no regression on #1-#4/tool -> FINAL GO/FROZEN if green.
+
+
+## SEO Article #5 FINAL — Graham Number — 2026-10-03
+Status: FINAL GO / FROZEN under Private Moat v3.
+- Live canonical owner resolves successfully with self-canonical, index/follow, OG metadata and published Article content.
+- Live /valuasi-saham.html contains static inbound link to Graham owner.
+- Live sitemap now contains 16 URLs including Graham owner.
+- Fair Value route remains live after methodDoc integration; exact Graham method maps to the canonical owner in source.
+- AQS final: 98/100 after live readiness closure. 10-layer Deep QC PASS.
+- Freeze boundary: factual production parity / broken route/schema / material intent drift only.
+
+## SEO Article #6 opportunity gate — Historical EV/EBITDA — 2026-10-03
+Status: AUTHORIZED TO DRAFT under Private Moat v3.
+Canonical owner: /riset/valuasi-saham/ev-ebitda-harga-wajar-saham/
+Intent owner: explain how CekValuasi reconstructs equity fair value from its own historical EV/EBITDA distribution, not generic peer-comparable valuation.
+Moat sentence: CekValuasi documents the production 5Y historical multiple construction, FX-normalized debt/cash/EBITDA, robust median/MAD band, enterprise-to-equity reversal, finance-sector exclusion and composite gates.
+Production parity:
+- Method skipped when company sector contains 'Keuangan'.
+- Net debt = Total Debt - selected cash/cash-equivalent balance; debt/cash multiplied by canonical fxFactor.
+- Annual EBITDA source preference: EBITDA then Normalized EBITDA; current EBITDA same preference; values multiplied by fxFactor.
+- Current EBITDA must be >0.
+- Pull 5Y unadjusted close history. For each annual EBITDA year, use same-year closes sampled with stride max(1, len(year_prices)//24).
+- Historical multiple = (price*shares + net debt) / annual EBITDA; retain only 0.5x..30x.
+- bands() requires >=3 valid observations; Base=median; sigma=1.4826*MAD, with near-zero fallback max(10%*median,0.1); Bear=max(0.5,median-sigma); Bull=min(30,median+sigma).
+- Equity FV/share = (target multiple*current EBITDA - net debt)/shares.
+- Candidate confidence=.82, relevance=1, family=enterprise; then 0.05x..5x market-price sanity and composite log-MAD outlier gate apply.
+SERP boundary: generic EV/EBITDA education may explain EV/EBITDA=EV/EBITDA and EV≈market cap+debt-cash; owner must focus on CekValuasi historical reverse-valuation implementation and limitations. External references confirm EV/EBITDA compares enterprise value with EBITDA and that EBITDA is not cash flow and ignores capex; do not convert generic rules-of-thumb into production thresholds.
+Next gate: draft -> source AQS/10-layer QC -> corpus/tool integration -> live QC -> GO/FROZEN.
