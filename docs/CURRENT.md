@@ -900,3 +900,17 @@ Audit result:
 - Known same-family boundary remains intentional: DCF + FCF Yield = cashflow; P/E 3Y + 5Y = earnings. These must not be described as independent-family evidence.
 - Formula cluster now CLOSED. Do not create more formula articles unless production gains a genuinely new method or a P0/P1 SERP/factual regression appears.
 Next SEO phase: Opportunity Intelligence outside the closed formula cluster. Run Deep SERP Opportunity Map before authorizing any new indexable URL; prioritize distinct user jobs adjacent to Fair Value rather than keyword variants of existing formula owners.
+
+
+## Deep SERP Opportunity Intelligence — post-formula cluster — 2026-10-03
+Status: WAVE 1 COMPLETE.
+Queries/jobs audited: generic fair value + margin of safety interpretation; why FV/methods may be unavailable; bank valuation/PBV-ROE; valuation evidence/quality.
+Decision:
+1. P1 AUTHORIZE — 'Cara Membaca Hasil Fair Value & Kualitas Evidence CekValuasi'. Distinct job = interpret output reliability, not calculate formulas. Moat: CekValuasi can uniquely explain SIAP/TERBATAS, Bear/Base/Bull, agreement/dispersion, valid method count, independent families, data score, guards, and why an apparent MoS must not outrank weak evidence. Existing Indonesian SERP is dominated by single-FV/MoS formulas and generic cheap/expensive interpretation; this owner adds product-native evidence-quality interpretation.
+2. HOLD — standalone generic Margin of Safety article. Generic formula is saturated and would be false moat unless attached to CekValuasi evidence-quality semantics. Fold MoS interpretation into candidate #1 instead.
+3. HOLD — 'why fair value cannot be calculated' standalone URL. This is a sub-intent of candidate #1 (TERBATAS/guards/missing independent families); separate URL would risk fragmentation unless Search Console later proves distinct demand.
+4. HOLD — bank valuation. Production has a genuine Keuangan profile (DCF .15, FCF Yield .10, Historical P/E .85, Historical PBV 1.55; PBV/ROE emphasized), but current unique value is not yet deep enough for a standalone sector owner beyond existing PBV/ROE material. Require richer bank-specific evidence or Search Console demand before NEW.
+Canonical candidate #9: /riset/valuasi-saham/cara-membaca-hasil-fair-value/
+Moat sentence: 'This page deserves its own URL because it uniquely helps the user decide how much trust to place in a CekValuasi Fair Value result by interpreting scenario range, model agreement, independent evidence families, data quality, and guards—not merely whether price is above or below one fair-value number.'
+Cannibalization boundary: #1 Composite owns calculation/aggregation mechanics; #9 owns output interpretation and evidence reliability. Formula owners retain method calculations. No generic buy/sell thresholds or universal MoS recommendation.
+Next gate: exact UI/engine parity audit -> draft #9 -> AQS + adversarial QC -> corpus integration -> live QC. No other new URL authorized in Wave 1.
