@@ -788,3 +788,37 @@ Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
 - Source QC: one H1/canonical, Article+Breadcrumb schema, disclaimer, methodology link, Fair Value CTA. AQS provisional 96/100; live readiness withheld.
 - Corpus integration completed in separate deterministic commits after initial batch-write safety rejection: sitemap, /valuasi-saham.html, and exact Fair Value methodDoc link.
 - Next: deployment -> live route/canonical/corpus/sitemap/tool regression QC -> FINAL GO/FROZEN. After #7 closes, remaining published formula owner gap is FCF Yield before formula cluster completion review.
+
+
+## Deep SERP Retrofit — Articles #1-#4 — 2026-10-03
+Status: SOURCE AUDIT PASS; #2/#4 P1 patches deployed to source; live QC pending.
+Scope executed: query landscape -> dominant intent -> SERP composition -> competitor gap -> information gain -> cannibalization -> title/H1/snippet -> P0/P1-only patch -> Sacred Diff -> live QC.
+
+### #1 Composite Methodology
+- Dominant Indonesian SERP: generic 'cara menghitung harga wajar saham' explainers combining PER/PBV/DCF/Graham/DDM and often industry multiples.
+- CekValuasi information gain remains material: input eligibility, model QC, economic sanity/outlier control, independent valuation families, normalized raw weights, Bear/Base/Bull aggregation, agreement/dispersion, indicative-vs-full evidence state.
+- Cannibalization: KEEP as parent methodology owner; child method pages own exact formulas.
+- Title/H1/snippet: KEEP. No P0/P1 mismatch. No content patch.
+
+### #2 Historical P/E
+- SERP mostly explains P/E formula and industry/peer target multiples; authoritative valuation literature permits own-company historical multiple as a benchmark alongside peers/industry/index.
+- Gap found P1: historical-median/regime trap. A stock below its own historical median is not automatically cheap if growth, competitive position, margins, risk or capital efficiency changed.
+- Patch added only interpretation guard explaining own-history benchmark and regime-change limitation. Formula, adaptive EPS validation, observation thresholds, trimming, MAD, 8% dispersion floor, high-multiple behavior, weights/family and economic sanity untouched.
+- Canonical owner/title/H1 KEEP.
+
+### #3 DCF
+- SERP highly competitive on PV, terminal value, FCFF/FCFE, WACC/cost-of-equity and sensitivity.
+- No P0/P1 gap: current owner already explicitly distinguishes production FCF/share + cost of equity from generic FCFF/WACC, documents 5Y projection, terminal-growth guard, Bear/Base/Bull, terminal-value-share diagnostic and relevance reduction.
+- Avoided generic rewrite because it would dilute production parity. Title/H1 KEEP.
+
+### #4 Historical PBV
+- SERP commonly treats PBV as simple BVPS multiple and often says sub-1x may be cheap; authoritative material ties justified P/B strongly to ROE relative to required return/cost of equity.
+- Gap found P1: profitability-regime interpretation. Patch adds PBV<median/<1x is not automatically cheap and historical median can become stale if ROE/risk/payout/growth/asset quality changes.
+- Formula, 4.5Y coverage, 0.2x-12x guard, observation counts, P5/P95 trim, MAD band, sector relevance multipliers and economic sanity untouched.
+- Canonical owner/title/H1 KEEP.
+
+### Sacred Diff
+- #1/#3: zero substantive changes.
+- #2/#4: additive interpretation-only sections; no production formula/threshold/weight/family/canonical/tool contract changed.
+- Structural source QC after patches: one H1, one canonical, Article+Breadcrumb schema, methodology/tool links and core guards PASS.
+- Next gate: Pages deployment -> live #1-#4 route/canonical/content checks -> hub/sitemap/tool regression -> retrofit FINAL GO/FROZEN.
