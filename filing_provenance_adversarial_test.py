@@ -6,7 +6,8 @@ def filing(**kw):
  x.update(kw);return x
 def unchanged(d):
  assert d['pointInTimeQuality']=='PROVISIONAL' and d['lockTimeSource']=='engineAsOfFallback'
-v=resolve(base(),filing());assert v['pointInTimeQuality']=='VERIFIED';assert v['lockTimeSource']=='reportPublishedAt';assert v['filingProvenance']['disclosureId']=='idx-1'
-for bad in [filing(ticker='ADRO'),filing(financialQuarter='2026Q1'),filing(source='OTHER'),filing(verification='UNVERIFIED'),filing(publishedAt=None),filing(documentType='OTHER'),filing(id='')]:unchanged(resolve(base(),bad))
-unchanged(resolve(base(),None))
+unchanged(resolve(base(),filing()))
+v=resolve(base(),filing(),allow_legacy_promotion=True);assert v['pointInTimeQuality']=='VERIFIED';assert v['lockTimeSource']=='reportPublishedAt';assert v['filingProvenance']['disclosureId']=='idx-1'
+for bad in [filing(ticker='ADRO'),filing(financialQuarter='2026Q1'),filing(source='OTHER'),filing(verification='UNVERIFIED'),filing(publishedAt=None),filing(documentType='OTHER'),filing(id='')]:unchanged(resolve(base(),bad,allow_legacy_promotion=True))
+unchanged(resolve(base(),None,allow_legacy_promotion=True))
 print('FILING_PROVENANCE_ADVERSARIAL_V1_PASS')
