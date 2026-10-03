@@ -1,13 +1,11 @@
 """Fail-closed boundary for already-obtained authorized IDX Data Reference records.
-This module performs no network access and assumes no undocumented field names.
-A caller must explicitly map an authorized feed/spec into this minimal contract.
+No network access. No undocumented IDX field names are assumed.
+The caller must map a real authorized feed/spec into this contract and preserve that mapping provenance.
 """
 from datetime import datetime
-
 def _dt(v):
     try:return datetime.fromisoformat(str(v).replace('Z','+00:00'))
     except:return None
-
 def normalize(record):
     if not isinstance(record,dict):return None
     if record.get('source')!='IDX_DATA_REFERENCE_ENTERPRISE':return None
@@ -17,8 +15,10 @@ def normalize(record):
     quarter=str(record.get('financialQuarter') or '').strip().upper()
     native_id=str(record.get('sourceNativeDocumentId') or '').strip()
     published=_dt(record.get('publishedAt'))
-    if not ticker or not quarter or not native_id or not published:return None
-    # Never derive identity from ticker/quarter/date/title/filename/url.
+    spec_reference=str(record.get('specReference') or '').strip()
+    native_id_field=str(record.get('feedRecordIdField') or '').strip()
+    if not ticker or not quarter or not native_id or not published or not spec_reference or not native_id_field:return None
     return {'ticker':ticker,'financialQuarter':quarter,'source':'IDX_DATA_REFERENCE_ENTERPRISE',
             'verification':'AUTHORIZED_IDX_SUBSCRIBER_FEED','documentType':'FINANCIAL_STATEMENT',
-            'sourceNativeDocumentId':native_id,'publishedAt':published.isoformat()}
+            'sourceNativeDocumentId':native_id,'publishedAt':published.isoformat(),
+            'mappingProvenance':{'specReference':spec_reference,'feedRecordIdField':native_id_field}}
