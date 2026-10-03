@@ -51,7 +51,9 @@ def recover_eps(info,price,raw,inc):
     else:eps,source=None,None
     return eps,source,candidates
 def process(path):
-    d=json.load(open(path,encoding='utf-8'));price=n(d.get('price'));raw=d.setdefault('raw',{});shares=n(raw.get('shares'))
+    d=json.load(open(path,encoding='utf-8'))
+    if not is_valuation_document(d):return None
+    price=n(d.get('price'));raw=d.setdefault('raw',{});shares=n(raw.get('shares'))
     if not price or not shares:return d
     ticker=d.get('ticker') or path.stem+'.JK';t=yf.Ticker(ticker)
     try:info=t.info or {};h=t.history(period='5y',auto_adjust=False);inc=t.income_stmt
