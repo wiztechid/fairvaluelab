@@ -20,4 +20,12 @@ for req in (.09,.12,.16,.17,.18):
 # entering them must obey Bear <= Base <= Bull.
 assert "comp=lambda k:sum(m[k]*m['normalizedWeight'] for m in use)" in g
 assert "comp=lambda k:sum(m[k]*m['normalizedWeight'] for m in use)" in a
+
+# Artifact provenance must bind generated ticker data to the exact workflow source SHA.
+v=(ROOT/'validate_engine.py').read_text(encoding='utf-8')
+assert "'engineCommit':os.getenv('CEKVALUASI_ENGINE_SHA') or None" in g
+assert "engine_commit=d.get('engineCommit')" in v
+assert "expected_commit=os.getenv('CEKVALUASI_ENGINE_SHA')" in v
+assert "engine_commit!=expected_commit" in v
+
 print('PASS fair-value scenario invariants')
