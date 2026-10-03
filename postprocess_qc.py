@@ -2,6 +2,7 @@
 import json, glob, math, os
 import numpy as np
 from des_universe import TICKERS, SECTOR_BY_TICKER, DES_SOURCE
+from valuation_document import is_valuation_document
 OUT='data';QC_VERSION='3.19-sector-waterfall-qc'
 def finite(x):return isinstance(x,(int,float)) and math.isfinite(x)
 def family(m):
@@ -42,8 +43,8 @@ def capped_weights(keep,cap=.60):
 def process(path):
     try:d=json.load(open(path,encoding='utf-8'))
     except:return None
-    # data/ also contains collector caches (e.g. news_raw.json) that are not ticker objects.
-    if not isinstance(d,dict) or not d.get('ticker'):return None
+    # Root data/ also contains provenance/collector sidecars. Only canonical valuation artifacts may be mutated.
+    if not is_valuation_document(d):return None
     upstream=d.get('engineGeneration') or d.get('engineVersion') or 'unknown';price=d.get('price');methods=d.get('methods') or [];q=d.setdefault('quality',{});guards=q.setdefault('guards',[]);keep=robust_keep(methods,price)
     independent=[m for m in keep if m.get('countsForIndependence',True)];ifam={family(m) for m in independent};suf=len(keep)>=2 and len(ifam)>=2
     if suf:
