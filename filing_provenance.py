@@ -4,6 +4,8 @@ def _dt(v):
     except:return None
 def resolve(snapshot, disclosure, allow_legacy_promotion=False):
     out=dict(snapshot)
+    # Production default is fail-closed. Legacy single-source promotion requires explicit compatibility opt-in.
+    if not allow_legacy_promotion:return out
     if not isinstance(disclosure,dict):return out
     ticker=str(out.get('ticker','')).replace('.JK','').upper()
     if str(disclosure.get('ticker','')).replace('.JK','').upper()!=ticker:return out
