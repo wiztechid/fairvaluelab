@@ -30,3 +30,13 @@ Production files changed: none.
 ## Merge verdict
 PASS for documentation/governance adoption only, using the clean candidate branch.
 This is NOT a PASS to activate CekValuasi rebrand, canonical-engine migration, provenance enforcement, SEO migration, AdSense, or model changes. Those remain separate gated implementations.
+
+
+## IDX authoritative filing transport boundary — 2026-10-03
+Status: **FROZEN — FAILURE SEMANTICS ONLY; AUTHORITATIVE TRANSPORT NOT RECOVERED**.
+
+The GitHub Actions collector currently receives HTTP 403 from the internal IDX announcement endpoint. This state is recorded explicitly as `IDX_COLLECTOR_STATUS_V1 / SOURCE_BLOCKED`; it is not treated as a healthy empty corpus. Existing validated cache is preserved on collection failure, and no Yahoo/valuation data may be promoted as official filing provenance.
+
+Collector health is schema-narrow and CI rejects unrelated valuation payload fields. Filing promotion requires official IDX verification plus explicit normalized `FINANCIAL_STATEMENT` document type and exact `financialQuarter`; publication date alone is never used to infer quarter. Existing historical PROVISIONAL backtest snapshots remain immutable and are not retroactively promoted.
+
+Workflow run `37114665627` SUCCESS with `IDX_DISCLOSURE_RECORDS 0`, `IDX_NORMALIZED_FINANCIAL_FILINGS 0`, and `IDX_COLLECTOR_STATE SOURCE_BLOCKED`. This proves fail-closed behavior, not transport availability.
