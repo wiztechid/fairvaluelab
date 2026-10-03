@@ -21,7 +21,9 @@ def sector_weights(sector,industry):
     if 'konsumen' in s:return {'forward_pe':1.25,'justified_pbv':.55,'graham':.2,'ev':.9,'dividend':.85,'dcf':1.0}
     return {'forward_pe':1.05,'justified_pbv':.7,'graham':.2,'ev':1.0,'dividend':.65,'dcf':1.0}
 def process(path):
-    d=json.load(open(path,encoding='utf-8'));raw=d.get('raw') or {};p=n(d.get('price'));eps=n(raw.get('epsTTM'));bvps=n(raw.get('bvps'));roe=n(raw.get('roe'));ke=n(raw.get('costOfEquity'));g0=n(raw.get('growthNormalized'));cp=d.get('companyProfile') or {};sector=cp.get('sector');industry=cp.get('industry');w=sector_weights(sector,industry)
+    d=json.load(open(path,encoding='utf-8'))
+    if not is_valuation_document(d):return None
+    raw=d.get('raw') or {};p=n(d.get('price'));eps=n(raw.get('epsTTM'));bvps=n(raw.get('bvps'));roe=n(raw.get('roe'));ke=n(raw.get('costOfEquity'));g0=n(raw.get('growthNormalized'));cp=d.get('companyProfile') or {};sector=cp.get('sector');industry=cp.get('industry');w=sector_weights(sector,industry)
     if not p:return d
     generated=('Forward Earnings Power','Mid-Cycle Earnings','Justified PBV / ROE');d['methods']=[m for m in (d.get('methods') or []) if m.get('name') not in generated]
     for m in d['methods']:
