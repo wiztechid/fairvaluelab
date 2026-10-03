@@ -1,4 +1,4 @@
-import json, math, sys
+import json, math, sys, os
 from pathlib import Path
 from des_universe import TICKERS
 DATA=Path('data');REGRESSION=['AADI','DSSA','BUMI','TPIA','BRMS'];EXPECTED_QC='3.20-family-consensus-qc'
@@ -19,6 +19,9 @@ def main():
   seen.add(ticker);versions.add(d.get('qcVersion'));s=d.get('analysisStatus','BELUM_DINILAI');status[s if s in status else 'BELUM_DINILAI']+=1
   if d.get('qcVersion')!=EXPECTED_QC:fail(f"{ticker}: stale QC version {d.get('qcVersion')}",errors)
   if not d.get('engineGeneration'):fail(f'{ticker}: missing upstream engine generation',errors)
+  engine_commit=d.get('engineCommit');expected_commit=os.getenv('CEKVALUASI_ENGINE_SHA')
+  if not engine_commit:fail(f'{ticker}: missing engine commit provenance',errors)
+  elif expected_commit and engine_commit!=expected_commit:fail(f'{ticker}: engine commit provenance mismatch {engine_commit} != {expected_commit}',errors)
   q=d.get('quality') or {};score=q.get('dataScore');label=q.get('dataLabel');expected='BAIK' if n(score) and score>=80 else ('CUKUP' if n(score) and score>=60 else 'TERBATAS')
   if n(score) and label!=expected:fail(f'{ticker}: dataScore/dataLabel mismatch {score}/{label}',errors)
   conf=q.get('valuationConfidence')
