@@ -34,5 +34,7 @@ iv=(ROOT/'indicative_fv.py').read_text(encoding='utf-8')
 assert 'stale=d.get("freshnessStatus")=="STALE"' in fc
 assert 'if stale:d["analysisStatus"]="STALE"' in fc
 assert "if d.get('freshnessStatus')=='STALE': return d" in iv
+assert "summary_rows={x.get('ticker'):x for x in sm.get('stocks',[]) if x.get('ticker')}" in v
+assert "summary projection mismatch" in v
 
 print('PASS fair-value scenario invariants')
