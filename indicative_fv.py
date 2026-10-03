@@ -1,3 +1,4 @@
+from valuation_document import is_valuation_document
 # Evidence ladder after QC: full FV > indicative FV > single-method reference > unvalued.
 # Market price is never a valuation target; it is only a QC/review guard.
 import json, math
@@ -38,8 +39,12 @@ rows={}
 for p in DATA.glob('*.json'):
     if p.name in ('summary.json','errors.json','idx_disclosures.json','idx_collector_status.json'):continue
     try:
+        _scope=json.load(open(p,encoding='utf-8'))
+        if not is_valuation_document(_scope):continue
+    except:continue
+    try:
         d=json.load(open(p,encoding='utf-8'))
-        if not isinstance(d,dict) or not d.get('ticker'):continue
+        if not is_valuation_document(d):continue
         d=process(d);json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False);rows[d['ticker'].replace('.JK','')]=d
     except Exception as e:print('EVIDENCE_ERR',p.name,e)
 try:
