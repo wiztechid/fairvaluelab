@@ -1,7 +1,7 @@
 {
   "ticker": "ASHA.JK",
   "name": "PT Cilacap Samudera Fishing Industry Tbk",
-  "asOf": "2026-10-02T09:41:22.274334+00:00",
+  "asOf": "2026-10-03T08:56:11.589621+00:00",
   "price": 42.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
@@ -13,15 +13,14 @@
   },
   "fairValue": {
     "bear": 2.9009754792627174,
-    "base": 3.53743951987149,
+    "base": 3.3490890998114695,
     "bull": 4.705043948324333,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "dispersion": 0.06399612706530293,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "DCF"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -38,12 +37,13 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 3.1326518400000003,
+      "bear": 3.111907089365517,
       "base": 3.111907089365517,
       "bull": 3.553103955153098,
       "confidence": 0.75,
@@ -54,8 +54,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -86,25 +86,28 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.350444900752909,
-    "validMethodCount": 1,
+    "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 4,
-    "outlierMethodCount": 1,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 2.9009754792627174,
-        "base": 3.53743951987149,
-        "bull": 4.705043948324333,
+        "bear": 3.0064412843141173,
+        "base": 3.3246733046185035,
+        "bull": 4.129073951738715,
         "weight": 0.25
       }
     ],
@@ -127,13 +130,14 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.005798999999999999,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -160,8 +164,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -230,9 +234,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

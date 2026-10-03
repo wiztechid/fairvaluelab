@@ -1,7 +1,7 @@
 {
   "ticker": "KOCI.JK",
   "name": "PT Kokoh Exa Nusantara Tbk",
-  "asOf": "2026-10-02T09:44:32.811570+00:00",
+  "asOf": "2026-10-03T09:01:06.328146+00:00",
   "price": 97.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 15.464665559560522,
-    "base": 20.928222609393067,
-    "bull": 26.89449929018495,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 25.007580217414336,
+    "base": 26.863210068400335,
+    "bull": 29.370258867781953,
+    "dispersion": 0.3431643838292906,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "DCF"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -36,14 +35,14 @@
       "bands": null,
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3344262295081967,
       "qcStatus": "VALID"
     },
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 17.794504150922624,
+      "bear": 15.857950997541591,
       "base": 15.857950997541591,
       "bull": 17.84592271574737,
       "confidence": 0.75,
@@ -52,10 +51,28 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
+      "included": true,
+      "normalizedWeight": 0.26557377049180325,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 34.35385215627762,
+      "base": 35.333333333333336,
+      "bull": 36.37030673259775,
+      "confidence": 0.68,
+      "relevance": 0.7,
+      "rawWeight": 0.476,
+      "bands": {
+        "mean": 0.05660377358490566,
+        "sd": 0.0016138606676342553
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.4,
+      "qcStatus": "VALID"
     }
   ],
   "dcfDiagnostics": {
@@ -85,30 +102,43 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 2.9897330595482545,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 1,
-    "reviewFlags": [],
-    "valuationConfidence": 26,
+    "validMethodCount": 3,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP"
+    ],
+    "valuationConfidence": 30,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 15.464665559560522,
-        "base": 20.928222609393067,
-        "bull": 26.89449929018495,
+        "bear": 15.661308278551058,
+        "base": 18.39308680346733,
+        "bull": 22.37021100296616,
+        "weight": 0.25
+      },
+      {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 34.35385215627762,
+        "base": 35.333333333333336,
+        "bull": 36.37030673259775,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.9210116121820593,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
@@ -127,13 +157,14 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.065675,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -155,13 +186,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -230,9 +254,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.2769403099835086,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "GIAA.JK",
   "name": "PT. Garuda Indonesia (Persero) Tbk",
-  "asOf": "2026-10-02T09:45:52.531973+00:00",
+  "asOf": "2026-10-03T09:03:11.537470+00:00",
   "price": 50.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,9 +12,9 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 0.19877022087570698,
-    "base": 0.27105030119414586,
-    "bull": 0.34333038151258477,
+    "bear": 0.19841551158126003,
+    "base": 0.27056660670171817,
+    "bull": 0.34271770182217637,
     "dispersion": null,
     "agreement": "SINGLE_METHOD",
     "available": false,
@@ -27,16 +27,16 @@
     {
       "name": "Adjusted Asset Floor",
       "family": "asset_floor",
-      "bear": 0.19877022087570698,
-      "base": 0.27105030119414586,
-      "bull": 0.34333038151258477,
+      "bear": 0.19841551158126003,
+      "base": 0.27056660670171817,
+      "bull": 0.34271770182217637,
       "confidence": 0.45,
       "relevance": 0.45,
       "rawWeight": 0.2025,
       "warning": null,
       "explanation": "Konservatif: haircut terhadap book value sebagai asset floor; bukan RNAV dan tidak dihitung sebagai bukti independen.",
       "bands": {
-        "bvps": 0.3614004015921945,
+        "bvps": 0.36075547560229093,
         "haircut": [
           0.55,
           0.75,
@@ -71,6 +71,7 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "Referensi Nilai dari satu metode valid (Adjusted Asset Floor); belum cukup bukti untuk FV gabungan."
     ],
@@ -86,13 +87,13 @@
   },
   "raw": {
     "epsTTM": null,
-    "bvps": 0.3614004015921945,
+    "bvps": 0.36075547560229093,
     "currentPE": null,
-    "currentPBV": 138.35070403828763,
+    "currentPBV": 138.59803490584213,
     "roe": null,
-    "fcf": -274633941668.0,
-    "growthNormalized": 0.17890039979489458,
-    "costOfEquity": 0.105,
+    "fcf": -8250489766400.0,
+    "growthNormalized": -0.1885560285256233,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
     "marketCap": 20354586116096.0,
     "shares": 407091722321.92,
@@ -100,9 +101,10 @@
     "financialCurrency": "USD",
     "fxApplied": true,
     "fxPair": "USDIDR=X",
-    "fxFactor": 17932.0,
+    "fxFactor": 17900.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.17890039979489458,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.1885560285256233
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
@@ -123,35 +125,75 @@
       "status": "NEGATIVE",
       "reason": "FCF negatif; metode cashflow dilewati.",
       "inputs": {
-        "fcf": -274633941668.0
+        "fcf": -8250489766400.0
       }
     },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "Hasil nol/negatif/tidak lengkap; tidak masuk Composite FV.",
+      "inputs": {
+        "bear": -87.95647845955297,
+        "base": -42.86107281209675,
+        "bull": 2.2343328353594716
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "ebit": 3068918287100.0,
+        "netDebt": 50185673148900.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      }
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 57577220263600.0,
+        "netDebt": 50185673148900.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "LIMITED",
+    "sustainableGrowth": -0.1885560285256233,
+    "confidence": 0.56,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.05360992868594172
+          }
+        ],
+        "normalGrowth": 0.05360992868594172,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -166,10 +208,16 @@
         "validGrowthCount": 0
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": -0.3923388678258596
+          }
+        ],
+        "normalGrowth": -0.3923388678258596,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],

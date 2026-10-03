@@ -1,7 +1,7 @@
 {
   "ticker": "UVCR.JK",
   "name": "PT Trimegah Karya Pratama Tbk",
-  "asOf": "2026-10-02T09:45:12.555015+00:00",
+  "asOf": "2026-10-03T09:02:11.688022+00:00",
   "price": 266.0,
   "companyProfile": {
     "sector": "Teknologi",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 93.92990672542436,
-    "base": 126.75910012084236,
+    "bear": 93.23591745920463,
+    "base": 114.36011475283937,
     "bull": 162.4413512024696,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "dispersion": 0.1523815540478777,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "DCF"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -38,12 +37,13 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.6301369863013698
     },
     {
       "name": "FCF Yield",
       "family": "cashflow",
-      "bear": 104.8904071416052,
+      "bear": 93.23591745920463,
       "base": 93.23591745920463,
       "bull": 104.8904071416052,
       "confidence": 0.75,
@@ -54,8 +54,29 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.3698630136986301
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 13.724774096410666,
+      "base": 17.59586422616752,
+      "bull": 21.466954355924376,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 3.4499999837875945,
+        "requiredReturn": 0.19606880000000002
+      },
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak: skenario fundamental tidak finite/positif/berurutan. Harga pasar tidak digunakan untuk eligibility metode."
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 5.30x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -86,32 +107,35 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.4500 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 1,
+    "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "diagnosticCount": 3,
     "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 93.92990672542436,
-        "base": 126.75910012084236,
-        "bull": 162.4413512024696,
+        "bear": 93.5829120923145,
+        "base": 109.99750879002349,
+        "bull": 133.6658791720374,
         "weight": 0.25
       }
     ],
     "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 3.4499999837875945,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -127,22 +151,26 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 3.45
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 3.4499999675751885
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07913975000000001,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "analysisStatus": "REFERENSI",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -160,8 +188,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
@@ -230,9 +258,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
