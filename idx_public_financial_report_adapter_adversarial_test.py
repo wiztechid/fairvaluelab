@@ -7,3 +7,8 @@ for x in [None,{},good(source='OTHER'),good(verification='UNVERIFIED'),good(tick
 # Filename-like values alone never create identity.
 assert normalize({'source':'IDX_PUBLIC_FINANCIAL_REPORT','verification':'OFFICIAL_IDX_PUBLIC','ticker':'AADI','publishedAt':'2026-08-01T10:00:00+07:00','filename':'20260801_AADI_report_123.pdf','financialQuarter':'2026Q2'}) is None
 print('IDX_PUBLIC_FINANCIAL_REPORT_ADAPTER_V1_PASS')
+
+# Authentic public IDX AADI Q1 2026 record is useful evidence but must remain inadmissible until source-native document identity is exposed.
+authentic={'source':'IDX_PUBLIC_FINANCIAL_REPORT','verification':'OFFICIAL_IDX_PUBLIC','ticker':'AADI','publishedAt':'2026-04-30T16:51:00+07:00','attachmentId':'','externalDocumentId':'','financialQuarter':'2026Q1','sourceUrl':'https://idx.id/en/listed-companies/financial-statements-and-annual-report','filename':'FinancialStatement-2026-I-AADI.pdf'}
+assert normalize(authentic) is None
+print('AUTHENTIC_AADI_2026Q1_IDENTITY_UNRESOLVED_FAIL_CLOSED_PASS')
