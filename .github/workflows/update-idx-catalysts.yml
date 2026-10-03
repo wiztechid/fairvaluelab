@@ -9,6 +9,7 @@ on:
     paths:
       - 'collect_idx_disclosures.py'
       - 'idx_catalyst.py'
+      - 'filing_provenance.py'
       - 'market_actors.py'
       - 'des_universe.py'
       - 'requirements.txt'
@@ -50,6 +51,8 @@ jobs:
           if not isinstance(rows,list):
               raise SystemExit('idx_disclosures.json must be a list')
           print('IDX_DISCLOSURE_RECORDS',len(rows))
+          verified_filings=[r for r in rows if isinstance(r,dict) and r.get('documentType')=='FINANCIAL_STATEMENT' and r.get('financialQuarter') and r.get('verification')=='OFFICIAL_IDX_API']
+          print('IDX_NORMALIZED_FINANCIAL_FILINGS',len(verified_filings))
           if len(rows)==0:
               print('IDX source unavailable/blocked: preserving honest empty state; no fabricated catalyst/controller/broker data.')
           PY
