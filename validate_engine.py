@@ -9,6 +9,7 @@ def main():
  try:sm=json.load(open(DATA/'summary.json',encoding='utf-8'))
  except Exception as e:sm={};fail(f'summary.json missing/invalid: {e}',errors)
  declared_errors={e.get('ticker'):e for e in sm.get('errors',[]) if e.get('ticker')}
+ summary_rows={x.get('ticker'):x for x in sm.get('stocks',[]) if x.get('ticker')}
  for ticker in TICKERS:
   p=DATA/f'{ticker}.json'
   if not p.exists():
@@ -57,6 +58,13 @@ def main():
    mv=[m.get(k) for k in ('bear','base','bull')]
    if not all(n(v) and v>0 for v in mv):fail(f"{ticker}: included method {m.get('name')} has invalid scenarios",errors)
    elif not (mv[0]<=mv[1]<=mv[2]):fail(f"{ticker}: included method {m.get('name')} scenarios not ordered",errors)
+  sr=summary_rows.get(ticker)
+  if not sr:fail(f'{ticker}: missing summary projection row',errors)
+  else:
+   sfv=d.get('fairValue') or {};sq=d.get('quality') or {}
+   expected_summary={'status':d.get('analysisStatus'),'base':sfv.get('base'),'valuationConfidence':sq.get('valuationConfidence'),'validMethods':sq.get('validMethodCount',0),'independentFamilies':sq.get('independentFamilies',0)}
+   for k,v in expected_summary.items():
+    if sr.get(k)!=v:fail(f'{ticker}: summary projection mismatch {k}: {sr.get(k)} != {v}',errors)
   qn=d.get('quarterlyNormalization')
   if qn and qn.get('sustainableGrowth') is not None and not (-.2501<=qn['sustainableGrowth']<=.3501):fail(f'{ticker}: sustainable growth escaped guard',errors)
  represented=len(seen)+len(declared_errors)
