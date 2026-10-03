@@ -8,3 +8,8 @@ def provisional(x):assert x['pointInTimeQuality']=='PROVISIONAL' and x['lockTime
 v=resolve(base(),p(),a());assert v['pointInTimeQuality']=='VERIFIED';assert v['lockTimeSource']=='dualSourceReportPublishedAt'
 for pe,ae in [(None,a()),(p(),None),(p(ticker='ADRO'),a()),(p(financialQuarter='2026Q1'),a()),(p(source='OTHER'),a()),(p(verification='UNVERIFIED'),a()),(p(id=''),a()),(p(externalDocumentId=''),a()),(p(externalDocumentId='X'),a()),(p(),a(ticker='ADRO')),(p(),a(financialQuarter='2026Q1')),(p(),a(source='OTHER')),(p(),a(verification='UNVERIFIED')),(p(),a(documentType='OTHER')),(p(),a(id='')),(p(),a(externalDocumentId='')),(p(),a(publishedAt=None)),(p(),a(externalDocumentId='X'))]:provisional(resolve(base(),pe,ae))
 print('DUAL_SOURCE_FILING_PROVENANCE_V1_PASS')
+
+# Public Financial Report evidence must never satisfy the API availability leg merely because it is official IDX evidence.
+public_leg=dict(availability);public_leg['source']='IDX_PUBLIC_FINANCIAL_REPORT';public_leg['verification']='OFFICIAL_IDX_PUBLIC'
+r=resolve(snapshot,period,public_leg);assert r.get('pointInTimeQuality')!='VERIFIED'
+print('DUAL_SOURCE_PUBLIC_CANNOT_MASQUERADE_AS_API_PASS')
