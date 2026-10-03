@@ -56,7 +56,7 @@ jobs:
       - name: Guard Fair Value scenario invariants
         run: python tests/test_fair_value_invariants.py
       - name: Generate core valuation data
-        run: python generate_data.py
+        run: CEKVALUASI_ENGINE_SHA="$GITHUB_SHA" python generate_data.py
       - name: Add adaptive historical PE valuation
         run: python adaptive_pe.py
       - name: Add EV EBITDA, Graham and dividend models
@@ -74,7 +74,7 @@ jobs:
       - name: Build family consensus and forensic review gate
         run: python family_consensus.py
       - name: Validate all DES valuations before publication
-        run: python validate_engine.py
+        run: CEKVALUASI_ENGINE_SHA="$GITHUB_SHA" python validate_engine.py
       - name: Build ticker and company alias map
         run: python build_ticker_aliases.py
       - name: Collect rolling 20D public ticker news
@@ -92,7 +92,7 @@ jobs:
       - name: Build FV timeline and quarter-over-quarter attribution
         run: python fv_timeline.py
       - name: Final pre-publication valuation validation
-        run: python validate_engine.py
+        run: CEKVALUASI_ENGINE_SHA="$GITHUB_SHA" python validate_engine.py
       - name: Commit refreshed valuation data
         run: |
           set -e
