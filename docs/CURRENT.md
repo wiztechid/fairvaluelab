@@ -1067,3 +1067,16 @@ Status: LATEST CI ACTIVE; NOT YET RE-FROZEN.
 - Latest run is regenerating core valuation data; downstream full DES validator with new per-included-method scenario-ordering guard has not executed yet.
 - Refreshed main contains 617 ticker JSON files. Spot audit of early-alphabet production outputs found ordered FCF Yield and Composite scenarios where present (examples AALI, ABMM, ACES, ADMG); this is supplementary only, not a substitute for the full-universe validator.
 Re-freeze condition unchanged: latest run must pass full pipeline and validate_engine.py after all model augmentation/postprocess stages, then refreshed output must land on main. Do not mark FINAL FROZEN before that.
+
+
+## P0 FCF Yield — Publication-State Validator Hardening — 2026-10-03
+Status: FIXED / LATEST FULL-PIPELINE GATE PENDING.
+Deep audit found the first method-level ordering patch was scoped inside fairValue.available, so it protected FULL/REVIEW but not all lower-confidence publication states. INDIKATIF/REFERENSI already required positive ranges but did not explicitly require Bear<=Base<=Bull.
+Correction commit 310cb023141302f80f37ee123d4d2986f75b23c5:
+- per-included-method finite/positive + Bear<=Base<=Bull invariant moved to the global methods loop, applying regardless of publication state;
+- INDIKATIF Fair Value range now explicitly requires Bear<=Base<=Bull;
+- REFERENSI Fair Value range now explicitly requires Bear<=Base<=Bull;
+- FULL/REVIEW composite ordering guard remains unchanged;
+- duplicated FULL-only method guard removed.
+This is validation-only hardening: no valuation outputs, formulas, weights, thresholds, families, sector policies, data inputs, or private Scanner logic changed.
+Latest Update Fair Value Data run 37113979933 queued from 310cb023. Re-freeze requires this exact validator revision to execute invariant pre-gate + complete model pipeline + full DES validation successfully and land refreshed data.
