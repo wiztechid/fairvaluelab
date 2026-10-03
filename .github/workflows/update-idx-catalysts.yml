@@ -108,7 +108,8 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/idx_disclosures.json data/idx_collector_status.json data/catalysts/ data/market_actors/ 2>/dev/null || true
+          git add data/idx_disclosures.json data/idx_collector_status.json data/catalysts/ 2>/dev/null || true
+          git add -f data/market_actors/
           if git diff --cached --quiet; then echo "No IDX catalyst/actor data changes to commit."; exit 0; fi
           git commit -m "data: refresh verified IDX catalysts and market actors"
           git pull --rebase origin main
