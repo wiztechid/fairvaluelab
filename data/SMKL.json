@@ -1,7 +1,7 @@
 {
   "ticker": "SMKL.JK",
   "name": "PT Satyamitra Kemas Lestari Tbk",
-  "asOf": "2026-10-03T10:46:18.934717+00:00",
+  "asOf": "2026-10-03T14:36:43.997875+00:00",
   "price": 146.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,17 +12,82 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
-    "dispersion": null,
-    "agreement": "INSUFFICIENT",
-    "available": false,
+    "bear": 169.49838577804167,
+    "base": 229.28481706598564,
+    "bull": 312.64756603941794,
+    "dispersion": 0.3130295725713264,
+    "agreement": "MEDIUM",
+    "available": true,
     "indicative": false,
     "referenceOnly": false,
-    "evidenceLevel": "UNVALUED"
+    "familyConsensus": true
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 95.52875350020827,
+      "base": 138.6,
+      "bull": 252.40019955625664,
+      "confidence": 0.68,
+      "relevance": 0.55,
+      "rawWeight": 0.37400000000000005,
+      "bands": {
+        "mean": 0.021645021645021648,
+        "sd": 0.00975913563829787
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.2092893116955792,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 167.95726196184478,
+      "base": 235.1401667465827,
+      "bull": 302.32307153132064,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
+      "bands": {
+        "normalizedEPS": 33.59145239236896,
+        "growthAdjustment": 0.0184783375,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.38780078343592617,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 245.00914187207192,
+      "base": 314.11428445137426,
+      "bull": 383.21942703067657,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 32.98199986739429,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.4029099048684947,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    }
+  ],
   "dcfDiagnostics": null,
   "technical": {
     "ma20": 153.6,
@@ -43,21 +108,53 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 32.9820 per saham."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 5,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0,
-    "familyConsensus": [],
-    "familyConsensusCount": 0
+    "valuationConfidence": 65,
+    "familyConsensus": [
+      {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 95.52875350020827,
+        "base": 138.6,
+        "bull": 252.40019955625664,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 167.95726196184478,
+        "base": 235.1401667465827,
+        "bull": 302.32307153132064,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 245.00914187207192,
+        "base": 314.11428445137426,
+        "bull": 383.21942703067657,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 2.266336828653494,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 32.98199986739429,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -73,23 +170,27 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 32.982
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 32.98199973478858
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.05279525,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "05610324b4fa40209e7d3171902886d2cf7a4aab",
-  "analysisStatus": "BELUM_DINILAI",
+  "engineCommit": "857fd85c98946bbb6978021c8bf61cc823701c8d",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -111,13 +212,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -186,9 +280,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "NO_DEFENSIBLE_METHOD",
-    "reason": "NO_VALID_METHOD",
-    "policy": "No value is fabricated or anchored to market price."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.5704439525067508,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

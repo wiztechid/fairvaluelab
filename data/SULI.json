@@ -1,7 +1,7 @@
 {
   "ticker": "SULI.JK",
   "name": "PT SLJ Global Tbk",
-  "asOf": "2026-10-03T10:46:21.884392+00:00",
+  "asOf": "2026-10-03T14:36:47.623035+00:00",
   "price": 75.0,
   "companyProfile": {
     "sector": "Barang Baku",
@@ -12,10 +12,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 50.97493275323505,
-    "base": 73.45170931585872,
-    "bull": 97.72269441315255,
-    "dispersion": 0.4805271308106283,
+    "bear": 18.109670374153712,
+    "base": 55.67509153433311,
+    "bull": 109.5918367346939,
+    "dispersion": 0.5731582566402088,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -77,8 +77,33 @@
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.25701676963812886,
+      "normalizedWeight": 0.1609729132117192,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 6.151532386910134,
+      "base": 20.121855971281903,
+      "bull": 36.42056681971564,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 294344324300.0,
+        "netDebt": 93572482700.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.1494748479823107,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     },
     {
       "name": "Adjusted Asset Floor",
@@ -100,7 +125,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.14298323036187116,
+      "normalizedWeight": 0.08955223880597016,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -132,15 +157,18 @@
     "guards": [
       "Laporan keuangan dinormalisasi USD→IDR dengan FX Yahoo; data historis memakai FX terdekat tanggal laporan.",
       "Jumlah saham direkonsiliasi dari market cap/harga karena denominator Yahoo tidak konsisten.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 4,
-    "independentFamilies": 2,
+    "validMethodCount": 5,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 59,
+    "reviewFlags": [
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 57,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -162,10 +190,20 @@
         "base": 99.62894248608535,
         "bull": 133.3970653213486,
         "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 6.151532386910134,
+        "base": 20.121855971281903,
+        "bull": 36.42056681971564,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 2.10745735561769,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 4.951279972795586,
     "forensicChecks": []
   },
   "raw": {
@@ -175,7 +213,7 @@
     "currentPBV": 1.9741529233463575,
     "roe": -0.26108998,
     "fcf": 29649900100.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": -0.25,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 474058260480.0,
@@ -185,14 +223,15 @@
     "fxApplied": true,
     "fxPair": "USDIDR=X",
     "fxFactor": 17900.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "05610324b4fa40209e7d3171902886d2cf7a4aab",
-  "analysisStatus": "SIAP",
+  "engineCommit": "857fd85c98946bbb6978021c8bf61cc823701c8d",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -205,47 +244,73 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -60465824100.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.25,
+    "confidence": 0.72,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.2794212630056867
+          }
+        ],
+        "normalGrowth": -0.2794212630056867,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.33469202944945664
+          }
+        ],
+        "normalGrowth": -0.33469202944945664,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.33218526653241554
+          }
+        ],
+        "normalGrowth": -0.33218526653241554,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.4458407781606707
+          }
+        ],
+        "normalGrowth": -0.4458407781606707,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -254,10 +319,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.8269545009784736
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
@@ -281,14 +352,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.9793561242114496,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 0.7423345537911081,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 4.951279972795586,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

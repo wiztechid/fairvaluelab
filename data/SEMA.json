@@ -1,7 +1,7 @@
 {
   "ticker": "SEMA.JK",
   "name": "PT Semacom Integrated Tbk",
-  "asOf": "2026-10-03T10:45:14.741905+00:00",
+  "asOf": "2026-10-03T14:35:30.991772+00:00",
   "price": 470.0,
   "companyProfile": {
     "sector": "Energi",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 28.25840568894303,
-    "base": 44.78605084796976,
-    "bull": 61.92375530365461,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 40.30744576317279,
+    "base": 111.97103689739204,
+    "bull": 183.02952671813568,
+    "dispersion": 0.4506411117683696,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "DCF"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -36,9 +35,54 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.3383282603605713,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Mid-Cycle Earnings",
+      "family": "earnings_midcycle",
+      "bear": 89.09755786395543,
+      "base": 124.7365810095376,
+      "bull": 160.3756041551198,
+      "confidence": 0.66,
+      "relevance": 1.05,
+      "rawWeight": 0.6930000000000001,
+      "warning": "SHORT HISTORY · confidence moderat; validasi bertambah seiring histori laporan.",
+      "explanation": "Fallback untuk emiten siklikal/riwayat listing pendek: EPS tervalidasi dinormalisasi secara konservatif lalu dikapitalisasi dengan rentang P/E through-cycle 5x–9x. Harga pasar hanya menjadi sanity guard, bukan anchor.",
+      "bands": {
+        "normalizedEPS": 17.819511572791086,
+        "growthAdjustment": 0.0199479875,
+        "peBand": [
+          5.0,
+          7.0,
+          9.0
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.32451416530086635,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 129.78457349104167,
+      "base": 166.39047883466878,
+      "bull": 202.9963841782959,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 17.471000277640222,
+        "requiredReturn": 0.105
+      },
+      "included": true,
+      "normalizedWeight": 0.3371575743385624,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -69,17 +113,20 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 17.4710 per saham.",
+      "Extreme Valuation Review: Base FV = 0.24x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 4.725530458590007,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 26,
+    "reviewFlags": [
+      "EXTREME_VALUATION",
+      "CROSS_FAMILY_CONFLICT",
+      "FORENSIC_EXTREME"
+    ],
+    "valuationConfidence": 0,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -90,12 +137,34 @@
         "base": 44.78605084796976,
         "bull": 61.92375530365461,
         "weight": 0.25
+      },
+      {
+        "family": "earnings_midcycle",
+        "methods": [
+          "Mid-Cycle Earnings"
+        ],
+        "bear": 89.09755786395543,
+        "base": 124.7365810095376,
+        "bull": 160.3756041551198,
+        "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 129.78457349104167,
+        "base": 166.39047883466878,
+        "bull": 202.9963841782959,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 3.7152299808593545,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 17.471000277640222,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -111,23 +180,27 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 17.471
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 17.47100055528044
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.05699425,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "05610324b4fa40209e7d3171902886d2cf7a4aab",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "857fd85c98946bbb6978021c8bf61cc823701c8d",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -145,8 +218,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -214,10 +287,25 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.2382362487178554,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

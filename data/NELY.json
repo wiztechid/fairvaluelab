@@ -1,7 +1,7 @@
 {
   "ticker": "NELY.JK",
   "name": "PT Pelayaran Nelly Dwi Putri Tbk",
-  "asOf": "2026-10-03T10:52:24.571547+00:00",
+  "asOf": "2026-10-03T14:43:48.444397+00:00",
   "price": 190.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,18 +12,36 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 207.0342909337293,
-    "base": 265.42857812016575,
-    "bull": 323.82286530660224,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 170.75640698482692,
+    "base": 221.865580572998,
+    "bull": 294.1601229722328,
+    "dispersion": 0.1963486063708503,
+    "agreement": "MEDIUM",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Earnings Power Value"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 134.47852303592455,
+      "base": 178.30258302583024,
+      "bull": 264.4973806378634,
+      "confidence": 0.68,
+      "relevance": 0.65,
+      "rawWeight": 0.44200000000000006,
+      "bands": {
+        "mean": 0.05608443708609272,
+        "sd": 0.01827687931034483
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.40000000000000013,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
@@ -39,8 +57,8 @@
         "eps": 27.870000702617403,
         "requiredReturn": 0.105
       },
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.6,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -65,18 +83,26 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 27.8700 per saham.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 27.8700 per saham."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 4,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 60,
     "familyConsensus": [
+      {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 134.47852303592455,
+        "base": 178.30258302583024,
+        "bull": 264.4973806378634,
+        "weight": 0.25
+      },
       {
         "family": "earnings_power",
         "methods": [
@@ -88,7 +114,9 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 1.4886412390431483,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": 27.870000702617403,
@@ -124,8 +152,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "05610324b4fa40209e7d3171902886d2cf7a4aab",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "857fd85c98946bbb6978021c8bf61cc823701c8d",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -149,13 +177,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -224,9 +245,13 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 1.1677135819631475,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
