@@ -1,6 +1,7 @@
 import json, math
 from pathlib import Path
 import numpy as np
+from valuation_document import is_valuation_document
 DATA=Path('data')
 def n(x):
     try:v=float(x);return v if math.isfinite(v) else None
@@ -49,6 +50,10 @@ def process(path):
     d.setdefault('valuationPolicy',{})['sectorWeights']=w;d['valuationPolicy']['principle']='Sector-aware evidence weighting; market price is QC guard only, never valuation target.';d['engineVersion']='3.13-sector-midcycle';return d
 for p in DATA.glob('*.json'):
     if p.name in ('summary.json','errors.json'):continue
+    try:
+        _scope=json.load(open(p,encoding='utf-8'))
+        if not is_valuation_document(_scope):continue
+    except:continue
     try:d=process(p);json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False)
     except Exception as e:print('SECTOR_MODEL_ERR',p.stem,e)
 print('SECTOR_MODELS_DONE')
