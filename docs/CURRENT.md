@@ -1080,3 +1080,14 @@ Correction commit 310cb023141302f80f37ee123d4d2986f75b23c5:
 - duplicated FULL-only method guard removed.
 This is validation-only hardening: no valuation outputs, formulas, weights, thresholds, families, sector policies, data inputs, or private Scanner logic changed.
 Latest Update Fair Value Data run 37113979933 queued from 310cb023. Re-freeze requires this exact validator revision to execute invariant pre-gate + complete model pipeline + full DES validation successfully and land refreshed data.
+
+
+## P0 FCF Yield — Atomic Publication / TOCTOU Hardening — 2026-10-03
+Status: FIXED / LATEST ATOMIC PUBLICATION GATE PENDING.
+Audit of update-fair-value workflow found validate_engine.py ran before several downstream builders that still write under data/ (ticker aliases, news/catalyst artifacts, sector MoS, Golden Zone, snapshots/catalyst snapshots, FV timeline). The valuation validator is primarily concerned with ticker valuation files, but the workflow later commits the entire data/ tree; therefore a single earlier validation was not the strongest atomic publication boundary.
+Correction commit a3142ce5bc86aeae5c8c831c0a77bbacada89b4d:
+- retain existing full-DES validation after valuation model/QC stages for fail-fast;
+- add a second 'Final pre-publication valuation validation' after all downstream data builders and immediately before 'Commit refreshed valuation data';
+- publication commit now follows the final validator with no intervening data mutation step.
+This closes the workflow TOCTOU gap without changing any valuation formula, output policy, threshold, family, sector profile, or private Scanner logic.
+Latest Update Fair Value Data run 37114372595 queued from a3142ce. Re-freeze requires this exact workflow revision to pass: invariant pre-gate -> full valuation pipeline -> first validator -> downstream builders -> final validator -> publication commit.
