@@ -32,10 +32,6 @@ def main():
    conflict='CROSS_FAMILY_CONFLICT' in (q.get('reviewFlags') or [])
    if s=='REVIEW' and not (should_review or conflict):fail(f'{ticker}: REVIEW without extreme or cross-family conflict trigger',errors)
    inc=[m for m in methods if m.get('included')];fam={m.get('family') for m in inc if m.get('countsForIndependence',True)}
-   for m in inc:
-    mv=[m.get(k) for k in ('bear','base','bull')]
-    if not all(n(v) and v>0 for v in mv):fail(f\"{ticker}: included method {m.get('name')} has invalid scenarios\",errors)
-    elif not (mv[0]<=mv[1]<=mv[2]):fail(f\"{ticker}: included method {m.get('name')} scenarios not ordered\",errors)
    if len(inc)<2 or len(fam)<2:fail(f'{ticker}: full FV without >=2 independent families',errors)
    weights={}
    for m in inc:weights[m.get('family')]=weights.get(m.get('family'),0)+(m.get('normalizedWeight') or 0)
@@ -43,15 +39,20 @@ def main():
   elif s=='INDIKATIF':
    if not fv.get('indicative') or q.get('validMethodCount',0)<2:fail(f'{ticker}: invalid indicative evidence',errors)
    if not all(n(v) and v>0 for v in vals):fail(f'{ticker}: indicative range invalid',errors)
+   elif not (vals[0]<=vals[1]<=vals[2]):fail(f'{ticker}: indicative scenarios not ordered',errors)
    if conf>55:fail(f'{ticker}: indicative confidence above cap',errors)
   elif s=='REFERENSI':
    if not fv.get('referenceOnly') or q.get('validMethodCount')!=1:fail(f'{ticker}: reference state must have exactly one valid method',errors)
    if not all(n(v) and v>0 for v in vals):fail(f'{ticker}: reference range invalid',errors)
+   elif not (vals[0]<=vals[1]<=vals[2]):fail(f'{ticker}: reference scenarios not ordered',errors)
    if conf>35:fail(f'{ticker}: reference confidence above cap',errors)
   elif s=='BELUM_DINILAI':
    if q.get('validMethodCount',0)!=0 or any(v is not None for v in vals):fail(f'{ticker}: unvalued state contains fabricated value',errors)
   for m in methods:
-   if m.get('included') and not all(n(m.get(k)) and m.get(k)>0 for k in ('bear','base','bull')):fail(f'{ticker}: included method invalid',errors)
+   if not m.get('included'):continue
+   mv=[m.get(k) for k in ('bear','base','bull')]
+   if not all(n(v) and v>0 for v in mv):fail(f"{ticker}: included method {m.get('name')} has invalid scenarios",errors)
+   elif not (mv[0]<=mv[1]<=mv[2]):fail(f"{ticker}: included method {m.get('name')} scenarios not ordered",errors)
   qn=d.get('quarterlyNormalization')
   if qn and qn.get('sustainableGrowth') is not None and not (-.2501<=qn['sustainableGrowth']<=.3501):fail(f'{ticker}: sustainable growth escaped guard',errors)
  represented=len(seen)+len(declared_errors)
