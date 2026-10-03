@@ -2,7 +2,7 @@ from datetime import datetime
 def _dt(v):
     try:return datetime.fromisoformat(str(v).replace('Z','+00:00'))
     except:return None
-def resolve(snapshot, disclosure):
+def resolve(snapshot, disclosure, allow_legacy_promotion=False):
     out=dict(snapshot)
     if not isinstance(disclosure,dict):return out
     ticker=str(out.get('ticker','')).replace('.JK','').upper()
