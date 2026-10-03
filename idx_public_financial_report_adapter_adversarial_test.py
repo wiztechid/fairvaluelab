@@ -14,3 +14,12 @@ print('IDX_PUBLIC_FINANCIAL_REPORT_ADAPTER_V2_PROVENANCE_PRESERVED_PASS')
 authentic={'source':'IDX_PUBLIC_FINANCIAL_REPORT','verification':'OFFICIAL_IDX_PUBLIC','ticker':'AADI','publishedAt':'2026-04-30T16:51:00+07:00','attachmentId':'','externalDocumentId':'','financialQuarter':'2026Q1','sourceUrl':'https://idx.id/en/listed-companies/financial-statements-and-annual-report','filename':'FinancialStatement-2026-I-AADI.pdf'}
 assert normalize(authentic) is None
 print('AUTHENTIC_AADI_2026Q1_IDENTITY_UNRESOLVED_FAIL_CLOSED_PASS')
+
+# Machine-readable authentic fixture must remain closed while the accessible public route exposes no native identity.
+import json
+fixture=json.load(open('data/provenance_fixtures/aadi-2026q1-authentic-unresolved.json',encoding='utf-8'))
+assert fixture['identityStatus']=='PUBLIC_ROUTE_IDENTITY_BLOCKED'
+assert fixture['pointInTimeAdmission']=='PROHIBITED'
+assert fixture['publicRoute']['status']=='IDENTITY_BLOCKED'
+assert fixture['publicRoute']['attachmentHrefOrNativeIdExposed'] is False
+print('PUBLIC_ROUTE_IDENTITY_BLOCKED_FIXTURE_PASS')
