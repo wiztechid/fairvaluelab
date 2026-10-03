@@ -1,3 +1,4 @@
+from valuation_document import is_valuation_document
 # v3.19 sector valuation waterfall: add defensible fallback families without anchoring values to market price.
 import json, math
 from pathlib import Path
@@ -61,6 +62,10 @@ def process(path):
     return d
 for p in DATA.glob('*.json'):
     if p.name in ('summary.json','errors.json','idx_disclosures.json','idx_collector_status.json'):continue
+    try:
+        _scope=json.load(open(p,encoding='utf-8'))
+        if not is_valuation_document(_scope):continue
+    except:continue
     try:
         d=process(p);json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False)
     except Exception as e:print('WATERFALL_ERR',p.stem,e)
