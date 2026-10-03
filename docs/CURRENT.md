@@ -1057,3 +1057,13 @@ Additional audit after CI hardening:
 - This is validation-only defense-in-depth; no valuation formula, weight, threshold, family, sector policy, or private Scanner logic changed.
 - Live Article #8 semantic correction is visible with self-canonical/index-follow; extractor may omit the first formula line inside styled formula blocks, but source exact parity was previously verified.
 Concurrency note: long-running refresh from c83d77a still holds fair-value-data-update lock; later 7aee70d run was superseded/cancelled by 4b49b046 and latest run is queued. Do not re-freeze until latest workflow executes invariant test + full DES pipeline + validator successfully and refreshed data is audited for method/composite scenario ordering.
+
+
+## P0 FCF Yield — Latest Gate Progress — 2026-10-03
+Status: LATEST CI ACTIVE; NOT YET RE-FROZEN.
+- Prior c83d77a full refresh completed SUCCESS and released concurrency lock.
+- Latest relevant run 37113252120 at 4b49b046 is now executing.
+- New mandatory pre-generation step 'Guard Fair Value scenario invariants' executed and PASS, proving CI wiring works in runtime.
+- Latest run is regenerating core valuation data; downstream full DES validator with new per-included-method scenario-ordering guard has not executed yet.
+- Refreshed main contains 617 ticker JSON files. Spot audit of early-alphabet production outputs found ordered FCF Yield and Composite scenarios where present (examples AALI, ABMM, ACES, ADMG); this is supplementary only, not a substitute for the full-universe validator.
+Re-freeze condition unchanged: latest run must pass full pipeline and validate_engine.py after all model augmentation/postprocess stages, then refreshed output must land on main. Do not mark FINAL FROZEN before that.
