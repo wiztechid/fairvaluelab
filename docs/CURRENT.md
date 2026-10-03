@@ -1105,3 +1105,15 @@ Minimal provenance hardening:
 - workflow passes GITHUB_SHA as CEKVALUASI_ENGINE_SHA to generation and both validation gates (commit d2cfe0e57ef5798ada34ff163e3705c8dc7c416c).
 This is provenance/CI hardening only; no valuation formula, thresholds, weights, family/sector policy, or private Scanner logic changed.
 Latest exact run 37114859330 queued from d2cfe0e. Re-freeze now requires compile gate -> invariant gate -> generation with engineCommit -> full pipeline -> first provenance-aware validator -> downstream builders -> final provenance-aware validator -> publication commit.
+
+
+## P0 FCF Yield — Runtime Ordering Proof + Provenance Regression Lock — 2026-10-03
+Status: FIXED / PROVENANCE-BOUND PIPELINE ACTIVE; NOT YET RE-FROZEN.
+Runtime evidence:
+- run 37113979933 at 310cb023 completed the invariant pre-gate and the full DES valuation pipeline through the publication-state-aware 'Validate all DES valuations before publication' step successfully. This is full-universe runtime evidence that the generalized Bear<=Base<=Bull guards accept the regenerated corpus; it is stronger than prior spot sampling.
+- historical 4b49b046 failure was confirmed as validator SyntaxError from an escaped f-string, not a valuation/data invariant failure; current validator source is corrected.
+- run 37114859330 at d2cfe0e is now active. Its early 'Compile critical Fair Value pipeline scripts' and 'Guard Fair Value scenario invariants' steps are PASS; core generation is running with CEKVALUASI_ENGINE_SHA bound to d2cfe0e.
+Regression hardening:
+- tests/test_fair_value_invariants.py now also statically locks the engineCommit generator+validator provenance contract (commit 3afea6c5ee9b434ad044050bfe105d53a9b59c32).
+- follow-up run 37115243901 is queued to prove the regression-lock revision itself.
+Final re-freeze remains gated on a provenance-bound run passing both validators including the final pre-publication validator and committing refreshed data; then the regression-lock run must not reveal a new failure.
