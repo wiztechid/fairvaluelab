@@ -23,6 +23,7 @@ def add(d,name,family,bear,base,bull,confidence,relevance,explanation,meta=None,
     return True
 def process(path):
     d=json.load(open(path,encoding='utf-8'))
+    if not is_valuation_document(d):return None
     if not isinstance(d,dict) or not d.get('ticker') or not n(d.get('price')):return d
     raw=d.get('raw') or {}; cp=d.get('companyProfile') or {}; sector=(cp.get('sector') or '').lower(); industry=(cp.get('industry') or '').lower()
     eps=n(raw.get('epsTTM')); bvps=n(raw.get('bvps')); roe=n(raw.get('roe')); ke=n(raw.get('costOfEquity')); growth=n(raw.get('growthNormalized')); shares=n(raw.get('shares')); factor=n(raw.get('fxFactor')) or 1
