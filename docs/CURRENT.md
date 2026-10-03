@@ -938,3 +938,23 @@ Cannibalization/Sacred Diff:
 - No production code, threshold, model weight, family, Fair Value UI contract, or private Scanner moat changed.
 Source QC: ~949 extracted words; one H1/canonical; Article+Breadcrumb schema; status/family/agreement/data/MoS/guards boundaries present; methodology + tool links present; disclaimer present.
 AQS provisional: 98/100. Discovery integration committed to sitemap + valuation hub. Next: deployment -> live canonical/content/hub/sitemap regression -> FINAL GO/FROZEN if green.
+
+
+## SEO Article #9 FINAL — Fair Value Evidence Interpretation — 2026-10-03
+Status: FINAL GO / FROZEN under Private Moat v3.
+- Pages deployment for 9f79c0b completed successfully.
+- Live owner resolves with self-canonical, index/follow and correct OG metadata; SIAP/TERBATAS, independent-family, Bear/Base/Bull, agreement, data-quality, MoS and guard interpretation are live.
+- Static valuation hub contains #9; live sitemap contains 20 URLs including #9.
+- Live extraction confirms agreement is explicitly not probability/certainty; no buy/sell threshold introduced.
+- AQS final 98/100; 10-layer Deep QC PASS.
+
+## Deep SERP Opportunity Intelligence — Wave 2 — 2026-10-03
+Status: COMPLETE; NO NEW URL AUTHORIZED YET.
+SERP/jobs audited: why valuation methods disagree; fair value uncertainty/sensitivity; how to choose valuation method; sector/business-character method relevance.
+Findings:
+- 'Why valuation results differ / valuation is a range / assumptions matter' substantially overlaps #9 interpretation owner and #1 methodology owner. NEW rejected for cannibalization; strengthen #9 only if future P0/P1 evidence appears.
+- 'Which valuation method fits which company/sector' has distinct user intent, but generic SERP already covers PER/PBV/EV-EBITDA/DCF suitability. A generic explainer would be false moat.
+- CekValuasi does have production-specific sector relevance profiles, creating potential information gain: Keuangan strongly favors Historical PBV and suppresses conventional cashflow models; Properti raises PBV; consumer/health raise P/E; sector-specific weights exist for infrastructure, energy, materials, technology, transport, etc.
+- However, current profile table is engine policy, not a universal finance truth. Before publishing a sector-method owner, require an exact production parity map plus an editorial boundary separating engine relevance multipliers from external/general valuation principles. Do not present multipliers as universal recommendations.
+Decision: HOLD candidate #10 pending sector-profile truth/moat audit. No other Wave 2 URL authorized.
+Next: audit all profile() sector mappings + method coverage including models not adjusted by profile weights; test whether one durable 'metode valuasi sesuai sektor' owner can provide enough unique utility without exposing private Scanner logic or cannibalizing formula owners. If PASS -> authorize #10; if weak -> stop expansion and shift to Search Console demand/data.
