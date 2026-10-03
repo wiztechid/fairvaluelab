@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import yfinance as yf
+from valuation_document import is_valuation_document
 DATA=Path('data')
 def num(x):
     try:v=float(x);return v if math.isfinite(v) else None
@@ -102,6 +103,10 @@ def augment(path):
 changed=failed=0
 for p in DATA.glob('*.json'):
     if p.name in ('summary.json','errors.json'):continue
+    try:
+        _scope=json.load(open(p,encoding='utf-8'))
+        if not is_valuation_document(_scope):continue
+    except:continue
     try:d=augment(p);json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2,allow_nan=False);changed+=1
     except Exception as e:failed+=1;print('AUGMENT_ERR',p.stem,e)
 print('AUGMENT_DONE changed=',changed,'failed=',failed)
