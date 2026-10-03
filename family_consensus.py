@@ -1,3 +1,4 @@
+from valuation_document import is_valuation_document
 # v3.20 family consensus + forensic review gate.
 # Rebuilds full FV from one consensus vote per independent valuation family.
 import json, math, statistics
@@ -72,6 +73,10 @@ def process(p):
  return d
 for p in DATA.glob("*.json"):
  if p.name in ("summary.json","errors.json","idx_disclosures.json","idx_collector_status.json"):continue
+    try:
+        _scope=json.load(open(p,encoding='utf-8'))
+        if not is_valuation_document(_scope):continue
+    except:continue
  try:
   d=process(p);json.dump(d,open(p,"w",encoding="utf-8"),ensure_ascii=False,indent=2,allow_nan=False)
  except Exception as e:print("FAMILY_CONSENSUS_ERR",p.stem,e)
@@ -81,9 +86,13 @@ if sp.exists():
  s=json.load(open(sp,encoding="utf-8")); rows=[]
  for p in DATA.glob("*.json"):
   if p.name in ("summary.json","errors.json","idx_disclosures.json","idx_collector_status.json"):continue
+    try:
+        _scope=json.load(open(p,encoding='utf-8'))
+        if not is_valuation_document(_scope):continue
+    except:continue
   try:
    d=json.load(open(p,encoding="utf-8"))
-   if not d.get("ticker"):continue
+   if not is_valuation_document(d):continue
    f=d.get("fairValue") or {};q=d.get("quality") or {}
    rows.append({"ticker":d["ticker"].replace(".JK",""),"name":d.get("name"),"sector":d.get("companyProfile",{}).get("sector") or d.get("sector"),"price":d.get("price"),"base":f.get("base"),"status":d.get("analysisStatus"),"valuationConfidence":q.get("valuationConfidence"),"validMethods":q.get("validMethodCount"),"independentFamilies":q.get("independentFamilies"),"outliers":q.get("outlierMethodCount",0),"reviewFlags":q.get("reviewFlags",[])})
   except:pass
