@@ -1031,3 +1031,18 @@ Gate for #11+:
 4. AQS >=80 and Private Moat release gate;
 5. no private Scanner logic exposure.
 Until that evidence exists, do not create another SEO article merely from keyword variants. Priority shifts to indexing/coverage observation, Search Console query collection, and product/private-engine work.
+
+
+## P0 Controlled Reopen — FCF Yield Scenario Ordering — 2026-10-03
+Status: FIX IMPLEMENTED / RE-FREEZE PENDING CI+LIVE QC.
+Issue confirmed in source: FCF Yield previously used Bear=FCF/share/16% while Base=FCF/share/req with req clamped up to 18%. For req>16%, Bear could exceed Base. Core and augmentation composites aggregate scenario labels directly, so an inverted method could contaminate Composite ordering.
+Minimal corrective policy:
+- Base unchanged: FCF/share / req.
+- Bull unchanged: FCF/share / max(8%, req-2pp).
+- Bear corrected to FCF/share / max(16%, req).
+Properties: old Bear is unchanged whenever req<=16%; when req>16%, Bear equals Base rather than exceeding it. No cost-of-equity/growth/req bounds, relevance, family, sector profile, composite weights, or private Scanner logic changed.
+Implementation commit: c83d77a60ee55c3d70ba339da535228b23f93272.
+Article #8 exact-formula parity patch: b9dd711a803bd7295a6cff6dd73b6f5767d894af.
+Regression guard added: tests/test_fair_value_invariants.py commit 2d957196109e4f2c3f63ab5d3817311942bf3852; checks req 9/12/16/17/18% and Bear<=Base<=Bull, plus direct composite scenario-label aggregation in both core and augmentation.
+SEO #1–#10 remain frozen except #8 controlled exact-parity correction; speculative expansion remains paused.
+Next gate: CI/deployment -> live #8 formula parity -> source invariant execution/CI visibility -> re-freeze Formula Cluster.
