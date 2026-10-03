@@ -681,3 +681,24 @@ Corpus patch:
 Private-moat check: PASS. Public pages expose public Fair Value calculation behavior needed for auditability but do not publish Scanner proprietary weights/thresholds/feature interactions/calibration/ranking/persistence/anti-gaming/decision traces.
 
 Release rule: Articles #1-#4 become FINAL GO/FROZEN only when live recheck confirms both new hubs resolve successfully, sitemap includes them, article canonicals remain self-referential, and existing article/tool routes have no regression.
+
+
+## Private Moat v3 FINAL baseline — Articles #1-#4 — 2026-10-03
+Status: FINAL GO / FROZEN.
+- GitHub Pages latest deployment succeeded after explicit-hub routing patch.
+- Live /riset.html: 200, self-canonical, index/follow, links to valuation hub and Fair Value.
+- Live /valuasi-saham.html: 200, self-canonical, index/follow, static links to canonical owners #1-#4 and Fair Value.
+- Live sitemap: 15 URLs including both explicit hubs and all four article owners.
+- Articles #1-#4 remain publicly reachable with self-referential canonicals and no observed route regression.
+- Retrospective AQS remains #1 93, #2 94, #3 95, #4 94; 10-layer Deep QC now closes PASS including live reality.
+- Directory-index hub routes that returned 404 are superseded by explicit /riset.html and /valuasi-saham.html. Do not restore them as canonical corpus routes without a separate routing test.
+- Freeze boundary: no further substantive edits to #1-#4 unless factual production parity, broken link/schema, material search-intent drift, or another P0/P1 regression is demonstrated.
+
+## SEO Article #5 opportunity gate — Graham Number — 2026-10-03
+Status: AUTHORIZED TO DRAFT under Private Moat v3; not yet FROZEN.
+Canonical owner: /riset/valuasi-saham/graham-number/
+Intent owner: explain the Graham Number actually used by CekValuasi, its inputs, production scenario treatment, applicability and limitations.
+Moat sentence: Unlike generic Graham calculators, the CekValuasi owner documents the exact production cross-check built from validated EPS/BVPS, the 80/100/120 Bear-Base-Bull treatment, confidence/relevance role, economic sanity/outlier gates, and how it participates as the fundamental family in Composite Fair Value.
+SERP separation rule: Graham Number sqrt(22.5*EPS*BVPS) is the owner territory. Do not conflate it with the separate growth/bond-yield Graham formula EPS*(8.5+2g)*4.4/Y, which is not a production CekValuasi method.
+Production parity: requires EPS>0 and BVPS>0; Base=sqrt(22.5*EPS*BVPS); Bear=.8*Base; Bull=1.2*Base; confidence=.60; relevance=.55; family=fundamental; general 0.05x-5x market-price sanity plus composite robust-outlier rules still apply.
+Next gate: draft -> AQS -> 10-layer Deep QC -> corpus/tool integration -> live-production QC -> GO/FROZEN.
