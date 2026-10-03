@@ -60,6 +60,27 @@ jobs:
         run: python idx_catalyst.py
       - name: Build verified controller and broker actor layer
         run: python market_actors.py
+      - name: Validate market actor publication contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from des_universe import TICKERS
+          root=Path('data/market_actors')
+          summary=root/'summary.json'
+          missing=[t for t in TICKERS if not (root/f'{t}.json').is_file()]
+          if missing or not summary.is_file():
+              raise SystemExit(f'market actor publication incomplete: missing={missing[:10]} summary={summary.is_file()}')
+          s=json.loads(summary.read_text(encoding='utf-8'))
+          if len(s.get('stocks') or []) != len(TICKERS):
+              raise SystemExit('market actor summary/universe mismatch')
+          for t in TICKERS:
+              d=json.loads((root/f'{t}.json').read_text(encoding='utf-8'))
+              ctrl=d.get('controller') or {}
+              if ctrl.get('status')=='VERIFIED' and not ctrl.get('sourceUrl'):
+                  raise SystemExit(f'{t}: VERIFIED controller without sourceUrl')
+          print('MARKET_ACTOR_PUBLICATION_OK',len(TICKERS))
+          PY
       - name: Validate disclosure ingestion health
         run: |
           python - <<'PY'
