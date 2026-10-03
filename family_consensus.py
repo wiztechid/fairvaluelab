@@ -13,6 +13,7 @@ def med(xs):
 def process(p):
  d=json.load(open(p,encoding="utf-8"))
  if not isinstance(d,dict) or not d.get("ticker") or not n(d.get("price")):return d
+ stale=d.get("freshnessStatus")=="STALE"
  price=float(d["price"]); q=d.setdefault("quality",{}); methods=d.get("methods") or []
  valid=[m for m in methods if m.get("qcStatus")=="VALID" and all(n(m.get(k)) and n(m.get(k))>0 for k in ("bear","base","bull"))]
  fam={}
@@ -66,6 +67,7 @@ def process(p):
  if d.get("analysisStatus") in ("SIAP","REVIEW"):
   guards=[g for g in guards if not ("Composite FV belum diterbitkan" in g or "Composite FV tidak diterbitkan" in g or "FV Indikatif diterbitkan" in g)]
  q["guards"]=guards
+ if stale:d["analysisStatus"]="STALE"
  d["qcVersion"]=QC;d["engineVersion"]="3.20-family-consensus";d.setdefault("valuationPolicy",{})["consensus"]="One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
  return d
 for p in DATA.glob("*.json"):
