@@ -822,3 +822,37 @@ Scope executed: query landscape -> dominant intent -> SERP composition -> compet
 - #2/#4: additive interpretation-only sections; no production formula/threshold/weight/family/canonical/tool contract changed.
 - Structural source QC after patches: one H1, one canonical, Article+Breadcrumb schema, methodology/tool links and core guards PASS.
 - Next gate: Pages deployment -> live #1-#4 route/canonical/content checks -> hub/sitemap/tool regression -> retrofit FINAL GO/FROZEN.
+
+
+## Deep SERP Retrofit #1-#4 FINAL — 2026-10-03
+Status: FINAL GO / FROZEN.
+- Final Pages deployment for retrofit head 61f9ac6 completed successfully.
+- Live #2 contains the historical-median/regime interpretation guard with self-canonical/index-follow intact.
+- Live #4 contains PBV-vs-ROE/profitability-regime guard with self-canonical/index-follow intact.
+- #1/#3 intentionally received no substantive patch because Deep SERP found no P0/P1 information gap beyond their existing production-specific moat.
+- Sacred Diff remains clean: no formula, threshold, model weight/family, canonical owner, or tool contract changed.
+- Retrofit #1-#4 is now closed; future edits require demonstrated P0/P1 factual, intent, technical, or SERP-regime regression.
+
+## SEO Article #7 FINAL — Historical Dividend Yield — 2026-10-03
+Status: FINAL GO / FROZEN under Private Moat v3.
+- Live owner resolves with self-canonical/index-follow and explicit non-DDM intent boundary.
+- Live sitemap contains 18 URLs including #7; static corpus links and Fair Value integration deployed without observed route regression.
+- AQS final 98/100; 10-layer Deep QC PASS.
+
+## SEO Article #8 opportunity gate — FCF Yield — 2026-10-03
+Status: AUTHORIZED FOR DEEP SERP + DRAFT; final formula-cluster owner gap.
+Canonical target: /riset/valuasi-saham/fcf-yield-harga-wajar-saham/
+Intent owner: explain the exact CekValuasi FCF Yield reverse-valuation method, not generic FCF yield screening and not DCF.
+Production parity from generate_data.py:
+- Requires positive FCF/share and cost of equity > terminal growth in the same cashflow eligibility block as DCF.
+- Required cash yield = clamp(costOfEquity - 0.2*normalizedGrowth, 9%, 18%).
+- Bear FV = FCF/share / 16%.
+- Base FV = FCF/share / required cash yield.
+- Bull FV = FCF/share / max(8%, required cash yield - 2 percentage points).
+- confidence=.75; base relevance=.90 before sector profile multiplier; family=cashflow.
+- Same general economic sanity applies; DCF and FCF Yield share the cashflow family and therefore do not alone satisfy independent-family evidence.
+Deep SERP boundary:
+- Generic FCF yield commonly means equity FCF/market cap or FCF/share/price; authoritative sources stress numerator/denominator matching and distinguish FCFE/equity value from FCFF/enterprise value.
+- CekValuasi owner must clearly say its production output is a reverse valuation from FCF/share and an engine-defined required cash yield; it is not a universal market benchmark, bond-like promised yield, or discounted multi-period DCF.
+- Avoid importing generic web claims such as '8% is cheap' into production semantics; 8/9/16/18% values are engine policy/guards, not universal valuation truths.
+Next: draft -> AQS/10-layer Deep QC -> corpus/tool integration -> live QC -> formula-cluster completion audit.
