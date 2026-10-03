@@ -26,6 +26,8 @@ v=(ROOT/'validate_engine.py').read_text(encoding='utf-8')
 assert "'engineCommit':os.getenv('CEKVALUASI_ENGINE_SHA') or None" in g
 assert "engine_commit=d.get('engineCommit')" in v
 assert "expected_commit=os.getenv('CEKVALUASI_ENGINE_SHA')" in v
-assert "engine_commit!=expected_commit" in v
+assert "not is_stale and engine_commit!=expected_commit" in v
+assert "old['lastAttemptCommit']=os.getenv('CEKVALUASI_ENGINE_SHA') or None" in g
+assert "stale carry-forward missing current attempt provenance" in v
 
 print('PASS fair-value scenario invariants')
