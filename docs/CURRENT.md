@@ -752,3 +752,29 @@ Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
 - Corpus integration: sitemap + static valuation hub + exact Fair Value methodDoc link added. Methodology parent already names Historical EV/EBITDA; no competing owner authorized.
 - AQS provisional: 96/100; live readiness withheld pending deployment.
 - Next: deploy -> live route/canonical/corpus/sitemap/tool regression QC -> FINAL GO/FROZEN if green. Then Article #7 Historical Dividend Yield.
+
+
+## SEO Article #6 FINAL — Historical EV/EBITDA — 2026-10-03
+Status: FINAL GO / FROZEN under Private Moat v3.
+- Live owner resolves with self-canonical/index-follow/OG and complete production article.
+- Static valuation hub contains inbound link; live sitemap now 17 URLs; Fair Value route shows no regression.
+- AQS final: 98/100; 10-layer Deep QC PASS.
+
+## SEO Article #7 opportunity gate — Historical Dividend Yield — 2026-10-03
+Status: AUTHORIZED TO DRAFT under Private Moat v3.
+Canonical owner: /riset/valuasi-saham/dividend-yield-historis-harga-wajar/
+Intent owner: explain CekValuasi reverse valuation from latest annual DPS and the issuer's own robust 5Y historical dividend-yield distribution.
+Moat sentence: CekValuasi groups actual dividends by calendar year, reconstructs annual yield using each year's median market price, validates 0.5%-20% yields and >=3 valid periods, builds median/MAD yield bands, then reverses latest DPS into Bear/Base/Bull prices with explicit yield floors/caps and composite QC.
+Production parity:
+- Yahoo dividend history must initially contain >=3 entries; then retain observations within 5 years of latest dividend date.
+- Annual DPS = sum of dividend events grouped by calendar year; keep positive annual DPS.
+- For each dividend year, annual historical yield = annual DPS / median unadjusted Close in that same year.
+- Valid yield range 0.005..0.20; require >=3 valid annual yields.
+- median yield; MAD; sigma=max(1.4826*MAD,0.001).
+- Latest DPS = latest positive annual grouped DPS.
+- Bear FV = latest DPS / min(0.25, median+sigma) because higher required/implied yield maps to lower price.
+- Base FV = latest DPS / median.
+- Bull FV = latest DPS / max(0.005, median-sigma).
+- Candidate confidence=.68, relevance=.65, family=income; then general positive + 0.05x..5x market sanity and composite robust-outlier gate apply.
+Intent boundary: this is NOT DDM/Gordon Growth. DDM discounts expected future dividend cash flows; this production method reverse-capitalizes latest DPS using the issuer's own historical yield distribution. Do not use DDM growth/discount-rate assumptions in this owner.
+Next: draft -> AQS/10-layer source QC -> corpus/tool integration -> live QC -> FINAL GO/FROZEN.
