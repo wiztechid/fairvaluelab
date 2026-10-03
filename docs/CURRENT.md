@@ -870,3 +870,33 @@ Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
 - Corpus integration: sitemap + static valuation hub + exact Fair Value methodDoc link committed.
 - AQS provisional 98/100; live readiness withheld pending deployment.
 - Next: deployment -> live route/canonical/corpus/sitemap/tool regression QC -> FINAL GO/FROZEN -> Formula Cluster Completion Audit.
+
+
+## SEO Article #8 FINAL — FCF Yield — 2026-10-03
+Status: FINAL GO / FROZEN under Private Moat v3.
+- Pages deployment for source-gate head 7530bb1 completed successfully.
+- Live owner resolves with self-canonical/index-follow/OG; production-specific FCF definition and non-FCFE caveat are live.
+- Static valuation hub contains FCF Yield owner; live sitemap now contains 19 URLs; Fair Value route remains live and source methodDoc maps exact 'FCF Yield' to the owner.
+- AQS final 98/100; 10-layer Deep QC PASS.
+
+## Formula Cluster Completion Audit — 2026-10-03
+Status: COMPLETE / FROZEN.
+Audited production method surface from generate_data.py + augment_models.py against canonical owners, valuation hub, sitemap, and Fair Value methodDoc.
+Canonical ownership:
+- Composite aggregation / evidence sufficiency -> cara-cekvaluasi-menghitung-harga-wajar.
+- DCF -> dcf-harga-wajar-saham.
+- FCF Yield -> fcf-yield-harga-wajar-saham.
+- Historical P/E 3Y + 5Y -> one shared per-historis-harga-wajar-saham owner because formula/intent are the same and only the historical window differs; SPLIT rejected as cannibalization.
+- Historical PBV 5Y -> pbv-historis-harga-wajar-saham.
+- Graham Number -> graham-number.
+- Historical EV/EBITDA -> ev-ebitda-harga-wajar-saham.
+- Historical Dividend Yield -> dividend-yield-historis-harga-wajar.
+Audit result:
+- Formula orphan: NONE.
+- Production method without Fair Value methodDoc: NONE.
+- Production method without durable valuation-hub discovery: NONE.
+- Formula owner missing from sitemap: NONE.
+- Duplicate formula owner requiring merge/retire: NONE.
+- Known same-family boundary remains intentional: DCF + FCF Yield = cashflow; P/E 3Y + 5Y = earnings. These must not be described as independent-family evidence.
+- Formula cluster now CLOSED. Do not create more formula articles unless production gains a genuinely new method or a P0/P1 SERP/factual regression appears.
+Next SEO phase: Opportunity Intelligence outside the closed formula cluster. Run Deep SERP Opportunity Map before authorizing any new indexable URL; prioritize distinct user jobs adjacent to Fair Value rather than keyword variants of existing formula owners.
