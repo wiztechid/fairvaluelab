@@ -1,5 +1,6 @@
 import json,math,statistics,re
 from pathlib import Path
+from valuation_document import is_valuation_document
 DATA=Path('data'); OUT=DATA/'sector_mos.json'
 ELIGIBLE={'SIAP','REVIEW'}
 MIN_MOS=10.0
@@ -28,6 +29,10 @@ def main():
  groups={}
  for p in DATA.glob('*.json'):
   if p.name in {'summary.json','sector_mos.json','news_raw.json','news_collector_status.json','ticker_aliases.json'}:continue
+  try:
+   _scope=json.load(open(p,encoding='utf-8'))
+   if not is_valuation_document(_scope):continue
+  except:continue
   try:d=json.load(open(p,encoding='utf-8'))
   except:continue
   if not isinstance(d,dict):continue
