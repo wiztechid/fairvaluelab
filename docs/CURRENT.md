@@ -778,3 +778,13 @@ Production parity:
 - Candidate confidence=.68, relevance=.65, family=income; then general positive + 0.05x..5x market sanity and composite robust-outlier gate apply.
 Intent boundary: this is NOT DDM/Gordon Growth. DDM discounts expected future dividend cash flows; this production method reverse-capitalizes latest DPS using the issuer's own historical yield distribution. Do not use DDM growth/discount-rate assumptions in this owner.
 Next: draft -> AQS/10-layer source QC -> corpus/tool integration -> live QC -> FINAL GO/FROZEN.
+
+
+## SEO Article #7 draft gate — Historical Dividend Yield — 2026-10-03
+Status: SOURCE PASS / LIVE QC PENDING; not yet FINAL FROZEN.
+- Created canonical owner /riset/valuasi-saham/dividend-yield-historis-harga-wajar/.
+- Intent boundary explicit: reverse historical-yield valuation is not DDM/Gordon Growth; no future dividend-growth or discount-rate assumptions are attributed to production.
+- Source parity PASS: 5Y dividend window; annual DPS aggregation; same-year median unadjusted Close; 0.5%-20% yield guard; >=3 valid annual yields; median/MAD; sigma floor 0.1 percentage point; latest annual DPS; inverse Bear/Base/Bull denominators with 25% cap / 0.5% floor; 0.05x-5x market sanity; confidence .68; relevance .65; family income; composite outlier gate explained.
+- Source QC: one H1/canonical, Article+Breadcrumb schema, disclaimer, methodology link, Fair Value CTA. AQS provisional 96/100; live readiness withheld.
+- Corpus integration completed in separate deterministic commits after initial batch-write safety rejection: sitemap, /valuasi-saham.html, and exact Fair Value methodDoc link.
+- Next: deployment -> live route/canonical/corpus/sitemap/tool regression QC -> FINAL GO/FROZEN. After #7 closes, remaining published formula owner gap is FCF Yield before formula cluster completion review.
