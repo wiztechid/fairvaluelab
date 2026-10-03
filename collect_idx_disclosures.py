@@ -54,7 +54,13 @@ def normalize_obj(obj):
   url=first(a,'url','Url','URL','File_Path','FilePath','Attachment','Link') or PAGE_URL
   if isinstance(url,str) and url.startswith('/'):url='https://www.idx.co.id'+url
   key=f'{ticker}|{dt.isoformat()}|{title}'
-  rows.append({'id':hashlib.sha256(key.encode()).hexdigest()[:20],'ticker':ticker,'title':title,'publishedAt':dt.isoformat(),'source':'IDX','sourceUrl':url,'verification':'OFFICIAL_IDX_API'})
+  up=title.upper()
+  doc_type='FINANCIAL_STATEMENT' if ('LAPORAN KEUANGAN' in up or 'FINANCIAL STATEMENT' in up) else 'OTHER'
+  # Quarter identity is intentionally not inferred from publication date.
+  # Only explicit period tokens are normalized; ambiguous disclosures remain unbound.
+  qm=re.search(r'\\b(20\\d{2})\\s*[- /]?\\s*(?:Q|TRIWULAN|QUARTER)\\s*([1-4])\\b',up)
+  financial_quarter=f'{qm.group(1)}Q{qm.group(2)}' if qm else None
+  rows.append({'id':hashlib.sha256(key.encode()).hexdigest()[:20],'ticker':ticker,'title':title,'publishedAt':dt.isoformat(),'source':'IDX','sourceUrl':url,'verification':'OFFICIAL_IDX_API','documentType':doc_type,'financialQuarter':financial_quarter})
  return rows
 
 def fetch_api():
