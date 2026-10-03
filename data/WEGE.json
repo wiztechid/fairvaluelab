@@ -1,7 +1,7 @@
 {
   "ticker": "WEGE.JK",
   "name": "PT Wijaya Karya Bangunan Gedung Tbk",
-  "asOf": "2026-10-03T10:15:16.320192+00:00",
+  "asOf": "2026-10-03T10:52:08.327674+00:00",
   "price": 37.0,
   "companyProfile": {
     "sector": "Infrastruktur",
@@ -12,63 +12,18 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 103.3080879267397,
-    "base": 153.19483212383514,
-    "bull": 211.9049268867217,
-    "dispersion": 0.0056993902041002015,
-    "agreement": "LIMITED",
+    "bear": 113.14482431145008,
+    "base": 154.288396788341,
+    "bull": 195.4319692652319,
+    "dispersion": null,
+    "agreement": "SINGLE_METHOD",
     "available": false,
-    "indicative": true,
-    "referenceOnly": false,
-    "evidenceLevel": "INDICATIVE"
+    "indicative": false,
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "Adjusted Asset Floor"
   },
   "methods": [
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 31.593388242764608,
-      "base": 44.679127725856695,
-      "bull": 76.26927909215605,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.01589108910891089,
-        "sd": 0.006581967422548706
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 3.41x dari median metode."
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "bear": 101.65515285145737,
-      "base": 152.5396639446563,
-      "bull": 211.9049268867217,
-      "confidence": 0.52,
-      "relevance": 0.65,
-      "rawWeight": 0.338,
-      "warning": null,
-      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
-      "bands": {
-        "revenue": 1623555133947.0,
-        "netDebt": -242443312818.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "countsForIndependence": true,
-      "indicativeWeight": 0.6253469010175764
-    },
     {
       "name": "Adjusted Asset Floor",
       "family": "asset_floor",
@@ -91,8 +46,7 @@
       "included": false,
       "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": false,
-      "indicativeWeight": 0.3746530989824237
+      "countsForIndependence": false
     }
   ],
   "dcfDiagnostics": {
@@ -127,29 +81,17 @@
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
+      "Referensi Nilai dari satu metode valid (Adjusted Asset Floor); belum cukup bukti untuk FV gabungan."
     ],
     "historyYears": 4.993839835728953,
-    "validMethodCount": 2,
-    "independentFamilies": 1,
-    "diagnosticCount": 2,
-    "outlierMethodCount": 1,
+    "validMethodCount": 1,
+    "independentFamilies": 0,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 46,
-    "indicativeMethodCount": 2,
-    "familyConsensus": [
-      {
-        "family": "revenue",
-        "methods": [
-          "EV / Sales"
-        ],
-        "bear": 101.65515285145737,
-        "base": 152.5396639446563,
-        "bull": 211.9049268867217,
-        "weight": 0.25
-      }
-    ],
-    "familyConsensusCount": 1
+    "valuationConfidence": 26,
+    "familyConsensus": [],
+    "familyConsensusCount": 0
   },
   "raw": {
     "epsTTM": null,
@@ -175,8 +117,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "d2cfe0e57ef5798ada34ff163e3705c8dc7c416c",
-  "analysisStatus": "INDIKATIF",
+  "engineCommit": "05610324b4fa40209e7d3171902886d2cf7a4aab",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -189,11 +131,16 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -612725322137.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "inputs": {}
     }
   ],
   "quarterlyNormalization": {
@@ -203,16 +150,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": -0.47544381759554855
-          }
-        ],
-        "normalGrowth": -0.47544381759554855,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -267,9 +208,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "LIMITED_EVIDENCE",
-    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
-    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
