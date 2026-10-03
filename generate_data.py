@@ -122,7 +122,7 @@ def analyze(sym):
             tv=f*(1+terminal)/(k-terminal)/(1+k)**5;return s+tv,sd(tv,s+tv)
         b,tvb=dcf(max(-.02,growth-.05),min(.24,ke+.02));base,tv=dcf(growth,ke);bu,tvu=dcf(min(.22,growth+.04),max(.095,ke-.015))
         if base:dcfdiag={'terminalValueShare':tv,'bearTerminalValueShare':tvb,'bullTerminalValueShare':tvu,'warning':bool(tv and tv>.70),'growth':growth,'costOfEquity':ke,'terminalGrowth':terminal};add('DCF',b,base,bu,.85,.65 if tv and tv>.70 else .85,'cashflow',warning='Porsi nilai jangka panjang tinggi' if tv and tv>.70 else None,explain='Estimasi nilai saham dari arus kas masa depan yang didiskontokan.')
-        req=clamp(ke-growth*.2,.09,.18);add('FCF Yield',fcfps/.16,fcfps/req,fcfps/max(.08,req-.02),.75,.9,'cashflow',explain='Free cash flow per saham dibandingkan required cash yield.')
+        req=clamp(ke-growth*.2,.09,.18);add('FCF Yield',fcfps/max(.16,req),fcfps/req,fcfps/max(.08,req-.02),.75,.9,'cashflow',explain='Free cash flow per saham dibandingkan required cash yield.')
     if pe_ok:
         for yrs in [3,5]:
             x=hist_multiple(h,nis,shares,eps,yrs,'pe',price)
