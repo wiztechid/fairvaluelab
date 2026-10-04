@@ -8,7 +8,7 @@ for x in (health,disclosures,fixture,ticker_only): assert is_valuation_document(
 assert is_valuation_document(valuation) is True
 # Guard against regression to filename blacklists: every root-data writer must import and use canonical scope.
 from pathlib import Path
-writers=['quarterly_normalizer.py','adaptive_pe.py','augment_models.py','family_consensus.py','indicative_fv.py','sector_models.py','sector_waterfall.py','postprocess_qc.py']
+writers=['quarterly_normalizer.py','adaptive_pe.py','augment_models.py','family_consensus.py','indicative_fv.py','sector_models.py','sector_waterfall.py','postprocess_qc.py','snapshot_backtest.py']
 for p in writers:
  s=Path(p).read_text(encoding='utf-8')
  assert 'from valuation_document import is_valuation_document' in s,p
