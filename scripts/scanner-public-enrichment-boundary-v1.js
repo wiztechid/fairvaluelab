@@ -1,10 +1,38 @@
 #!/usr/bin/env node
 const fail=m=>{throw new Error('[scanner-enrichment] '+m)};
+const seedContract=require('../contracts/private-public-scanner-seed-v1.pinned.json');
 const labels={WATCHLIST:'Daftar Pantau',RESEARCH_CONFIRMED:'Terkonfirmasi Riset',WAITING_CONFIRMATION:'Tunggu Konfirmasi',EXTENDED:'Extended',LIMITED_EVIDENCE:'Evidence Terbatas'};
 const historyReason={WATCHLIST:'VALUATION_OPPORTUNITY',RESEARCH_CONFIRMED:'MULTI_DOMAIN_CONFIRMATION',WAITING_CONFIRMATION:'PRICE_CONFIRMATION_PENDING',EXTENDED:'PRICE_EXTENDED',LIMITED_EVIDENCE:'EVIDENCE_LIMITED'};
+const seedKeys=seedContract.exactKeys;
+const states=new Set(seedContract.states);
+const lenses=new Set(seedContract.lenses);
+const reasonCodes=new Set(seedContract.reasonCodes);
+const caveatCodes=new Set(seedContract.caveatCodes);
+const exact=(o,keys,n)=>{if(!o||Object.keys(o).length!==keys.length||keys.some(k=>!Object.prototype.hasOwnProperty.call(o,k)))fail(n+' shape')};
+function validateSeed(seed){
+ exact(seed,seedKeys,'seed');
+ if(seed.contractVersion!==seedContract.contractVersion||seed.publicationStatus!==seedContract.publicationStatus)fail('eligible sanitized seed required');
+ if(!/^[A-Z0-9]{4,6}$/.test(seed.ticker||''))fail('ticker');
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(seed.evaluationDate||'')||Number.isNaN(new Date(seed.evaluationDate+'T00:00:00Z').valueOf()))fail('evaluationDate');
+ if(!states.has(seed.state))fail('public state');
+ for(const [n,a,set,min,max] of [['researchLens',seed.researchLens,lenses,1,6],['reasonCodes',seed.reasonCodes,reasonCodes,1,4],['caveatCodes',seed.caveatCodes,caveatCodes,0,4]]){
+  if(!Array.isArray(a)||a.length<min||a.length>max||new Set(a).size!==a.length||a.some(x=>!set.has(x)))fail(n);
+ }
+ if(!seedContract.catalystFreshness.includes(seed.catalystFreshness))fail('catalyst freshness');
+ if(!Array.isArray(seed.stateHistory)||seed.stateHistory.length<seedContract.stateHistory.min||seed.stateHistory.length>seedContract.stateHistory.max)fail('stateHistory size');
+ let prev=null,prevState=null;
+ for(const h of seed.stateHistory){
+  exact(h,seedContract.stateHistory.exactKeys,'stateHistory');
+  if(!states.has(h.state)||!/^\d{4}-\d{2}-\d{2}$/.test(h.date||'')||Number.isNaN(new Date(h.date+'T00:00:00Z').valueOf()))fail('stateHistory entry');
+  if(h.date>seed.evaluationDate||(prev&&h.date<prev)||h.state===prevState)fail('stateHistory chronology');
+  prev=h.date;prevState=h.state;
+ }
+ const last=seed.stateHistory[seed.stateHistory.length-1];
+ if(last.state!==seed.state||last.date!==seed.evaluationDate)fail('public history/current state/date');
+}
 const strength=new Set(['STRONG','ADEQUATE','LIMITED']),domain=new Set(['SUPPORTIVE','MIXED','WEAK','LIMITED','NOT_AVAILABLE']),fresh=new Set(['CURRENT','AGING','STALE','UNAVAILABLE']),catFresh=new Set(['CURRENT','NO_MATERIAL_EVENT','SOURCE_UNAVAILABLE','STALE']);
 function enrich({seed,canonicalSummary,fairValue,reasonRegistry,publicEvidence,desAsOf}={}){
- if(!seed||seed.contractVersion!=='PRIVATE_PUBLIC_SCANNER_SEED_V1'||seed.publicationStatus!=='ELIGIBLE_FOR_PUBLIC_ENRICHMENT')fail('eligible sanitized seed required');
+ validateSeed(seed);
  const c=(canonicalSummary?.stocks||[]).find(x=>x.ticker===seed.ticker);if(!c)fail('canonical summary identity missing');
  if(String(fairValue?.ticker||'').replace(/\.JK$/,'')!==seed.ticker||fairValue.name!==c.name||fairValue.companyProfile?.sector!==c.sector)fail('canonical Fair Value identity mismatch');
  if(!String(canonicalSummary.universeSource||'').startsWith('OJK ')||!String(canonicalSummary.universeSource).includes('DES'))fail('canonical DES source missing');
@@ -22,4 +50,4 @@ function enrich({seed,canonicalSummary,fairValue,reasonRegistry,publicEvidence,d
  if(!history.length||history[history.length-1].state!==seed.state)fail('public history/current state');
  return {schemaVersion:'scanner-ticker-v1',ticker:seed.ticker,name:c.name,sector:c.sector,industry:fairValue.companyProfile?.industry??null,des:{eligible:true,universe:canonicalSummary.universeSource,asOf:desAsOf},scanner:{state:seed.state,stateLabel:labels[seed.state],stateChangedDate:history[history.length-1].date},researchLens:[...seed.researchLens],evidenceStrength:{overall:p.overall,quality:p.quality,valuation:p.valuation,price:p.price,catalyst:p.catalyst},whyWatching:why,whatToVerify:verify,freshness:{overall:p.overallFreshness,valuation:p.valuationFreshness,fundamentals:p.fundamentalsFreshness,price:p.priceFreshness,catalyst:seed.catalystFreshness,lastEvaluatedAt:p.lastEvaluatedAt},valuationContext:{status:c.status,evidence:p.valuationContextEvidence},provenance:{valuation:'CANONICAL_FAIR_VALUE',price:'MARKET_DATA',des:'OJK_DES',catalyst:'PUBLIC_MATERIAL_EVENTS'},actions:{primary:{type:'FAIR_VALUE',label:'Cek Fair Value',url:'/fair-value/?ticker='+seed.ticker},secondary:{type:'QSTP',label:'Buka QSTP',url:'/qstp.html?ticker='+seed.ticker}},stateHistory:history};
 }
-module.exports={enrich};
+module.exports={enrich,validateSeed};

@@ -1,0 +1,22 @@
+name: Scanner Public Enrichment Ingress v1 Gate
+on:
+  push:
+    paths:
+      - 'scripts/scanner-public-enrichment-boundary-v1.js'
+      - 'contracts/private-public-scanner-seed-v1.pinned.json'
+      - 'scripts/scanner-public-enrichment-boundary-adversarial-test-v1.js'
+      - '.github/workflows/scanner-public-enrichment-ingress-v1-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/scanner-public-enrichment-boundary-v1.js'
+      - 'scripts/scanner-public-enrichment-boundary-adversarial-test-v1.js'
+      - '.github/workflows/scanner-public-enrichment-ingress-v1-gate.yml'
+jobs:
+  ingress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/scanner-public-enrichment-boundary-adversarial-test-v1.js
