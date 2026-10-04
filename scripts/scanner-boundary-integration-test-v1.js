@@ -5,8 +5,8 @@ const canonicalSummary=read('data/summary.json'), registry=read('data/scanner/re
 const canon=canonicalSummary.stocks.find(x=>x.ticker==='AADI'); if(!canon)throw new Error('canonical AADI fixture unavailable');
 const fv=read('data/AADI.json'), date='2026-09-29', evaluated=date+'T03:00:00Z';
 const seed={contractVersion:'PRIVATE_PUBLIC_SCANNER_SEED_V1',publicationStatus:'ELIGIBLE_FOR_PUBLIC_ENRICHMENT',ticker:'AADI',evaluationDate:date,state:'WATCHLIST',researchLens:['UNDERVALUED'],reasonCodes:['VALUATION_OPPORTUNITY'],caveatCodes:['PRICE_CONFIRMATION_PENDING'],catalystFreshness:'SOURCE_UNAVAILABLE',stateHistory:[{state:'WATCHLIST',date}]};
-const publicEvidence={ticker:'AADI',des:{eligible:true,universe:canonicalSummary.universeSource,asOf:'2026-05-21'},evidenceStrength:{overall:'ADEQUATE',quality:'MIXED',valuation:'SUPPORTIVE',price:'MIXED',catalyst:'NOT_AVAILABLE'},freshness:{overall:'CURRENT',valuation:'CURRENT',fundamentals:'CURRENT',price:'CURRENT',catalyst:'SOURCE_UNAVAILABLE',lastEvaluatedAt:evaluated},provenance:{valuation:'CANONICAL_FAIR_VALUE',price:'MARKET_DATA',des:'OJK_DES',catalyst:'PUBLIC_MATERIAL_EVENTS'}};
-const t=enrich({seed,canonicalSummary,canonicalFairValue:fv,publicEvidence,registry});
+const publicEvidence={overall:'ADEQUATE',valuationContextEvidence:'ADEQUATE',quality:'MIXED',valuation:'SUPPORTIVE',price:'MIXED',catalyst:'NOT_AVAILABLE',overallFreshness:'CURRENT',valuationFreshness:'CURRENT',fundamentalsFreshness:'CURRENT',priceFreshness:'CURRENT',valuationStatus:canon.status,lastEvaluatedAt:evaluated};
+const t=enrich({seed,canonicalSummary,fairValue:fv,reasonRegistry:registry,publicEvidence,desAsOf:'2026-05-21'});
 if(t.schemaVersion!=='scanner-ticker-v1'||t.ticker!=='AADI')throw new Error('enrichment did not emit scanner-ticker-v1');
 const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'scanner-boundary-integration-'));
 for(const d of ['data/scanner/tickers','contracts','scripts','data/scanner'])fs.mkdirSync(path.join(tmp,d),{recursive:true});
