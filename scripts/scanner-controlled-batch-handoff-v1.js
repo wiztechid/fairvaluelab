@@ -5,10 +5,11 @@ function buildBatch({seeds,canonicalSummary,fairValues,reasonRegistry,evidenceBy
  if(!Array.isArray(seeds)||!seeds.length)fail('non-empty seeds required');
  if(typeof generatedAt!=='string'||Number.isNaN(new Date(generatedAt).valueOf()))fail('generatedAt');
  if(!Number.isInteger(evaluatedUniverseCount)||evaluatedUniverseCount<seeds.length||evaluatedUniverseCount>canonicalSummary.requested)fail('evaluatedUniverseCount');
- const seen=new Set(),tickers=[];
- for(const s of seeds){if(!s||seen.has(s.ticker))fail('duplicate/invalid ticker '+(s&&s.ticker));seen.add(s.ticker);tickers.push(s.ticker)}
+ const seen=new Set();
+ for(const s of seeds){if(!s||typeof s.ticker!=='string'||seen.has(s.ticker))fail('duplicate/invalid ticker '+(s&&s.ticker));seen.add(s.ticker)}
+ const ordered=[...seeds].sort((a,b)=>a.ticker.localeCompare(b.ticker));
  const out=[];
- for(const seed of seeds){
+ for(const seed of ordered){
   const fairValue=fairValues&&fairValues[seed.ticker], publicEvidence=evidenceByTicker&&evidenceByTicker[seed.ticker];
   if(!fairValue||!publicEvidence)fail('incomplete batch input '+seed.ticker);
   out.push(enrich({seed,canonicalSummary,fairValue,reasonRegistry,publicEvidence,desAsOf}));
