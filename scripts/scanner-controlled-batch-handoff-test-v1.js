@@ -1,0 +1,27 @@
+const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process'),{buildBatch}=require('./scanner-controlled-batch-handoff-v1');
+const ROOT=path.resolve(__dirname,'..'),read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8')),summary=read('data/summary.json'),registry=read('data/scanner/reason-registry.json');
+const names=['AADI','AALI','ABMM'],date='2026-09-29',generatedAt=date+'T03:00:00Z';
+const state=['WATCHLIST','RESEARCH_CONFIRMED','WAITING_CONFIRMATION'];
+const reason=['VALUATION_OPPORTUNITY','MULTI_DOMAIN_CONFIRMATION','PRICE_STRUCTURE_SUPPORT'];
+const caveat=[['PRICE_CONFIRMATION_PENDING'],[],['PRICE_CONFIRMATION_PENDING']];
+const seeds=names.map((ticker,i)=>({contractVersion:'PRIVATE_PUBLIC_SCANNER_SEED_V1',publicationStatus:'ELIGIBLE_FOR_PUBLIC_ENRICHMENT',ticker,evaluationDate:date,state:state[i],researchLens:[i===1?'QUALITY_VALUE':'UNDERVALUED'],reasonCodes:[reason[i]],caveatCodes:caveat[i],catalystFreshness:'SOURCE_UNAVAILABLE',stateHistory:[{state:state[i],date}]}));
+const fairValues=Object.fromEntries(names.map(t=>[t,read('data/'+t+'.json')]));const evidenceByTicker={};
+for(const ticker of names){const c=summary.stocks.find(x=>x.ticker===ticker);evidenceByTicker[ticker]={overall:'ADEQUATE',valuationContextEvidence:'ADEQUATE',quality:'MIXED',valuation:'SUPPORTIVE',price:'MIXED',catalyst:'NOT_AVAILABLE',overallFreshness:'CURRENT',valuationFreshness:'CURRENT',fundamentalsFreshness:'CURRENT',priceFreshness:'CURRENT',valuationStatus:c.status,lastEvaluatedAt:generatedAt}}
+const args={seeds,canonicalSummary:summary,fairValues,reasonRegistry:registry,evidenceByTicker,desAsOf:'2026-05-21',generatedAt,evaluatedUniverseCount:3};
+const batch=buildBatch(args); if(Object.keys(batch.tickers).length!==3||batch.summary.watchlist.count!==3)throw new Error('batch size');
+if(JSON.stringify(batch)!==JSON.stringify(buildBatch(args)))throw new Error('batch not deterministic');
+const reversed={...args,seeds:[...seeds].reverse()};
+if(JSON.stringify(batch)!==JSON.stringify(buildBatch(reversed)))throw new Error('batch order must be canonical independent of input order');
+if(batch.summary.items.map(x=>x.ticker).join(',')!=='AADI,AALI,ABMM')throw new Error('canonical ticker order');
+const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'scanner-batch-'));for(const d of ['data/scanner/tickers','contracts','scripts','data/scanner'])fs.mkdirSync(path.join(tmp,d),{recursive:true});
+const copy=(s,d=s)=>fs.copyFileSync(path.join(ROOT,s),path.join(tmp,d));copy('data/summary.json');for(const t of names)copy('data/'+t+'.json');copy('data/scanner/reason-registry.json');copy('contracts/scanner-summary-v1.schema.json');copy('contracts/scanner-ticker-v1.schema.json');copy('scripts/scanner-contract-validator.js');copy('scripts/scanner-publication-gate.js');
+fs.writeFileSync(path.join(tmp,'data/scanner/summary.json'),JSON.stringify(batch.summary));for(const [ticker,obj] of Object.entries(batch.tickers))fs.writeFileSync(path.join(tmp,'data/scanner/tickers/'+ticker+'.json'),JSON.stringify(obj));
+cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-publication-gate.js')],{stdio:'inherit',env:{...process.env,SCANNER_PUBLICATION_ROOT:tmp}});
+const reject=(name,mutate)=>{const a={...args,seeds:JSON.parse(JSON.stringify(seeds)),fairValues:{...fairValues},evidenceByTicker:{...evidenceByTicker}};mutate(a);let ok=false;try{buildBatch(a)}catch(_){ok=true}if(!ok)throw new Error('adversarial batch passed '+name)};
+reject('empty batch',a=>a.seeds=[]);
+reject('evaluated below candidate count',a=>a.evaluatedUniverseCount=2);
+reject('evaluated above eligible universe',a=>a.evaluatedUniverseCount=summary.requested+1);
+reject('invalid generatedAt',a=>a.generatedAt='not-a-date');
+reject('missing evaluated count',a=>delete a.evaluatedUniverseCount);reject('duplicate ticker',a=>a.seeds[1].ticker='AADI');reject('missing fair value',a=>delete a.fairValues.AALI);reject('missing evidence',a=>delete a.evidenceByTicker.ABMM);reject('one invalid seed makes whole batch fail',a=>a.seeds[2].state='DETECTED');
+if(read('data/scanner/summary.json').generationStatus!=='NOT_GENERATED')throw new Error('production PRE_ENGINE_LOCK changed');
+console.log('SCANNER_CONTROLLED_BATCH_HANDOFF_V1_PASS 3 tickers; deterministic atomic staging; production locked');
