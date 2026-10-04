@@ -1,0 +1,24 @@
+name: Scanner Atomic Authorized Publisher v1 Gate
+on:
+  push:
+    paths:
+      - 'scripts/scanner-atomic-authorized-publisher-v1.js'
+      - 'scripts/scanner-atomic-authorized-publisher-test-v1.js'
+      - 'scripts/scanner-publication-authorization-v1.js'
+      - 'scripts/scanner-publication-gate.js'
+      - '.github/workflows/scanner-atomic-authorized-publisher-v1-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/scanner-atomic-authorized-publisher-v1.js'
+      - 'scripts/scanner-atomic-authorized-publisher-test-v1.js'
+      - 'scripts/scanner-publication-authorization-v1.js'
+      - 'scripts/scanner-publication-gate.js'
+      - '.github/workflows/scanner-atomic-authorized-publisher-v1-gate.yml'
+jobs:
+  publisher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '20'}
+      - run: node scripts/scanner-atomic-authorized-publisher-test-v1.js
