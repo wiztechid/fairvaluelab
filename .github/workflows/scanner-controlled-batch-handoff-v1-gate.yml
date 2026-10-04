@@ -1,0 +1,26 @@
+name: Scanner Controlled Batch Handoff v1 Gate
+on:
+  push:
+    paths:
+      - 'scripts/scanner-controlled-batch-handoff-v1.js'
+      - 'scripts/scanner-controlled-batch-handoff-test-v1.js'
+      - 'scripts/scanner-public-enrichment-boundary-v1.js'
+      - 'scripts/scanner-publication-gate.js'
+      - 'data/summary.json'
+      - 'data/*.json'
+      - '.github/workflows/scanner-controlled-batch-handoff-v1-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/scanner-controlled-batch-handoff-v1.js'
+      - 'scripts/scanner-controlled-batch-handoff-test-v1.js'
+      - 'scripts/scanner-public-enrichment-boundary-v1.js'
+      - 'scripts/scanner-publication-gate.js'
+      - '.github/workflows/scanner-controlled-batch-handoff-v1-gate.yml'
+jobs:
+  batch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '20'}
+      - run: node scripts/scanner-controlled-batch-handoff-test-v1.js
