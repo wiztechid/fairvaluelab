@@ -7,9 +7,9 @@ for(const ticker of names){const c=summary.stocks.find(x=>x.ticker===ticker);evi
 const batch=buildBatch({seeds,canonicalSummary:summary,fairValues,reasonRegistry:registry,evidenceByTicker,desAsOf:'2026-05-21',generatedAt,evaluatedUniverseCount:2});
 const digest=snapshotDigest(batch),auth={authorizationId:'scanner-release-0001',status:'APPROVED_FOR_PUBLICATION',snapshotDigest:digest,authorizedAt:'2026-10-04T09:00:00Z',expiresAt:'2026-10-04T11:00:00Z'},now='2026-10-04T10:00:00Z';
 authorize({batch,authorization:auth,now});
-const reject=(name,b,a,n)=>{if(arguments.length<3)a=auth;if(arguments.length<4)n=now;let ok=false;try{authorize({batch:b,authorization:a,now:n})}catch(_){ok=true}if(!ok)throw new Error('authorization attack passed '+name)};
-reject('missing authorization',batch,undefined);reject('wrong status',batch,{...auth,status:'PENDING'});reject('expired',batch,auth,'2026-10-04T12:00:00Z');reject('future authorization',batch,{...auth,authorizedAt:'2026-10-04T10:30:00Z'});reject('extra field',batch,{...auth,approver:'implicit'});
-const changed=JSON.parse(JSON.stringify(batch));changed.summary.items[0].state='WAITING_CONFIRMATION';reject('snapshot replay after mutation',changed,auth);
+const reject=(name,{b=batch,a=auth,n=now}={})=>{let ok=false;try{authorize({batch:b,authorization:a,now:n})}catch(_){ok=true}if(!ok)throw new Error('authorization attack passed '+name)};
+reject('missing authorization',{a:undefined});reject('wrong status',{a:{...auth,status:'PENDING'}});reject('expired',{n:'2026-10-04T12:00:00Z'});reject('future authorization',{a:{...auth,authorizedAt:'2026-10-04T10:30:00Z'}});reject('authorization predates snapshot',{a:{...auth,authorizedAt:'2026-09-28T10:00:00Z'}});reject('extra field',{a:{...auth,approver:'implicit'}});
+const changed=JSON.parse(JSON.stringify(batch));changed.summary.items[0].state='WAITING_CONFIRMATION';reject('snapshot replay after mutation',{b:changed});
 const reordered=JSON.parse(JSON.stringify(batch));reordered.tickers=Object.fromEntries(Object.entries(reordered.tickers).reverse());if(snapshotDigest(reordered)!==digest)throw new Error('canonical digest changed on object key order');
 if(read('data/scanner/summary.json').generationStatus!=='NOT_GENERATED')throw new Error('production PRE_ENGINE_LOCK changed');
 console.log('SCANNER_PUBLICATION_AUTHORIZATION_V1_PASS snapshot-bound expiring fail-closed; production locked');
