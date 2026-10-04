@@ -3,6 +3,7 @@ from pathlib import Path
 from datetime import datetime, timezone, timedelta
 import pandas as pd
 import yfinance as yf
+from valuation_document import is_valuation_document
 
 DATA=Path('data'); OUT=DATA/'backtest'; OUT.mkdir(parents=True,exist_ok=True)
 HORIZONS=[30,60,90,180,365]
@@ -66,10 +67,9 @@ def main():
         if p.name in ('summary.json','errors.json'):continue
         try:d=json.load(open(p,encoding='utf-8'))
         except:continue
-        # data/ now also contains collector feeds/status files. Snapshot only
-        # valuation ticker objects; disclosure feeds are JSON arrays and must
-        # never be interpreted as ticker valuation documents.
-        if not isinstance(d,dict):continue
+        # Snapshot creation may consume only canonical first-party valuation artifacts.
+        # Provenance/collector/fixture sidecars are never eligible even if they carry ticker/fairValue-like fields.
+        if not is_valuation_document(d):continue
         fv=d.get('fairValue') or {}
         if not isinstance(fv,dict) or not fv.get('available'):continue
         ticker=(d.get('ticker') or p.stem).replace('.JK','');fq=financial_quarter(d)
