@@ -15,11 +15,14 @@ function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=pat
   return {stage,proof};
  }catch(e){fs.rmSync(stage,{recursive:true,force:true});throw e}
 }
-function promoteStagedPublication({stage,root}={}){
+function promoteStagedPublication({stage,root,simulateFailureAfterBackup=false}={}){
  if(!stage||!root||!fs.existsSync(path.join(stage,'data/scanner/summary.json')))fail('validated stage required');
+ const stageReal=fs.realpathSync(stage),rootReal=fs.realpathSync(root);
+ if(path.dirname(stageReal)!==path.dirname(rootReal)||!path.basename(stageReal).startsWith('.scanner-publish-'))fail('untrusted stage location');
  const target=path.join(path.resolve(root),'data/scanner'),backup=target+'.backup-'+process.pid;
  try{
   if(fs.existsSync(target))fs.renameSync(target,backup);
+  if(simulateFailureAfterBackup)throw new Error('simulated promote failure');
   fs.mkdirSync(path.dirname(target),{recursive:true});fs.renameSync(path.join(stage,'data/scanner'),target);
   if(fs.existsSync(backup))fs.rmSync(backup,{recursive:true,force:true});fs.rmSync(stage,{recursive:true,force:true});
  }catch(e){if(fs.existsSync(target))fs.rmSync(target,{recursive:true,force:true});if(fs.existsSync(backup))fs.renameSync(backup,target);throw e}
