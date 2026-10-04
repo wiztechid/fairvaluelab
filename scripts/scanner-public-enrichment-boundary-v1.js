@@ -15,6 +15,7 @@ function enrich({seed,canonicalSummary,fairValue,reasonRegistry,publicEvidence,d
  for(const k of ['overallFreshness','valuationFreshness','fundamentalsFreshness','priceFreshness'])if(!fresh.has(p[k]))fail('public freshness '+k);
  if(!catFresh.has(seed.catalystFreshness))fail('catalyst freshness');
  if(c.status!==p.valuationStatus)fail('valuation status must bind canonical summary');
+ if(typeof p.lastEvaluatedAt!=='string'||Number.isNaN(new Date(p.lastEvaluatedAt).valueOf())||p.lastEvaluatedAt.slice(0,10)!==seed.evaluationDate)fail('evaluation time/date binding');
  const why=seed.reasonCodes.map(code=>{const text=reasonRegistry?.whyWatching?.[code];if(!text)fail('reason registry '+code);return {code,text}});
  const verify=seed.caveatCodes.map(code=>{const text=reasonRegistry?.whatToVerify?.[code];if(!text)fail('caveat registry '+code);return {code,text}});
  const history=(seed.stateHistory||[]).map(h=>{const reason=historyReason[h.state];if(!reason)fail('unsupported public history state '+h.state);return {state:h.state,date:h.date,reason}});
