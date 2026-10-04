@@ -13,4 +13,13 @@ for p in writers:
  s=Path(p).read_text(encoding='utf-8')
  assert 'from valuation_document import is_valuation_document' in s,p
  assert 'is_valuation_document(' in s,p
-print('VALUATION_ARTIFACT_ISOLATION_V2_POSTPROCESS_CLOSED_PASS')
+# Discovery guard: fail closed if a new top-level Python root-data glob writer appears without canonical scope.
+# This supplements the explicit writer inventory so future pipelines cannot silently escape it.
+for p in Path('.').glob('*.py'):
+ s=p.read_text(encoding='utf-8')
+ root_scan=("DATA.glob('*.json')" in s or "glob.glob(os.path.join(OUT,'*.json'))" in s or "glob('data/*.json')" in s or 'glob("data/*.json")' in s)
+ mutates=('json.dump(' in s or '.write_text(' in s)
+ if root_scan and mutates:
+  assert 'from valuation_document import is_valuation_document' in s,p
+  assert 'is_valuation_document(' in s,p
+print('VALUATION_ARTIFACT_ISOLATION_V3_DISCOVERY_GUARD_PASS')
