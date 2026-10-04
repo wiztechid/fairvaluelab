@@ -1,0 +1,22 @@
+name: Scanner Publication Authorization v1 Gate
+on:
+  push:
+    paths:
+      - 'scripts/scanner-publication-authorization-v1.js'
+      - 'scripts/scanner-publication-authorization-test-v1.js'
+      - 'scripts/scanner-controlled-batch-handoff-v1.js'
+      - '.github/workflows/scanner-publication-authorization-v1-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/scanner-publication-authorization-v1.js'
+      - 'scripts/scanner-publication-authorization-test-v1.js'
+      - 'scripts/scanner-controlled-batch-handoff-v1.js'
+      - '.github/workflows/scanner-publication-authorization-v1-gate.yml'
+jobs:
+  authorization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '20'}
+      - run: node scripts/scanner-publication-authorization-test-v1.js
