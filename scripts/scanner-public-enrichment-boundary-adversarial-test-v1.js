@@ -11,3 +11,12 @@ let failed=false;try{run({...base,stateHistory:[{state:'DETECTED',date:'2026-09-
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:{...fv,name:'Private Alias'},reasonRegistry:registry,publicEvidence:ev,desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'canonical identity mismatch accepted');
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:{...ev,lastEvaluatedAt:'2026-09-30T03:00:00Z'},desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'evaluation timestamp escaped sanitized seed date');
 console.log('SCANNER_PUBLIC_ENRICHMENT_BOUNDARY_V1_PASS');
+
+const mustFail=(seed,msg)=>{let x=false;try{run(seed)}catch(e){x=true}assert(x,msg)};
+mustFail({...base,privateScore:'secret'},'unknown/private seed field accepted');
+mustFail({...base,researchLens:['UNDERVALUED','UNDERVALUED']},'duplicate lens accepted');
+mustFail({...base,reasonCodes:['VALUATION_OPPORTUNITY','VALUATION_OPPORTUNITY']},'duplicate reason accepted');
+mustFail({...base,stateHistory:[{state:'WATCHLIST',date:'2026-09-26'},{state:'WAITING_CONFIRMATION',date:'2026-09-27'},{state:'RESEARCH_CONFIRMED',date:'2026-09-28'},{state:'WATCHLIST',date:'2026-09-29'}]},'history >3 accepted');
+mustFail({...base,stateHistory:[{state:'WAITING_CONFIRMATION',date:'2026-09-29'},{state:'WATCHLIST',date:'2026-09-28'}]},'nonchronological history accepted');
+mustFail({...base,stateHistory:[{state:'WATCHLIST',date:'2026-09-28'}]},'current state date not bound to evaluation date');
+mustFail({...base,stateHistory:[{state:'WATCHLIST',date:'2026-09-28'},{state:'WATCHLIST',date:'2026-09-29'}]},'adjacent duplicate public states accepted');
