@@ -10,7 +10,8 @@ function authorize({batch,authorization,now}={}){
  if(authorization.status!=='APPROVED_FOR_PUBLICATION')fail('status');
  if(!/^[A-Za-z0-9._-]{8,128}$/.test(authorization.authorizationId||''))fail('authorizationId');
  const at=Date.parse(authorization.authorizedAt), exp=Date.parse(authorization.expiresAt), n=Date.parse(now);
- if([at,exp,n].some(Number.isNaN)||at>n||exp<=n||exp<=at)fail('authorization time window');
+ const generated=Date.parse(batch.summary.generatedAt);
+ if([at,exp,n,generated].some(Number.isNaN)||at<generated||at>n||exp<=n||exp<=at)fail('authorization time window');
  const digest=snapshotDigest(batch);if(authorization.snapshotDigest!==digest)fail('snapshot binding');
  return {authorizationId:authorization.authorizationId,snapshotDigest:digest,authorizedAt:authorization.authorizedAt,expiresAt:authorization.expiresAt};
 }
