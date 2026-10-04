@@ -1,27 +1,28 @@
 #!/usr/bin/env node
 const fail=m=>{throw new Error('[scanner-enrichment] '+m)};
+const seedContract=require('../contracts/private-public-scanner-seed-v1.pinned.json');
 const labels={WATCHLIST:'Daftar Pantau',RESEARCH_CONFIRMED:'Terkonfirmasi Riset',WAITING_CONFIRMATION:'Tunggu Konfirmasi',EXTENDED:'Extended',LIMITED_EVIDENCE:'Evidence Terbatas'};
 const historyReason={WATCHLIST:'VALUATION_OPPORTUNITY',RESEARCH_CONFIRMED:'MULTI_DOMAIN_CONFIRMATION',WAITING_CONFIRMATION:'PRICE_CONFIRMATION_PENDING',EXTENDED:'PRICE_EXTENDED',LIMITED_EVIDENCE:'EVIDENCE_LIMITED'};
-const seedKeys=['contractVersion','publicationStatus','ticker','evaluationDate','state','researchLens','reasonCodes','caveatCodes','catalystFreshness','stateHistory'];
-const states=new Set(['WATCHLIST','RESEARCH_CONFIRMED','WAITING_CONFIRMATION','LIMITED_EVIDENCE']);
-const lenses=new Set(['UNDERVALUED','QUALITY_VALUE','DIVIDEND_QUALITY','QUALITY_GROWTH','VALUE_MOMENTUM','HIDDEN_OPPORTUNITY']);
-const reasonCodes=new Set(['VALUATION_OPPORTUNITY','PEER_RELATIVE_VALUE','QUALITY_SUPPORT','CASHFLOW_SUPPORT','SUSTAINABLE_GROWTH','PRICE_STRUCTURE_SUPPORT','MOMENTUM_CONFIRMATION','MATERIAL_CATALYST','MULTI_DOMAIN_CONFIRMATION']);
-const caveatCodes=new Set(['PRICE_CONFIRMATION_PENDING','VALUATION_DISAGREEMENT','LIMITED_VALUATION_EVIDENCE','FUNDAMENTAL_EVIDENCE_MIXED','PRICE_EXTENDED','CATALYST_UNVERIFIED','CATALYST_UNAVAILABLE','DATA_STALE','LIQUIDITY_CAUTION','MATERIAL_EVENT_REVIEW']);
+const seedKeys=seedContract.exactKeys;
+const states=new Set(seedContract.states);
+const lenses=new Set(seedContract.lenses);
+const reasonCodes=new Set(seedContract.reasonCodes);
+const caveatCodes=new Set(seedContract.caveatCodes);
 const exact=(o,keys,n)=>{if(!o||Object.keys(o).length!==keys.length||keys.some(k=>!Object.prototype.hasOwnProperty.call(o,k)))fail(n+' shape')};
 function validateSeed(seed){
  exact(seed,seedKeys,'seed');
- if(seed.contractVersion!=='PRIVATE_PUBLIC_SCANNER_SEED_V1'||seed.publicationStatus!=='ELIGIBLE_FOR_PUBLIC_ENRICHMENT')fail('eligible sanitized seed required');
+ if(seed.contractVersion!==seedContract.contractVersion||seed.publicationStatus!==seedContract.publicationStatus)fail('eligible sanitized seed required');
  if(!/^[A-Z0-9]{4,6}$/.test(seed.ticker||''))fail('ticker');
  if(!/^\d{4}-\d{2}-\d{2}$/.test(seed.evaluationDate||'')||Number.isNaN(new Date(seed.evaluationDate+'T00:00:00Z').valueOf()))fail('evaluationDate');
  if(!states.has(seed.state))fail('public state');
  for(const [n,a,set,min,max] of [['researchLens',seed.researchLens,lenses,1,6],['reasonCodes',seed.reasonCodes,reasonCodes,1,4],['caveatCodes',seed.caveatCodes,caveatCodes,0,4]]){
   if(!Array.isArray(a)||a.length<min||a.length>max||new Set(a).size!==a.length||a.some(x=>!set.has(x)))fail(n);
  }
- if(!catFresh.has(seed.catalystFreshness))fail('catalyst freshness');
- if(!Array.isArray(seed.stateHistory)||seed.stateHistory.length<1||seed.stateHistory.length>3)fail('stateHistory size');
+ if(!seedContract.catalystFreshness.includes(seed.catalystFreshness))fail('catalyst freshness');
+ if(!Array.isArray(seed.stateHistory)||seed.stateHistory.length<seedContract.stateHistory.min||seed.stateHistory.length>seedContract.stateHistory.max)fail('stateHistory size');
  let prev=null,prevState=null;
  for(const h of seed.stateHistory){
-  exact(h,['state','date'],'stateHistory');
+  exact(h,seedContract.stateHistory.exactKeys,'stateHistory');
   if(!states.has(h.state)||!/^\d{4}-\d{2}-\d{2}$/.test(h.date||'')||Number.isNaN(new Date(h.date+'T00:00:00Z').valueOf()))fail('stateHistory entry');
   if(h.date>seed.evaluationDate||(prev&&h.date<prev)||h.state===prevState)fail('stateHistory chronology');
   prev=h.date;prevState=h.state;
