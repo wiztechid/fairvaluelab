@@ -8,6 +8,7 @@ function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=pat
  const stage=fs.mkdtempSync(path.join(path.dirname(path.resolve(root)),'.scanner-publish-'));
  try{
   for(const p of ['data/summary.json','data/scanner/reason-registry.json','contracts/scanner-summary-v1.schema.json','contracts/scanner-ticker-v1.schema.json']){const d=path.join(stage,p);fs.mkdirSync(path.dirname(d),{recursive:true});fs.copyFileSync(path.join(sourceRoot,p),d)}
+  for(const ticker of Object.keys(batch.tickers)){const src=path.join(sourceRoot,'data',ticker+'.json');if(!fs.existsSync(src))fail('canonical Fair Value record missing '+ticker);fs.copyFileSync(src,path.join(stage,'data',ticker+'.json'))}
   write(path.join(stage,'data/scanner/summary.json'),batch.summary);
   for(const [ticker,obj] of Object.entries(batch.tickers))write(path.join(stage,'data/scanner/tickers',ticker+'.json'),obj);
   cp.execFileSync(process.execPath,[path.join(sourceRoot,'scripts/scanner-publication-gate.js')],{stdio:'pipe',env:{...process.env,SCANNER_PUBLICATION_ROOT:stage}});
