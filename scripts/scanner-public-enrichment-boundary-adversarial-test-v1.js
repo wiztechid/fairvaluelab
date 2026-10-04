@@ -9,4 +9,5 @@ const states=[['WATCHLIST','VALUATION_OPPORTUNITY'],['RESEARCH_CONFIRMED','MULTI
 for(const [state,reason] of states){const seed={...base,state,stateHistory:[{state,date:'2026-09-29'}]};o=run(seed);assert.equal(o.stateHistory[0].reason,reason);}
 let failed=false;try{run({...base,stateHistory:[{state:'DETECTED',date:'2026-09-28'},{state:'WATCHLIST',date:'2026-09-29'}]})}catch(e){failed=true}assert(failed,'unsupported private history state crossed public boundary');
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:{...fv,name:'Private Alias'},reasonRegistry:registry,publicEvidence:ev,desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'canonical identity mismatch accepted');
+failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:{...ev,lastEvaluatedAt:'2026-09-30T03:00:00Z'},desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'evaluation timestamp escaped sanitized seed date');
 console.log('SCANNER_PUBLIC_ENRICHMENT_BOUNDARY_V1_PASS');
