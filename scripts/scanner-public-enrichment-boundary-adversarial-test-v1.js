@@ -11,6 +11,9 @@ let failed=false;try{run({...base,stateHistory:[{state:'DETECTED',date:'2026-09-
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:{...fv,name:'Private Alias'},reasonRegistry:registry,publicEvidence:ev,desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'canonical identity mismatch accepted');
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:{...ev,lastEvaluatedAt:'2026-09-30T03:00:00Z'},desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'evaluation timestamp escaped sanitized seed date');
 let ext=false;try{run({...base,state:'EXTENDED',stateHistory:[{state:'EXTENDED',date:'2026-09-29'}]})}catch(e){ext=true}assert(ext,'EXTENDED must not cross private seed ingress');
+const valuationOnly={...seed,state:'RESEARCH_CONFIRMED',reasonCodes:['VALUATION_OPPORTUNITY'],stateHistory:[{state:'RESEARCH_CONFIRMED',date:seed.evaluationDate}]};
+const valuationOnlyOut=enrich({seed:valuationOnly,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:{...evidence,valuationStatus:summary.stocks.find(x=>x.ticker===seed.ticker).status},desAsOf:'2026-05-21'});
+assert.equal(valuationOnlyOut.stateHistory.at(-1).reason,'VALUATION_OPPORTUNITY');assert.notEqual(valuationOnlyOut.stateHistory.at(-1).reason,'MULTI_DOMAIN_CONFIRMATION');
 console.log('SCANNER_PUBLIC_ENRICHMENT_BOUNDARY_V1_PASS');
 
 const mustFail=(seed,msg)=>{let x=false;try{run(seed)}catch(e){x=true}assert(x,msg)};
