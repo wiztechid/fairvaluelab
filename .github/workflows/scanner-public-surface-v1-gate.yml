@@ -1,0 +1,14 @@
+name: Scanner Public Surface v1 Gate
+on:
+  push:
+    paths: ['scanner/**','scripts/scanner-public-surface-test-v1.js','.github/workflows/scanner-public-surface-v1-gate.yml']
+  pull_request:
+    paths: ['scanner/**','scripts/scanner-public-surface-test-v1.js','.github/workflows/scanner-public-surface-v1-gate.yml']
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node scripts/scanner-public-surface-test-v1.js
