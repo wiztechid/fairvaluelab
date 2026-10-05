@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process'),{authorize}=require('./scanner-publication-authorization-v1');
+const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process'),{authorize}=require('./scanner-publication-authorization-v1'),{verifyActivation}=require('./scanner-production-activation-v1');
 const fail=m=>{throw new Error('[scanner-publisher] '+m)};
 const write=(p,v)=>{fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n')};
 function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=path.resolve(__dirname,'..')}={}){
@@ -15,7 +15,8 @@ function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=pat
   return {stage,proof};
  }catch(e){fs.rmSync(stage,{recursive:true,force:true});throw e}
 }
-function promoteStagedPublication({stage,root,simulateFailureAfterBackup=false}={}){
+function promoteStagedPublication({stage,root,activation,simulateFailureAfterBackup=false}={}){
+ verifyActivation(activation);
  if(!stage||!root||!fs.existsSync(path.join(stage,'data/scanner/summary.json')))fail('validated stage required');
  const stageReal=fs.realpathSync(stage),rootReal=fs.realpathSync(root);
  if(path.dirname(stageReal)!==path.dirname(rootReal)||!path.basename(stageReal).startsWith('.scanner-publish-'))fail('untrusted stage location');
