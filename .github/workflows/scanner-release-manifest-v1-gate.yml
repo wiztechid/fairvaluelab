@@ -1,0 +1,14 @@
+name: Scanner Release Manifest v1 Gate
+on:
+  push:
+    paths: ['contracts/scanner-release-manifest-v1.json','contracts/scanner-production-mode-v1.json','scripts/scanner-release-manifest-gate-v1.js','.github/workflows/scanner-release-manifest-v1-gate.yml']
+  pull_request:
+    paths: ['contracts/scanner-release-manifest-v1.json','contracts/scanner-production-mode-v1.json','scripts/scanner-release-manifest-gate-v1.js','.github/workflows/scanner-release-manifest-v1-gate.yml']
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node scripts/scanner-release-manifest-gate-v1.js
