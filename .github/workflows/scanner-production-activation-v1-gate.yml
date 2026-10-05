@@ -1,0 +1,16 @@
+name: Scanner Production Activation v1 Gate
+on:
+  push:
+    paths: ['scripts/scanner-production-activation-v1.js','scripts/scanner-production-activation-test-v1.js','scripts/scanner-atomic-authorized-publisher-v1.js','scripts/scanner-atomic-authorized-publisher-test-v1.js','.github/workflows/scanner-production-activation-v1-gate.yml']
+  pull_request:
+    paths: ['scripts/scanner-production-activation-v1.js','scripts/scanner-production-activation-test-v1.js','scripts/scanner-atomic-authorized-publisher-v1.js','scripts/scanner-atomic-authorized-publisher-test-v1.js','.github/workflows/scanner-production-activation-v1-gate.yml']
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node scripts/scanner-production-activation-test-v1.js
+      - run: node scripts/scanner-atomic-authorized-publisher-test-v1.js
+      - run: node scripts/scanner-smoke-gate.js
