@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const assert=require('assert'),A=require('./scanner-production-activation-v1');
-const key='scanner-activation-authority-test-key-0123456789abcdef',base={activationId:'SCANNER-ACTIVATION-V1',activatedAt:'2026-10-05T08:30:00.000Z',status:'ACTIVATED_FOR_AUTHORIZED_PUBLICATION'};
-const good={...base,signature:A.signActivation(base,key)};assert.equal(A.verifyActivation(good,key).activationId,good.activationId);
-for(const run of [()=>A.verifyActivation({...good,status:'LOCKED'},key),()=>A.verifyActivation({...good,signature:'0'.repeat(64)},key),()=>A.verifyActivation(good,'wrong-key-that-is-long-enough-0123456789'),()=>A.verifyActivation({...good,extra:true},key),()=>A.verifyActivation({...good,activatedAt:'2026-10-05T08:30:00Z'},key)]){let ok=false;try{run()}catch(_){ok=true}assert(ok)}
-console.log('SCANNER_PRODUCTION_ACTIVATION_V1_PASS signed authority required');
+const key='scanner-activation-authority-test-key-0123456789abcdef',authorization={authorizationId:'scanner-release-1',snapshotDigest:'a'.repeat(64),expiresAt:'2026-10-05T09:30:00.000Z'},base={activationId:'SCANNER-ACTIVATION-V1',activatedAt:'2026-10-05T08:30:00.000Z',authorizationId:authorization.authorizationId,expiresAt:authorization.expiresAt,snapshotDigest:authorization.snapshotDigest,status:'ACTIVATED_FOR_AUTHORIZED_PUBLICATION'};
+const good={...base,signature:A.signActivation(base,key)},ctx={authorization,now:'2026-10-05T09:00:00.000Z'};assert.equal(A.verifyActivation(good,key,ctx).activationId,good.activationId);
+for(const run of [()=>A.verifyActivation({...good,signature:'0'.repeat(64)},key,ctx),()=>A.verifyActivation(good,key,{...ctx,authorization:{...authorization,snapshotDigest:'b'.repeat(64)}}),()=>A.verifyActivation(good,key,{...ctx,now:authorization.expiresAt}),()=>A.verifyActivation({...good,authorizationId:'other-release'},key,ctx),()=>A.verifyActivation({...good,extra:true},key,ctx)]){let ok=false;try{run()}catch(_){ok=true}assert(ok)}
+console.log('SCANNER_PRODUCTION_ACTIVATION_V1_PASS signed release-bound expiring authority');
