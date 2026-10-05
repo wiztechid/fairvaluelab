@@ -1,0 +1,14 @@
+name: Scanner Release 1 Package v1 Gate
+on:
+  push:
+    paths: ['scripts/scanner-release1-package-v1.js','scripts/scanner-release1-package-test-v1.js','.github/workflows/scanner-release1-package-v1-gate.yml']
+  pull_request:
+    paths: ['scripts/scanner-release1-package-v1.js','scripts/scanner-release1-package-test-v1.js','.github/workflows/scanner-release1-package-v1-gate.yml']
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node scripts/scanner-release1-package-test-v1.js
