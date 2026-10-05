@@ -1,0 +1,35 @@
+name: Scanner Production Release v1 Gate
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: Reviewed release identifier
+        required: true
+        type: string
+      snapshot_digest:
+        description: Exact reviewed 64-char snapshot digest
+        required: true
+        type: string
+jobs:
+  release-authority-preflight:
+    runs-on: ubuntu-latest
+    environment: scanner-production
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify production mode and authority inputs
+        env:
+          RELEASE_ID: ${{ inputs.release_id }}
+          SNAPSHOT_DIGEST: ${{ inputs.snapshot_digest }}
+          SCANNER_ACTIVATION_AUTHORITY_KEY: ${{ secrets.SCANNER_ACTIVATION_AUTHORITY_KEY }}
+        run: |
+          node scripts/scanner-production-mode-gate-v1.js
+          node scripts/scanner-production-release-preflight-v1.js
+      - name: Re-run frozen publication safety gates
+        run: |
+          node scripts/scanner-contract-validator.js
+          node scripts/scanner-publication-gate.js
+          node scripts/scanner-smoke-gate.js
