@@ -5,14 +5,15 @@ const ev={overall:'ADEQUATE',valuationContextEvidence:'ADEQUATE',quality:'MIXED'
 const base={contractVersion:'PRIVATE_PUBLIC_SCANNER_SEED_V1',publicationStatus:'ELIGIBLE_FOR_PUBLIC_ENRICHMENT',ticker:'AADI',evaluationDate:'2026-09-29',state:'WATCHLIST',researchLens:['UNDERVALUED'],reasonCodes:['MATERIAL_CATALYST'],caveatCodes:['CATALYST_UNAVAILABLE'],catalystFreshness:'SOURCE_UNAVAILABLE',stateHistory:[{state:'WATCHLIST',date:'2026-09-29'}]};
 const run=seed=>E.enrich({seed,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:ev,desAsOf:'2026-05-21'});
 let o=run(base);assert.equal(o.whyWatching[0].code,'MATERIAL_CATALYST');assert.equal(o.stateHistory[0].reason,'VALUATION_OPPORTUNITY');
-const states=[['WATCHLIST','VALUATION_OPPORTUNITY'],['RESEARCH_CONFIRMED','MULTI_DOMAIN_CONFIRMATION'],['WAITING_CONFIRMATION','PRICE_CONFIRMATION_PENDING'],['LIMITED_EVIDENCE','EVIDENCE_LIMITED']];
+const states=[['WATCHLIST','VALUATION_OPPORTUNITY'],['WAITING_CONFIRMATION','PRICE_CONFIRMATION_PENDING'],['LIMITED_EVIDENCE','EVIDENCE_LIMITED']];
 for(const [state,reason] of states){const seed={...base,state,stateHistory:[{state,date:'2026-09-29'}]};o=run(seed);assert.equal(o.stateHistory[0].reason,reason);}
+o=run({...base,state:'RESEARCH_CONFIRMED',reasonCodes:['MULTI_DOMAIN_CONFIRMATION','VALUATION_OPPORTUNITY'],stateHistory:[{state:'RESEARCH_CONFIRMED',date:'2026-09-29'}]});assert.equal(o.stateHistory[0].reason,'MULTI_DOMAIN_CONFIRMATION');
 let failed=false;try{run({...base,stateHistory:[{state:'DETECTED',date:'2026-09-28'},{state:'WATCHLIST',date:'2026-09-29'}]})}catch(e){failed=true}assert(failed,'unsupported private history state crossed public boundary');
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:{...fv,name:'Private Alias'},reasonRegistry:registry,publicEvidence:ev,desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'canonical identity mismatch accepted');
 failed=false;try{E.enrich({seed:base,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:{...ev,lastEvaluatedAt:'2026-09-30T03:00:00Z'},desAsOf:'2026-05-21'})}catch(e){failed=true}assert(failed,'evaluation timestamp escaped sanitized seed date');
 let ext=false;try{run({...base,state:'EXTENDED',stateHistory:[{state:'EXTENDED',date:'2026-09-29'}]})}catch(e){ext=true}assert(ext,'EXTENDED must not cross private seed ingress');
-const valuationOnly={...seed,state:'RESEARCH_CONFIRMED',reasonCodes:['VALUATION_OPPORTUNITY'],stateHistory:[{state:'RESEARCH_CONFIRMED',date:seed.evaluationDate}]};
-const valuationOnlyOut=enrich({seed:valuationOnly,canonicalSummary:summary,fairValue:fv,reasonRegistry:registry,publicEvidence:{...evidence,valuationStatus:summary.stocks.find(x=>x.ticker===seed.ticker).status},desAsOf:'2026-05-21'});
+const valuationOnly={...base,state:'RESEARCH_CONFIRMED',reasonCodes:['VALUATION_OPPORTUNITY'],stateHistory:[{state:'RESEARCH_CONFIRMED',date:base.evaluationDate}]};
+const valuationOnlyOut=run(valuationOnly);
 assert.equal(valuationOnlyOut.stateHistory.at(-1).reason,'VALUATION_OPPORTUNITY');assert.notEqual(valuationOnlyOut.stateHistory.at(-1).reason,'MULTI_DOMAIN_CONFIRMATION');
 console.log('SCANNER_PUBLIC_ENRICHMENT_BOUNDARY_V1_PASS');
 
