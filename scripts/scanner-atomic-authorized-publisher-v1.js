@@ -12,11 +12,11 @@ function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=pat
   write(path.join(stage,'data/scanner/summary.json'),batch.summary);
   for(const [ticker,obj] of Object.entries(batch.tickers))write(path.join(stage,'data/scanner/tickers',ticker+'.json'),obj);
   cp.execFileSync(process.execPath,[path.join(sourceRoot,'scripts/scanner-publication-gate.js')],{stdio:'pipe',env:{...process.env,SCANNER_PUBLICATION_ROOT:stage}});
-  return {stage,proof};
+  return {stage,proof,authorization:Object.freeze({...authorization})};
  }catch(e){fs.rmSync(stage,{recursive:true,force:true});throw e}
 }
-function promoteStagedPublication({stage,root,activation,activationAuthorityKey,simulateFailureAfterBackup=false}={}){
- verifyActivation(activation,activationAuthorityKey);
+function promoteStagedPublication({stage,root,authorization,activation,activationAuthorityKey,now,simulateFailureAfterBackup=false}={}){
+ verifyActivation(activation,activationAuthorityKey,{authorization,now});
  if(!stage||!root||!fs.existsSync(path.join(stage,'data/scanner/summary.json')))fail('validated stage required');
  const stageReal=fs.realpathSync(stage),rootReal=fs.realpathSync(root);
  if(path.dirname(stageReal)!==path.dirname(rootReal)||!path.basename(stageReal).startsWith('.scanner-publish-'))fail('untrusted stage location');
