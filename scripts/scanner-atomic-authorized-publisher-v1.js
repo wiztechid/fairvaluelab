@@ -16,6 +16,7 @@ function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=pat
  }catch(e){fs.rmSync(stage,{recursive:true,force:true});throw e}
 }
 function promoteStagedPublication({stage,root,authorization,activation,activationAuthorityKey,now,simulateFailureAfterBackup=false}={}){
+ const productionMode=require('./scanner-production-mode-gate-v1');if(productionMode.mode!=='CONTROLLED_ACTIVATION')fail('production mode locked');
  verifyActivation(activation,activationAuthorityKey,{authorization,now});
  if(!stage||!root||!fs.existsSync(path.join(stage,'data/scanner/summary.json')))fail('validated stage required');
  const stageReal=fs.realpathSync(stage),rootReal=fs.realpathSync(root);
