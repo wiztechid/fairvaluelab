@@ -19,6 +19,9 @@ function promoteStagedPublication({stage,root,authorization,activation,activatio
  const productionMode=require('./scanner-production-mode-gate-v1');if(productionMode.mode!=='CONTROLLED_ACTIVATION')fail('production mode locked');
  verifyActivation(activation,activationAuthorityKey,{authorization,now});
  if(!stage||!root||!fs.existsSync(path.join(stage,'data/scanner/summary.json')))fail('validated stage required');
+ const stagedSummary=JSON.parse(fs.readFileSync(path.join(stage,'data/scanner/summary.json'),'utf8'));
+ const receipt=Object.freeze({contractVersion:'SCANNER_RELEASE_RECEIPT_V1',authorizationId:authorization.authorizationId,activationId:activation.activationId,snapshotDigest:authorization.snapshotDigest,authorizedAt:authorization.authorizedAt,activatedAt:activation.activatedAt,expiresAt:authorization.expiresAt,generatedAt:stagedSummary.generatedAt,candidateCount:stagedSummary.watchlist.count});
+ write(path.join(stage,'data/scanner/release-receipt.json'),receipt);
  const stageReal=fs.realpathSync(stage),rootReal=fs.realpathSync(root);
  if(path.dirname(stageReal)!==path.dirname(rootReal)||!path.basename(stageReal).startsWith('.scanner-publish-'))fail('untrusted stage location');
  const target=path.join(path.resolve(root),'data/scanner'),backup=target+'.backup-'+process.pid;
