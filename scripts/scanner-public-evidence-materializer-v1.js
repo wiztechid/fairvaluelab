@@ -13,7 +13,7 @@ function materialize({seed,canonicalSummary,fairValue,lastEvaluatedAt}={}){
  const valuationFreshness=freshMap[fairValue.freshnessStatus];if(!valuationFreshness)fail('canonical freshness');
  const valuationContextEvidence=strengthByStatus[c.status];
  return Object.freeze({
-  overall:valuationContextEvidence,
+  // Overall remains ADEQUATE while valuation is the only affirmative public domain.\n  overall:'ADEQUATE',
   valuationContextEvidence,
   quality:'NOT_AVAILABLE',
   valuation:'SUPPORTIVE',
