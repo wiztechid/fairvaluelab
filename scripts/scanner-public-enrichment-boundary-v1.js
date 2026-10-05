@@ -2,7 +2,7 @@
 const fail=m=>{throw new Error('[scanner-enrichment] '+m)};
 const seedContract=require('../contracts/private-public-scanner-seed-v1.pinned.json');
 const labels={WATCHLIST:'Daftar Pantau',RESEARCH_CONFIRMED:'Terkonfirmasi Riset',WAITING_CONFIRMATION:'Tunggu Konfirmasi',EXTENDED:'Extended',LIMITED_EVIDENCE:'Evidence Terbatas'};
-const historyReason={WATCHLIST:'VALUATION_OPPORTUNITY',RESEARCH_CONFIRMED:'MULTI_DOMAIN_CONFIRMATION',WAITING_CONFIRMATION:'PRICE_CONFIRMATION_PENDING',EXTENDED:'PRICE_EXTENDED',LIMITED_EVIDENCE:'EVIDENCE_LIMITED'};
+const historicalReason={WATCHLIST:'VALUATION_OPPORTUNITY',WAITING_CONFIRMATION:'PRICE_CONFIRMATION_PENDING',EXTENDED:'PRICE_EXTENDED',LIMITED_EVIDENCE:'EVIDENCE_LIMITED'};
 const seedKeys=seedContract.exactKeys;
 const states=new Set(seedContract.states);
 const lenses=new Set(seedContract.lenses);
@@ -46,7 +46,7 @@ function enrich({seed,canonicalSummary,fairValue,reasonRegistry,publicEvidence,d
  if(typeof p.lastEvaluatedAt!=='string'||Number.isNaN(new Date(p.lastEvaluatedAt).valueOf())||p.lastEvaluatedAt.slice(0,10)!==seed.evaluationDate)fail('evaluation time/date binding');
  const why=seed.reasonCodes.map(code=>{const text=reasonRegistry?.whyWatching?.[code];if(!text)fail('reason registry '+code);return {code,text}});
  const verify=seed.caveatCodes.map(code=>{const text=reasonRegistry?.whatToVerify?.[code];if(!text)fail('caveat registry '+code);return {code,text}});
- const history=(seed.stateHistory||[]).map(h=>{const reason=historyReason[h.state];if(!reason)fail('unsupported public history state '+h.state);return {state:h.state,date:h.date,reason}});
+ const history=(seed.stateHistory||[]).map((h,i)=>{const isCurrent=i===seed.stateHistory.length-1;if(isCurrent)return {state:h.state,date:h.date,reason:seed.reasonCodes[0]};const reason=historicalReason[h.state];if(!reason)fail('historical reason unavailable for prior state '+h.state);return {state:h.state,date:h.date,reason}});
  if(!history.length||history[history.length-1].state!==seed.state)fail('public history/current state');
  return {schemaVersion:'scanner-ticker-v1',ticker:seed.ticker,name:c.name,sector:c.sector,industry:fairValue.companyProfile?.industry??null,des:{eligible:true,universe:canonicalSummary.universeSource,asOf:desAsOf},scanner:{state:seed.state,stateLabel:labels[seed.state],stateChangedDate:history[history.length-1].date},researchLens:[...seed.researchLens],evidenceStrength:{overall:p.overall,quality:p.quality,valuation:p.valuation,price:p.price,catalyst:p.catalyst},whyWatching:why,whatToVerify:verify,freshness:{overall:p.overallFreshness,valuation:p.valuationFreshness,fundamentals:p.fundamentalsFreshness,price:p.priceFreshness,catalyst:seed.catalystFreshness,lastEvaluatedAt:p.lastEvaluatedAt},valuationContext:{status:c.status,evidence:p.valuationContextEvidence},provenance:{valuation:'CANONICAL_FAIR_VALUE',price:'MARKET_DATA',des:'OJK_DES',catalyst:'PUBLIC_MATERIAL_EVENTS'},actions:{primary:{type:'FAIR_VALUE',label:'Cek Fair Value',url:'/fair-value/?ticker='+seed.ticker},secondary:{type:'QSTP',label:'Buka QSTP',url:'/qstp.html?ticker='+seed.ticker}},stateHistory:history};
 }
