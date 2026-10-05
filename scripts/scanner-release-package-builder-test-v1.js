@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+const fs=require('fs'),assert=require('assert'),path=require('path'),B=require('./scanner-release-package-builder-v1'),A=require('./scanner-publication-authorization-v1');
+const seed={contractVersion:'PRIVATE_PUBLIC_SCANNER_SEED_V1',publicationStatus:'ELIGIBLE_FOR_PUBLIC_ENRICHMENT',ticker:'ACES',evaluationDate:'2026-10-03',state:'RESEARCH_CONFIRMED',researchLens:['UNDERVALUED'],reasonCodes:['VALUATION_OPPORTUNITY'],caveatCodes:['CATALYST_UNAVAILABLE'],catalystFreshness:'SOURCE_UNAVAILABLE',stateHistory:[{state:'RESEARCH_CONFIRMED',date:'2026-10-03'}]};
+let rejected=false;try{B.build({seeds:[seed],generatedAt:'2026-10-05T12:00:00.000Z',lastEvaluatedAt:'2026-10-03T14:45:00.000Z'})}catch(e){rejected=/exactly 91/.test(e.message)}assert(rejected,'partial cohort accepted');
+const src=fs.readFileSync(path.resolve(__dirname,'scanner-release-package-builder-v1.js'),'utf8');for(const bad of ['APPROVED_FOR_PUBLICATION','promoteStagedPublication','signActivation('])assert(!src.includes(bad),'builder contains authority/promotion primitive '+bad);
+console.log('SCANNER_RELEASE_PACKAGE_BUILDER_V1_PASS authority separation locked');
