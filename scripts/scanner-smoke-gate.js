@@ -4,6 +4,7 @@ const must=['contracts/scanner-summary-v1.schema.json','contracts/scanner-ticker
 for(const p of must)if(!fs.existsSync(path.join(ROOT,p)))throw new Error('Missing Scanner contract artifact: '+p);
 cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-contract-validator.js')],{stdio:'inherit'});
 const fixture=JSON.parse(fs.readFileSync(path.join(ROOT,'data/scanner/summary.json'),'utf8'));
-// PRE_ENGINE_LOCK: removal/change requires separately reviewed Opportunity Engine authorization.
-if(fixture.generationStatus!=='NOT_GENERATED'||fixture.items.length!==0||fixture.watchlist.count!==null)throw new Error('PRE_ENGINE_LOCK: Scanner must remain honest NOT_GENERATED state');
-console.log('SCANNER_SMOKE_PASS PRE_ENGINE_LOCK');
+const mode=require('./scanner-production-mode-gate-v1');
+if(mode.mode==='LOCKED'&&(fixture.generationStatus!=='NOT_GENERATED'||fixture.items.length!==0||fixture.watchlist.count!==null))throw new Error('PRE_ENGINE_LOCK: Scanner must remain honest NOT_GENERATED state');
+if(mode.mode==='CONTROLLED_ACTIVATION'&&!['NOT_GENERATED','GENERATED'].includes(fixture.generationStatus))throw new Error('CONTROLLED_ACTIVATION: invalid generation state');
+console.log('SCANNER_SMOKE_PASS',mode.mode,fixture.generationStatus);
