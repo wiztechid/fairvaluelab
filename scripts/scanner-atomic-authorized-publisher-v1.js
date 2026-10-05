@@ -15,8 +15,8 @@ function stageAuthorizedPublication({batch,authorization,now,root,sourceRoot=pat
   return {stage,proof};
  }catch(e){fs.rmSync(stage,{recursive:true,force:true});throw e}
 }
-function promoteStagedPublication({stage,root,activation,simulateFailureAfterBackup=false}={}){
- verifyActivation(activation);
+function promoteStagedPublication({stage,root,activation,activationAuthorityKey,simulateFailureAfterBackup=false}={}){
+ verifyActivation(activation,activationAuthorityKey);
  if(!stage||!root||!fs.existsSync(path.join(stage,'data/scanner/summary.json')))fail('validated stage required');
  const stageReal=fs.realpathSync(stage),rootReal=fs.realpathSync(root);
  if(path.dirname(stageReal)!==path.dirname(rootReal)||!path.basename(stageReal).startsWith('.scanner-publish-'))fail('untrusted stage location');
