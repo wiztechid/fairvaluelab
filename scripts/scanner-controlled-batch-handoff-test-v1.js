@@ -9,6 +9,8 @@ const fairValues=Object.fromEntries(names.map(t=>[t,read('data/'+t+'.json')]));c
 for(const ticker of names){const c=summary.stocks.find(x=>x.ticker===ticker);evidenceByTicker[ticker]={overall:'ADEQUATE',valuationContextEvidence:'ADEQUATE',quality:'MIXED',valuation:'SUPPORTIVE',price:'MIXED',catalyst:'NOT_AVAILABLE',overallFreshness:'CURRENT',valuationFreshness:'CURRENT',fundamentalsFreshness:'CURRENT',priceFreshness:'CURRENT',valuationStatus:c.status,lastEvaluatedAt:generatedAt}}
 const args={seeds,canonicalSummary:summary,fairValues,reasonRegistry:registry,evidenceByTicker,desAsOf:'2026-05-21',generatedAt,evaluatedUniverseCount:3};
 const batch=buildBatch(args); if(Object.keys(batch.tickers).length!==3||batch.summary.watchlist.count!==3)throw new Error('batch size');
+if(batch.summary.universe.eligible!==summary.count||batch.summary.universe.eligible!==summary.stocks.length)throw new Error('eligible universe must use canonical successful stock count');
+if(summary.requested===summary.count)throw new Error('fixture must preserve requested vs canonical-count distinction');
 if(JSON.stringify(batch)!==JSON.stringify(buildBatch(args)))throw new Error('batch not deterministic');
 const reversed={...args,seeds:[...seeds].reverse()};
 if(JSON.stringify(batch)!==JSON.stringify(buildBatch(reversed)))throw new Error('batch order must be canonical independent of input order');
@@ -20,7 +22,7 @@ cp.execFileSync(process.execPath,[path.join(ROOT,'scripts/scanner-publication-ga
 const reject=(name,mutate)=>{const a={...args,seeds:JSON.parse(JSON.stringify(seeds)),fairValues:{...fairValues},evidenceByTicker:{...evidenceByTicker}};mutate(a);let ok=false;try{buildBatch(a)}catch(_){ok=true}if(!ok)throw new Error('adversarial batch passed '+name)};
 reject('empty batch',a=>a.seeds=[]);
 reject('evaluated below candidate count',a=>a.evaluatedUniverseCount=2);
-reject('evaluated above eligible universe',a=>a.evaluatedUniverseCount=summary.requested+1);
+reject('evaluated above eligible universe',a=>a.evaluatedUniverseCount=summary.count+1);
 reject('invalid generatedAt',a=>a.generatedAt='not-a-date');
 reject('missing evaluated count',a=>delete a.evaluatedUniverseCount);reject('duplicate ticker',a=>a.seeds[1].ticker='AADI');reject('missing fair value',a=>delete a.fairValues.AALI);reject('missing evidence',a=>delete a.evidenceByTicker.ABMM);reject('one invalid seed makes whole batch fail',a=>a.seeds[2].state='DETECTED');
 if(read('data/scanner/summary.json').generationStatus!=='NOT_GENERATED')throw new Error('production PRE_ENGINE_LOCK changed');
