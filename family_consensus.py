@@ -73,10 +73,10 @@ def process(p):
  return d
 for p in DATA.glob("*.json"):
  if p.name in ("summary.json","errors.json","idx_disclosures.json","idx_collector_status.json"):continue
-    try:
-        _scope=json.load(open(p,encoding='utf-8'))
-        if not is_valuation_document(_scope):continue
-    except:continue
+ try:
+  _scope=json.load(open(p,encoding='utf-8'))
+  if not is_valuation_document(_scope):continue
+ except:continue
  try:
   d=process(p);json.dump(d,open(p,"w",encoding="utf-8"),ensure_ascii=False,indent=2,allow_nan=False)
  except Exception as e:print("FAMILY_CONSENSUS_ERR",p.stem,e)
@@ -86,10 +86,10 @@ if sp.exists():
  s=json.load(open(sp,encoding="utf-8")); rows=[]
  for p in DATA.glob("*.json"):
   if p.name in ("summary.json","errors.json","idx_disclosures.json","idx_collector_status.json"):continue
-    try:
-        _scope=json.load(open(p,encoding='utf-8'))
-        if not is_valuation_document(_scope):continue
-    except:continue
+  try:
+   _scope=json.load(open(p,encoding='utf-8'))
+   if not is_valuation_document(_scope):continue
+  except:continue
   try:
    d=json.load(open(p,encoding="utf-8"))
    if not is_valuation_document(d):continue
