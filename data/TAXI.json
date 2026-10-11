@@ -1,8 +1,8 @@
 {
   "ticker": "TAXI.JK",
   "name": "PT Express Transindo Utama Tbk",
-  "asOf": "2026-10-03T14:43:55.202558+00:00",
-  "price": 14.0,
+  "asOf": "2026-10-11T10:56:11.467958+00:00",
+  "price": 15.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
     "valuationProfile": "Transportasi & Logistik",
@@ -67,8 +67,8 @@
       "bands": {
         "mean": 8.172029423134887,
         "sd": 0.857382144857937,
-        "current": 3.8842262256680997,
-        "z": -5.00104092811176,
+        "current": 4.161670956072964,
+        "z": -4.677445747049486,
         "minus1": 26.36434026915188,
         "base": 29.454621146380266,
         "plus1": 32.54490202360865,
@@ -79,32 +79,6 @@
       "included": true,
       "normalizedWeight": 0.40000000000000013,
       "qcStatus": "VALID"
-    },
-    {
-      "name": "EV / Sales",
-      "family": "revenue",
-      "bear": 0.21925540521852493,
-      "base": 0.3220483306749989,
-      "bull": 0.4419734103742185,
-      "confidence": 0.52,
-      "relevance": 0.65,
-      "rawWeight": 0.338,
-      "warning": null,
-      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
-      "bands": {
-        "revenue": 3503062000.0,
-        "netDebt": -665212000.0,
-        "multipleBand": [
-          0.45,
-          0.75,
-          1.1
-        ]
-      },
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 34.24x dari median metode."
     },
     {
       "name": "Adjusted Asset Floor",
@@ -129,7 +103,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.08x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.54x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -142,12 +116,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 14.85,
-    "ma50": 14.26,
-    "ma200": 16.795,
-    "rsi14": 41.66666666666667,
-    "return1m": 0.0,
-    "return3m": 0.16666666666666674
+    "ma20": 15.1,
+    "ma50": 14.5,
+    "ma200": 16.765,
+    "rsi14": 53.33333333333333,
+    "return1m": 0.0714285714285714,
+    "return3m": 0.25
   },
   "quality": {
     "cashConversion": null,
@@ -157,14 +131,13 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
     ],
     "historyYears": 4.993839835728953,
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 2,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
     "valuationConfidence": 59,
     "familyConsensus": [
@@ -198,27 +171,26 @@
     "epsTTM": null,
     "bvps": 3.604321475274513,
     "currentPE": null,
-    "currentPBV": 3.8842262256680997,
+    "currentPBV": 4.161670956072964,
     "roe": -0.346,
     "fcf": 12513771520.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 143131049984.0,
+    "marketCap": 153354698752.0,
     "shares": 10223647156.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "857fd85c98946bbb6978021c8bf61cc823701c8d",
+  "engineCommit": "d296d24c87c84149679731ff68d55060eb6dac96",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -232,17 +204,15 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NEGATIVE",
-      "reason": "EBITDA negatif/nol.",
-      "inputs": {
-        "ebitda": -19509592000.0
-      }
+      "status": "NOT_APPLICABLE",
+      "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -253,16 +223,10 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [
-          {
-            "year": 2026,
-            "quarter": 2,
-            "growth": 2.8497635369186587
-          }
-        ],
-        "normalGrowth": 1.5,
+        "observations": [],
+        "normalGrowth": null,
         "outliersRemoved": [],
-        "validGrowthCount": 1
+        "validGrowthCount": 0
       },
       "ebitda": {
         "observations": [],
@@ -319,7 +283,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 1.4925038772499069,
+    "baseToPrice": 1.3930036187665797,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
