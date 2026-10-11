@@ -42,7 +42,7 @@ for(const x of summary.items){
  if(!states.has(x.state)||x.stateLabel!==labels[x.state])fail('state/label mismatch '+x.ticker);
  if(!Array.isArray(x.researchLens)||!x.researchLens.length||new Set(x.researchLens).size!==x.researchLens.length||x.researchLens.some(v=>!lenses.has(v)))fail('researchLens '+x.ticker);
  if(!reasons.has(x.primaryReason))fail('primaryReason '+x.ticker);
- if(x.detail!=='/scanner/'+x.ticker+'.json')fail('noncanonical detail link '+x.ticker);
+ if(x.detail!=='/data/scanner/tickers/'+x.ticker+'.json')fail('noncanonical detail link '+x.ticker);
  if(x.fairValue!=='/fair-value/?ticker='+x.ticker)fail('noncanonical FV link '+x.ticker);
 }
 function validateTicker(t){
