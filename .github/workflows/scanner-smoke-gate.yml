@@ -5,6 +5,7 @@ on:
     paths:
       - 'contracts/scanner-**'
       - 'data/scanner/**'
+      - 'scanner/**'
       - 'scripts/scanner-**'
       - '.github/workflows/scanner-smoke-gate.yml'
       - 'docs/CURRENT.md'
@@ -14,6 +15,7 @@ on:
     paths:
       - 'contracts/scanner-**'
       - 'data/scanner/**'
+      - 'scanner/**'
       - 'scripts/scanner-**'
       - '.github/workflows/scanner-smoke-gate.yml'
 
@@ -27,6 +29,8 @@ jobs:
           node-version: '20'
       - name: Validate Scanner public contract
         run: node scripts/scanner-contract-validator.js
+      - name: Test Scanner public surface and detail routes
+        run: node scripts/scanner-public-surface-test-v1.js
       - name: Run Scanner pre-engine smoke gate
         run: node scripts/scanner-smoke-gate.js
       - name: Prove Scanner public enrichment boundary
