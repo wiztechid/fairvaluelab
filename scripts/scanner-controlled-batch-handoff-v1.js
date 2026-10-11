@@ -17,7 +17,7 @@ function buildBatch({seeds,canonicalSummary,fairValues,reasonRegistry,evidenceBy
  }
  const stateKeys=['WATCHLIST','RESEARCH_CONFIRMED','WAITING_CONFIRMATION','EXTENDED','LIMITED_EVIDENCE'];
  const states=Object.fromEntries(stateKeys.map(k=>[k,0])); for(const t of out)states[t.scanner.state]++;
- const items=out.map(t=>({ticker:t.ticker,name:t.name,sector:t.sector,state:t.scanner.state,stateLabel:t.scanner.stateLabel,researchLens:t.researchLens,evidenceStrength:t.evidenceStrength.overall,primaryReason:t.whyWatching[0].code,freshness:t.freshness.overall,detail:'/data/scanner/tickers/'+t.ticker+'.json',fairValue:'/fair-value/?ticker='+t.ticker}));
+ const items=out.map(t=>({ticker:t.ticker,name:t.name,sector:t.sector,state:t.scanner.state,stateLabel:t.scanner.stateLabel,researchLens:t.researchLens,evidenceStrength:t.evidenceStrength.overall,primaryReason:t.whyWatching[0].code,freshness:t.freshness.overall,detail:'/scanner/'+t.ticker+'.json',fairValue:'/fair-value/?ticker='+t.ticker}));
  return {summary:{schemaVersion:'scanner-summary-v1',generationStatus:'GENERATED',generatedAt,universe:{name:canonicalSummary.universeSource,eligible:eligibleUniverseCount,evaluated:evaluatedUniverseCount},watchlist:{count:out.length,states},items},tickers:Object.fromEntries(out.map(t=>[t.ticker,t]))};
 }
 module.exports={buildBatch};
