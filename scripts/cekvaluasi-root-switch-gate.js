@@ -9,7 +9,7 @@ assert(home.includes('href="fair-value/"'),'Fair Value CTA route missing');
 assert(home.includes('href="qstp.html"'),'QSTP CTA route missing');
 assert(!home.includes('../index.html'),'prototype Fair Value route leaked into root');
 assert(!home.includes('../qstp.html'),'prototype QSTP route leaked into root');
-assert(home.includes('Opportunity Scanner')&&home.includes('Dalam pengembangan'),'Scanner teaser contract missing');
+assert(home.includes('<h3>Syariah Opportunity Scanner</h3>')&&home.includes('href="scanner/"'),'Scanner teaser or route missing');
 assert(fv.includes('canonicalLink" href="https://cekvaluasi.com/fair-value/"'),'Fair Value canonical wrong');
 for(const u of ['https://cekvaluasi.com/','https://cekvaluasi.com/fair-value/','https://cekvaluasi.com/qstp.html','https://cekvaluasi.com/universe.html']) assert(sm.includes('<loc>'+u+'</loc>'),'sitemap missing '+u);
 console.log('CekValuasi root switch smoke gate PASS');
