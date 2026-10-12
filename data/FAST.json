@@ -1,7 +1,7 @@
 {
   "ticker": "FAST.JK",
   "name": "PT Fast Food Indonesia Tbk",
-  "asOf": "2026-10-11T10:52:14.386674+00:00",
+  "asOf": "2026-10-12T19:17:33.834243+00:00",
   "price": 400.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -56,6 +56,26 @@
       "normalizedWeight": 0,
       "qcStatus": "VALID",
       "indicativeWeight": 0.4426229508196722
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 208.55198653241197,
+      "base": 292.0,
+      "bull": 375.44801346758805,
+      "confidence": 0.82,
+      "relevance": 0.9,
+      "rawWeight": 0.738,
+      "bands": {
+        "mean": 18.608402105771983,
+        "sd": 5.317925306619021
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 2.30x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -90,11 +110,11 @@
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.993839835728953,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
     "valuationConfidence": 42,
     "indicativeMethodCount": 2,
@@ -120,10 +140,10 @@
     "currentPBV": null,
     "roe": -1.06915,
     "fcf": 61010489344.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": -0.25,
     "costOfEquity": 0.1184312,
     "terminalGrowth": 0.035,
-    "marketCap": 1808160915456.0,
+    "marketCap": 1744875290624.0,
     "shares": 4520402492.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -132,12 +152,12 @@
     "fxFactor": 1.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": -0.25
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "d296d24c87c84149679731ff68d55060eb6dac96",
+  "engineCommit": "cc35be7f1a3cebce3de3bafbb4b604cf8642627b",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -156,31 +176,35 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": -0.25,
+    "confidence": 0.64,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "growth": 0.18596566517660773
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.1358270109074715
+          }
+        ],
+        "normalGrowth": 0.15253989566385023,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 2
       },
       "ebitda": {
         "observations": [],
@@ -189,16 +213,28 @@
         "validGrowthCount": 0
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.4495269579276503
+          }
+        ],
+        "normalGrowth": -0.4495269579276503,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.3132407314654192
+          }
+        ],
+        "normalGrowth": -0.3132407314654192,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -207,10 +243,16 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.81868192390082
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
     "notes": [
