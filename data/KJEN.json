@@ -1,8 +1,8 @@
 {
   "ticker": "KJEN.JK",
   "name": "PT Krida Jaringan Nusantara Tbk",
-  "asOf": "2026-10-13T17:12:28.813791+00:00",
-  "price": 146.0,
+  "asOf": "2026-10-14T14:46:50.641484+00:00",
+  "price": 131.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
     "valuationProfile": "Transportasi & Logistik",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 10.573988834448556,
-    "base": 16.753920451246792,
+    "bear": 9.321167022680024,
+    "base": 14.334071828456697,
     "bull": 23.18257150740006,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "dispersion": 0.18881651544620895,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "DCF"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -38,7 +37,25 @@
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.545308740978348
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "bear": 6.928304000000001,
+      "base": 11.431960605357466,
+      "bull": 13.856608000000001,
+      "confidence": 0.75,
+      "relevance": 0.9450000000000001,
+      "rawWeight": 0.70875,
+      "bands": null,
+      "warning": null,
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.45469125902165203
     }
   ],
   "dcfDiagnostics": {
@@ -51,12 +68,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 156.45,
-    "ma50": 158.14,
-    "ma200": 154.06,
-    "rsi14": 35.41666666666667,
-    "return1m": -0.08750000000000002,
-    "return3m": 0.21666666666666656
+    "ma20": 151.25,
+    "ma50": 157.1,
+    "ma200": 152.355,
+    "rsi14": 27.11864406779661,
+    "return1m": -0.22941176470588232,
+    "return3m": 0.10084033613445387
   },
   "quality": {
     "cashConversion": null,
@@ -68,28 +85,29 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 1,
+    "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 10.573988834448556,
-        "base": 16.753920451246792,
-        "bull": 23.18257150740006,
+        "bear": 8.751146417224279,
+        "base": 14.09294052830213,
+        "bull": 18.519589753700032,
         "weight": 0.25
       }
     ],
@@ -119,8 +137,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "006571149c531090b276c00a0a416ba610dcf11e",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "7302eef573e0c22c880abebab0fc0368fb485037",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -217,9 +235,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
