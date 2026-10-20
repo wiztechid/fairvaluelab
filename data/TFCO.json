@@ -1,7 +1,7 @@
 {
   "ticker": "TFCO.JK",
   "name": "PT Tifico Fiber Indonesia Tbk",
-  "asOf": "2026-10-19T16:39:43.047501+00:00",
+  "asOf": "2026-10-20T14:30:50.697719+00:00",
   "price": 2000.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,16 +12,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 667.3136535322121,
-    "base": 737.9244861746606,
-    "bull": 808.5353188171092,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 271.53597867004555,
+    "base": 613.8021144615192,
+    "bull": 1098.5858850181019,
+    "dispersion": 0.445987857156662,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical PBV 5Y"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
@@ -41,13 +40,82 @@
         "minus1": 667.3136535322121,
         "base": 737.9244861746606,
         "plus1": 808.5353188171092,
-        "coverageYears": 4.991101984941821
+        "coverageYears": 4.993839835728953
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.13618677042801558,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 397.8985191376874,
+      "base": 416.86288777915195,
+      "bull": 421.0018710066463,
+      "confidence": 0.82,
+      "relevance": 0.9,
+      "rawWeight": 0.738,
+      "bands": {
+        "mean": 29.359233222175458,
+        "sd": 2.935923322217546
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.3589494163424125,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 283.0847825661646,
+      "base": 301.70664296671725,
+      "bull": 320.3285033672699,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 29938218474.0,
+        "netDebt": -1095895567728.0,
+        "multipleBand": [
+          9,
+          12,
+          15
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.3404669260700389,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 718.170717448805,
+      "base": 998.714440925547,
+      "bull": 1349.3940952714745,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 3382709529672.0,
+        "netDebt": -1095895567728.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.1643968871595331,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -60,12 +128,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 1066.5,
-    "ma50": 931.0,
-    "ma200": 776.95,
-    "rsi14": 83.89057750759878,
+    "ma20": 1124.0,
+    "ma50": 954.7,
+    "ma200": 784.45,
+    "rsi14": 89.32038834951456,
     "return1m": 1.5,
-    "return3m": 1.5316455696202533
+    "return3m": 1.5806451612903225
   },
   "quality": {
     "cashConversion": null,
@@ -79,18 +147,18 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical PBV 5Y); belum cukup bukti untuk FV gabungan."
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
-    "historyYears": 4.991101984941821,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
-    "diagnosticCount": 3,
+    "historyYears": 4.993839835728953,
+    "validMethodCount": 4,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 30,
+    "reviewFlags": [
+      "LARGE_MARKET_GAP",
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 38,
     "familyConsensus": [
       {
         "family": "book",
@@ -101,9 +169,41 @@
         "base": 737.9244861746606,
         "bull": 808.5353188171092,
         "weight": 0.25
+      },
+      {
+        "family": "enterprise",
+        "methods": [
+          "Historical EV/EBITDA"
+        ],
+        "bear": 397.8985191376874,
+        "base": 416.86288777915195,
+        "bull": 421.0018710066463,
+        "weight": 0.25
+      },
+      {
+        "family": "enterprise_earnings",
+        "methods": [
+          "EV / EBIT"
+        ],
+        "bear": 283.0847825661646,
+        "base": 301.70664296671725,
+        "bull": 320.3285033672699,
+        "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 718.170717448805,
+        "base": 998.714440925547,
+        "bull": 1349.3940952714745,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 4,
+    "crossFamilySpreadRatio": 3.3102169415464946,
+    "forensicChecks": []
   },
   "raw": {
     "epsTTM": null,
@@ -112,7 +212,7 @@
     "currentPBV": 1.7231827310806827,
     "roe": -0.00511,
     "fcf": 10640389626432.0,
-    "growthNormalized": -0.020805472252479668,
+    "growthNormalized": 0.35,
     "costOfEquity": 0.11695520000000001,
     "terminalGrowth": 0.035,
     "marketCap": 9646152613888.0,
@@ -124,13 +224,13 @@
     "fxFactor": 17943.0,
     "epsCandidates": [],
     "growthNormalizedLegacy": -0.020805472252479668,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.35
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "0053878b7128323828cd15bc0d5286f7242ec940",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "a1dcbb608842b8d9cc85a4376d4853f4232db56f",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -141,49 +241,66 @@
       "inputs": {}
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.35,
+    "confidence": 0.64,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 0.07092685037423596
+          }
+        ],
+        "normalGrowth": 0.07092685037423596,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 2.759694322685083
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 2.7890843593815524
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": 2.461044274342553
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -219,10 +336,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 0.3069010572307596,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "familySpreadRatio": 3.3102169415464946,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

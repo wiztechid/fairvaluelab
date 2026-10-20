@@ -1,8 +1,8 @@
 {
   "ticker": "MGLV.JK",
   "name": "PT NexAI Digital Infrastruktur Tbk",
-  "asOf": "2026-10-19T16:39:13.336378+00:00",
-  "price": 10325.0,
+  "asOf": "2026-10-20T14:30:19.119090+00:00",
+  "price": 10950.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
     "valuationProfile": "Barang Konsumen Non-Primer",
@@ -12,25 +12,52 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
+    "bear": 48.63659519984134,
+    "base": 75.48684287854297,
+    "bull": 109.04965247692002,
     "dispersion": null,
-    "agreement": "INSUFFICIENT",
+    "agreement": "SINGLE_METHOD",
     "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "evidenceLevel": "UNVALUED"
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "EV / Sales"
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 48.63659519984134,
+      "base": 75.48684287854297,
+      "bull": 109.04965247692002,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 127866478461.0,
+        "netDebt": -3140508441.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    }
+  ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 13808.75,
-    "ma50": 12805.5,
-    "ma200": 7431.2,
-    "rsi14": 25.35612535612536,
-    "return1m": -0.28298611111111116,
-    "return3m": 0.27469135802469147
+    "ma20": 13556.25,
+    "ma50": 12856.0,
+    "ma200": 7478.4,
+    "rsi14": 30.319148936170222,
+    "return1m": -0.27121464226289516,
+    "return3m": 0.35185185185185186
   },
   "quality": {
     "cashConversion": null,
@@ -45,29 +72,40 @@
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
+      "Referensi Nilai dari satu metode valid (EV / Sales); belum cukup bukti untuk FV gabungan."
     ],
-    "historyYears": 4.999315537303217,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "historyYears": 4.996577686516085,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0,
-    "familyConsensus": [],
-    "familyConsensusCount": 0
+    "valuationConfidence": 30,
+    "familyConsensus": [
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 48.63659519984134,
+        "base": 75.48684287854297,
+        "bull": 109.04965247692002,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
     "bvps": 66.77434277367435,
     "currentPE": null,
-    "currentPBV": 154.62525831209845,
+    "currentPBV": 163.98514077651117,
     "roe": -0.25129998,
     "fcf": -5169294848.0,
     "growthNormalized": -0.03,
     "costOfEquity": 0.1412354,
     "terminalGrowth": 0.035,
-    "marketCap": 19667921928192.0,
+    "marketCap": 20858473021440.0,
     "shares": 1904883411.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -81,8 +119,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "0053878b7128323828cd15bc0d5286f7242ec940",
-  "analysisStatus": "BELUM_DINILAI",
+  "engineCommit": "a1dcbb608842b8d9cc85a4376d4853f4232db56f",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -104,15 +142,17 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -1748982655.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -181,9 +221,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "NO_DEFENSIBLE_METHOD",
-    "reason": "NO_VALID_METHOD",
-    "policy": "No value is fabricated or anchored to market price."
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
