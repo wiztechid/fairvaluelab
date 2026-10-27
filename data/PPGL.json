@@ -1,7 +1,7 @@
 {
   "ticker": "PPGL.JK",
   "name": "PT Prima Globalindo Logistik Tbk",
-  "asOf": "2026-10-26T16:19:49.972632+00:00",
+  "asOf": "2026-10-27T15:38:12.431837+00:00",
   "price": 468.0,
   "companyProfile": {
     "sector": "Transportasi & Logistik",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 289.47305933375117,
-    "base": 380.21519896314976,
-    "bull": 497.55298466233097,
-    "dispersion": 0.027225536032600008,
-    "agreement": "HIGH",
+    "bear": 230.3224694541383,
+    "base": 295.7971131574686,
+    "bull": 370.69912074034755,
+    "dispersion": 0.2681405877506132,
+    "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
@@ -36,7 +36,7 @@
       "warning": null,
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.6,
+      "normalizedWeight": 0.31241385647339887,
       "qcStatus": "VALID"
     },
     {
@@ -51,10 +51,9 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": false,
-      "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.36x dari median metode."
+      "included": true,
+      "normalizedWeight": 0.26049802444178993,
+      "qcStatus": "VALID"
     },
     {
       "name": "Historical Dividend Yield",
@@ -72,8 +71,28 @@
       "warning": null,
       "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.39999999999999997,
+      "normalizedWeight": 0.16245520536616742,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 145.59032494186332,
+      "base": 186.6542627459786,
+      "bull": 227.71820055009388,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 23.923999488087766,
+        "requiredReturn": 0.1281728
+      },
+      "included": true,
+      "normalizedWeight": 0.2646329137186437,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -87,11 +106,11 @@
   },
   "technical": {
     "ma20": 468.0,
-    "ma50": 417.04,
-    "ma200": 265.955,
+    "ma50": 422.2,
+    "ma200": 267.445,
     "rsi14": null,
     "return1m": 0.0,
-    "return3m": 1.2285714285714286
+    "return3m": 1.1272727272727274
   },
   "quality": {
     "cashConversion": null,
@@ -102,24 +121,26 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan."
+      "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 23.9240 per saham."
     ],
-    "historyYears": 4.991101984941821,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "historyYears": 4.996577686516085,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67,
+    "valuationConfidence": 65,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 262.84545748607763,
-        "base": 390.5667615626632,
-        "bull": 549.4431986243738,
+        "bear": 229.2764222391268,
+        "base": 330.8734403627908,
+        "bull": 438.7163909706607,
         "weight": 0.25
       },
       {
@@ -131,14 +152,24 @@
         "base": 369.8636363636364,
         "bull": 445.6627707002881,
         "weight": 0.25
+      },
+      {
+        "family": "earnings_power",
+        "methods": [
+          "Earnings Power Value"
+        ],
+        "bear": 145.59032494186332,
+        "base": 186.6542627459786,
+        "bull": 227.71820055009388,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0559750220448065,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 1.9815440104199011,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 23.923999488087766,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -154,23 +185,27 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 23.924
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 23.923998976175533
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.06351375000000001,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "ac2c371ed6f36de61c0928ada357e7c16d2c41a8",
+  "engineCommit": "b810999c16b8a6b7c95c52dd363e9bc4ff17ad94",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -253,7 +288,7 @@
     "required": false,
     "status": "PASS",
     "reason": null,
-    "baseToPrice": 0.8124256388101491,
+    "baseToPrice": 0.6320451135843346,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
