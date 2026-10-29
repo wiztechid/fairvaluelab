@@ -1,7 +1,7 @@
 {
   "ticker": "EAST.JK",
   "name": "PT Eastparc Hotel Tbk",
-  "asOf": "2026-10-28T16:15:41.951393+00:00",
+  "asOf": "2026-10-29T16:22:02.970053+00:00",
   "price": 86.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
@@ -12,11 +12,11 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 37.00373299612569,
-    "base": 55.129405244421804,
-    "bull": 69.88338534338449,
-    "dispersion": 0.3171477445070922,
-    "agreement": "MEDIUM",
+    "bear": 35.50285839577783,
+    "base": 93.687267173503,
+    "bull": 187.88329013483195,
+    "dispersion": 0.5753928366275234,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
@@ -36,7 +36,7 @@
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": true,
-      "normalizedWeight": 0.3344262295081967,
+      "normalizedWeight": 0.3010981225646475,
       "qcStatus": "VALID"
     },
     {
@@ -52,7 +52,26 @@
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": true,
-      "normalizedWeight": 0.2655737704918033,
+      "normalizedWeight": 0.23910733262486716,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "bear": 111.92488711641178,
+      "base": 170.80299103166539,
+      "bull": 360.3819937180896,
+      "confidence": 0.68,
+      "relevance": 0.85,
+      "rawWeight": 0.5780000000000001,
+      "bands": {
+        "mean": 0.0667435618729097,
+        "sd": 0.03511046088918602
+      },
+      "warning": null,
+      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "included": true,
+      "normalizedWeight": 0.20474672334396032,
       "qcStatus": "VALID"
     },
     {
@@ -71,7 +90,7 @@
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.4,
+      "normalizedWeight": 0.25504782146652494,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -86,12 +105,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 88.2,
-    "ma50": 89.14,
-    "ma200": 91.115,
-    "rsi14": 39.99999999999999,
+    "ma20": 88.05,
+    "ma50": 89.06,
+    "ma200": 90.99,
+    "rsi14": 35.71428571428572,
     "return1m": -0.0337078651685393,
-    "return3m": -0.0444444444444444
+    "return3m": -0.05494505494505497
   },
   "quality": {
     "cashConversion": null,
@@ -106,12 +125,14 @@
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 4.1420 per saham."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
+    "diagnosticCount": 2,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 60,
+    "reviewFlags": [
+      "CROSS_FAMILY_CONFLICT"
+    ],
+    "valuationConfidence": 44,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -125,6 +146,16 @@
         "weight": 0.25
       },
       {
+        "family": "income",
+        "methods": [
+          "Historical Dividend Yield"
+        ],
+        "bear": 111.92488711641178,
+        "base": 170.80299103166539,
+        "bull": 360.3819937180896,
+        "weight": 0.25
+      },
+      {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
@@ -135,8 +166,8 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.795068733163201,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 4.3298680409006245,
     "forensicChecks": []
   },
   "raw": {
@@ -173,8 +204,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "65343c86e716fe55fd6d53a23c85b61fe54766e6",
-  "analysisStatus": "SIAP",
+  "engineCommit": "d0280f7a6ea09dd07b9bea34150a6eaa6a9f43da",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -189,13 +220,6 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -263,14 +287,16 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 0.6410395958653698,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "CROSS_FAMILY_CONFLICT",
+    "baseToPrice": 1.089386827598872,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "familySpreadRatio": 4.3298680409006245,
+    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

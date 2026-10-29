@@ -1,8 +1,8 @@
 {
   "ticker": "UDNG.JK",
   "name": "PT Agro Bahari Nusantara Tbk",
-  "asOf": "2026-10-28T16:15:15.010718+00:00",
-  "price": 304.0,
+  "asOf": "2026-10-29T16:21:36.271850+00:00",
+  "price": 276.0,
   "companyProfile": {
     "sector": "Barang Konsumen Primer",
     "valuationProfile": "Barang Konsumen Primer",
@@ -12,25 +12,52 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
+    "bear": 9.838463143659947,
+    "base": 14.780941240012933,
+    "bull": 20.959038860454164,
     "dispersion": null,
-    "agreement": "INSUFFICIENT",
+    "agreement": "SINGLE_METHOD",
     "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "evidenceLevel": "UNVALUED"
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "EV / Sales"
   },
-  "methods": [],
+  "methods": [
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 9.838463143659947,
+      "base": 14.780941240012933,
+      "bull": 20.959038860454164,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 21623836809.0,
+        "netDebt": -2081018982.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
+    }
+  ],
   "dcfDiagnostics": null,
   "technical": {
-    "ma20": 413.8,
-    "ma50": 681.32,
-    "ma200": 1590.83,
-    "rsi14": 26.836158192090394,
-    "return1m": -0.36929460580912865,
-    "return3m": -0.7445378151260504
+    "ma20": 407.7,
+    "ma50": 660.34,
+    "ma200": 1572.66,
+    "rsi14": 15.588235294117652,
+    "return1m": -0.3669724770642202,
+    "return3m": -0.7670886075949367
   },
   "quality": {
     "cashConversion": null,
@@ -44,29 +71,40 @@
       "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
+      "Referensi Nilai dari satu metode valid (EV / Sales); belum cukup bukti untuk FV gabungan."
     ],
-    "historyYears": 2.9924709103353866,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
+    "historyYears": 2.9952087611225187,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0,
-    "familyConsensus": [],
-    "familyConsensusCount": 0
+    "valuationConfidence": 30,
+    "familyConsensus": [
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 9.838463143659947,
+        "base": 14.780941240012933,
+        "bull": 20.959038860454164,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
     "bvps": 29.59662874565309,
     "currentPE": null,
-    "currentPBV": 10.271440122877138,
+    "currentPBV": 9.325386427348981,
     "roe": -0.13881,
     "fcf": -1128443904.0,
     "growthNormalized": 0.18,
     "costOfEquity": 0.19975880000000001,
     "terminalGrowth": 0.035,
-    "marketCap": 532012171264.0,
+    "marketCap": 483011067904.0,
     "shares": 1750040072.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -80,8 +118,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "65343c86e716fe55fd6d53a23c85b61fe54766e6",
-  "analysisStatus": "BELUM_DINILAI",
+  "engineCommit": "d0280f7a6ea09dd07b9bea34150a6eaa6a9f43da",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -103,15 +141,17 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -3661025388.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -180,9 +220,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "NO_DEFENSIBLE_METHOD",
-    "reason": "NO_VALID_METHOD",
-    "policy": "No value is fabricated or anchored to market price."
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

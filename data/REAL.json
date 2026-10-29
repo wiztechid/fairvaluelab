@@ -1,8 +1,8 @@
 {
   "ticker": "REAL.JK",
   "name": "PT Repower Asia Indonesia Tbk",
-  "asOf": "2026-10-28T16:18:17.130894+00:00",
-  "price": 34.0,
+  "asOf": "2026-10-29T16:24:43.003983+00:00",
+  "price": 32.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
     "valuationProfile": "Properti & Real Estat",
@@ -12,35 +12,50 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 0.950857142857143,
-    "base": 1.2190476190476192,
-    "bull": 1.4872380952380952,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
-    "available": false,
+    "bear": 1.2774854523663928,
+    "base": 1.8803285449369183,
+    "bull": 2.5020808958340814,
+    "dispersion": 0.35168368788954124,
+    "agreement": "LOW",
+    "available": true,
     "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Earnings Power Value"
+    "referenceOnly": false,
+    "familyConsensus": true
   },
   "methods": [
     {
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 1.6041137238413539,
+      "base": 2.5416094220643086,
+      "bull": 3.5169236369405388,
+      "confidence": 0.85,
+      "relevance": 0.55,
+      "rawWeight": 0.4675,
+      "bands": null,
+      "warning": "Porsi nilai jangka panjang tinggi",
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": true,
+      "normalizedWeight": 0.39999999999999997,
+      "qcStatus": "VALID"
+    },
+    {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 0.950857142857143,
-      "base": 1.2190476190476192,
-      "bull": 1.4872380952380952,
+      "bear": 0.9508571808914318,
+      "base": 1.219047667809528,
+      "bull": 1.4872381547276239,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 0.128,
+        "eps": 0.12800000512000043,
         "requiredReturn": 0.105
       },
-      "included": false,
-      "normalizedWeight": 0,
+      "included": true,
+      "normalizedWeight": 0.6,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
@@ -55,12 +70,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 40.25,
-    "ma50": 45.48,
-    "ma200": 54.095,
-    "rsi14": 26.66666666666667,
-    "return1m": -0.08108108108108103,
-    "return3m": -0.33333333333333337
+    "ma20": 40.15,
+    "ma50": 45.08,
+    "ma200": 53.915,
+    "rsi14": 25.0,
+    "return1m": -0.08571428571428574,
+    "return3m": -0.36
   },
   "quality": {
     "cashConversion": null,
@@ -72,36 +87,48 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 0.1280 per saham.",
-      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
+      "Extreme Valuation Review: Base FV = 0.05x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 1,
-    "independentFamilies": 1,
+    "validMethodCount": 2,
+    "independentFamilies": 2,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
-    "reviewFlags": [],
-    "valuationConfidence": 26,
+    "reviewFlags": [
+      "EXTREME_VALUATION",
+      "FORENSIC_EXTREME"
+    ],
+    "valuationConfidence": 4,
     "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF"
+        ],
+        "bear": 1.6041137238413539,
+        "base": 2.5416094220643086,
+        "bull": 3.5169236369405388,
+        "weight": 0.25
+      },
       {
         "family": "earnings_power",
         "methods": [
           "Earnings Power Value"
         ],
-        "bear": 0.950857142857143,
-        "base": 1.2190476190476192,
-        "bull": 1.4872380952380952,
+        "bear": 0.9508571808914318,
+        "base": 1.219047667809528,
+        "bull": 1.4872381547276239,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 1
+    "familyConsensusCount": 2,
+    "crossFamilySpreadRatio": 2.0849138956405655,
+    "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 0.128,
+    "epsTTM": 0.12800000512000043,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -110,7 +137,7 @@
     "growthNormalized": 0.0396945000195,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 225542750208.0,
+    "marketCap": 212275527680.0,
     "shares": 6633610151.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -124,7 +151,7 @@
       },
       {
         "source": "Price / Yahoo trailingPE",
-        "value": 0.128
+        "value": 0.12800001024000082
       }
     ],
     "epsSource": "Yahoo TTM cross-check",
@@ -134,8 +161,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "65343c86e716fe55fd6d53a23c85b61fe54766e6",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "d0280f7a6ea09dd07b9bea34150a6eaa6a9f43da",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -155,8 +182,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
@@ -224,10 +251,25 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "direction": "BELOW_MARKET",
+    "baseToPrice": 0.058760267029278695,
+    "thresholds": {
+      "low": 0.25,
+      "high": 3.0
+    },
+    "checks": [
+      "currency_and_units",
+      "shares_and_dilution",
+      "earnings_quality_and_oneoffs",
+      "cycle_and_corporate_actions",
+      "cashflow_confirmation",
+      "independent_model_agreement"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
+    "forensicChecks": []
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
