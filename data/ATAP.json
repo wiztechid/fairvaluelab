@@ -1,7 +1,7 @@
 {
   "ticker": "ATAP.JK",
   "name": "PT Trimitra Prawara Goldland Tbk",
-  "asOf": "2026-10-30T16:14:34.381813+00:00",
+  "asOf": "2026-11-02T19:45:35.321772+00:00",
   "price": 400.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,40 +12,82 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 24.32857188473216,
-    "base": 31.19047677529764,
-    "bull": 38.052381665863116,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "bear": 89.46965455988438,
+    "base": 125.05188264404569,
+    "bull": 193.93200453315396,
+    "dispersion": 0.14587827080418136,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Earnings Power Value"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 96.96958241630274,
+      "base": 140.93496548068478,
+      "bull": 193.93200453315396,
+      "confidence": 0.85,
+      "relevance": 0.55,
+      "rawWeight": 0.4675,
+      "bands": null,
+      "warning": null,
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803278
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "bear": 85.44812544,
+      "base": 105.05096351642611,
+      "bull": 124.12625411758299,
+      "confidence": 0.75,
+      "relevance": 0.49500000000000005,
+      "rawWeight": 0.37125,
+      "bands": null,
+      "warning": null,
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196721
+    },
+    {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 24.32857188473216,
-      "base": 31.19047677529764,
-      "bull": 38.052381665863116,
+      "bear": 18.050252493189404,
+      "base": 23.141349350242827,
+      "bull": 28.23244620729625,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 3.275000061406252,
-        "requiredReturn": 0.105
+        "eps": 3.2120192898137043,
+        "requiredReturn": 0.1388
       },
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID",
-      "countsForIndependence": true
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.54x dari median metode."
     }
   ],
-  "dcfDiagnostics": null,
+  "dcfDiagnostics": {
+    "terminalValueShare": 0.6241932755804304,
+    "bearTerminalValueShare": 0.5454163959229374,
+    "bullTerminalValueShare": 0.6838548286069792,
+    "warning": false,
+    "growth": 0.0432825,
+    "costOfEquity": 0.1388,
+    "terminalGrowth": 0.035
+  },
   "technical": {
     "ma20": 515.2,
     "ma50": 540.28,
@@ -56,51 +98,53 @@
   },
   "quality": {
     "cashConversion": null,
-    "roe": 0.02251,
-    "dataScore": 57,
-    "dataLabel": "TERBATAS",
-    "availableInputs": 4,
+    "roe": 0.0101,
+    "dataScore": 71,
+    "dataLabel": "CUKUP",
+    "availableInputs": 5,
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.2750 per saham.",
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.2120 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Earnings Power Value); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 1,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
-    "valuationConfidence": 22,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
-        "family": "earnings_power",
+        "family": "cashflow",
         "methods": [
-          "Earnings Power Value"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 24.32857188473216,
-        "base": 31.19047677529764,
-        "bull": 38.052381665863116,
+        "bear": 91.20885392815137,
+        "base": 122.99296449855544,
+        "bull": 159.02912932536847,
         "weight": 0.25
       }
     ],
     "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 3.275000061406252,
+    "epsTTM": 3.2120192898137043,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
-    "roe": 0.02251,
-    "fcf": null,
-    "growthNormalized": 0.047315750000000004,
-    "costOfEquity": 0.105,
+    "roe": 0.0101,
+    "fcf": 17089625088.0,
+    "growthNormalized": 0.0432825,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
-    "marketCap": 499999997952.0,
+    "marketCap": 520000012288.0,
     "shares": 1250000000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -114,18 +158,18 @@
       },
       {
         "source": "Price / Yahoo trailingPE",
-        "value": 3.2750001228125045
+        "value": 3.1490385796274083
       }
     ],
     "epsSource": "Yahoo TTM cross-check",
-    "growthNormalizedLegacy": 0.047315750000000004,
+    "growthNormalizedLegacy": 0.0432825,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "34aa8e0a2acb23720f03a6dccf2d856adc910ef9",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "22fef47eb77edeb8f0a829486c034ba70498c353",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -133,13 +177,6 @@
       "family": "book",
       "status": "NOT_APPLICABLE",
       "reason": "BVPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
-    {
-      "name": "DCF & FCF Yield",
-      "family": "cashflow",
-      "status": "NOT_APPLICABLE",
-      "reason": "FCF tidak tersedia/tervalidasi.",
       "inputs": {}
     },
     {
@@ -222,9 +259,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

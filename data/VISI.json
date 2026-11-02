@@ -1,7 +1,7 @@
 {
   "ticker": "VISI.JK",
   "name": "PT Satu Visi Putra Tbk",
-  "asOf": "2026-10-30T16:09:20.188938+00:00",
+  "asOf": "2026-11-02T19:41:45.863805+00:00",
   "price": 635.0,
   "companyProfile": {
     "sector": "Perindustrian",
@@ -12,17 +12,50 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 71.79162112115887,
-    "base": 94.17737119952477,
-    "bull": 121.90570197776057,
-    "dispersion": 0.03388478259545912,
-    "agreement": "HIGH",
+    "bear": 106.20666375014927,
+    "base": 145.31783764636893,
+    "bull": 181.53145179528667,
+    "dispersion": 0.4980149904752768,
+    "agreement": "LOW",
     "available": true,
     "indicative": false,
     "referenceOnly": false,
     "familyConsensus": true
   },
   "methods": [
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 276.9237325272646,
+      "base": 403.0460523710042,
+      "bull": 554.2585897852698,
+      "confidence": 0.85,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
+      "bands": null,
+      "warning": null,
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.14x dari median metode."
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "bear": 175.03674900813007,
+      "base": 247.59877054005727,
+      "bull": 300.78295143033887,
+      "confidence": 0.75,
+      "relevance": 0.9,
+      "rawWeight": 0.675,
+      "bands": null,
+      "warning": null,
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": true,
+      "normalizedWeight": 0.36824877250409166,
+      "qcStatus": "VALID"
+    },
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
@@ -39,7 +72,7 @@
       "warning": null,
       "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
       "included": true,
-      "normalizedWeight": 0.6,
+      "normalizedWeight": 0.4473540643753409,
       "qcStatus": "VALID"
     },
     {
@@ -66,7 +99,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": true,
-      "qcReason": "Ditolak cross-method outlier: deviasi 10.20x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 10.91x dari median metode."
     },
     {
       "name": "EV / Sales",
@@ -89,18 +122,18 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.4000000000000001,
+      "normalizedWeight": 0.18439716312056736,
       "qcStatus": "VALID",
       "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
-    "terminalValueShare": 0.4884427674545883,
-    "bearTerminalValueShare": 0.4292255384584301,
-    "bullTerminalValueShare": 0.5343435869335579,
+    "terminalValueShare": 0.6619306969218046,
+    "bearTerminalValueShare": 0.590292256225246,
+    "bullTerminalValueShare": 0.7156000133905506,
     "warning": false,
-    "growth": 0.13027904682192057,
-    "costOfEquity": 0.22,
+    "growth": 0.12845034520537058,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035
   },
   "technical": {
@@ -113,30 +146,37 @@
   },
   "quality": {
     "cashConversion": null,
-    "roe": -0.030550001,
+    "roe": -0.04346,
     "dataScore": 86,
     "dataLabel": "BAIK",
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
-      "Extreme Valuation Review: Base FV = 0.15x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "Extreme Valuation Review: Base FV = 0.24x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
     ],
-    "historyYears": 2.6721423682409307,
-    "validMethodCount": 2,
-    "independentFamilies": 2,
+    "historyYears": 2.6803559206023273,
+    "validMethodCount": 3,
+    "independentFamilies": 3,
     "diagnosticCount": 2,
-    "outlierMethodCount": 1,
+    "outlierMethodCount": 2,
     "reviewFlags": [
       "EXTREME_VALUATION",
       "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 22,
+    "valuationConfidence": 14,
     "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "FCF Yield"
+        ],
+        "bear": 175.03674900813007,
+        "base": 247.59877054005727,
+        "bull": 300.78295143033887,
+        "weight": 0.25
+      },
       {
         "family": "enterprise",
         "methods": [
@@ -158,8 +198,8 @@
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0701464628338848,
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 2.7212785433859334,
     "forensicChecks": [
       "NON_POSITIVE_EARNINGS"
     ]
@@ -169,10 +209,10 @@
     "bvps": 59.341577702113824,
     "currentPE": null,
     "currentPBV": 10.700760319983546,
-    "roe": -0.030550001,
-    "fcf": 13722956800.0,
+    "roe": -0.04346,
+    "fcf": 86118080512.0,
     "growthNormalized": -0.18426302479136902,
-    "costOfEquity": 0.22,
+    "costOfEquity": 0.1388,
     "terminalGrowth": 0.035,
     "marketCap": 1952625065984.0,
     "shares": 3075000000.0,
@@ -182,13 +222,13 @@
     "fxPair": null,
     "fxFactor": 1.0,
     "epsCandidates": [],
-    "growthNormalizedLegacy": 0.13027904682192057,
+    "growthNormalizedLegacy": 0.12845034520537058,
     "growthNormalizedQuarterly": -0.18426302479136902
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "34aa8e0a2acb23720f03a6dccf2d856adc910ef9",
+  "engineCommit": "22fef47eb77edeb8f0a829486c034ba70498c353",
   "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -293,7 +333,7 @@
     "status": "REVIEW",
     "reason": "FORENSIC_EXTREME",
     "direction": "BELOW_MARKET",
-    "baseToPrice": 0.14831082078665317,
+    "baseToPrice": 0.22884698841947862,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
