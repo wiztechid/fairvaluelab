@@ -1,8 +1,8 @@
 {
   "ticker": "RAAM.JK",
   "name": "PT Tripar Multivision Plus Tbk",
-  "asOf": "2026-11-04T17:30:10.767259+00:00",
-  "price": 135.0,
+  "asOf": "2026-11-05T17:36:18.316509+00:00",
+  "price": 127.0,
   "companyProfile": {
     "sector": "Barang Konsumen Non-Primer",
     "valuationProfile": "Barang Konsumen Non-Primer",
@@ -12,25 +12,51 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": null,
-    "base": null,
-    "bull": null,
+    "bear": 8.098698455499045,
+    "base": 9.880314482643564,
+    "bull": 13.708524163298163,
     "dispersion": null,
-    "agreement": "INSUFFICIENT",
+    "agreement": "SINGLE_METHOD",
     "available": false,
     "indicative": false,
-    "referenceOnly": false,
-    "evidenceLevel": "UNVALUED"
+    "referenceOnly": true,
+    "evidenceLevel": "REFERENCE",
+    "referenceMethod": "DCF"
   },
-  "methods": [],
-  "dcfDiagnostics": null,
+  "methods": [
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 8.098698455499045,
+      "base": 9.880314482643564,
+      "bull": 13.708524163298163,
+      "confidence": 0.85,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
+      "bands": null,
+      "warning": null,
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID"
+    }
+  ],
+  "dcfDiagnostics": {
+    "terminalValueShare": 0.6914052596292686,
+    "bearTerminalValueShare": 0.6313413487529989,
+    "bullTerminalValueShare": 0.7446437120520003,
+    "warning": false,
+    "growth": -0.03,
+    "costOfEquity": 0.105,
+    "terminalGrowth": 0.035
+  },
   "technical": {
-    "ma20": 136.85,
-    "ma50": 160.28,
-    "ma200": 201.0,
-    "rsi14": 39.449541284403665,
-    "return1m": -0.11184210526315785,
-    "return3m": -0.3382352941176471
+    "ma20": 135.2,
+    "ma50": 159.1,
+    "ma200": 200.435,
+    "rsi14": 38.392857142857146,
+    "return1m": -0.21604938271604934,
+    "return3m": -0.3712871287128713
   },
   "quality": {
     "cashConversion": null,
@@ -41,30 +67,42 @@
     "totalInputs": 7,
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "FCF Yield ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Belum dapat dinilai: tidak ada metode fundamental yang lolos QC. Harga pasar hanya ditampilkan sebagai harga pasar."
+      "Referensi Nilai dari satu metode valid (DCF); belum cukup bukti untuk FV gabungan."
     ],
-    "historyYears": 3.4934976043805612,
-    "validMethodCount": 0,
-    "independentFamilies": 0,
-    "diagnosticCount": 4,
+    "historyYears": 3.4962354551676933,
+    "validMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 0,
-    "familyConsensus": [],
-    "familyConsensusCount": 0
+    "valuationConfidence": 30,
+    "familyConsensus": [
+      {
+        "family": "cashflow",
+        "methods": [
+          "DCF"
+        ],
+        "bear": 8.098698455499045,
+        "base": 9.880314482643564,
+        "bull": 13.708524163298163,
+        "weight": 0.25
+      }
+    ],
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
     "bvps": 190.2653713381433,
     "currentPE": null,
-    "currentPBV": 0.7095353140224102,
+    "currentPBV": 0.6674887768951563,
     "roe": -0.07975,
-    "fcf": -12907013120.0,
+    "fcf": 6039371776.0,
     "growthNormalized": -0.03,
-    "costOfEquity": 0.1388,
+    "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 865329741824.0,
     "shares": 6813620000.0,
@@ -80,8 +118,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "0b0f9ddb091068eec03549aa765a31576415d229",
-  "analysisStatus": "BELUM_DINILAI",
+  "engineCommit": "b84130625159a109a463e55da2a4a7f6f6e820fe",
+  "analysisStatus": "REFERENSI",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -90,15 +128,6 @@
       "status": "NOT_APPLICABLE",
       "reason": "EPS tidak tersedia/tervalidasi.",
       "inputs": {}
-    },
-    {
-      "name": "DCF & FCF Yield",
-      "family": "cashflow",
-      "status": "NEGATIVE",
-      "reason": "FCF negatif; metode cashflow dilewati.",
-      "inputs": {
-        "fcf": -12907013120.0
-      }
     },
     {
       "name": "Historical EV/EBITDA",
@@ -209,9 +238,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "NO_DEFENSIBLE_METHOD",
-    "reason": "NO_VALID_METHOD",
-    "policy": "No value is fabricated or anchored to market price."
+    "status": "SINGLE_METHOD",
+    "reason": "ONLY_ONE_VALID_METHOD",
+    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
