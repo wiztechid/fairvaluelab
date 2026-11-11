@@ -53,6 +53,13 @@ def cagr(a):
     if len(a)<3 or a[0][1]<=0 or a[-1][1]<=0:return None
     y=max(1,a[-1][0].year-a[0][0].year);return (a[-1][1]/a[0][1])**(1/y)-1
 def clamp(v,lo,hi):return max(lo,min(hi,v))
+def financial_period(info):
+    stamp=n(info.get('mostRecentQuarter'))
+    if stamp is None or stamp<=0:return None
+    try:
+        end=pd.to_datetime(stamp,unit='s',utc=True)
+        return {'periodEnd':end.date().isoformat(),'year':int(end.year),'quarter':int((end.month-1)//3+1),'source':'Yahoo Finance'}
+    except:return None
 def profile(ds,ys,ind):
     s=ds or ys or 'Umum';x=(ind or '').lower()
     if s=='Infrastruktur' and any(k in x for k in ['construction','engineering','building']):return 'Infrastruktur · Konstruksi',{'DCF':1.05,'FCF Yield':.85,'Historical P/E':1.15,'Historical PBV':.45},'Kontraktor dinilai terutama dari laba dan arus kas proyek; PBV hanya pendukung.'
@@ -141,7 +148,7 @@ def analyze(sym):
         comp=lambda k:sum(m[k]*m['normalizedWeight'] for m in use);bear,base,bull=comp('bear'),comp('base'),comp('bull');vals=[m['base'] for m in use];disp=sd(float(np.std(vals)),float(np.mean(vals)));agreement='HIGH' if disp<.18 else 'MEDIUM' if disp<.32 else 'LOW'
     else:bear=base=bull=disp=None;agreement='INSUFFICIENT'
     cashconv=sd(fcfv,ni) if ni and ni>0 else None;checks=[price,eps,bvps,roe,fcfv,shares,mcap];avail=sum(v is not None for v in checks);qs=round(avail/7*100);ql='BAIK' if qs>=80 and sufficient else 'CUKUP' if qs>=60 else 'TERBATAS'
-    return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'price':price,'companyProfile':{'sector':ds or sector,'valuationProfile':sector,'sourceSector':ys,'industry':ind,'sectorNote':note,'sectorSource':'OJK DES Periode I 2026' if ds else 'Yahoo Finance'},'fairValue':{'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agreement,'available':sufficient},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe,'dataScore':qs,'dataLabel':ql,'availableInputs':avail,'totalInputs':7,'guards':guards,'historyYears':cov,'validMethodCount':len(use) if sufficient else 0,'independentFamilies':len(families) if sufficient else 0},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':pe,'currentPBV':pbv,'roe':roe,'fcf':fcfv,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares,'quoteCurrency':qc,'financialCurrency':fc,'fxApplied':bool(fx and fx.get('applied')),'fxPair':fx.get('pair') if fx else None,'fxFactor':factor},'source':'Yahoo Finance via yfinance','universeSource':DES_SOURCE,'engineVersion':'3.8-all-tickers','engineCommit':os.getenv('CEKVALUASI_ENGINE_SHA') or None,'analysisStatus':'SIAP' if sufficient else 'TERBATAS','freshnessStatus':'FRESH'}
+    return {'ticker':tk,'name':info.get('longName') or info.get('shortName') or tk,'asOf':datetime.now(timezone.utc).isoformat(),'financialPeriod':financial_period(info),'price':price,'companyProfile':{'sector':ds or sector,'valuationProfile':sector,'sourceSector':ys,'industry':ind,'sectorNote':note,'sectorSource':'OJK DES Periode I 2026' if ds else 'Yahoo Finance'},'fairValue':{'bear':bear,'base':base,'bull':bull,'dispersion':disp,'agreement':agreement,'available':sufficient},'methods':methods,'dcfDiagnostics':dcfdiag,'technical':tech(h),'quality':{'cashConversion':cashconv,'roe':roe,'dataScore':qs,'dataLabel':ql,'availableInputs':avail,'totalInputs':7,'guards':guards,'historyYears':cov,'validMethodCount':len(use) if sufficient else 0,'independentFamilies':len(families) if sufficient else 0},'raw':{'epsTTM':eps,'bvps':bvps,'currentPE':pe,'currentPBV':pbv,'roe':roe,'fcf':fcfv,'growthNormalized':growth,'costOfEquity':ke,'terminalGrowth':terminal,'marketCap':mcap,'shares':shares,'quoteCurrency':qc,'financialCurrency':fc,'fxApplied':bool(fx and fx.get('applied')),'fxPair':fx.get('pair') if fx else None,'fxFactor':factor},'source':'Yahoo Finance via yfinance','universeSource':DES_SOURCE,'engineVersion':'3.8-all-tickers','engineCommit':os.getenv('CEKVALUASI_ENGINE_SHA') or None,'analysisStatus':'SIAP' if sufficient else 'TERBATAS','freshnessStatus':'FRESH'}
 
 summary=[];errors=[]
 for s in TICKERS:
