@@ -81,6 +81,17 @@ def process(path):
         pts=standalone(series(df,names,factor));obs=yoy_growth(pts);g,keep,drop=weighted_growth(obs)
         details[key]={'observations':obs,'normalGrowth':g,'outliersRemoved':drop,'validGrowthCount':len(keep)}
         if g is not None:usable.append((key,g))
+    latest_statement_period=None
+    if qi is not None and not qi.empty:
+        try:
+            latest=pd.Timestamp(max(pd.Timestamp(c) for c in qi.columns))
+            latest_statement_period={'year':int(latest.year),'quarter':int(latest.quarter),'periodEnd':latest.date().isoformat()}
+        except:pass
+    all_obs=[x for metric in details.values() for x in metric['observations']]
+    latest_growth_observation_period=None
+    if all_obs:
+        latest_obs=max(all_obs,key=lambda x:(x['year'],x['quarter']))
+        latest_growth_observation_period={'year':int(latest_obs['year']),'quarter':int(latest_obs['quarter'])}
     # Earnings is primary, but sustainable growth requires operating confirmation.
     primary=details['netIncome']['normalGrowth'];rev=details['revenue']['normalGrowth'];eb=details['ebitda']['normalGrowth'];ocf=details['operatingCashFlow']['normalGrowth'];fcf=details['freeCashFlow']['normalGrowth']
     confirms=[x for x in (rev,eb,ocf,fcf) if x is not None]
@@ -95,7 +106,7 @@ def process(path):
     else:sustainable=None;confidence=.25;status='INSUFFICIENT'
     old=n(raw.get('growthNormalized'));raw['growthNormalizedLegacy']=old;raw['growthNormalizedQuarterly']=sustainable
     if sustainable is not None:raw['growthNormalized']=sustainable
-    d['quarterlyNormalization']={'status':status,'sustainableGrowth':sustainable,'confidence':confidence,'method':'same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation','metrics':details,'notes':['Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.','Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth.']}
+    d['quarterlyNormalization']={'status':status,'sustainableGrowth':sustainable,'confidence':confidence,'method':'same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation','metrics':details,'latestStatementPeriod':latest_statement_period,'latestGrowthObservationPeriod':latest_growth_observation_period,'notes':['Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.','Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth.']}
     d.setdefault('valuationPolicy',{})['growthSource']='Robust quarterly sustainable growth when available; legacy normalized growth otherwise.'
     d['engineVersion']='3.12-quarterly-normalized';return d
 
