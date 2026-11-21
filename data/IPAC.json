@@ -1,7 +1,13 @@
 {
   "ticker": "IPAC.JK",
   "name": "PT Era Graharealty Tbk",
-  "asOf": "2026-11-06T16:58:30.771400+00:00",
+  "asOf": "2026-11-21T06:46:43.240925+00:00",
+  "financialPeriod": {
+    "periodEnd": "2026-09-30",
+    "year": 2026,
+    "quarter": 3,
+    "source": "Yahoo Finance"
+  },
   "price": 189.0,
   "companyProfile": {
     "sector": "Properti & Real Estat",
@@ -12,15 +18,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 23.148251481895553,
-    "base": 32.42355528250587,
-    "bull": 42.02850951523841,
-    "dispersion": 0.1583775604038046,
-    "agreement": "HIGH",
-    "available": true,
-    "indicative": false,
+    "bear": 19.530680683141686,
+    "base": 31.31720335819471,
+    "bull": 53.736894125526064,
+    "dispersion": 0.19004063624333942,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -35,9 +41,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.29991980753809144,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803278
     },
     {
       "name": "FCF Yield",
@@ -51,29 +58,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.23817161186848437,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 26.674669943404993,
-      "base": 34.19829479923717,
-      "bull": 41.72191965506934,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 3.8230000169708838,
-        "requiredReturn": 0.1117892
-      },
-      "included": true,
-      "normalizedWeight": 0.46190858059342416,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": true
+      "indicativeWeight": 0.4426229508196721
     }
   ],
   "dcfDiagnostics": {
@@ -87,11 +75,11 @@
   },
   "technical": {
     "ma20": 189.0,
-    "ma50": 188.04,
-    "ma200": 167.63,
+    "ma50": 189.0,
+    "ma200": 168.335,
     "rsi14": null,
     "return1m": 0.0,
-    "return3m": 0.1454545454545455
+    "return3m": 0.021621621621621623
   },
   "quality": {
     "cashConversion": null,
@@ -103,19 +91,18 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.8230 per saham.",
-      "Extreme Valuation Review: Base FV = 0.17x harga pasar. Verifikasi currency/unit/shares, earnings quality, siklus, corporate action, dan model; harga pasar tidak menarik FV ke arahnya."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.991101984941821,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "historyYears": 4.993839835728953,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
-    "reviewFlags": [
-      "EXTREME_VALUATION",
-      "FORENSIC_EXTREME"
-    ],
-    "valuationConfidence": 17,
+    "reviewFlags": [],
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -127,24 +114,12 @@
         "base": 30.64881576577457,
         "bull": 42.335099375407474,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 26.674669943404993,
-        "base": 34.19829479923717,
-        "bull": 41.72191965506934,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.1158112946545324,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 3.8230000169708838,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -160,27 +135,23 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 3.823
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 3.823000033941767
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.0525905,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "e569109612a91b7f378af3aaf22c44328f3bc645",
-  "analysisStatus": "REVIEW",
+  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -198,8 +169,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat pembayaran dividen belum cukup.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -246,6 +217,8 @@
         "validGrowthCount": 0
       }
     },
+    "latestStatementPeriod": null,
+    "latestGrowthObservationPeriod": null,
     "notes": [
       "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
       "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
@@ -267,25 +240,10 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "FORENSIC_EXTREME",
-    "direction": "BELOW_MARKET",
-    "baseToPrice": 0.17155320255294113,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    },
-    "checks": [
-      "currency_and_units",
-      "shares_and_dilution",
-      "earnings_quality_and_oneoffs",
-      "cycle_and_corporate_actions",
-      "cashflow_confirmation",
-      "independent_model_agreement"
-    ],
-    "policy": "Extreme market divergence requires forensic review; market price never anchors FV.",
-    "forensicChecks": []
+    "required": false,
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

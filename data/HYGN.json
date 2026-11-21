@@ -1,8 +1,14 @@
 {
   "ticker": "HYGN.JK",
   "name": "PT Ecocare Indo Pasifik Tbk",
-  "asOf": "2026-11-06T16:53:42.382932+00:00",
-  "price": 173.0,
+  "asOf": "2026-11-21T06:42:50.345132+00:00",
+  "financialPeriod": {
+    "periodEnd": "2026-09-30",
+    "year": 2026,
+    "quarter": 3,
+    "source": "Yahoo Finance"
+  },
+  "price": 164.0,
   "companyProfile": {
     "sector": "Perindustrian",
     "valuationProfile": "Perindustrian",
@@ -12,46 +18,68 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 172.57269508177149,
-    "base": 185.0,
-    "bull": 199.35602615551062,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "bear": 38.983201537843215,
+    "base": 59.462770709697836,
+    "bull": 99.2463466215375,
+    "dispersion": 0.2423577043629003,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "Historical Dividend Yield"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 172.57269508177149,
-      "base": 185.0,
-      "bull": 199.35602615551062,
-      "confidence": 0.68,
-      "relevance": 0.65,
-      "rawWeight": 0.44200000000000006,
-      "bands": {
-        "mean": 0.016216216216216217,
-        "sd": 0.0011677621621621608
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 45.340407660490314,
+      "base": 71.87507480710313,
+      "bull": 99.2463466215375,
+      "confidence": 0.85,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
+      "bands": null,
+      "warning": "Porsi nilai jangka panjang tinggi",
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
+    },
+    {
+      "name": "FCF Yield",
+      "family": "cashflow",
+      "bear": 24.655759788542934,
+      "base": 43.83246184629856,
+      "bull": 49.31151957708587,
+      "confidence": 0.75,
+      "relevance": 0.9,
+      "rawWeight": 0.675,
+      "bands": null,
+      "warning": null,
+      "explanation": "Free cash flow per saham dibandingkan required cash yield.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
-  "dcfDiagnostics": null,
+  "dcfDiagnostics": {
+    "terminalValueShare": 0.7402168582381753,
+    "bearTerminalValueShare": 0.6590155557163327,
+    "bullTerminalValueShare": 0.7843939566665146,
+    "warning": true,
+    "growth": 0.08485975325,
+    "costOfEquity": 0.105,
+    "terminalGrowth": 0.035
+  },
   "technical": {
-    "ma20": 178.05,
-    "ma50": 182.38,
-    "ma200": 159.285,
-    "rsi14": 42.42424242424243,
-    "return1m": -0.05978260869565222,
-    "return3m": 0.04216867469879526
+    "ma20": 171.55,
+    "ma50": 178.72,
+    "ma200": 159.11,
+    "rsi14": 25.925925925925924,
+    "return1m": -0.09392265193370164,
+    "return3m": -0.06285714285714283
   },
   "quality": {
     "cashConversion": null,
@@ -63,27 +91,29 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Tidak ada metode core yang lolos QC; ticker tetap diterbitkan agar fallback model dapat dicoba.",
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (Historical Dividend Yield); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 2.729637234770705,
-    "validMethodCount": 1,
+    "historyYears": 2.7679671457905544,
+    "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
-        "family": "income",
+        "family": "cashflow",
         "methods": [
-          "Historical Dividend Yield"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 172.57269508177149,
-        "base": 185.0,
-        "bull": 199.35602615551062,
+        "bear": 34.998083724516626,
+        "base": 57.853768326700845,
+        "bull": 74.27893309931169,
         "weight": 0.25
       }
     ],
@@ -95,11 +125,11 @@
     "currentPE": null,
     "currentPBV": null,
     "roe": 0.13803001,
-    "fcf": -12483809280.0,
+    "fcf": 9848971264.0,
     "growthNormalized": 0.08485975325,
-    "costOfEquity": 0.1388,
+    "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 431915302912.0,
+    "marketCap": 409445728256.0,
     "shares": 2496620300.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -113,8 +143,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "e569109612a91b7f378af3aaf22c44328f3bc645",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -132,19 +162,17 @@
       "inputs": {}
     },
     {
-      "name": "DCF & FCF Yield",
-      "family": "cashflow",
-      "status": "NEGATIVE",
-      "reason": "FCF negatif; metode cashflow dilewati.",
-      "inputs": {
-        "fcf": -12483809280.0
-      }
-    },
-    {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -191,6 +219,8 @@
         "validGrowthCount": 0
       }
     },
+    "latestStatementPeriod": null,
+    "latestGrowthObservationPeriod": null,
     "notes": [
       "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
       "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
@@ -213,9 +243,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
