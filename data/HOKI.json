@@ -1,7 +1,7 @@
 {
   "ticker": "HOKI.JK",
   "name": "PT Buyung Poetra Sembada Tbk",
-  "asOf": "2026-11-21T06:43:46.709977+00:00",
+  "asOf": "2026-11-23T21:39:00.818953+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
@@ -18,10 +18,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 67.96321962477765,
-    "base": 90.9015718955749,
-    "bull": 116.54319174850589,
-    "dispersion": 0.231772527867101,
+    "bear": 73.25613564863768,
+    "base": 105.2332779381699,
+    "bull": 143.18382547637475,
+    "dispersion": 0.2825515541980375,
     "agreement": "MEDIUM",
     "available": true,
     "indicative": false,
@@ -78,13 +78,38 @@
         "minus1": 81.5524097838862,
         "base": 110.57644056384957,
         "plus1": 139.60047134381296,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.4000000000000001,
+      "normalizedWeight": 0.18122977346278324,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 83.84196769635777,
+      "base": 133.89669002335987,
+      "bull": 196.46509293211244,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 1211043057867.0,
+        "netDebt": 36328312937.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      },
+      "included": true,
+      "normalizedWeight": 0.21877022653721695,
+      "qcStatus": "VALID",
+      "countsForIndependence": true
     }
   ],
   "dcfDiagnostics": {
@@ -115,15 +140,16 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 4,
+    "independentFamilies": 3,
     "diagnosticCount": 3,
     "outlierMethodCount": 0,
     "reviewFlags": [
-      "LARGE_MARKET_GAP"
+      "LARGE_MARKET_GAP",
+      "FORENSIC_EXTREME"
     ],
-    "valuationConfidence": 41,
+    "valuationConfidence": 33,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -145,11 +171,23 @@
         "base": 110.57644056384957,
         "bull": 139.60047134381296,
         "weight": 0.25
+      },
+      {
+        "family": "revenue",
+        "methods": [
+          "EV / Sales"
+        ],
+        "bear": 83.84196769635777,
+        "base": 133.89669002335987,
+        "bull": 196.46509293211244,
+        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.5524576535709587,
-    "forensicChecks": []
+    "familyConsensusCount": 3,
+    "crossFamilySpreadRatio": 1.879866453962719,
+    "forensicChecks": [
+      "NON_POSITIVE_EARNINGS"
+    ]
   },
   "raw": {
     "epsTTM": null,
@@ -175,8 +213,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
-  "analysisStatus": "SIAP",
+  "engineCommit": "07419751bd0f6fb563a889b8f57045531dd67fbd",
+  "analysisStatus": "REVIEW",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -189,16 +227,23 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -6483741275.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
-      "inputs": {}
+      "status": "OUTLIER",
+      "reason": "Hasil di luar economic sanity guard 0,05x–5x harga pasar.",
+      "inputs": {
+        "bear": 98.49526401147371,
+        "base": 136.0,
+        "bull": 200.0,
+        "price": 32.0
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -208,10 +253,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": -0.602933561759363
+          }
+        ],
+        "normalGrowth": -0.602933561759363,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -238,14 +289,27 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": -0.8335900379092822
+          }
+        ],
+        "normalGrowth": -0.75,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
-    "latestStatementPeriod": null,
-    "latestGrowthObservationPeriod": null,
+    "latestStatementPeriod": {
+      "year": 2026,
+      "quarter": 3,
+      "periodEnd": "2026-09-30"
+    },
+    "latestGrowthObservationPeriod": {
+      "year": 2026,
+      "quarter": 3
+    },
     "notes": [
       "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
       "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
@@ -267,14 +331,18 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 2.8406741217367157,
+    "required": true,
+    "status": "REVIEW",
+    "reason": "FORENSIC_EXTREME",
+    "baseToPrice": 3.2885399355678095,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    }
+    },
+    "forensicChecks": [
+      "NON_POSITIVE_EARNINGS"
+    ],
+    "policy": "Extreme market divergence requires forensic review; market price never anchors FV."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "TAXI.JK",
   "name": "PT Express Transindo Utama Tbk",
-  "asOf": "2026-11-21T06:48:28.955156+00:00",
+  "asOf": "2026-11-23T21:46:29.288203+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
@@ -78,13 +78,39 @@
         "minus1": 26.36434026915188,
         "base": 29.454621146380266,
         "plus1": 32.54490202360865,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
       "normalizedWeight": 0.40000000000000013,
       "qcStatus": "VALID"
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "bear": 0.21925540521852493,
+      "base": 0.3220483306749989,
+      "bull": 0.4419734103742185,
+      "confidence": 0.52,
+      "relevance": 0.65,
+      "rawWeight": 0.338,
+      "warning": null,
+      "explanation": "Fallback revenue valuation untuk bisnis dengan laba belum defensible; confidence sengaja dibatasi.",
+      "bands": {
+        "revenue": 3503062000.0,
+        "netDebt": -665212000.0,
+        "multipleBand": [
+          0.45,
+          0.75,
+          1.1
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 36.73x dari median metode."
     },
     {
       "name": "Adjusted Asset Floor",
@@ -109,7 +135,7 @@
       "normalizedWeight": 0,
       "qcStatus": "OUTLIER",
       "countsForIndependence": false,
-      "qcReason": "Ditolak cross-method outlier: deviasi 4.87x dari median metode."
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.38x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -122,10 +148,10 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 10.55,
-    "ma50": 12.66,
-    "ma200": 14.965,
-    "rsi14": 33.33333333333333,
+    "ma20": 10.4,
+    "ma50": 12.54,
+    "ma200": 14.88,
+    "rsi14": 50.0,
     "return1m": -0.16666666666666663,
     "return3m": -0.2857142857142857
   },
@@ -137,15 +163,16 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
-    "historyYears": 4.993839835728953,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "outlierMethodCount": 2,
     "reviewFlags": [],
-    "valuationConfidence": 47,
+    "valuationConfidence": 55,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -180,7 +207,7 @@
     "currentPBV": 2.7744473040486426,
     "roe": -0.36710998,
     "fcf": 13422867456.0,
-    "growthNormalized": -0.03,
+    "growthNormalized": 0.35,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
     "marketCap": 102236471296.0,
@@ -190,13 +217,14 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": -0.03,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.35
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
+  "engineCommit": "07419751bd0f6fb563a889b8f57045531dd67fbd",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -210,47 +238,73 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "EBITDA negatif/nol.",
+      "inputs": {
+        "ebitda": -19509592000.0
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat pembayaran dividen belum cukup.",
       "inputs": {}
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.35,
+    "confidence": 0.64,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 5.780874892343184
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 0.28949543005485157
+          }
+        ],
+        "normalGrowth": 0.28949543005485157,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 0.28438672715539814
+          }
+        ],
+        "normalGrowth": 0.28438672715539814,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 0.2863148348703959
+          }
+        ],
+        "normalGrowth": 0.2863148348703959,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -265,8 +319,15 @@
         "validGrowthCount": 0
       }
     },
-    "latestStatementPeriod": null,
-    "latestGrowthObservationPeriod": null,
+    "latestStatementPeriod": {
+      "year": 2026,
+      "quarter": 3,
+      "periodEnd": "2026-09-30"
+    },
+    "latestGrowthObservationPeriod": {
+      "year": 2026,
+      "quarter": 3
+    },
     "notes": [
       "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
       "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."

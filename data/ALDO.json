@@ -1,7 +1,7 @@
 {
   "ticker": "ALDO.JK",
   "name": "PT Alkindo Naratama Tbk",
-  "asOf": "2026-11-21T06:41:39.425376+00:00",
+  "asOf": "2026-11-23T21:35:40.303554+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
@@ -18,10 +18,10 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 111.68311334064515,
-    "base": 560.6201590205748,
-    "bull": 1170.1449417959975,
-    "dispersion": 0.6986667096663323,
+    "bear": 529.6472668509142,
+    "base": 676.4484470242404,
+    "bull": 823.2496271975666,
+    "dispersion": 0.389336357456,
     "agreement": "LOW",
     "available": true,
     "indicative": false,
@@ -46,20 +46,89 @@
         "minus1": 434.2752785152103,
         "base": 493.99999999999994,
         "plus1": 553.7247214847896,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
       "included": true,
-      "normalizedWeight": 0.19325723387310859,
+      "normalizedWeight": 0.12515042117930206,
+      "qcStatus": "VALID"
+    },
+    {
+      "name": "Historical P/E 3Y",
+      "family": "earnings",
+      "bear": 2380.6758916135855,
+      "base": 2587.691186536506,
+      "bull": 2794.7064814594264,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 37.913392523099716,
+        "sd": 3.033071401847977,
+        "current": 23.881841130883608,
+        "sampleCount": 181,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 3 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.65x dari median metode."
+    },
+    {
+      "name": "Historical P/E 5Y",
+      "family": "earnings",
+      "bear": 625.4971856712955,
+      "base": 2598.167669073091,
+      "bull": 4570.8381524748875,
+      "confidence": 0.9,
+      "relevance": 1.0,
+      "rawWeight": 0.9,
+      "bands": {
+        "mean": 38.06688803938757,
+        "sd": 28.90245588232212,
+        "current": 23.881841130883608,
+        "sampleCount": 663,
+        "adaptive": true,
+        "hardCap": null,
+        "epsSource": "Yahoo TTM cross-check"
+      },
+      "warning": null,
+      "explanation": "EPS TTM tervalidasi (Yahoo TTM cross-check) × median P/E historis 5 tahun. Outlier dinilai relatif terhadap histori emiten.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.66x dari median metode."
+    },
+    {
+      "name": "Historical EV/EBITDA",
+      "family": "enterprise",
+      "bear": 326.2792715947073,
+      "base": 498.0,
+      "bull": 669.7207284052927,
+      "confidence": 0.82,
+      "relevance": 1.25,
+      "rawWeight": 1.025,
+      "bands": {
+        "mean": 18.555567027431778,
+        "sd": 4.587291036087176
+      },
+      "warning": null,
+      "explanation": "Enterprise value berbasis median EV/EBITDA historis dengan debt/cash/EBITDA dinormalisasi ke mata uang harga.",
+      "included": true,
+      "normalizedWeight": 0.3524153343647929,
       "qcStatus": "VALID"
     },
     {
       "name": "Graham Number",
       "family": "fundamental",
-      "bear": 270.2485649199475,
-      "base": 337.8107061499344,
-      "bull": 405.37284737992127,
+      "bear": 618.5234153468765,
+      "base": 773.1542691835956,
+      "bull": 927.7851230203147,
       "confidence": 0.6,
       "relevance": 0.15,
       "rawWeight": 0.09,
@@ -67,9 +136,31 @@
       "warning": "Cross-check konservatif; tidak dihitung sebagai keluarga independen.",
       "explanation": "Cross-check konservatif berbasis EPS dan BVPS tervalidasi.",
       "included": true,
-      "normalizedWeight": 0.04778338200159278,
+      "normalizedWeight": 0.030943785456420837,
       "qcStatus": "VALID",
       "countsForIndependence": false
+    },
+    {
+      "name": "Forward Earnings Power",
+      "family": "forward_earnings",
+      "bear": 2652.5668046443093,
+      "base": 3014.280459823078,
+      "bull": 3375.994115001847,
+      "confidence": 0.86,
+      "relevance": 1.05,
+      "rawWeight": 0.903,
+      "warning": null,
+      "explanation": "Forward EPS memakai normalized sustainable growth dan adaptive historical P/E.",
+      "bands": {
+        "forwardEPS": 79.34375702506364,
+        "growthUsed": 0.1625,
+        "historicalPE": 37.99014028124364
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.25x dari median metode."
     },
     {
       "name": "Justified PBV / ROE",
@@ -89,29 +180,55 @@
         "costOfEquity": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.2691797186089727,
+      "normalizedWeight": 0.17431665807117072,
       "qcStatus": "VALID",
       "countsForIndependence": true
     },
     {
       "name": "Earnings Power Value",
       "family": "earnings_power",
-      "bear": 96.79203156189247,
-      "base": 124.0923481562724,
-      "bull": 151.39266475065233,
+      "bear": 507.0200141693775,
+      "base": 650.0256591915096,
+      "bull": 793.0313042136416,
       "confidence": 0.72,
       "relevance": 1.0,
       "rawWeight": 0.72,
       "warning": null,
       "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
       "bands": {
-        "eps": 13.0296965564086,
+        "eps": 68.2526942151085,
         "requiredReturn": 0.105
       },
       "included": true,
-      "normalizedWeight": 0.38226705601274225,
+      "normalizedWeight": 0.2475502836513667,
       "qcStatus": "VALID",
       "countsForIndependence": true
+    },
+    {
+      "name": "EV / EBIT",
+      "family": "enterprise_earnings",
+      "bear": 47.02012431052682,
+      "base": 151.43277868159723,
+      "bull": 255.84543305266763,
+      "confidence": 0.7,
+      "relevance": 1.0,
+      "rawWeight": 0.7,
+      "warning": null,
+      "explanation": "Operating earnings dikapitalisasi pada rentang EV/EBIT sektor lalu dikurangi net debt.",
+      "bands": {
+        "ebit": 93805837241.0,
+        "netDebt": 529910183605.0,
+        "multipleBand": [
+          7,
+          10,
+          13
+        ]
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 4.68x dari median metode."
     },
     {
       "name": "Adjusted Asset Floor",
@@ -133,7 +250,7 @@
         ]
       },
       "included": true,
-      "normalizedWeight": 0.10751260950358377,
+      "normalizedWeight": 0.06962351727694689,
       "qcStatus": "VALID",
       "countsForIndependence": false
     }
@@ -156,18 +273,18 @@
     "totalInputs": 7,
     "guards": [
       "EPS Yahoo tidak konsisten dengan laba/jumlah saham; EPS hasil rekonsiliasi FX digunakan.",
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 68.2527 per saham."
     ],
-    "historyYears": 4.993839835728953,
-    "validMethodCount": 5,
-    "independentFamilies": 3,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 0,
+    "historyYears": 4.999315537303217,
+    "validMethodCount": 6,
+    "independentFamilies": 4,
+    "diagnosticCount": 2,
+    "outlierMethodCount": 4,
     "reviewFlags": [
-      "LARGE_MARKET_GAP",
-      "CROSS_FAMILY_CONFLICT"
+      "LARGE_MARKET_GAP"
     ],
-    "valuationConfidence": 20,
+    "valuationConfidence": 48,
     "familyConsensus": [
       {
         "family": "book",
@@ -177,6 +294,16 @@
         "bear": 434.2752785152103,
         "base": 493.99999999999994,
         "bull": 553.7247214847896,
+        "weight": 0.25
+      },
+      {
+        "family": "enterprise",
+        "methods": [
+          "Historical EV/EBITDA"
+        ],
+        "bear": 326.2792715947073,
+        "base": 498.0,
+        "bull": 669.7207284052927,
         "weight": 0.25
       },
       {
@@ -194,41 +321,60 @@
         "methods": [
           "Earnings Power Value"
         ],
-        "bear": 96.79203156189247,
-        "base": 124.0923481562724,
-        "bull": 151.39266475065233,
+        "bear": 507.0200141693775,
+        "base": 650.0256591915096,
+        "bull": 793.0313042136416,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 3,
-    "crossFamilySpreadRatio": 8.572391003237557,
+    "familyConsensusCount": 4,
+    "crossFamilySpreadRatio": 2.1533767791608347,
     "forensicChecks": []
   },
   "raw": {
-    "epsTTM": 13.0296965564086,
+    "epsTTM": 68.2526942151085,
     "bvps": 389.25123491038664,
     "currentPE": 125.09884577460029,
     "currentPBV": 4.187526856209611,
     "roe": 0.16565001,
     "fcf": -82719170560.0,
-    "growthNormalized": 0.07244776999162308,
+    "growthNormalized": 0.35,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 4393246392320.0,
+    "marketCap": 4501055995904.0,
     "shares": 2695243344.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 69.08
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 67.425388430217
+      },
+      {
+        "source": "WISS reconciled EPS",
+        "value": 13.0296965564086
+      },
+      {
+        "source": "Latest annual NI / shares",
+        "value": 13.0296965564086
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.07244776999162308,
-    "growthNormalizedQuarterly": null
+    "growthNormalizedQuarterly": 0.35
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
-  "analysisStatus": "REVIEW",
+  "engineCommit": "07419751bd0f6fb563a889b8f57045531dd67fbd",
+  "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -241,64 +387,66 @@
       }
     },
     {
-      "name": "Historical EV/EBITDA",
-      "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
-    },
-    {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
-    },
-    {
-      "name": "Mid-Cycle Earnings",
-      "family": "earnings_midcycle",
-      "status": "OUTLIER",
-      "reason": "Hasil sector model tidak lolos economic sanity guard 0.05x–5x harga.",
-      "inputs": {
-        "normalizedEPS": 13.360086917121368,
-        "growthAdjustment": 0.025356719497068077,
-        "peBand": [
-          5.0,
-          7.0,
-          9.0
-        ]
-      }
     }
   ],
   "quarterlyNormalization": {
-    "status": "INSUFFICIENT",
-    "sustainableGrowth": null,
-    "confidence": 0.25,
+    "status": "READY",
+    "sustainableGrowth": 0.35,
+    "confidence": 0.72,
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 0.24059057622433966
+          }
+        ],
+        "normalGrowth": 0.24059057622433966,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 2.8614170678807893
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebit": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 3.0397985323057393
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "netIncome": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": 6.723320478660481
+          }
+        ],
+        "normalGrowth": 1.5,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "operatingCashFlow": {
         "observations": [],
@@ -307,14 +455,27 @@
         "validGrowthCount": 0
       },
       "freeCashFlow": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 3,
+            "growth": -0.5804716860891432
+          }
+        ],
+        "normalGrowth": -0.5804716860891432,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       }
     },
-    "latestStatementPeriod": null,
-    "latestGrowthObservationPeriod": null,
+    "latestStatementPeriod": {
+      "year": 2026,
+      "quarter": 3,
+      "periodEnd": "2026-09-30"
+    },
+    "latestGrowthObservationPeriod": {
+      "year": 2026,
+      "quarter": 3
+    },
     "notes": [
       "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
       "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
@@ -336,16 +497,14 @@
     "consensus": "One consensus vote per independent family; cross-family disagreement is preserved as uncertainty."
   },
   "valuationReview": {
-    "required": true,
-    "status": "REVIEW",
-    "reason": "CROSS_FAMILY_CONFLICT",
-    "baseToPrice": 0.3439387478653833,
+    "required": false,
+    "status": "PASS",
+    "reason": null,
+    "baseToPrice": 0.4149990472541352,
     "thresholds": {
       "low": 0.25,
       "high": 3.0
-    },
-    "familySpreadRatio": 8.572391003237557,
-    "policy": "Conflicting independent valuation families widen the range and reduce confidence; minority families are not discarded."
+    }
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

@@ -1,7 +1,7 @@
 {
   "ticker": "UVCR.JK",
   "name": "PT Trimegah Karya Pratama Tbk",
-  "asOf": "2026-11-21T06:47:31.025327+00:00",
+  "asOf": "2026-11-23T21:44:58.616885+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
@@ -62,6 +62,27 @@
       "normalizedWeight": 0,
       "qcStatus": "VALID",
       "indicativeWeight": 0.3698630136986301
+    },
+    {
+      "name": "Earnings Power Value",
+      "family": "earnings_power",
+      "bear": 13.571525010237906,
+      "base": 17.399391038766545,
+      "bull": 21.227257067295184,
+      "confidence": 0.72,
+      "relevance": 1.0,
+      "rawWeight": 0.72,
+      "warning": null,
+      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
+      "bands": {
+        "eps": 3.449999973461539,
+        "requiredReturn": 0.1982828
+      },
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "OUTLIER",
+      "countsForIndependence": true,
+      "qcReason": "Ditolak cross-method outlier: deviasi 3.75x dari median metode."
     }
   ],
   "dcfDiagnostics": {
@@ -74,12 +95,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 180.65,
-    "ma50": 206.78,
-    "ma200": 173.38,
-    "rsi14": 50.0,
-    "return1m": -0.21028037383177567,
-    "return3m": 0.1901408450704225
+    "ma20": 178.1,
+    "ma50": 207.06,
+    "ma200": 173.245,
+    "rsi14": 53.96825396825397,
+    "return1m": -0.2318181818181818,
+    "return3m": 0.198581560283688
   },
   "quality": {
     "cashConversion": null,
@@ -92,14 +113,15 @@
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 3.4500 per saham.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
       "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 4.993839835728953,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 2,
     "independentFamilies": 1,
-    "diagnosticCount": 4,
-    "outlierMethodCount": 0,
+    "diagnosticCount": 3,
+    "outlierMethodCount": 1,
     "reviewFlags": [],
     "valuationConfidence": 42,
     "indicativeMethodCount": 2,
@@ -119,7 +141,7 @@
     "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": null,
+    "epsTTM": 3.449999973461539,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -135,23 +157,27 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [
+      {
+        "source": "Yahoo trailingEps",
+        "value": 3.45
+      },
+      {
+        "source": "Price / Yahoo trailingPE",
+        "value": 3.4499999469230773
+      }
+    ],
+    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.08279600000000001,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
+  "engineCommit": "07419751bd0f6fb563a889b8f57045531dd67fbd",
   "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
-    {
-      "name": "P/E & Graham",
-      "family": "earnings",
-      "status": "NOT_APPLICABLE",
-      "reason": "EPS tidak tersedia/tervalidasi.",
-      "inputs": {}
-    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -169,8 +195,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
     }
   ],

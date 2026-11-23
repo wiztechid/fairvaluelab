@@ -1,7 +1,7 @@
 {
   "ticker": "MDIA.JK",
   "name": "PT Intermedia Capital Tbk",
-  "asOf": "2026-11-21T06:45:15.342451+00:00",
+  "asOf": "2026-11-23T21:41:23.900572+00:00",
   "financialPeriod": {
     "periodEnd": "2026-06-30",
     "year": 2026,
@@ -78,7 +78,7 @@
         "minus1": 11.826366894203192,
         "base": 24.107860516026435,
         "plus1": 36.38935413784968,
-        "coverageYears": 4.993839835728953
+        "coverageYears": 4.999315537303217
       },
       "warning": null,
       "explanation": "BVPS tervalidasi dikalikan median P/BV historis 5 tahun.",
@@ -112,9 +112,10 @@
     "availableInputs": 6,
     "totalInputs": 7,
     "guards": [
-      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan."
+      "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
     ],
-    "historyYears": 4.993839835728953,
+    "historyYears": 4.999315537303217,
     "validMethodCount": 3,
     "independentFamilies": 2,
     "diagnosticCount": 3,
@@ -160,20 +161,21 @@
     "growthNormalized": 0.14014918271170707,
     "costOfEquity": 0.17887340000000002,
     "terminalGrowth": 0.035,
-    "marketCap": 2392147886080.0,
+    "marketCap": 2431363317760.0,
     "shares": 39215538400.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
+    "epsCandidates": [],
     "growthNormalizedLegacy": 0.14014918271170707,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "aa78c705ee17ece5b5bf37890c9a5c3c8fb18f5b",
+  "engineCommit": "07419751bd0f6fb563a889b8f57045531dd67fbd",
   "analysisStatus": "SIAP",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
@@ -187,16 +189,35 @@
     {
       "name": "Historical EV/EBITDA",
       "family": "enterprise",
-      "status": "NOT_APPLICABLE",
-      "reason": "EBITDA tidak tersedia.",
-      "inputs": {}
+      "status": "NEGATIVE",
+      "reason": "Hasil nol/negatif/tidak lengkap; tidak masuk Composite FV.",
+      "inputs": {
+        "bear": -20.656964432224072,
+        "base": -20.559199695510866,
+        "bull": -20.461434958797664
+      }
     },
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "INVALID",
-      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
+      "status": "NOT_APPLICABLE",
+      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
       "inputs": {}
+    },
+    {
+      "name": "EV / Sales",
+      "family": "revenue",
+      "status": "INVALID",
+      "reason": "Input fundamental tidak menghasilkan nilai positif lengkap.",
+      "inputs": {
+        "revenue": 605263232000.0,
+        "netDebt": 844579053000.0,
+        "multipleBand": [
+          0.7,
+          1.1,
+          1.6
+        ]
+      }
     }
   ],
   "quarterlyNormalization": {
@@ -206,10 +227,16 @@
     "method": "same-quarter YoY -> median/MAD outlier removal -> recency weighting -> earnings + operating/cash confirmation",
     "metrics": {
       "revenue": {
-        "observations": [],
-        "normalGrowth": null,
+        "observations": [
+          {
+            "year": 2026,
+            "quarter": 2,
+            "growth": -0.007399408182238498
+          }
+        ],
+        "normalGrowth": -0.007399408182238498,
         "outliersRemoved": [],
-        "validGrowthCount": 0
+        "validGrowthCount": 1
       },
       "ebitda": {
         "observations": [],
@@ -242,8 +269,15 @@
         "validGrowthCount": 0
       }
     },
-    "latestStatementPeriod": null,
-    "latestGrowthObservationPeriod": null,
+    "latestStatementPeriod": {
+      "year": 2026,
+      "quarter": 2,
+      "periodEnd": "2026-06-30"
+    },
+    "latestGrowthObservationPeriod": {
+      "year": 2026,
+      "quarter": 2
+    },
     "notes": [
       "Sign changes and near-zero denominators are excluded from percentage growth and treated as turnaround/base-effect conditions.",
       "Extreme reported growth remains visible in observations but is not allowed to dominate sustainable growth."
