@@ -1,14 +1,14 @@
 {
   "ticker": "MANG.JK",
   "name": "PT Manggung Polahraya Tbk",
-  "asOf": "2026-11-24T20:26:23.843708+00:00",
+  "asOf": "2026-11-25T19:38:17.360403+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
     "quarter": 3,
     "source": "Yahoo Finance"
   },
-  "price": 50.0,
+  "price": 55.0,
   "companyProfile": {
     "sector": "Infrastruktur",
     "valuationProfile": "Infrastruktur · Konstruksi",
@@ -19,17 +19,33 @@
   },
   "fairValue": {
     "bear": 128.77910299905136,
-    "base": 153.32556817984312,
-    "bull": 180.13425256675453,
-    "dispersion": null,
-    "agreement": "SINGLE_METHOD",
+    "base": 175.55575988559582,
+    "bull": 263.2610480874892,
+    "dispersion": 0.10827859960457548,
+    "agreement": "LIMITED",
     "available": false,
-    "indicative": false,
-    "referenceOnly": true,
-    "evidenceLevel": "REFERENCE",
-    "referenceMethod": "FCF Yield"
+    "indicative": true,
+    "referenceOnly": false,
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
+    {
+      "name": "DCF",
+      "family": "cashflow",
+      "bear": 140.93073738946453,
+      "base": 190.56113928697891,
+      "bull": 263.2610480874892,
+      "confidence": 0.85,
+      "relevance": 1.0,
+      "rawWeight": 0.85,
+      "bands": null,
+      "warning": null,
+      "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5970149253731343
+    },
     {
       "name": "FCF Yield",
       "family": "cashflow",
@@ -44,7 +60,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4029850746268656
     }
   ],
   "dcfDiagnostics": {
@@ -57,12 +74,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 36.4,
-    "ma50": 36.02,
-    "ma200": 43.97,
-    "rsi14": 84.0,
-    "return1m": 0.4285714285714286,
-    "return3m": 0.3157894736842106
+    "ma20": 37.45,
+    "ma50": 36.36,
+    "ma200": 43.91,
+    "rsi14": 89.65517241379311,
+    "return1m": 0.4864864864864864,
+    "return3m": 0.375
   },
   "quality": {
     "cashConversion": null,
@@ -74,28 +91,29 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "DCF ditolak economic sanity guard karena hasil tidak konsisten dengan skala harga pasar.",
       "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
       "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
       "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
-      "Referensi Nilai dari satu metode valid (FCF Yield); belum cukup bukti untuk FV gabungan."
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
-    "historyYears": 2.869267624914442,
-    "validMethodCount": 1,
+    "historyYears": 2.8720054757015743,
+    "validMethodCount": 2,
     "independentFamilies": 1,
     "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 26,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
+          "DCF",
           "FCF Yield"
         ],
-        "bear": 128.77910299905136,
-        "base": 153.32556817984312,
-        "bull": 180.13425256675453,
+        "bear": 134.85492019425794,
+        "base": 171.94335373341102,
+        "bull": 221.69765032712186,
         "weight": 0.25
       }
     ],
@@ -111,7 +129,7 @@
     "growthNormalized": 0.011373999999999999,
     "costOfEquity": 0.1366598,
     "terminalGrowth": 0.035,
-    "marketCap": 209693474816.0,
+    "marketCap": 228756520960.0,
     "shares": 3812608833.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -125,8 +143,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "bed6e73074290090f59f49c59eb954e5d365a50d",
-  "analysisStatus": "REFERENSI",
+  "engineCommit": "b909f40922e90ebe24dfd59716997880964eda87",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -225,9 +243,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "SINGLE_METHOD",
-    "reason": "ONLY_ONE_VALID_METHOD",
-    "policy": "Reference value is method-derived, not a composite fair value and not anchored to market."
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
