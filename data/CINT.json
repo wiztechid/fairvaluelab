@@ -1,7 +1,7 @@
 {
   "ticker": "CINT.JK",
   "name": "PT Chitose Internasional Tbk",
-  "asOf": "2026-11-25T19:34:01.508731+00:00",
+  "asOf": "2026-11-26T19:14:10.916454+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
@@ -18,15 +18,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 157.12208733696025,
-    "base": 225.7133403606428,
-    "bull": 320.43932975348,
-    "dispersion": 0.004104917493475535,
-    "agreement": "HIGH",
-    "available": true,
-    "indicative": false,
+    "bear": 121.64572555166227,
+    "base": 185.57911222497887,
+    "bull": 310.36565453066237,
+    "dispersion": 0.2453794923436915,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -41,9 +41,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.5952380952380952,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
@@ -59,27 +60,8 @@
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
       "included": false,
       "normalizedWeight": 0,
-      "qcStatus": "OUTLIER",
-      "qcReason": "Ditolak cross-method outlier: deviasi 1.65x dari median metode."
-    },
-    {
-      "name": "Historical Dividend Yield",
-      "family": "income",
-      "bear": 172.44433030045292,
-      "base": 226.639875,
-      "bull": 330.51300497629774,
-      "confidence": 0.68,
-      "relevance": 0.85,
-      "rawWeight": 0.5780000000000001,
-      "bands": {
-        "mean": 0.060790273556231005,
-        "sd": 0.01910507571964955
-      },
-      "warning": null,
-      "explanation": "Dividend per saham terbaru terhadap median dividend yield historis 5 tahun.",
-      "included": true,
-      "normalizedWeight": 0.4047619047619048,
-      "qcStatus": "VALID"
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -93,11 +75,11 @@
   },
   "technical": {
     "ma20": 176.95,
-    "ma50": 183.76,
-    "ma200": 186.68,
-    "rsi14": 41.379310344827594,
-    "return1m": -0.016853932584269704,
-    "return3m": -0.02777777777777779
+    "ma50": 183.38,
+    "ma200": 186.465,
+    "rsi14": 44.444444444444436,
+    "return1m": 0.01744186046511631,
+    "return3m": -0.022346368715083775
   },
   "quality": {
     "cashConversion": null,
@@ -109,40 +91,33 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Adaptive P/E dilewati: EPS positif belum dapat divalidasi dari minimal dua sumber yang konsisten.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
     "validMethodCount": 2,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
-    "outlierMethodCount": 1,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
+    "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 67,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
         "methods": [
-          "DCF"
+          "DCF",
+          "FCF Yield"
         ],
-        "bear": 141.79984437346758,
-        "base": 224.7868057212856,
-        "bull": 310.36565453066237,
-        "weight": 0.25
-      },
-      {
-        "family": "income",
-        "methods": [
-          "Historical Dividend Yield"
-        ],
-        "bear": 172.44433030045292,
-        "base": 226.639875,
-        "bull": 330.51300497629774,
+        "bear": 109.2079893867338,
+        "base": 180.4966334384206,
+        "bull": 231.7989616653312,
         "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.0082436745909902,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
     "epsTTM": null,
@@ -154,7 +129,7 @@
     "growthNormalized": 0.08641975,
     "costOfEquity": 0.105,
     "terminalGrowth": 0.035,
-    "marketCap": 174999994368.0,
+    "marketCap": 176000008192.0,
     "shares": 1000000000.0,
     "quoteCurrency": "IDR",
     "financialCurrency": "IDR",
@@ -168,8 +143,8 @@
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "b909f40922e90ebe24dfd59716997880964eda87",
-  "analysisStatus": "SIAP",
+  "engineCommit": "2699a6517a9679193050e9271154c687090bd472",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
     {
@@ -191,6 +166,13 @@
       "family": "enterprise",
       "status": "NOT_APPLICABLE",
       "reason": "EBITDA tidak tersedia.",
+      "inputs": {}
+    },
+    {
+      "name": "Historical Dividend Yield",
+      "family": "income",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -261,13 +243,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 1.2897905163465304,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"

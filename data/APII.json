@@ -1,14 +1,14 @@
 {
   "ticker": "APII.JK",
   "name": "PT Arita Prima Indonesia Tbk",
-  "asOf": "2026-11-25T19:31:22.305026+00:00",
+  "asOf": "2026-11-26T19:12:09.786630+00:00",
   "financialPeriod": {
     "periodEnd": "2026-09-30",
     "year": 2026,
     "quarter": 3,
     "source": "Yahoo Finance"
   },
-  "price": 186.0,
+  "price": 181.0,
   "companyProfile": {
     "sector": "Perindustrian",
     "valuationProfile": "Perindustrian",
@@ -18,15 +18,15 @@
     "sectorSource": "OJK DES Periode I 2026"
   },
   "fairValue": {
-    "bear": 176.15385703877337,
-    "base": 261.5288479931698,
-    "bull": 333.86478140083256,
-    "dispersion": 0.32422360124452837,
-    "agreement": "LOW",
-    "available": true,
-    "indicative": false,
+    "bear": 227.48718532990563,
+    "base": 349.4342326457105,
+    "bull": 565.7590445175256,
+    "dispersion": 0.19696126257780971,
+    "agreement": "LIMITED",
+    "available": false,
+    "indicative": true,
     "referenceOnly": false,
-    "familyConsensus": true
+    "evidenceLevel": "INDICATIVE"
   },
   "methods": [
     {
@@ -41,9 +41,10 @@
       "bands": null,
       "warning": "Porsi nilai jangka panjang tinggi",
       "explanation": "Estimasi nilai saham dari arus kas masa depan yang didiskontokan.",
-      "included": true,
-      "normalizedWeight": 0.3344262295081967,
-      "qcStatus": "VALID"
+      "included": false,
+      "normalizedWeight": 0,
+      "qcStatus": "VALID",
+      "indicativeWeight": 0.5573770491803279
     },
     {
       "name": "FCF Yield",
@@ -57,29 +58,10 @@
       "bands": null,
       "warning": null,
       "explanation": "Free cash flow per saham dibandingkan required cash yield.",
-      "included": true,
-      "normalizedWeight": 0.2655737704918033,
-      "qcStatus": "VALID"
-    },
-    {
-      "name": "Earnings Power Value",
-      "family": "earnings_power",
-      "bear": 141.45054314270337,
-      "base": 181.34685018295303,
-      "bull": 221.2431572232027,
-      "confidence": 0.72,
-      "relevance": 1.0,
-      "rawWeight": 0.72,
-      "warning": null,
-      "explanation": "No-growth earnings power: EPS tervalidasi dikapitalisasi dengan required return. Growth tidak dipakai sebagai pengerek nilai.",
-      "bands": {
-        "eps": 19.041419269210067,
-        "requiredReturn": 0.105
-      },
-      "included": true,
-      "normalizedWeight": 0.4,
+      "included": false,
+      "normalizedWeight": 0,
       "qcStatus": "VALID",
-      "countsForIndependence": true
+      "indicativeWeight": 0.4426229508196722
     }
   ],
   "dcfDiagnostics": {
@@ -92,12 +74,12 @@
     "terminalGrowth": 0.035
   },
   "technical": {
-    "ma20": 177.05,
-    "ma50": 185.36,
-    "ma200": 187.575,
-    "rsi14": 65.11627906976744,
-    "return1m": -0.010638297872340385,
-    "return3m": -0.015873015873015928
+    "ma20": 176.9,
+    "ma50": 185.08,
+    "ma200": 187.47,
+    "rsi14": 57.4468085106383,
+    "return1m": -0.016304347826086918,
+    "return3m": -0.05235602094240843
   },
   "quality": {
     "cashConversion": null,
@@ -109,15 +91,18 @@
     "guards": [
       "P/E tidak lolos sanity check atau EPS tidak tervalidasi; Historical P/E dinonaktifkan.",
       "P/BV tidak lolos sanity check atau BVPS tidak tervalidasi; Historical PBV dinonaktifkan.",
-      "EPS TTM dipulihkan dengan cross-check Yahoo TTM cross-check: 19.0414 per saham."
+      "Composite FV belum diterbitkan: dibutuhkan minimal 2 metode dari keluarga valuasi independen.",
+      "Composite FV tidak diterbitkan: minimal 2 keluarga valuasi independen wajib lolos QC.",
+      "FV Indikatif diterbitkan karena >=2 metode valid tersedia tetapi bukti keluarga independen belum cukup untuk Composite FV penuh."
     ],
     "historyYears": 4.999315537303217,
-    "validMethodCount": 3,
-    "independentFamilies": 2,
-    "diagnosticCount": 3,
+    "validMethodCount": 2,
+    "independentFamilies": 1,
+    "diagnosticCount": 4,
     "outlierMethodCount": 0,
     "reviewFlags": [],
-    "valuationConfidence": 54,
+    "valuationConfidence": 42,
+    "indicativeMethodCount": 2,
     "familyConsensus": [
       {
         "family": "cashflow",
@@ -129,24 +114,12 @@
         "base": 341.7108458033865,
         "bull": 446.4864055784624,
         "weight": 0.25
-      },
-      {
-        "family": "earnings_power",
-        "methods": [
-          "Earnings Power Value"
-        ],
-        "bear": 141.45054314270337,
-        "base": 181.34685018295303,
-        "bull": 221.2431572232027,
-        "weight": 0.25
       }
     ],
-    "familyConsensusCount": 2,
-    "crossFamilySpreadRatio": 1.8842943533822019,
-    "forensicChecks": []
+    "familyConsensusCount": 1
   },
   "raw": {
-    "epsTTM": 19.041419269210067,
+    "epsTTM": null,
     "bvps": null,
     "currentPE": null,
     "currentPBV": null,
@@ -162,27 +135,23 @@
     "fxApplied": false,
     "fxPair": null,
     "fxFactor": 1.0,
-    "epsCandidates": [
-      {
-        "source": "Yahoo trailingEps",
-        "value": 18.782
-      },
-      {
-        "source": "Price / Yahoo trailingPE",
-        "value": 19.300838538420134
-      }
-    ],
-    "epsSource": "Yahoo TTM cross-check",
     "growthNormalizedLegacy": 0.048024250000000004,
     "growthNormalizedQuarterly": null
   },
   "source": "Yahoo Finance via yfinance",
   "universeSource": "OJK KEP-21/D.04/2026 — DES Periode I 2026 (21 Mei 2026)",
   "engineVersion": "3.20-family-consensus",
-  "engineCommit": "b909f40922e90ebe24dfd59716997880964eda87",
-  "analysisStatus": "SIAP",
+  "engineCommit": "2699a6517a9679193050e9271154c687090bd472",
+  "analysisStatus": "INDIKATIF",
   "freshnessStatus": "FRESH",
   "methodDiagnostics": [
+    {
+      "name": "P/E & Graham",
+      "family": "earnings",
+      "status": "NOT_APPLICABLE",
+      "reason": "EPS tidak tersedia/tervalidasi.",
+      "inputs": {}
+    },
     {
       "name": "PBV & Graham",
       "family": "book",
@@ -200,8 +169,8 @@
     {
       "name": "Historical Dividend Yield",
       "family": "income",
-      "status": "NOT_APPLICABLE",
-      "reason": "Riwayat dividend yield valid kurang dari 3 periode.",
+      "status": "INVALID",
+      "reason": "Model dividen gagal: Too Many Requests. Rate limited. Try after a while.",
       "inputs": {}
     }
   ],
@@ -272,13 +241,9 @@
   },
   "valuationReview": {
     "required": false,
-    "status": "PASS",
-    "reason": null,
-    "baseToPrice": 1.4060690752320957,
-    "thresholds": {
-      "low": 0.25,
-      "high": 3.0
-    }
+    "status": "LIMITED_EVIDENCE",
+    "reason": "INSUFFICIENT_INDEPENDENT_FAMILIES",
+    "policy": "Indicative FV is method-derived; market price is not a valuation anchor."
   },
   "engineGeneration": "3.19-sector-waterfall",
   "qcVersion": "3.20-family-consensus-qc"
